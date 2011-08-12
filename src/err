@@ -1,0 +1,1199 @@
+e_acosf.c:59:10: warning: implicitly declaring C library function 'sqrtf' with type 'float (float)'
+            s = sqrtf(z);
+                ^
+e_acosf.c:59:10: note: please include the header <math.h> or explicitly provide a declaration for 'sqrtf'
+1 warning generated.
+e_acosh.c:60:13: warning: implicit declaration of function 'log1p' is invalid in C99 [-Wimplicit-function-declaration]
+            return log1p(t+sqrt(2.0*t+t*t));
+                   ^
+1 warning generated.
+e_acoshf.c:38:10: warning: implicit declaration of function 'logf' is invalid in C99 [-Wimplicit-function-declaration]
+                return __ieee754_logf(x)+ln2;   /* acosh(huge)=log(2x) */
+                       ^
+In file included from e_acoshf.c:20:
+./math_private.h:325:24: note: instantiated from:
+#define __ieee754_logf  logf
+                        ^
+e_acoshf.c:43:48: warning: implicitly declaring C library function 'sqrtf' with type 'float (float)'
+            return __ieee754_logf((float)2.0*x-one/(x+__ieee754_sqrtf(t-one)));
+                                                      ^
+In file included from e_acoshf.c:20:
+./math_private.h:322:25: note: instantiated from:
+#define __ieee754_sqrtf sqrtf
+                        ^
+e_acoshf.c:43:48: note: please include the header <math.h> or explicitly provide a declaration for 'sqrtf'
+e_acoshf.c:46:13: warning: implicit declaration of function 'log1pf' is invalid in C99 [-Wimplicit-function-declaration]
+            return log1pf(t+__ieee754_sqrtf((float)2.0*t+t*t));
+                   ^
+3 warnings generated.
+e_acosl.c:25:10: fatal error: 'invtrig.h' file not found
+#include "invtrig.h"
+         ^
+1 error generated.
+e_asinf.c:57:10: warning: implicit declaration of function 'fabsf' is invalid in C99 [-Wimplicit-function-declaration]
+        w = one-fabsf(x);
+                ^
+1 warning generated.
+e_asinl.c:25:10: fatal error: 'invtrig.h' file not found
+#include "invtrig.h"
+         ^
+1 error generated.
+e_atan2f.c:45:28: warning: implicit declaration of function 'atanf' is invalid in C99 [-Wimplicit-function-declaration]
+        if(hx==0x3f800000) return atanf(y);   /* x=1.0 */
+                                  ^
+e_atan2f.c:88:15: warning: implicit declaration of function 'fabsf' is invalid in C99 [-Wimplicit-function-declaration]
+        else z=atanf(fabsf(y/x));       /* safe to do y/x */
+                     ^
+2 warnings generated.
+e_atan2l.c:26:10: fatal error: 'invtrig.h' file not found
+#include "invtrig.h"
+         ^
+1 error generated.
+e_atanh.c:58:14: warning: implicit declaration of function 'log1p' is invalid in C99 [-Wimplicit-function-declaration]
+            t = 0.5*log1p(t+t*x/(one-x));
+                    ^
+1 warning generated.
+e_atanhf.c:41:21: warning: implicit declaration of function 'log1pf' is invalid in C99 [-Wimplicit-function-declaration]
+            t = (float)0.5*log1pf(t+t*x/(one-x));
+                           ^
+1 warning generated.
+e_cosh.c:59:10: warning: implicit declaration of function 'expm1' is invalid in C99 [-Wimplicit-function-declaration]
+            t = expm1(fabs(x));
+                ^
+1 warning generated.
+e_coshf.c:38:10: warning: implicit declaration of function 'expm1f' is invalid in C99 [-Wimplicit-function-declaration]
+            t = expm1f(fabsf(x));
+                ^
+e_coshf.c:38:17: warning: implicit declaration of function 'fabsf' is invalid in C99 [-Wimplicit-function-declaration]
+            t = expm1f(fabsf(x));
+                       ^
+e_coshf.c:46:7: warning: implicit declaration of function 'expf' is invalid in C99 [-Wimplicit-function-declaration]
+                t = __ieee754_expf(fabsf(x));
+                    ^
+In file included from e_coshf.c:20:
+./math_private.h:329:24: note: instantiated from:
+#define __ieee754_expf  expf
+                        ^
+3 warnings generated.
+In file included from e_fmodl.c:19:
+../include/fpmath.h:78:16: error: duplicate member 'manl'
+                unsigned int    manl    :32;
+                                ^
+../include/fpmath.h:72:16: note: previous declaration is here
+                unsigned int    manl    :32;
+                                ^
+1 error generated.
+e_gamma.c:32:9: warning: implicit declaration of function 'gamma_r' is invalid in C99 [-Wimplicit-function-declaration]
+        return __ieee754_gamma_r(x,&signgam);
+               ^
+In file included from e_gamma.c:25:
+./math_private.h:310:27: note: instantiated from:
+#define __ieee754_gamma_r gamma_r
+                          ^
+1 warning generated.
+e_gamma_r.c:31:9: warning: implicit declaration of function 'lgamma_r' is invalid in C99 [-Wimplicit-function-declaration]
+        return __ieee754_lgamma_r(x,signgamp);
+               ^
+In file included from e_gamma_r.c:26:
+./math_private.h:309:28: note: instantiated from:
+#define __ieee754_lgamma_r lgamma_r
+                           ^
+1 warning generated.
+e_gammaf.c:33:9: warning: implicit declaration of function 'gammaf_r' is invalid in C99 [-Wimplicit-function-declaration]
+        return __ieee754_gammaf_r(x,&signgam);
+               ^
+In file included from e_gammaf.c:26:
+./math_private.h:336:28: note: instantiated from:
+#define __ieee754_gammaf_r gammaf_r
+                           ^
+1 warning generated.
+e_gammaf_r.c:32:9: warning: implicit declaration of function 'lgammaf_r' is invalid in C99 [-Wimplicit-function-declaration]
+        return __ieee754_lgammaf_r(x,signgamp);
+               ^
+In file included from e_gammaf_r.c:27:
+./math_private.h:335:29: note: instantiated from:
+#define __ieee754_lgammaf_r lgammaf_r
+                            ^
+1 warning generated.
+e_hypotf.c:33:6: warning: implicit declaration of function 'fabsf' is invalid in C99 [-Wimplicit-function-declaration]
+        a = fabsf(a);
+            ^
+e_hypotf.c:70:11: warning: implicitly declaring C library function 'sqrtf' with type 'float (float)'
+            w  = __ieee754_sqrtf(t1*t1-(b*(-b)-t2*(a+t1)));
+                 ^
+In file included from e_hypotf.c:20:
+./math_private.h:322:25: note: instantiated from:
+#define __ieee754_sqrtf sqrtf
+                        ^
+e_hypotf.c:70:11: note: please include the header <math.h> or explicitly provide a declaration for 'sqrtf'
+2 warnings generated.
+In file included from e_hypotl.c:20:
+../include/fpmath.h:78:16: error: duplicate member 'manl'
+                unsigned int    manl    :32;
+                                ^
+../include/fpmath.h:72:16: note: previous declaration is here
+                unsigned int    manl    :32;
+                                ^
+e_hypotl.c:74:6: warning: implicit declaration of function 'fabsl' is invalid in C99 [-Wimplicit-function-declaration]
+        a = fabsl(a);
+            ^
+e_hypotl.c:120:11: warning: implicitly declaring C library function 'sqrtl' with type 'long double (long double)'
+            w  = sqrtl(t1*t1-(b*(-b)-t2*(a+t1)));
+                 ^
+e_hypotl.c:120:11: note: please include the header <math.h> or explicitly provide a declaration for 'sqrtl'
+2 warnings and 1 error generated.
+e_j0f.c:50:6: warning: implicit declaration of function 'fabsf' is invalid in C99 [-Wimplicit-function-declaration]
+        x = fabsf(x);
+            ^
+e_j0f.c:52:7: warning: implicitly declaring C library function 'sinf' with type 'float (float)'
+                s = sinf(x);
+                    ^
+e_j0f.c:52:7: note: please include the header <math.h> or explicitly provide a declaration for 'sinf'
+e_j0f.c:53:7: warning: implicitly declaring C library function 'cosf' with type 'float (float)'
+                c = cosf(x);
+                    ^
+e_j0f.c:53:7: note: please include the header <math.h> or explicitly provide a declaration for 'cosf'
+e_j0f.c:65:40: warning: implicitly declaring C library function 'sqrtf' with type 'float (float)'
+                if(ix>0x80000000) z = (invsqrtpi*cc)/sqrtf(x);
+                                                     ^
+e_j0f.c:65:40: note: please include the header <math.h> or explicitly provide a declaration for 'sqrtf'
+e_j0f.c:147:23: warning: implicit declaration of function 'logf' is invalid in C99 [-Wimplicit-function-declaration]
+            return(u00 + tpi*__ieee754_logf(x));
+                             ^
+In file included from e_j0f.c:20:
+./math_private.h:325:24: note: instantiated from:
+#define __ieee754_logf  logf
+                        ^
+5 warnings generated.
+e_j1f.c:51:6: warning: implicit declaration of function 'fabsf' is invalid in C99 [-Wimplicit-function-declaration]
+        y = fabsf(x);
+            ^
+e_j1f.c:53:7: warning: implicitly declaring C library function 'sinf' with type 'float (float)'
+                s = sinf(y);
+                    ^
+e_j1f.c:53:7: note: please include the header <math.h> or explicitly provide a declaration for 'sinf'
+e_j1f.c:54:7: warning: implicitly declaring C library function 'cosf' with type 'float (float)'
+                c = cosf(y);
+                    ^
+e_j1f.c:54:7: note: please include the header <math.h> or explicitly provide a declaration for 'cosf'
+e_j1f.c:66:40: warning: implicitly declaring C library function 'sqrtf' with type 'float (float)'
+                if(ix>0x80000000) z = (invsqrtpi*cc)/sqrtf(y);
+                                                     ^
+e_j1f.c:66:40: note: please include the header <math.h> or explicitly provide a declaration for 'sqrtf'
+e_j1f.c:145:48: warning: implicit declaration of function 'logf' is invalid in C99 [-Wimplicit-function-declaration]
+        return(x*(u/v) + tpi*(__ieee754_j1f(x)*__ieee754_logf(x)-one/x));
+                                               ^
+In file included from e_j1f.c:20:
+./math_private.h:325:24: note: instantiated from:
+#define __ieee754_logf  logf
+                        ^
+5 warnings generated.
+e_jn.c:72:18: warning: implicit declaration of function 'j0' is invalid in C99 [-Wimplicit-function-declaration]
+        if(n==0) return(__ieee754_j0(x));
+                        ^
+In file included from e_jn.c:44:
+./math_private.h:314:22: note: instantiated from:
+#define __ieee754_j0    j0
+                        ^
+e_jn.c:73:18: warning: implicit declaration of function 'j1' is invalid in C99 [-Wimplicit-function-declaration]
+        if(n==1) return(__ieee754_j1(x));
+                        ^
+In file included from e_jn.c:44:
+./math_private.h:315:22: note: instantiated from:
+#define __ieee754_j1    j1
+                        ^
+e_jn.c:232:18: warning: implicit declaration of function 'y0' is invalid in C99 [-Wimplicit-function-declaration]
+        if(n==0) return(__ieee754_y0(x));
+                        ^
+In file included from e_jn.c:44:
+./math_private.h:316:22: note: instantiated from:
+#define __ieee754_y0    y0
+                        ^
+e_jn.c:233:23: warning: implicit declaration of function 'y1' is invalid in C99 [-Wimplicit-function-declaration]
+        if(n==1) return(sign*__ieee754_y1(x));
+                             ^
+In file included from e_jn.c:44:
+./math_private.h:317:22: note: instantiated from:
+#define __ieee754_y1    y1
+                        ^
+4 warnings generated.
+e_jnf.c:47:18: warning: implicit declaration of function 'j0f' is invalid in C99 [-Wimplicit-function-declaration]
+        if(n==0) return(__ieee754_j0f(x));
+                        ^
+In file included from e_jnf.c:20:
+./math_private.h:341:23: note: instantiated from:
+#define __ieee754_j0f   j0f
+                        ^
+e_jnf.c:48:18: warning: implicit declaration of function 'j1f' is invalid in C99 [-Wimplicit-function-declaration]
+        if(n==1) return(__ieee754_j1f(x));
+                        ^
+In file included from e_jnf.c:20:
+./math_private.h:342:23: note: instantiated from:
+#define __ieee754_j1f   j1f
+                        ^
+e_jnf.c:50:6: warning: implicit declaration of function 'fabsf' is invalid in C99 [-Wimplicit-function-declaration]
+        x = fabsf(x);
+            ^
+e_jnf.c:131:13: warning: implicit declaration of function 'logf' is invalid in C99 [-Wimplicit-function-declaration]
+                tmp = tmp*__ieee754_logf(fabsf(v*tmp));
+                          ^
+In file included from e_jnf.c:20:
+./math_private.h:325:24: note: instantiated from:
+#define __ieee754_logf  logf
+                        ^
+e_jnf.c:184:18: warning: implicit declaration of function 'y0f' is invalid in C99 [-Wimplicit-function-declaration]
+        if(n==0) return(__ieee754_y0f(x));
+                        ^
+In file included from e_jnf.c:20:
+./math_private.h:343:23: note: instantiated from:
+#define __ieee754_y0f   y0f
+                        ^
+e_jnf.c:185:23: warning: implicit declaration of function 'y1f' is invalid in C99 [-Wimplicit-function-declaration]
+        if(n==1) return(sign*__ieee754_y1f(x));
+                             ^
+In file included from e_jnf.c:20:
+./math_private.h:344:23: note: instantiated from:
+#define __ieee754_y1f   y1f
+                        ^
+6 warnings generated.
+e_lgamma.c:32:9: warning: implicit declaration of function 'lgamma_r' is invalid in C99 [-Wimplicit-function-declaration]
+        return __ieee754_lgamma_r(x,&signgam);
+               ^
+In file included from e_lgamma.c:25:
+./math_private.h:309:28: note: instantiated from:
+#define __ieee754_lgamma_r lgamma_r
+                           ^
+1 warning generated.
+e_lgammaf.c:33:9: warning: implicit declaration of function 'lgammaf_r' is invalid in C99 [-Wimplicit-function-declaration]
+        return __ieee754_lgammaf_r(x,&signgam);
+               ^
+In file included from e_lgammaf.c:26:
+./math_private.h:335:29: note: instantiated from:
+#define __ieee754_lgammaf_r lgammaf_r
+                            ^
+1 warning generated.
+e_lgammaf_r.c:107:6: warning: implicit declaration of function 'floorf' is invalid in C99 [-Wimplicit-function-declaration]
+        z = floorf(y);
+            ^
+e_lgammaf_r.c:154:18: warning: implicit declaration of function 'logf' is invalid in C99 [-Wimplicit-function-declaration]
+                return -__ieee754_logf(-x);
+                        ^
+In file included from e_lgammaf_r.c:20:
+./math_private.h:325:24: note: instantiated from:
+#define __ieee754_logf  logf
+                        ^
+e_lgammaf_r.c:162:31: warning: implicit declaration of function 'fabsf' is invalid in C99 [-Wimplicit-function-declaration]
+            nadj = __ieee754_logf(pi/fabsf(t*x));
+                                     ^
+3 warnings generated.
+e_log10.c:23:10: fatal error: 'k_log.h' file not found
+#include "k_log.h"
+         ^
+1 error generated.
+e_log10f.c:21:10: fatal error: 'k_logf.h' file not found
+#include "k_logf.h"
+         ^
+1 error generated.
+e_pow.c:300:21: warning: implicit declaration of function 'scalbn' is invalid in C99 [-Wimplicit-function-declaration]
+        if((j>>20)<=0) z = scalbn(z,n); /* subnormal output */
+                           ^
+1 warning generated.
+e_powf.c:105:13: warning: implicitly declaring C library function 'sqrtf' with type 'float (float)'
+            return __ieee754_sqrtf(x);
+                   ^
+In file included from e_powf.c:20:
+./math_private.h:322:25: note: instantiated from:
+#define __ieee754_sqrtf sqrtf
+                        ^
+e_powf.c:105:13: note: please include the header <math.h> or explicitly provide a declaration for 'sqrtf'
+e_powf.c:108:9: warning: implicit declaration of function 'fabsf' is invalid in C99 [-Wimplicit-function-declaration]
+        ax   = fabsf(x);
+               ^
+e_powf.c:243:21: warning: implicit declaration of function 'scalbnf' is invalid in C99 [-Wimplicit-function-declaration]
+        if((j>>23)<=0) z = scalbnf(z,n);        /* subnormal output */
+                           ^
+3 warnings generated.
+e_remainderf.c:45:26: warning: implicit declaration of function 'fmodf' is invalid in C99 [-Wimplicit-function-declaration]
+        if (hp<=0x7effffff) x = __ieee754_fmodf(x,p+p); /* now x < 2p */
+                                ^
+In file included from e_remainderf.c:20:
+./math_private.h:331:25: note: instantiated from:
+#define __ieee754_fmodf fmodf
+                        ^
+e_remainderf.c:47:7: warning: implicit declaration of function 'fabsf' is invalid in C99 [-Wimplicit-function-declaration]
+        x  = fabsf(x);
+             ^
+2 warnings generated.
+e_remainderl.c:37:10: warning: implicit declaration of function 'remquol' is invalid in C99 [-Wimplicit-function-declaration]
+        return (remquol(x, y, &quo));
+                ^
+1 warning generated.
+e_scalb.c:37:6: warning: implicit declaration of function 'isnan' is invalid in C99 [-Wimplicit-function-declaration]
+        if (isnan(x)||isnan(fn)) return x*fn;
+            ^
+e_scalb.c:38:7: warning: implicit declaration of function 'finite' is invalid in C99 [-Wimplicit-function-declaration]
+        if (!finite(fn)) {
+             ^
+e_scalb.c:42:6: warning: implicit declaration of function 'rint' is invalid in C99 [-Wimplicit-function-declaration]
+        if (rint(fn)!=fn) return (fn-fn)/(fn-fn);
+            ^
+e_scalb.c:43:28: warning: implicit declaration of function 'scalbn' is invalid in C99 [-Wimplicit-function-declaration]
+        if ( fn > 65000.0) return scalbn(x, 65000);
+                                  ^
+4 warnings generated.
+e_scalbf.c:33:7: error: use of undeclared identifier 'isnanf'; did you mean '__isnanf'?
+        if ((isnanf)(x)||(isnanf)(fn)) return x*fn;
+             ^~~~~~
+             __isnanf
+./openlibm.h:182:5: note: '__isnanf' declared here
+int     __isnanf(float) __pure2;
+        ^
+e_scalbf.c:33:20: error: use of undeclared identifier 'isnanf'; did you mean '__isnanf'?
+        if ((isnanf)(x)||(isnanf)(fn)) return x*fn;
+                          ^~~~~~
+                          __isnanf
+./openlibm.h:182:5: note: '__isnanf' declared here
+int     __isnanf(float) __pure2;
+        ^
+e_scalbf.c:34:7: warning: implicit declaration of function 'finitef' is invalid in C99 [-Wimplicit-function-declaration]
+        if (!finitef(fn)) {
+             ^
+e_scalbf.c:38:6: warning: implicit declaration of function 'rintf' is invalid in C99 [-Wimplicit-function-declaration]
+        if (rintf(fn)!=fn) return (fn-fn)/(fn-fn);
+            ^
+e_scalbf.c:39:35: warning: implicit declaration of function 'scalbnf' is invalid in C99 [-Wimplicit-function-declaration]
+        if ( fn > (float)65000.0) return scalbnf(x, 65000);
+                                         ^
+3 warnings and 2 errors generated.
+e_sinh.c:60:10: warning: implicit declaration of function 'expm1' is invalid in C99 [-Wimplicit-function-declaration]
+            t = expm1(fabs(x));
+                ^
+1 warning generated.
+e_sinhf.c:42:10: warning: implicit declaration of function 'expm1f' is invalid in C99 [-Wimplicit-function-declaration]
+            t = expm1f(fabsf(x));
+                ^
+e_sinhf.c:42:17: warning: implicit declaration of function 'fabsf' is invalid in C99 [-Wimplicit-function-declaration]
+            t = expm1f(fabsf(x));
+                       ^
+e_sinhf.c:48:33: warning: implicit declaration of function 'expf' is invalid in C99 [-Wimplicit-function-declaration]
+        if (ix < 0x42b17217)  return h*__ieee754_expf(fabsf(x));
+                                       ^
+In file included from e_sinhf.c:20:
+./math_private.h:329:24: note: instantiated from:
+#define __ieee754_expf  expf
+                        ^
+3 warnings generated.
+In file included from e_sqrtl.c:33:
+../include/fpmath.h:78:16: error: duplicate member 'manl'
+                unsigned int    manl    :32;
+                                ^
+../include/fpmath.h:72:16: note: previous declaration is here
+                unsigned int    manl    :32;
+                                ^
+e_sqrtl.c:68:14: warning: pragma STDC FENV_ACCESS ON is not supported, ignoring pragma [-Wunknown-pragmas]
+#pragma STDC FENV_ACCESS ON
+             ^
+1 warning and 1 error generated.
+k_rem_pio2.c:327:7: warning: implicit declaration of function 'scalbn' is invalid in C99 [-Wimplicit-function-declaration]
+        z  = scalbn(z,q0);              /* actual value of z */
+             ^
+1 warning generated.
+s_asinh.c:53:9: warning: implicit declaration of function 'log1p' is invalid in C99 [-Wimplicit-function-declaration]
+            w =log1p(fabs(x)+t/(one+__ieee754_sqrt(one+t)));
+               ^
+1 warning generated.
+s_asinhf.c:39:10: warning: implicit declaration of function 'logf' is invalid in C99 [-Wimplicit-function-declaration]
+            w = __ieee754_logf(fabsf(x))+ln2;
+                ^
+In file included from s_asinhf.c:20:
+./math_private.h:325:24: note: instantiated from:
+#define __ieee754_logf  logf
+                        ^
+s_asinhf.c:39:25: warning: implicit declaration of function 'fabsf' is invalid in C99 [-Wimplicit-function-declaration]
+            w = __ieee754_logf(fabsf(x))+ln2;
+                               ^
+s_asinhf.c:42:43: warning: implicitly declaring C library function 'sqrtf' with type 'float (float)'
+            w = __ieee754_logf((float)2.0*t+one/(__ieee754_sqrtf(x*x+one)+t));
+                                                 ^
+In file included from s_asinhf.c:20:
+./math_private.h:322:25: note: instantiated from:
+#define __ieee754_sqrtf sqrtf
+                        ^
+s_asinhf.c:42:43: note: please include the header <math.h> or explicitly provide a declaration for 'sqrtf'
+s_asinhf.c:45:9: warning: implicit declaration of function 'log1pf' is invalid in C99 [-Wimplicit-function-declaration]
+            w =log1pf(fabsf(x)+t/(one+__ieee754_sqrtf(one+t)));
+               ^
+4 warnings generated.
+s_atanf.c:67:6: warning: implicit declaration of function 'fabsf' is invalid in C99 [-Wimplicit-function-declaration]
+        x = fabsf(x);
+            ^
+1 warning generated.
+s_atanl.c:24:10: fatal error: 'invtrig.h' file not found
+#include "invtrig.h"
+         ^
+1 error generated.
+s_cargf.c:37:10: warning: implicit declaration of function 'atan2f' is invalid in C99 [-Wimplicit-function-declaration]
+        return (atan2f(cimagf(z), crealf(z)));
+                ^
+1 warning generated.
+s_cargl.c:37:10: warning: implicit declaration of function 'atan2l' is invalid in C99 [-Wimplicit-function-declaration]
+        return (atan2l(cimagl(z), creall(z)));
+                ^
+1 warning generated.
+s_cbrt.c:42:6: error: unknown type name 'uint64_t'
+            uint64_t bits;
+            ^
+1 error generated.
+In file included from s_ceill.c:30:
+../include/fpmath.h:78:16: error: duplicate member 'manl'
+                unsigned int    manl    :32;
+                                ^
+../include/fpmath.h:72:16: note: previous declaration is here
+                unsigned int    manl    :32;
+                                ^
+1 error generated.
+s_cimag.c:35:8: error: unknown type name 'double_complex'
+        const double_complex z1 = { .f = z };
+              ^
+s_cimag.c:37:10: warning: implicit declaration of function 'IMAGPART' is invalid in C99 [-Wimplicit-function-declaration]
+        return (IMAGPART(z1));
+                ^
+1 warning and 1 error generated.
+s_cimagf.c:35:8: error: unknown type name 'float_complex'
+        const float_complex z1 = { .f = z };
+              ^
+s_cimagf.c:37:10: warning: implicit declaration of function 'IMAGPART' is invalid in C99 [-Wimplicit-function-declaration]
+        return (IMAGPART(z1));
+                ^
+1 warning and 1 error generated.
+s_cimagl.c:35:8: error: unknown type name 'long_double_complex'
+        const long_double_complex z1 = { .f = z };
+              ^
+s_cimagl.c:37:10: warning: implicit declaration of function 'IMAGPART' is invalid in C99 [-Wimplicit-function-declaration]
+        return (IMAGPART(z1));
+                ^
+1 warning and 1 error generated.
+s_conj.c:37:10: warning: implicit declaration of function 'cpack' is invalid in C99 [-Wimplicit-function-declaration]
+        return (cpack(creal(z), -cimag(z)));
+                ^
+1 warning generated.
+s_conjf.c:37:10: warning: implicit declaration of function 'cpackf' is invalid in C99 [-Wimplicit-function-declaration]
+        return (cpackf(crealf(z), -cimagf(z)));
+                ^
+1 warning generated.
+s_conjl.c:37:10: warning: implicit declaration of function 'cpackl' is invalid in C99 [-Wimplicit-function-declaration]
+        return (cpackl(creall(z), -cimagl(z)));
+                ^
+1 warning generated.
+In file included from s_copysignl.c:31:
+../include/fpmath.h:78:16: error: duplicate member 'manl'
+                unsigned int    manl    :32;
+                                ^
+../include/fpmath.h:72:16: note: previous declaration is here
+                unsigned int    manl    :32;
+                                ^
+1 error generated.
+s_cosf.c:33:12: error: use of undeclared identifier 'M_PI_2'
+c1pio2 = 1*M_PI_2,                      /* 0x3FF921FB, 0x54442D18 */
+           ^
+s_cosf.c:34:12: error: use of undeclared identifier 'M_PI_2'
+c2pio2 = 2*M_PI_2,                      /* 0x400921FB, 0x54442D18 */
+           ^
+s_cosf.c:35:12: error: use of undeclared identifier 'M_PI_2'
+c3pio2 = 3*M_PI_2,                      /* 0x4012D97C, 0x7F3321D2 */
+           ^
+s_cosf.c:36:12: error: use of undeclared identifier 'M_PI_2'
+c4pio2 = 4*M_PI_2;                      /* 0x401921FB, 0x54442D18 */
+           ^
+4 errors generated.
+s_cosl.c:40:10: fatal error: '../ld80/e_rem_pio2l.h' file not found
+#include "../ld80/e_rem_pio2l.h"
+         ^
+1 error generated.
+s_cproj.c:39:7: warning: implicit declaration of function 'isinf' is invalid in C99 [-Wimplicit-function-declaration]
+        if (!isinf(creal(z)) && !isinf(cimag(z)))
+             ^
+s_cproj.c:42:11: warning: implicit declaration of function 'cpack' is invalid in C99 [-Wimplicit-function-declaration]
+                return (cpack(INFINITY, copysign(0.0, cimag(z))));
+                        ^
+s_cproj.c:42:17: error: use of undeclared identifier 'INFINITY'
+                return (cpack(INFINITY, copysign(0.0, cimag(z))));
+                              ^
+2 warnings and 1 error generated.
+s_cprojf.c:39:7: warning: implicit declaration of function 'isinf' is invalid in C99 [-Wimplicit-function-declaration]
+        if (!isinf(crealf(z)) && !isinf(cimagf(z)))
+             ^
+s_cprojf.c:42:11: warning: implicit declaration of function 'cpackf' is invalid in C99 [-Wimplicit-function-declaration]
+                return (cpackf(INFINITY, copysignf(0.0, cimagf(z))));
+                        ^
+s_cprojf.c:42:18: error: use of undeclared identifier 'INFINITY'
+                return (cpackf(INFINITY, copysignf(0.0, cimagf(z))));
+                               ^
+2 warnings and 1 error generated.
+s_cprojl.c:39:7: warning: implicit declaration of function 'isinf' is invalid in C99 [-Wimplicit-function-declaration]
+        if (!isinf(creall(z)) && !isinf(cimagl(z)))
+             ^
+s_cprojl.c:42:11: warning: implicit declaration of function 'cpackl' is invalid in C99 [-Wimplicit-function-declaration]
+                return (cpackl(INFINITY, copysignl(0.0, cimagl(z))));
+                        ^
+s_cprojl.c:42:18: error: use of undeclared identifier 'INFINITY'
+                return (cpackl(INFINITY, copysignl(0.0, cimagl(z))));
+                               ^
+2 warnings and 1 error generated.
+s_csqrt.c:61:11: warning: implicit declaration of function 'cpack' is invalid in C99 [-Wimplicit-function-declaration]
+                return (cpack(0, b));
+                        ^
+s_csqrt.c:62:6: warning: implicit declaration of function 'isinf' is invalid in C99 [-Wimplicit-function-declaration]
+        if (isinf(b))
+            ^
+s_csqrt.c:63:17: error: use of undeclared identifier 'INFINITY'
+                return (cpack(INFINITY, b));
+                              ^
+s_csqrt.c:64:6: warning: implicit declaration of function 'isnan' is invalid in C99 [-Wimplicit-function-declaration]
+        if (isnan(a)) {
+            ^
+s_csqrt.c:75:7: warning: implicit declaration of function 'signbit' is invalid in C99 [-Wimplicit-function-declaration]
+                if (signbit(a))
+                    ^
+s_csqrt.c:76:31: warning: implicit declaration of function 'copysign' is invalid in C99 [-Wimplicit-function-declaration]
+                        return (cpack(fabs(b - b), copysign(a, b)));
+                                                   ^
+s_csqrt.c:96:17: warning: implicit declaration of function 'hypot' is invalid in C99 [-Wimplicit-function-declaration]
+                t = sqrt((a + hypot(a, b)) * 0.5);
+                              ^
+6 warnings and 1 error generated.
+s_csqrtf.c:52:11: warning: implicit declaration of function 'cpackf' is invalid in C99 [-Wimplicit-function-declaration]
+                return (cpackf(0, b));
+                        ^
+s_csqrtf.c:53:6: warning: implicit declaration of function 'isinf' is invalid in C99 [-Wimplicit-function-declaration]
+        if (isinf(b))
+            ^
+s_csqrtf.c:54:18: error: use of undeclared identifier 'INFINITY'
+                return (cpackf(INFINITY, b));
+                               ^
+s_csqrtf.c:55:6: warning: implicit declaration of function 'isnan' is invalid in C99 [-Wimplicit-function-declaration]
+        if (isnan(a)) {
+            ^
+s_csqrtf.c:66:7: warning: implicit declaration of function 'signbit' is invalid in C99 [-Wimplicit-function-declaration]
+                if (signbit(a))
+                    ^
+s_csqrtf.c:67:19: warning: implicit declaration of function 'fabsf' is invalid in C99 [-Wimplicit-function-declaration]
+                        return (cpackf(fabsf(b - b), copysignf(a, b)));
+                                       ^
+s_csqrtf.c:67:33: warning: implicit declaration of function 'copysignf' is invalid in C99 [-Wimplicit-function-declaration]
+                        return (cpackf(fabsf(b - b), copysignf(a, b)));
+                                                     ^
+s_csqrtf.c:82:17: warning: implicit declaration of function 'hypot' is invalid in C99 [-Wimplicit-function-declaration]
+                t = sqrt((a + hypot(a, b)) * 0.5);
+                              ^
+7 warnings and 1 error generated.
+s_csqrtl.c:61:11: warning: implicit declaration of function 'cpackl' is invalid in C99 [-Wimplicit-function-declaration]
+                return (cpackl(0, b));
+                        ^
+s_csqrtl.c:62:6: warning: implicit declaration of function 'isinf' is invalid in C99 [-Wimplicit-function-declaration]
+        if (isinf(b))
+            ^
+s_csqrtl.c:63:18: error: use of undeclared identifier 'INFINITY'
+                return (cpackl(INFINITY, b));
+                               ^
+s_csqrtl.c:64:6: warning: implicit declaration of function 'isnan' is invalid in C99 [-Wimplicit-function-declaration]
+        if (isnan(a)) {
+            ^
+s_csqrtl.c:75:7: warning: implicit declaration of function 'signbit' is invalid in C99 [-Wimplicit-function-declaration]
+                if (signbit(a))
+                    ^
+s_csqrtl.c:76:19: warning: implicit declaration of function 'fabsl' is invalid in C99 [-Wimplicit-function-declaration]
+                        return (cpackl(fabsl(b - b), copysignl(a, b)));
+                                       ^
+s_csqrtl.c:76:33: warning: implicit declaration of function 'copysignl' is invalid in C99 [-Wimplicit-function-declaration]
+                        return (cpackl(fabsl(b - b), copysignl(a, b)));
+                                                     ^
+s_csqrtl.c:96:7: warning: implicitly declaring C library function 'sqrtl' with type 'long double (long double)'
+                t = sqrtl((a + hypotl(a, b)) * 0.5);
+                    ^
+s_csqrtl.c:96:7: note: please include the header <math.h> or explicitly provide a declaration for 'sqrtl'
+s_csqrtl.c:96:18: warning: implicit declaration of function 'hypotl' is invalid in C99 [-Wimplicit-function-declaration]
+                t = sqrtl((a + hypotl(a, b)) * 0.5);
+                               ^
+8 warnings and 1 error generated.
+s_erff.c:123:10: warning: implicit declaration of function 'fabsf' is invalid in C99 [-Wimplicit-function-declaration]
+            s = fabsf(x)-one;
+                ^
+s_erff.c:146:8: warning: implicit declaration of function 'expf' is invalid in C99 [-Wimplicit-function-declaration]
+        r  =  __ieee754_expf(-z*z-(float)0.5625)*__ieee754_expf((z-x)*(z+x)+R/S);
+              ^
+In file included from s_erff.c:20:
+./math_private.h:329:24: note: instantiated from:
+#define __ieee754_expf  expf
+                        ^
+2 warnings generated.
+In file included from s_fabsl.c:33:
+../include/fpmath.h:78:16: error: duplicate member 'manl'
+                unsigned int    manl    :32;
+                                ^
+../include/fpmath.h:72:16: note: previous declaration is here
+                unsigned int    manl    :32;
+                                ^
+1 error generated.
+s_fdim.c:44:1: warning: implicit declaration of function 'isnan' is invalid in C99 [-Wimplicit-function-declaration]
+DECL(double, fdim)
+^
+s_fdim.c:37:6: note: instantiated from:
+        if (isnan(x))                   \
+            ^
+1 warning generated.
+In file included from s_floorl.c:30:
+../include/fpmath.h:78:16: error: duplicate member 'manl'
+                unsigned int    manl    :32;
+                                ^
+../include/fpmath.h:72:16: note: previous declaration is here
+                unsigned int    manl    :32;
+                                ^
+1 error generated.
+s_fma.c:72:7: warning: implicit declaration of function 'isfinite' is invalid in C99 [-Wimplicit-function-declaration]
+        if (!isfinite(x) || !isfinite(y))
+             ^
+s_fma.c:100:9: warning: implicit declaration of function 'nextafter' is invalid in C99 [-Wimplicit-function-declaration]
+                                r = nextafter(r, 0);
+                                    ^
+s_fma.c:109:23: error: use of undeclared identifier 'INFINITY'
+                                r = nextafter(r, -INFINITY);
+                                                  ^
+s_fma.c:118:22: error: use of undeclared identifier 'INFINITY'
+                                r = nextafter(r, INFINITY);
+                                                 ^
+s_fma.c:125:8: warning: implicit declaration of function 'isnormal' is invalid in C99 [-Wimplicit-function-declaration]
+                if (!isnormal(z))
+                     ^
+s_fma.c:139:27: error: use of undeclared identifier 'INFINITY'
+                                return (nextafter(z, -INFINITY));
+                                                      ^
+s_fma.c:142:26: error: use of undeclared identifier 'INFINITY'
+                                return (nextafter(z, INFINITY));
+                                                     ^
+s_fma.c:176:15: warning: implicit declaration of function 'ilogb' is invalid in C99 [-Wimplicit-function-declaration]
+        if (spread + ilogb(r) > -1023) {
+                     ^
+s_fma.c:184:13: warning: implicit declaration of function 'copysign' is invalid in C99 [-Wimplicit-function-declaration]
+                p = ldexp(copysign(0x1p-1022, r), -spread);
+                          ^
+5 warnings and 4 errors generated.
+s_fmal.c:67:7: warning: implicit declaration of function 'isfinite' is invalid in C99 [-Wimplicit-function-declaration]
+        if (!isfinite(x) || !isfinite(y))
+             ^
+s_fmal.c:72:7: warning: implicit declaration of function 'frexpl' is invalid in C99 [-Wimplicit-function-declaration]
+        xs = frexpl(x, &ex);
+             ^
+s_fmal.c:95:9: warning: implicit declaration of function 'nextafterl' is invalid in C99 [-Wimplicit-function-declaration]
+                                r = nextafterl(r, 0);
+                                    ^
+s_fmal.c:104:24: error: use of undeclared identifier 'INFINITY'
+                                r = nextafterl(r, -INFINITY);
+                                                   ^
+s_fmal.c:113:23: error: use of undeclared identifier 'INFINITY'
+                                r = nextafterl(r, INFINITY);
+                                                  ^
+s_fmal.c:120:8: warning: implicit declaration of function 'isnormal' is invalid in C99 [-Wimplicit-function-declaration]
+                if (!isnormal(z))
+                     ^
+s_fmal.c:134:28: error: use of undeclared identifier 'INFINITY'
+                                return (nextafterl(z, -INFINITY));
+                                                       ^
+s_fmal.c:137:27: error: use of undeclared identifier 'INFINITY'
+                                return (nextafterl(z, INFINITY));
+                                                      ^
+s_fmal.c:165:7: warning: implicit declaration of function 'ldexpl' is invalid in C99 [-Wimplicit-function-declaration]
+        zs = ldexpl(zs, -spread);
+             ^
+s_fmal.c:171:15: warning: implicit declaration of function 'ilogbl' is invalid in C99 [-Wimplicit-function-declaration]
+        if (spread + ilogbl(r) > -16383) {
+                     ^
+s_fmal.c:179:14: warning: implicit declaration of function 'copysignl' is invalid in C99 [-Wimplicit-function-declaration]
+                p = ldexpl(copysignl(0x1p-16382L, r), -spread);
+                           ^
+7 warnings and 4 errors generated.
+In file included from s_fmax.c:32:
+../include/fpmath.h:78:16: error: duplicate member 'manl'
+                unsigned int    manl    :32;
+                                ^
+../include/fpmath.h:72:16: note: previous declaration is here
+                unsigned int    manl    :32;
+                                ^
+1 error generated.
+In file included from s_fmaxf.c:32:
+../include/fpmath.h:78:16: error: duplicate member 'manl'
+                unsigned int    manl    :32;
+                                ^
+../include/fpmath.h:72:16: note: previous declaration is here
+                unsigned int    manl    :32;
+                                ^
+1 error generated.
+In file included from s_fmaxl.c:32:
+../include/fpmath.h:78:16: error: duplicate member 'manl'
+                unsigned int    manl    :32;
+                                ^
+../include/fpmath.h:72:16: note: previous declaration is here
+                unsigned int    manl    :32;
+                                ^
+1 error generated.
+In file included from s_fmin.c:32:
+../include/fpmath.h:78:16: error: duplicate member 'manl'
+                unsigned int    manl    :32;
+                                ^
+../include/fpmath.h:72:16: note: previous declaration is here
+                unsigned int    manl    :32;
+                                ^
+1 error generated.
+In file included from s_fminf.c:32:
+../include/fpmath.h:78:16: error: duplicate member 'manl'
+                unsigned int    manl    :32;
+                                ^
+../include/fpmath.h:72:16: note: previous declaration is here
+                unsigned int    manl    :32;
+                                ^
+1 error generated.
+In file included from s_fminl.c:32:
+../include/fpmath.h:78:16: error: duplicate member 'manl'
+                unsigned int    manl    :32;
+                                ^
+../include/fpmath.h:72:16: note: previous declaration is here
+                unsigned int    manl    :32;
+                                ^
+1 error generated.
+In file included from s_frexpl.c:32:
+../include/fpmath.h:78:16: error: duplicate member 'manl'
+                unsigned int    manl    :32;
+                                ^
+../include/fpmath.h:72:16: note: previous declaration is here
+                unsigned int    manl    :32;
+                                ^
+1 error generated.
+s_ilogb.c:36:10: error: use of undeclared identifier 'FP_ILOGB0'
+                return FP_ILOGB0;
+                       ^
+s_ilogb.c:46:42: error: use of undeclared identifier 'FP_ILOGBNAN'
+        else if (hx>0x7ff00000 || lx!=0) return FP_ILOGBNAN;
+                                                ^
+2 errors generated.
+s_ilogbf.c:32:10: error: use of undeclared identifier 'FP_ILOGB0'
+                return FP_ILOGB0;
+                       ^
+s_ilogbf.c:38:33: error: use of undeclared identifier 'FP_ILOGBNAN'
+        else if (hx>0x7f800000) return FP_ILOGBNAN;
+                                       ^
+2 errors generated.
+In file included from s_ilogbl.c:20:
+../include/fpmath.h:78:16: error: duplicate member 'manl'
+                unsigned int    manl    :32;
+                                ^
+../include/fpmath.h:72:16: note: previous declaration is here
+                unsigned int    manl    :32;
+                                ^
+s_ilogbl.c:32:12: error: use of undeclared identifier 'FP_ILOGB0'
+                        return (FP_ILOGB0);
+                                ^
+s_ilogbl.c:50:11: error: use of undeclared identifier 'FP_ILOGBNAN'
+                return (FP_ILOGBNAN);
+                        ^
+3 errors generated.
+In file included from s_isfinite.c:31:
+../include/fpmath.h:78:16: error: duplicate member 'manl'
+                unsigned int    manl    :32;
+                                ^
+../include/fpmath.h:72:16: note: previous declaration is here
+                unsigned int    manl    :32;
+                                ^
+1 error generated.
+In file included from s_isnan.c:31:
+../include/fpmath.h:78:16: error: duplicate member 'manl'
+                unsigned int    manl    :32;
+                                ^
+../include/fpmath.h:72:16: note: previous declaration is here
+                unsigned int    manl    :32;
+                                ^
+s_isnan.c:64:1: warning: type specifier missing, defaults to 'int' [-Wimplicit-int]
+__weak_reference(__isnanf, isnanf);
+^~~~~~~~~~~~~~~~
+s_isnan.c:64:18: error: a parameter list without types is only allowed in a function definition
+__weak_reference(__isnanf, isnanf);
+                 ^
+1 warning and 2 errors generated.
+In file included from s_isnormal.c:31:
+../include/fpmath.h:78:16: error: duplicate member 'manl'
+                unsigned int    manl    :32;
+                                ^
+../include/fpmath.h:72:16: note: previous declaration is here
+                unsigned int    manl    :32;
+                                ^
+1 error generated.
+In file included from s_llrint.c:9:
+./s_lrint.c:53:13: warning: implicit declaration of function 'rint' is invalid in C99 [-Wimplicit-function-declaration]
+        d = (dtype)roundit(x);
+                   ^
+s_llrint.c:5:18: note: instantiated from:
+#define roundit         rint
+                        ^
+1 warning generated.
+In file included from s_llrintf.c:9:
+./s_lrint.c:53:13: warning: implicit declaration of function 'rintf' is invalid in C99 [-Wimplicit-function-declaration]
+        d = (dtype)roundit(x);
+                   ^
+s_llrintf.c:5:18: note: instantiated from:
+#define roundit         rintf
+                        ^
+1 warning generated.
+In file included from s_llrintl.c:9:
+./s_lrint.c:53:13: warning: implicit declaration of function 'rintl' is invalid in C99 [-Wimplicit-function-declaration]
+        d = (dtype)roundit(x);
+                   ^
+s_llrintl.c:5:18: note: instantiated from:
+#define roundit         rintl
+                        ^
+1 warning generated.
+In file included from s_llround.c:11:
+./s_lround.c:28:10: fatal error: 'sys/limits.h' file not found
+#include <sys/limits.h>
+         ^
+1 error generated.
+In file included from s_llroundf.c:11:
+./s_lround.c:28:10: fatal error: 'sys/limits.h' file not found
+#include <sys/limits.h>
+         ^
+1 error generated.
+In file included from s_llroundl.c:11:
+./s_lround.c:28:10: fatal error: 'sys/limits.h' file not found
+#include <sys/limits.h>
+         ^
+1 error generated.
+s_logbf.c:31:31: warning: implicit declaration of function 'fabsf' is invalid in C99 [-Wimplicit-function-declaration]
+        if(ix==0) return (float)-1.0/fabsf(x);
+                                     ^
+1 warning generated.
+In file included from s_logbl.c:21:
+../include/fpmath.h:78:16: error: duplicate member 'manl'
+                unsigned int    manl    :32;
+                                ^
+../include/fpmath.h:72:16: note: previous declaration is here
+                unsigned int    manl    :32;
+                                ^
+1 error generated.
+s_lrint.c:53:13: warning: implicit declaration of function 'rint' is invalid in C99 [-Wimplicit-function-declaration]
+        d = (dtype)roundit(x);
+                   ^
+s_lrint.c:34:18: note: instantiated from:
+#define roundit         rint
+                        ^
+1 warning generated.
+In file included from s_lrintf.c:9:
+./s_lrint.c:53:13: warning: implicit declaration of function 'rintf' is invalid in C99 [-Wimplicit-function-declaration]
+        d = (dtype)roundit(x);
+                   ^
+s_lrintf.c:5:18: note: instantiated from:
+#define roundit         rintf
+                        ^
+1 warning generated.
+In file included from s_lrintl.c:9:
+./s_lrint.c:53:13: warning: implicit declaration of function 'rintl' is invalid in C99 [-Wimplicit-function-declaration]
+        d = (dtype)roundit(x);
+                   ^
+s_lrintl.c:5:18: note: instantiated from:
+#define roundit         rintl
+                        ^
+1 warning generated.
+s_lround.c:28:10: fatal error: 'sys/limits.h' file not found
+#include <sys/limits.h>
+         ^
+1 error generated.
+In file included from s_lroundf.c:11:
+./s_lround.c:28:10: fatal error: 'sys/limits.h' file not found
+#include <sys/limits.h>
+         ^
+1 error generated.
+In file included from s_lroundl.c:11:
+./s_lround.c:28:10: fatal error: 'sys/limits.h' file not found
+#include <sys/limits.h>
+         ^
+1 error generated.
+In file included from s_modfl.c:43:
+../include/fpmath.h:78:16: error: duplicate member 'manl'
+                unsigned int    manl    :32;
+                                ^
+../include/fpmath.h:72:16: note: previous declaration is here
+                unsigned int    manl    :32;
+                                ^
+s_modfl.c:70:9: error: use of undeclared identifier 'uint32_t'
+                        if ((GETFRAC(ux.bits.manh, HIBITS - 1 - e) |
+                             ^
+s_modfl.c:51:38: note: instantiated from:
+#define GETFRAC(bits, n)        ((bits) & ~(MASK << (n)))
+                                            ^
+s_modfl.c:48:16: note: instantiated from:
+#define MASK    ((uint32_t)-1)
+                  ^
+s_modfl.c:89:7: error: use of undeclared identifier 'uint32_t'
+                if (GETFRAC(ux.bits.manl, LDBL_MANT_DIG - 1 - e) == 0) {
+                    ^
+s_modfl.c:51:38: note: instantiated from:
+#define GETFRAC(bits, n)        ((bits) & ~(MASK << (n)))
+                                            ^
+s_modfl.c:48:16: note: instantiated from:
+#define MASK    ((uint32_t)-1)
+                  ^
+3 errors generated.
+s_nan.c:29:10: fatal error: 'sys/endian.h' file not found
+#include <sys/endian.h>
+         ^
+1 error generated.
+s_nearbyint.c:53:1: warning: implicit declaration of function 'rint' is invalid in C99 [-Wimplicit-function-declaration]
+DECL(double, nearbyint, rint)
+^
+s_nearbyint.c:53:25: note: instantiated from:
+DECL(double, nearbyint, rint)
+                        ^
+s_nearbyint.c:54:1: warning: implicit declaration of function 'rintf' is invalid in C99 [-Wimplicit-function-declaration]
+DECL(float, nearbyintf, rintf)
+^
+s_nearbyint.c:54:25: note: instantiated from:
+DECL(float, nearbyintf, rintf)
+                        ^
+s_nearbyint.c:55:1: warning: implicit declaration of function 'rintl' is invalid in C99 [-Wimplicit-function-declaration]
+DECL(long double, nearbyintl, rintl)
+^
+s_nearbyint.c:55:31: note: instantiated from:
+DECL(long double, nearbyintl, rintl)
+                              ^
+3 warnings generated.
+In file included from s_nextafterl.c:25:
+../include/fpmath.h:78:16: error: duplicate member 'manl'
+                unsigned int    manl    :32;
+                                ^
+../include/fpmath.h:72:16: note: previous declaration is here
+                unsigned int    manl    :32;
+                                ^
+s_nextafterl.c:80:1: warning: type specifier missing, defaults to 'int' [-Wimplicit-int]
+__strong_reference(nextafterl, nexttowardl);
+^~~~~~~~~~~~~~~~~~
+s_nextafterl.c:80:20: error: a parameter list without types is only allowed in a function definition
+__strong_reference(nextafterl, nexttowardl);
+                   ^
+1 warning and 2 errors generated.
+In file included from s_nexttoward.c:24:
+../include/fpmath.h:78:16: error: duplicate member 'manl'
+                unsigned int    manl    :32;
+                                ^
+../include/fpmath.h:72:16: note: previous declaration is here
+                unsigned int    manl    :32;
+                                ^
+1 error generated.
+In file included from s_nexttowardf.c:17:
+../include/fpmath.h:78:16: error: duplicate member 'manl'
+                unsigned int    manl    :32;
+                                ^
+../include/fpmath.h:72:16: note: previous declaration is here
+                unsigned int    manl    :32;
+                                ^
+1 error generated.
+s_remquof.c:106:6: warning: implicit declaration of function 'fabsf' is invalid in C99 [-Wimplicit-function-declaration]
+        y = fabsf(y);
+            ^
+1 warning generated.
+In file included from s_remquol.c:19:
+../include/fpmath.h:78:16: error: duplicate member 'manl'
+                unsigned int    manl    :32;
+                                ^
+../include/fpmath.h:72:16: note: previous declaration is here
+                unsigned int    manl    :32;
+                                ^
+s_remquol.c:159:6: warning: implicit declaration of function 'fabsl' is invalid in C99 [-Wimplicit-function-declaration]
+        y = fabsl(y);
+            ^
+1 warning and 1 error generated.
+In file included from s_rintl.c:33:
+../include/fpmath.h:78:16: error: duplicate member 'manl'
+                unsigned int    manl    :32;
+                                ^
+../include/fpmath.h:72:16: note: previous declaration is here
+                unsigned int    manl    :32;
+                                ^
+s_rintl.c:58:2: error: use of undeclared identifier 'uint32_t'
+        uint32_t expsign;
+        ^
+s_rintl.c:62:2: error: use of undeclared identifier 'expsign'
+        expsign = u.xbits.expsign;
+        ^
+s_rintl.c:63:7: error: use of undeclared identifier 'expsign'
+        ex = expsign & 0x7fff;
+             ^
+s_rintl.c:70:9: error: use of undeclared identifier 'expsign'
+        sign = expsign >> 15;
+               ^
+5 errors generated.
+s_round.c:37:7: warning: implicit declaration of function 'isfinite' is invalid in C99 [-Wimplicit-function-declaration]
+        if (!isfinite(x))
+             ^
+1 warning generated.
+s_roundf.c:37:7: warning: implicit declaration of function 'isfinite' is invalid in C99 [-Wimplicit-function-declaration]
+        if (!isfinite(x))
+             ^
+s_roundf.c:41:7: warning: implicit declaration of function 'floorf' is invalid in C99 [-Wimplicit-function-declaration]
+                t = floorf(x);
+                    ^
+2 warnings generated.
+s_roundl.c:37:7: warning: implicit declaration of function 'isfinite' is invalid in C99 [-Wimplicit-function-declaration]
+        if (!isfinite(x))
+             ^
+s_roundl.c:41:7: warning: implicit declaration of function 'floorl' is invalid in C99 [-Wimplicit-function-declaration]
+                t = floorl(x);
+                    ^
+2 warnings generated.
+s_scalbln.c:45:10: warning: implicit declaration of function 'scalbn' is invalid in C99 [-Wimplicit-function-declaration]
+        return (scalbn(x, in));
+                ^
+s_scalbln.c:60:10: warning: implicit declaration of function 'scalbnf' is invalid in C99 [-Wimplicit-function-declaration]
+        return (scalbnf(x, in));
+                ^
+s_scalbln.c:75:10: warning: implicit declaration of function 'scalbnl' is invalid in C99 [-Wimplicit-function-declaration]
+        return (scalbnl(x, (int)n));
+                ^
+3 warnings generated.
+s_scalbn.c:51:37: warning: implicit declaration of function 'copysign' is invalid in C99 [-Wimplicit-function-declaration]
+        if (k >  0x7fe) return huge*copysign(huge,x); /* overflow  */
+                                    ^
+1 warning generated.
+s_scalbnf.c:46:36: warning: implicit declaration of function 'copysignf' is invalid in C99 [-Wimplicit-function-declaration]
+        if (k >  0xfe) return huge*copysignf(huge,x); /* overflow  */
+                                   ^
+s_scalbnf.c:58:1: warning: type specifier missing, defaults to 'int' [-Wimplicit-int]
+__strong_reference(scalbnf, ldexpf);
+^~~~~~~~~~~~~~~~~~
+s_scalbnf.c:58:20: error: a parameter list without types is only allowed in a function definition
+__strong_reference(scalbnf, ldexpf);
+                   ^
+2 warnings and 1 error generated.
+In file included from s_scalbnl.c:34:
+../include/fpmath.h:78:16: error: duplicate member 'manl'
+                unsigned int    manl    :32;
+                                ^
+../include/fpmath.h:72:16: note: previous declaration is here
+                unsigned int    manl    :32;
+                                ^
+s_scalbnl.c:59:38: warning: implicit declaration of function 'copysignl' is invalid in C99 [-Wimplicit-function-declaration]
+        if (k >= 0x7fff) return huge*copysignl(huge,x); /* overflow  */
+                                     ^
+s_scalbnl.c:64:15: warning: implicit declaration of function 'copysign' is invalid in C99 [-Wimplicit-function-declaration]
+                return huge*copysign(huge,x);   /*overflow*/
+                            ^
+s_scalbnl.c:71:1: warning: type specifier missing, defaults to 'int' [-Wimplicit-int]
+__strong_reference(scalbnl, ldexpl);
+^~~~~~~~~~~~~~~~~~
+s_scalbnl.c:71:20: error: a parameter list without types is only allowed in a function definition
+__strong_reference(scalbnl, ldexpl);
+                   ^
+3 warnings and 2 errors generated.
+In file included from s_signbit.c:31:
+../include/fpmath.h:78:16: error: duplicate member 'manl'
+                unsigned int    manl    :32;
+                                ^
+../include/fpmath.h:72:16: note: previous declaration is here
+                unsigned int    manl    :32;
+                                ^
+1 error generated.
+s_significand.c:28:9: warning: implicit declaration of function 'scalb' is invalid in C99 [-Wimplicit-function-declaration]
+        return __ieee754_scalb(x,(double) -ilogb(x));
+               ^
+In file included from s_significand.c:23:
+./math_private.h:321:25: note: instantiated from:
+#define __ieee754_scalb scalb
+                        ^
+s_significand.c:28:37: warning: implicit declaration of function 'ilogb' is invalid in C99 [-Wimplicit-function-declaration]
+        return __ieee754_scalb(x,(double) -ilogb(x));
+                                           ^
+2 warnings generated.
+s_significandf.c:25:9: warning: implicit declaration of function 'scalbf' is invalid in C99 [-Wimplicit-function-declaration]
+        return __ieee754_scalbf(x,(float) -ilogbf(x));
+               ^
+In file included from s_significandf.c:20:
+./math_private.h:348:26: note: instantiated from:
+#define __ieee754_scalbf scalbf
+                         ^
+s_significandf.c:25:37: warning: implicit declaration of function 'ilogbf' is invalid in C99 [-Wimplicit-function-declaration]
+        return __ieee754_scalbf(x,(float) -ilogbf(x));
+                                           ^
+2 warnings generated.
+s_sinf.c:33:12: error: use of undeclared identifier 'M_PI_2'
+s1pio2 = 1*M_PI_2,                      /* 0x3FF921FB, 0x54442D18 */
+           ^
+s_sinf.c:34:12: error: use of undeclared identifier 'M_PI_2'
+s2pio2 = 2*M_PI_2,                      /* 0x400921FB, 0x54442D18 */
+           ^
+s_sinf.c:35:12: error: use of undeclared identifier 'M_PI_2'
+s3pio2 = 3*M_PI_2,                      /* 0x4012D97C, 0x7F3321D2 */
+           ^
+s_sinf.c:36:12: error: use of undeclared identifier 'M_PI_2'
+s4pio2 = 4*M_PI_2;                      /* 0x401921FB, 0x54442D18 */
+           ^
+4 errors generated.
+s_sinl.c:35:10: fatal error: '../ld80/e_rem_pio2l.h' file not found
+#include "../ld80/e_rem_pio2l.h"
+         ^
+1 error generated.
+s_tanf.c:31:12: error: use of undeclared identifier 'M_PI_2'
+t1pio2 = 1*M_PI_2,                      /* 0x3FF921FB, 0x54442D18 */
+           ^
+s_tanf.c:32:12: error: use of undeclared identifier 'M_PI_2'
+t2pio2 = 2*M_PI_2,                      /* 0x400921FB, 0x54442D18 */
+           ^
+s_tanf.c:33:12: error: use of undeclared identifier 'M_PI_2'
+t3pio2 = 3*M_PI_2,                      /* 0x4012D97C, 0x7F3321D2 */
+           ^
+s_tanf.c:34:12: error: use of undeclared identifier 'M_PI_2'
+t4pio2 = 4*M_PI_2;                      /* 0x401921FB, 0x54442D18 */
+           ^
+4 errors generated.
+s_tanh.c:66:7: warning: implicit declaration of function 'expm1' is invalid in C99 [-Wimplicit-function-declaration]
+                t = expm1(two*fabs(x));
+                    ^
+1 warning generated.
+s_tanhf.c:44:7: warning: implicit declaration of function 'expm1f' is invalid in C99 [-Wimplicit-function-declaration]
+                t = expm1f(two*fabsf(x));
+                    ^
+s_tanhf.c:44:18: warning: implicit declaration of function 'fabsf' is invalid in C99 [-Wimplicit-function-declaration]
+                t = expm1f(two*fabsf(x));
+                               ^
+2 warnings generated.
+s_tanl.c:41:10: fatal error: '../ld80/e_rem_pio2l.h' file not found
+#include "../ld80/e_rem_pio2l.h"
+         ^
+1 error generated.
+s_tgammaf.c:42:10: warning: implicit declaration of function 'tgamma' is invalid in C99 [-Wimplicit-function-declaration]
+        return (tgamma(x));
+                ^
+1 warning generated.
+In file included from s_truncl.c:30:
+../include/fpmath.h:78:16: error: duplicate member 'manl'
+                unsigned int    manl    :32;
+                                ^
+../include/fpmath.h:72:16: note: previous declaration is here
+                unsigned int    manl    :32;
+                                ^
+1 error generated.
+w_cabs.c:18:9: warning: implicit declaration of function 'hypot' is invalid in C99 [-Wimplicit-function-declaration]
+        return hypot(creal(z), cimag(z));
+               ^
+1 warning generated.
+w_cabsf.c:22:9: warning: implicit declaration of function 'hypotf' is invalid in C99 [-Wimplicit-function-declaration]
+        return hypotf(crealf(z), cimagf(z));
+               ^
+1 warning generated.
+w_cabsl.c:19:9: warning: implicit declaration of function 'hypotl' is invalid in C99 [-Wimplicit-function-declaration]
+        return hypotl(creall(z), cimagl(z));
+               ^
+1 warning generated.
+w_drem.c:14:9: warning: implicit declaration of function 'remainder' is invalid in C99 [-Wimplicit-function-declaration]
+        return remainder(x, y);
+               ^
+1 warning generated.
+w_dremf.c:15:9: warning: implicit declaration of function 'remainderf' is invalid in C99 [-Wimplicit-function-declaration]
+        return remainderf(x, y);
+               ^
+1 warning generated.
