@@ -27,6 +27,7 @@
  * $FreeBSD: src/lib/libc/include/fpmath.h,v 1.4 2008/12/23 22:20:59 marcel Exp $
  */
 
+// Currently assumes Intel platform
 #ifdef __LP64__
 #include "amd64_fpmath.h"
 #else 
@@ -36,10 +37,31 @@
 #ifdef __linux
 #include <features.h>
 #include <endian.h>
+#define _LITTLE_ENDIAN  __LITTLE_ENDIAN
+#define _BIG_ENDIAN     __BIG_ENDIAN
+#define _PDP_ENDIAN     __PDP_ENDIAN
+#define _BYTE_ORDER     __BYTE_ORDER
 #endif
 
 #ifdef __APPLE__
 #include <machine/endian.h>
+#define _LITTLE_ENDIAN  LITTLE_ENDIAN
+#define _BIG_ENDIAN     BIG_ENDIAN
+#define _PDP_ENDIAN     PDP_ENDIAN
+#define _BYTE_ORDER     BYTE_ORDER
+#endif
+
+
+#ifdef WIN32
+#define _LITTLE_ENDIAN 1234
+#define _BIG_ENDIAN    4321
+#define _PDP_ENDIAN    3412
+#define _BYTE_ORDER       __LITTLE_ENDIAN
+#define _FLOAT_WORD_ORDER __LITTLE_ENDIAN
+#define LITTLE_ENDIAN  __LITTLE_ENDIAN
+#define BIG_ENDIAN     __BIG_ENDIAN
+#define PDP_ENDIAN     __PDP_ENDIAN
+#define BYTE_ORDER     __BYTE_ORDER
 #endif
 
 #ifndef _IEEE_WORD_ORDER

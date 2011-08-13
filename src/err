@@ -75,14 +75,6 @@ In file included from e_coshf.c:20:
 #define __ieee754_expf  expf
                         ^
 3 warnings generated.
-In file included from e_fmodl.c:19:
-../include/fpmath.h:78:16: error: duplicate member 'manl'
-                unsigned int    manl    :32;
-                                ^
-../include/fpmath.h:72:16: note: previous declaration is here
-                unsigned int    manl    :32;
-                                ^
-1 error generated.
 e_gamma.c:32:9: warning: implicit declaration of function 'gamma_r' is invalid in C99 [-Wimplicit-function-declaration]
         return __ieee754_gamma_r(x,&signgam);
                ^
@@ -127,13 +119,6 @@ In file included from e_hypotf.c:20:
                         ^
 e_hypotf.c:70:11: note: please include the header <math.h> or explicitly provide a declaration for 'sqrtf'
 2 warnings generated.
-In file included from e_hypotl.c:20:
-../include/fpmath.h:78:16: error: duplicate member 'manl'
-                unsigned int    manl    :32;
-                                ^
-../include/fpmath.h:72:16: note: previous declaration is here
-                unsigned int    manl    :32;
-                                ^
 e_hypotl.c:74:6: warning: implicit declaration of function 'fabsl' is invalid in C99 [-Wimplicit-function-declaration]
         a = fabsl(a);
             ^
@@ -141,7 +126,7 @@ e_hypotl.c:120:11: warning: implicitly declaring C library function 'sqrtl' with
             w  = sqrtl(t1*t1-(b*(-b)-t2*(a+t1)));
                  ^
 e_hypotl.c:120:11: note: please include the header <math.h> or explicitly provide a declaration for 'sqrtl'
-2 warnings and 1 error generated.
+2 warnings generated.
 e_j0f.c:50:6: warning: implicit declaration of function 'fabsf' is invalid in C99 [-Wimplicit-function-declaration]
         x = fabsf(x);
             ^
@@ -383,17 +368,10 @@ In file included from e_sinhf.c:20:
 #define __ieee754_expf  expf
                         ^
 3 warnings generated.
-In file included from e_sqrtl.c:33:
-../include/fpmath.h:78:16: error: duplicate member 'manl'
-                unsigned int    manl    :32;
-                                ^
-../include/fpmath.h:72:16: note: previous declaration is here
-                unsigned int    manl    :32;
-                                ^
 e_sqrtl.c:68:14: warning: pragma STDC FENV_ACCESS ON is not supported, ignoring pragma [-Wunknown-pragmas]
 #pragma STDC FENV_ACCESS ON
              ^
-1 warning and 1 error generated.
+1 warning generated.
 k_rem_pio2.c:327:7: warning: implicit declaration of function 'scalbn' is invalid in C99 [-Wimplicit-function-declaration]
         z  = scalbn(z,q0);              /* actual value of z */
              ^
@@ -444,14 +422,6 @@ s_cbrt.c:42:6: error: unknown type name 'uint64_t'
             uint64_t bits;
             ^
 1 error generated.
-In file included from s_ceill.c:30:
-../include/fpmath.h:78:16: error: duplicate member 'manl'
-                unsigned int    manl    :32;
-                                ^
-../include/fpmath.h:72:16: note: previous declaration is here
-                unsigned int    manl    :32;
-                                ^
-1 error generated.
 s_cimag.c:35:8: error: unknown type name 'double_complex'
         const double_complex z1 = { .f = z };
               ^
@@ -485,14 +455,6 @@ s_conjl.c:37:10: warning: implicit declaration of function 'cpackl' is invalid i
         return (cpackl(creall(z), -cimagl(z)));
                 ^
 1 warning generated.
-In file included from s_copysignl.c:31:
-../include/fpmath.h:78:16: error: duplicate member 'manl'
-                unsigned int    manl    :32;
-                                ^
-../include/fpmath.h:72:16: note: previous declaration is here
-                unsigned int    manl    :32;
-                                ^
-1 error generated.
 s_cosf.c:33:12: error: use of undeclared identifier 'M_PI_2'
 c1pio2 = 1*M_PI_2,                      /* 0x3FF921FB, 0x54442D18 */
            ^
@@ -627,14 +589,6 @@ In file included from s_erff.c:20:
 #define __ieee754_expf  expf
                         ^
 2 warnings generated.
-In file included from s_fabsl.c:33:
-../include/fpmath.h:78:16: error: duplicate member 'manl'
-                unsigned int    manl    :32;
-                                ^
-../include/fpmath.h:72:16: note: previous declaration is here
-                unsigned int    manl    :32;
-                                ^
-1 error generated.
 s_fdim.c:44:1: warning: implicit declaration of function 'isnan' is invalid in C99 [-Wimplicit-function-declaration]
 DECL(double, fdim)
 ^
@@ -642,14 +596,6 @@ s_fdim.c:37:6: note: instantiated from:
         if (isnan(x))                   \
             ^
 1 warning generated.
-In file included from s_floorl.c:30:
-../include/fpmath.h:78:16: error: duplicate member 'manl'
-                unsigned int    manl    :32;
-                                ^
-../include/fpmath.h:72:16: note: previous declaration is here
-                unsigned int    manl    :32;
-                                ^
-1 error generated.
 s_fma.c:72:7: warning: implicit declaration of function 'isfinite' is invalid in C99 [-Wimplicit-function-declaration]
         if (!isfinite(x) || !isfinite(y))
              ^
@@ -712,62 +658,6 @@ s_fmal.c:179:14: warning: implicit declaration of function 'copysignl' is invali
                 p = ldexpl(copysignl(0x1p-16382L, r), -spread);
                            ^
 7 warnings and 4 errors generated.
-In file included from s_fmax.c:32:
-../include/fpmath.h:78:16: error: duplicate member 'manl'
-                unsigned int    manl    :32;
-                                ^
-../include/fpmath.h:72:16: note: previous declaration is here
-                unsigned int    manl    :32;
-                                ^
-1 error generated.
-In file included from s_fmaxf.c:32:
-../include/fpmath.h:78:16: error: duplicate member 'manl'
-                unsigned int    manl    :32;
-                                ^
-../include/fpmath.h:72:16: note: previous declaration is here
-                unsigned int    manl    :32;
-                                ^
-1 error generated.
-In file included from s_fmaxl.c:32:
-../include/fpmath.h:78:16: error: duplicate member 'manl'
-                unsigned int    manl    :32;
-                                ^
-../include/fpmath.h:72:16: note: previous declaration is here
-                unsigned int    manl    :32;
-                                ^
-1 error generated.
-In file included from s_fmin.c:32:
-../include/fpmath.h:78:16: error: duplicate member 'manl'
-                unsigned int    manl    :32;
-                                ^
-../include/fpmath.h:72:16: note: previous declaration is here
-                unsigned int    manl    :32;
-                                ^
-1 error generated.
-In file included from s_fminf.c:32:
-../include/fpmath.h:78:16: error: duplicate member 'manl'
-                unsigned int    manl    :32;
-                                ^
-../include/fpmath.h:72:16: note: previous declaration is here
-                unsigned int    manl    :32;
-                                ^
-1 error generated.
-In file included from s_fminl.c:32:
-../include/fpmath.h:78:16: error: duplicate member 'manl'
-                unsigned int    manl    :32;
-                                ^
-../include/fpmath.h:72:16: note: previous declaration is here
-                unsigned int    manl    :32;
-                                ^
-1 error generated.
-In file included from s_frexpl.c:32:
-../include/fpmath.h:78:16: error: duplicate member 'manl'
-                unsigned int    manl    :32;
-                                ^
-../include/fpmath.h:72:16: note: previous declaration is here
-                unsigned int    manl    :32;
-                                ^
-1 error generated.
 s_ilogb.c:36:10: error: use of undeclared identifier 'FP_ILOGB0'
                 return FP_ILOGB0;
                        ^
@@ -782,50 +672,20 @@ s_ilogbf.c:38:33: error: use of undeclared identifier 'FP_ILOGBNAN'
         else if (hx>0x7f800000) return FP_ILOGBNAN;
                                        ^
 2 errors generated.
-In file included from s_ilogbl.c:20:
-../include/fpmath.h:78:16: error: duplicate member 'manl'
-                unsigned int    manl    :32;
-                                ^
-../include/fpmath.h:72:16: note: previous declaration is here
-                unsigned int    manl    :32;
-                                ^
 s_ilogbl.c:32:12: error: use of undeclared identifier 'FP_ILOGB0'
                         return (FP_ILOGB0);
                                 ^
 s_ilogbl.c:50:11: error: use of undeclared identifier 'FP_ILOGBNAN'
                 return (FP_ILOGBNAN);
                         ^
-3 errors generated.
-In file included from s_isfinite.c:31:
-../include/fpmath.h:78:16: error: duplicate member 'manl'
-                unsigned int    manl    :32;
-                                ^
-../include/fpmath.h:72:16: note: previous declaration is here
-                unsigned int    manl    :32;
-                                ^
-1 error generated.
-In file included from s_isnan.c:31:
-../include/fpmath.h:78:16: error: duplicate member 'manl'
-                unsigned int    manl    :32;
-                                ^
-../include/fpmath.h:72:16: note: previous declaration is here
-                unsigned int    manl    :32;
-                                ^
+2 errors generated.
 s_isnan.c:64:1: warning: type specifier missing, defaults to 'int' [-Wimplicit-int]
 __weak_reference(__isnanf, isnanf);
 ^~~~~~~~~~~~~~~~
 s_isnan.c:64:18: error: a parameter list without types is only allowed in a function definition
 __weak_reference(__isnanf, isnanf);
                  ^
-1 warning and 2 errors generated.
-In file included from s_isnormal.c:31:
-../include/fpmath.h:78:16: error: duplicate member 'manl'
-                unsigned int    manl    :32;
-                                ^
-../include/fpmath.h:72:16: note: previous declaration is here
-                unsigned int    manl    :32;
-                                ^
-1 error generated.
+1 warning and 1 error generated.
 In file included from s_llrint.c:9:
 ./s_lrint.c:53:13: warning: implicit declaration of function 'rint' is invalid in C99 [-Wimplicit-function-declaration]
         d = (dtype)roundit(x);
@@ -869,14 +729,6 @@ s_logbf.c:31:31: warning: implicit declaration of function 'fabsf' is invalid in
         if(ix==0) return (float)-1.0/fabsf(x);
                                      ^
 1 warning generated.
-In file included from s_logbl.c:21:
-../include/fpmath.h:78:16: error: duplicate member 'manl'
-                unsigned int    manl    :32;
-                                ^
-../include/fpmath.h:72:16: note: previous declaration is here
-                unsigned int    manl    :32;
-                                ^
-1 error generated.
 s_lrint.c:53:13: warning: implicit declaration of function 'rint' is invalid in C99 [-Wimplicit-function-declaration]
         d = (dtype)roundit(x);
                    ^
@@ -914,13 +766,6 @@ In file included from s_lroundl.c:11:
 #include <sys/limits.h>
          ^
 1 error generated.
-In file included from s_modfl.c:43:
-../include/fpmath.h:78:16: error: duplicate member 'manl'
-                unsigned int    manl    :32;
-                                ^
-../include/fpmath.h:72:16: note: previous declaration is here
-                unsigned int    manl    :32;
-                                ^
 s_modfl.c:70:9: error: use of undeclared identifier 'uint32_t'
                         if ((GETFRAC(ux.bits.manh, HIBITS - 1 - e) |
                              ^
@@ -939,7 +784,7 @@ s_modfl.c:51:38: note: instantiated from:
 s_modfl.c:48:16: note: instantiated from:
 #define MASK    ((uint32_t)-1)
                   ^
-3 errors generated.
+2 errors generated.
 s_nan.c:29:10: fatal error: 'sys/endian.h' file not found
 #include <sys/endian.h>
          ^
@@ -963,58 +808,21 @@ s_nearbyint.c:55:31: note: instantiated from:
 DECL(long double, nearbyintl, rintl)
                               ^
 3 warnings generated.
-In file included from s_nextafterl.c:25:
-../include/fpmath.h:78:16: error: duplicate member 'manl'
-                unsigned int    manl    :32;
-                                ^
-../include/fpmath.h:72:16: note: previous declaration is here
-                unsigned int    manl    :32;
-                                ^
 s_nextafterl.c:80:1: warning: type specifier missing, defaults to 'int' [-Wimplicit-int]
 __strong_reference(nextafterl, nexttowardl);
 ^~~~~~~~~~~~~~~~~~
 s_nextafterl.c:80:20: error: a parameter list without types is only allowed in a function definition
 __strong_reference(nextafterl, nexttowardl);
                    ^
-1 warning and 2 errors generated.
-In file included from s_nexttoward.c:24:
-../include/fpmath.h:78:16: error: duplicate member 'manl'
-                unsigned int    manl    :32;
-                                ^
-../include/fpmath.h:72:16: note: previous declaration is here
-                unsigned int    manl    :32;
-                                ^
-1 error generated.
-In file included from s_nexttowardf.c:17:
-../include/fpmath.h:78:16: error: duplicate member 'manl'
-                unsigned int    manl    :32;
-                                ^
-../include/fpmath.h:72:16: note: previous declaration is here
-                unsigned int    manl    :32;
-                                ^
-1 error generated.
+1 warning and 1 error generated.
 s_remquof.c:106:6: warning: implicit declaration of function 'fabsf' is invalid in C99 [-Wimplicit-function-declaration]
         y = fabsf(y);
             ^
 1 warning generated.
-In file included from s_remquol.c:19:
-../include/fpmath.h:78:16: error: duplicate member 'manl'
-                unsigned int    manl    :32;
-                                ^
-../include/fpmath.h:72:16: note: previous declaration is here
-                unsigned int    manl    :32;
-                                ^
 s_remquol.c:159:6: warning: implicit declaration of function 'fabsl' is invalid in C99 [-Wimplicit-function-declaration]
         y = fabsl(y);
             ^
-1 warning and 1 error generated.
-In file included from s_rintl.c:33:
-../include/fpmath.h:78:16: error: duplicate member 'manl'
-                unsigned int    manl    :32;
-                                ^
-../include/fpmath.h:72:16: note: previous declaration is here
-                unsigned int    manl    :32;
-                                ^
+1 warning generated.
 s_rintl.c:58:2: error: use of undeclared identifier 'uint32_t'
         uint32_t expsign;
         ^
@@ -1027,7 +835,7 @@ s_rintl.c:63:7: error: use of undeclared identifier 'expsign'
 s_rintl.c:70:9: error: use of undeclared identifier 'expsign'
         sign = expsign >> 15;
                ^
-5 errors generated.
+4 errors generated.
 s_round.c:37:7: warning: implicit declaration of function 'isfinite' is invalid in C99 [-Wimplicit-function-declaration]
         if (!isfinite(x))
              ^
@@ -1070,13 +878,6 @@ s_scalbnf.c:58:20: error: a parameter list without types is only allowed in a fu
 __strong_reference(scalbnf, ldexpf);
                    ^
 2 warnings and 1 error generated.
-In file included from s_scalbnl.c:34:
-../include/fpmath.h:78:16: error: duplicate member 'manl'
-                unsigned int    manl    :32;
-                                ^
-../include/fpmath.h:72:16: note: previous declaration is here
-                unsigned int    manl    :32;
-                                ^
 s_scalbnl.c:59:38: warning: implicit declaration of function 'copysignl' is invalid in C99 [-Wimplicit-function-declaration]
         if (k >= 0x7fff) return huge*copysignl(huge,x); /* overflow  */
                                      ^
@@ -1089,15 +890,7 @@ __strong_reference(scalbnl, ldexpl);
 s_scalbnl.c:71:20: error: a parameter list without types is only allowed in a function definition
 __strong_reference(scalbnl, ldexpl);
                    ^
-3 warnings and 2 errors generated.
-In file included from s_signbit.c:31:
-../include/fpmath.h:78:16: error: duplicate member 'manl'
-                unsigned int    manl    :32;
-                                ^
-../include/fpmath.h:72:16: note: previous declaration is here
-                unsigned int    manl    :32;
-                                ^
-1 error generated.
+3 warnings and 1 error generated.
 s_significand.c:28:9: warning: implicit declaration of function 'scalb' is invalid in C99 [-Wimplicit-function-declaration]
         return __ieee754_scalb(x,(double) -ilogb(x));
                ^
@@ -1169,14 +962,6 @@ s_tgammaf.c:42:10: warning: implicit declaration of function 'tgamma' is invalid
         return (tgamma(x));
                 ^
 1 warning generated.
-In file included from s_truncl.c:30:
-../include/fpmath.h:78:16: error: duplicate member 'manl'
-                unsigned int    manl    :32;
-                                ^
-../include/fpmath.h:72:16: note: previous declaration is here
-                unsigned int    manl    :32;
-                                ^
-1 error generated.
 w_cabs.c:18:9: warning: implicit declaration of function 'hypot' is invalid in C99 [-Wimplicit-function-declaration]
         return hypot(creal(z), cimag(z));
                ^
