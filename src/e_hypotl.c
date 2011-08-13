@@ -55,7 +55,7 @@
 #define	MAX_EXP		LDBL_MAX_EXP
 
 #if LDBL_MANL_SIZE > 32
-typedef	uint64_t man_t;
+typedef	u_int64_t man_t;
 #else
 typedef	uint32_t man_t;
 #endif

@@ -43,7 +43,7 @@
 #include "fpmath.h"
 
 #if LDBL_MANL_SIZE > 32
-#define	MASK	((uint64_t)-1)
+#define	MASK	((u_int64_t)-1)
 #else
 #define	MASK	((uint32_t)-1)
 #endif

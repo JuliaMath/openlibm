@@ -12,7 +12,6 @@
  */
 
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD: src/lib/msun/src/k_log.h,v 1.1.2.2 2011/03/06 08:49:44 das Exp $");
 
 /* __kernel_log(x)
  * Return log(x) - (x-1) for x in ~[sqrt(2)/2, sqrt(2)].

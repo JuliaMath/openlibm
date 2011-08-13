@@ -18,8 +18,8 @@
 #define	_MATH_H_
 
 #include <sys/cdefs.h>
-#include <sys/_types.h>
-#include <machine/_limits.h>
+#include <sys/types.h>
+#include <machine/limits.h>
 
 /*
  * ANSI/POSIX
@@ -134,7 +134,7 @@ typedef	__float_t	float_t;
 /*
  * XOPEN/SVID
  */
-#if __BSD_VISIBLE || __XSI_VISIBLE
+//#if __BSD_VISIBLE || __XSI_VISIBLE
 #define	M_E		2.7182818284590452354	/* e */
 #define	M_LOG2E		1.4426950408889634074	/* log 2e */
 #define	M_LOG10E	0.43429448190325182765	/* log 10e */
@@ -151,7 +151,7 @@ typedef	__float_t	float_t;
 
 #define	MAXFLOAT	((float)3.40282346638528860e+38)
 extern int signgam;
-#endif /* __BSD_VISIBLE || __XSI_VISIBLE */
+//#endif /* __BSD_VISIBLE || __XSI_VISIBLE */
 
 #if __BSD_VISIBLE
 #if 0

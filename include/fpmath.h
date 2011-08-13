@@ -28,10 +28,12 @@
  */
 
 // Currently assumes Intel platform
+#if defined (__i386__) || defined(__x86_64__)
 #ifdef __LP64__
 #include "amd64_fpmath.h"
 #else 
 #include "i386_fpmath.h"
+#endif
 #endif
 
 #ifdef __linux

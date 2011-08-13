@@ -23,13 +23,13 @@
 #define	BIAS (LDBL_MAX_EXP - 1)
 
 #if LDBL_MANL_SIZE > 32
-typedef	uint64_t manl_t;
+typedef	u_int64_t manl_t;
 #else
 typedef	uint32_t manl_t;
 #endif
 
 #if LDBL_MANH_SIZE > 32
-typedef	uint64_t manh_t;
+typedef	u_int64_t manh_t;
 #else
 typedef	uint32_t manh_t;
 #endif
