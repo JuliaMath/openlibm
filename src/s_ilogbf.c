@@ -14,11 +14,11 @@
  */
 
 #include <sys/cdefs.h>
-
+__FBSDID("$FreeBSD: src/lib/msun/src/s_ilogbf.c,v 1.8 2008/02/22 02:30:35 das Exp $");
 
 #include <limits.h>
 
-#include "openlibm.h"
+#include "math.h"
 #include "math_private.h"
 
 	int ilogbf(float x)

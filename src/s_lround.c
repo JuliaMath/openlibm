@@ -27,10 +27,10 @@
 #include <sys/cdefs.h>
 #include <sys/limits.h>
 #include <fenv.h>
-#include "openlibm.h"
+#include <math.h>
 
 #ifndef type
-
+__FBSDID("$FreeBSD: src/lib/msun/src/s_lround.c,v 1.2 2005/04/08 00:52:16 das Exp $");
 #define type		double
 #define	roundit		round
 #define dtype		long

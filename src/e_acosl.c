@@ -13,7 +13,7 @@
  */
 
 #include <sys/cdefs.h>
-
+__FBSDID("$FreeBSD: src/lib/msun/src/e_acosl.c,v 1.2 2008/08/02 03:56:22 das Exp $");
 
 /*
  * See comments in e_acos.c.
@@ -23,7 +23,7 @@
 #include <float.h>
 
 #include "invtrig.h"
-#include "openlibm.h"
+#include "math.h"
 #include "math_private.h"
 
 static const long double

@@ -11,7 +11,7 @@
  */
 
 #include <sys/cdefs.h>
-
+__FBSDID("$FreeBSD: src/lib/msun/src/s_ceil.c,v 1.11 2008/02/15 07:01:40 bde Exp $");
 
 /*
  * ceil(x)
@@ -24,7 +24,7 @@
 
 #include <float.h>
 
-#include "openlibm.h"
+#include "math.h"
 #include "math_private.h"
 
 static const double huge = 1.0e300;

@@ -14,7 +14,7 @@
  */
 
 #include <sys/cdefs.h>
-
+__FBSDID("$FreeBSD: src/lib/msun/src/e_fmodf.c,v 1.7 2008/02/22 02:30:34 das Exp $");
 
 /*
  * __ieee754_fmodf(x,y)
@@ -22,7 +22,7 @@
  * Method: shift and subtract
  */
 
-#include "openlibm.h"
+#include "math.h"
 #include "math_private.h"
 
 static const float one = 1.0, Zero[] = {0.0, -0.0,};

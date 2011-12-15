@@ -5,7 +5,7 @@
  * Placed into the Public Domain, 1994.
  */
 
-#include "openlibm.h"
+#include <math.h>
 
 double
 drem(x, y)

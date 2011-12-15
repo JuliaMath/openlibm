@@ -14,9 +14,9 @@
  */
 
 #include <sys/cdefs.h>
+__FBSDID("$FreeBSD: src/lib/msun/src/e_j1f.c,v 1.8 2008/02/22 02:30:35 das Exp $");
 
-
-#include "openlibm.h"
+#include "math.h"
 #include "math_private.h"
 
 static float ponef(float), qonef(float);

@@ -11,7 +11,7 @@
  */
 
 #include <sys/cdefs.h>
-
+__FBSDID("$FreeBSD: src/lib/msun/src/s_rint.c,v 1.16 2008/02/22 02:30:35 das Exp $");
 
 /*
  * rint(x)
@@ -25,7 +25,7 @@
 
 #include <float.h>
 
-#include "openlibm.h"
+#include "math.h"
 #include "math_private.h"
 
 static const double

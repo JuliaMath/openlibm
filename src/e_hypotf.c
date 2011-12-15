@@ -14,15 +14,15 @@
  */
 
 #include <sys/cdefs.h>
+__FBSDID("$FreeBSD: src/lib/msun/src/e_hypotf.c,v 1.14 2011/10/15 07:00:28 das Exp $");
 
-
-#include "openlibm.h"
+#include "math.h"
 #include "math_private.h"
 
 float
 __ieee754_hypotf(float x, float y)
 {
-	float a=x,b=y,t1,t2,y1,y2,w;
+	float a,b,t1,t2,y1,y2,w;
 	int32_t j,k,ha,hb;
 
 	GET_FLOAT_WORD(ha,x);

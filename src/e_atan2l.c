@@ -14,7 +14,7 @@
  */
 
 #include <sys/cdefs.h>
-
+__FBSDID("$FreeBSD: src/lib/msun/src/e_atan2l.c,v 1.3 2008/08/02 19:17:00 das Exp $");
 
 /*
  * See comments in e_atan2.c.
@@ -24,7 +24,7 @@
 #include <float.h>
 
 #include "invtrig.h"
-#include "openlibm.h"
+#include "math.h"
 #include "math_private.h"
 
 static volatile long double

@@ -11,22 +11,15 @@
  */
 
 #include <sys/cdefs.h>
-
+__FBSDID("$FreeBSD: src/lib/msun/src/e_hypotl.c,v 1.3 2011/10/16 05:36:39 das Exp $");
 
 /* long double version of hypot().  See e_hypot.c for most comments. */
 
 #include <float.h>
 
 #include "fpmath.h"
-#include "openlibm.h"
+#include "math.h"
 #include "math_private.h"
-
-#define	GET_LDBL_EXPSIGN(i, v) do {	\
-	union IEEEl2bits uv;		\
-					\
-	uv.e = v;			\
-	i = uv.xbits.expsign;		\
-} while (0)
 
 #define	GET_LDBL_MAN(h, l, v) do {	\
 	union IEEEl2bits uv;		\
@@ -34,14 +27,6 @@
 	uv.e = v;			\
 	h = uv.bits.manh;		\
 	l = uv.bits.manl;		\
-} while (0)
-
-#define	SET_LDBL_EXPSIGN(v, i) do {	\
-	union IEEEl2bits uv;		\
-					\
-	uv.e = v;			\
-	uv.xbits.expsign = i;		\
-	v = uv.e;			\
 } while (0)
 
 #undef GET_HIGH_WORD
@@ -55,7 +40,7 @@
 #define	MAX_EXP		LDBL_MAX_EXP
 
 #if LDBL_MANL_SIZE > 32
-typedef	u_int64_t man_t;
+typedef	uint64_t man_t;
 #else
 typedef	uint32_t man_t;
 #endif

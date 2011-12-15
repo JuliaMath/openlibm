@@ -13,7 +13,7 @@
  */
 
 #include <sys/cdefs.h>
-
+__FBSDID("$FreeBSD: src/lib/msun/src/e_acosh.c,v 1.9 2008/02/22 02:30:34 das Exp $");
 
 /* __ieee754_acosh(x)
  * Method :
@@ -29,7 +29,7 @@
  *	acosh(NaN) is NaN without signal.
  */
 
-#include "openlibm.h"
+#include "math.h"
 #include "math_private.h"
 
 static const double

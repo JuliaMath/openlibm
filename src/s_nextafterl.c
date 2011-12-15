@@ -11,7 +11,7 @@
  */
 
 #include <sys/cdefs.h>
-
+__FBSDID("$FreeBSD: src/lib/msun/src/s_nextafterl.c,v 1.2 2008/02/22 02:30:36 das Exp $");
 
 /* IEEE functions
  *	nextafter(x,y)
@@ -23,7 +23,7 @@
 #include <float.h>
 
 #include "fpmath.h"
-#include "openlibm.h"
+#include "math.h"
 #include "math_private.h"
 
 #if LDBL_MAX_EXP != 0x4000

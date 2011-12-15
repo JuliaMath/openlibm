@@ -23,7 +23,7 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  *
- * $FreeBSD: src/lib/msun/i387/fenv.h,v 1.7 2010/02/03 20:23:47 kib Exp $
+ * $FreeBSD: src/lib/msun/i387/fenv.h,v 1.8 2011/10/10 15:43:09 das Exp $
  */
 
 #ifndef	_FENV_H_
@@ -31,6 +31,10 @@
 
 #include <sys/cdefs.h>
 #include <sys/_types.h>
+
+#ifndef	__fenv_static
+#define	__fenv_static	static
+#endif
 
 /*                   
  * To preserve binary compatibility with FreeBSD 5.3, we pack the
@@ -110,7 +114,7 @@ extern const fenv_t	__fe_dfl_env;
 #define	__ldmxcsr(__csr)	__asm __volatile("ldmxcsr %0" : : "m" (__csr))
 #define	__stmxcsr(__csr)	__asm __volatile("stmxcsr %0" : "=m" (*(__csr)))
 
-static __inline int
+__fenv_static inline int
 feclearexcept(int __excepts)
 {
 	fenv_t __env;
@@ -131,7 +135,7 @@ feclearexcept(int __excepts)
 	return (0);
 }
 
-static __inline int
+__fenv_static inline int
 fegetexceptflag(fexcept_t *__flagp, int __excepts)
 {
 	__uint32_t __mxcsr;
@@ -149,7 +153,7 @@ fegetexceptflag(fexcept_t *__flagp, int __excepts)
 int fesetexceptflag(const fexcept_t *__flagp, int __excepts);
 int feraiseexcept(int __excepts);
 
-static __inline int
+__fenv_static inline int
 fetestexcept(int __excepts)
 {
 	__uint32_t __mxcsr;
@@ -163,7 +167,7 @@ fetestexcept(int __excepts)
 	return ((__status | __mxcsr) & __excepts);
 }
 
-static __inline int
+__fenv_static inline int
 fegetround(void)
 {
 	__uint16_t __control;
@@ -178,7 +182,7 @@ fegetround(void)
 	return (__control & _ROUND_MASK);
 }
 
-static __inline int
+__fenv_static inline int
 fesetround(int __round)
 {
 	__uint32_t __mxcsr;
@@ -205,7 +209,7 @@ fesetround(int __round)
 int fegetenv(fenv_t *__envp);
 int feholdexcept(fenv_t *__envp);
 
-static __inline int
+__fenv_static inline int
 fesetenv(const fenv_t *__envp)
 {
 	fenv_t __env = *__envp;
@@ -234,7 +238,8 @@ int feupdateenv(const fenv_t *__envp);
 int feenableexcept(int __mask);
 int fedisableexcept(int __mask);
 
-static __inline int
+/* We currently provide no external definition of fegetexcept(). */
+static inline int
 fegetexcept(void)
 {
 	__uint16_t __control;

@@ -12,7 +12,7 @@
  */
 
 #include <sys/cdefs.h>
-
+__FBSDID("$FreeBSD: src/lib/msun/src/e_log.c,v 1.15 2008/03/29 16:37:59 das Exp $");
 
 /* __ieee754_log(x)
  * Return the logrithm of x
@@ -65,7 +65,7 @@
  * to produce the hexadecimal values shown.
  */
 
-#include "openlibm.h"
+#include "math.h"
 #include "math_private.h"
 
 static const double

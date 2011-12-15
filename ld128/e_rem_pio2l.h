@@ -14,7 +14,7 @@
  */
 
 #include <sys/cdefs.h>
-
+__FBSDID("$FreeBSD: src/lib/msun/ld128/e_rem_pio2l.h,v 1.2 2011/05/30 19:41:28 kargl Exp $");
 
 /* ld128 version of __ieee754_rem_pio2l(x,y)
  * 
@@ -24,7 +24,7 @@
 
 #include <float.h>
 
-#include "openlibm.h"
+#include "math.h"
 #include "math_private.h"
 #include "fpmath.h"
 

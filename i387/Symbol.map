@@ -1,5 +1,5 @@
 /*
- * $FreeBSD: src/lib/msun/i387/Symbol.map,v 1.2 2007/04/29 14:05:21 deischen Exp $
+ * $FreeBSD: src/lib/msun/i387/Symbol.map,v 1.3 2011/10/10 15:43:09 das Exp $
  */
 FBSD_1.0 {
 	__has_sse;
@@ -9,8 +9,6 @@ FBSD_1.0 {
 	fegetenv;
 	feholdexcept;
 	feupdateenv;
-	__feenableexcept;
-	__fedisableexcept;
 	feenableexcept;
 	fedisableexcept;
 };

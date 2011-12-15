@@ -11,7 +11,7 @@
  */
 
 #include <sys/cdefs.h>
-
+__FBSDID("$FreeBSD: src/lib/msun/src/s_nexttoward.c,v 1.3 2011/02/10 07:38:13 das Exp $");
 
 /*
  * We assume that a long double has a 15-bit exponent.  On systems
@@ -22,7 +22,7 @@
 #include <float.h>
 
 #include "fpmath.h"
-#include "openlibm.h"
+#include "math.h"
 #include "math_private.h"
 
 #if LDBL_MAX_EXP != 0x4000

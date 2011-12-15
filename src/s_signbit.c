@@ -26,7 +26,7 @@
  * $FreeBSD: src/lib/msun/src/s_signbit.c,v 1.1 2004/07/19 08:16:10 das Exp $
  */
 
-#include "openlibm.h"
+#include <math.h>
 
 #include "fpmath.h"
 

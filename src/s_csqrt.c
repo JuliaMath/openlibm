@@ -25,11 +25,11 @@
  */
 
 #include <sys/cdefs.h>
-
+__FBSDID("$FreeBSD: src/lib/msun/src/s_csqrt.c,v 1.4 2008/08/08 00:15:16 das Exp $");
 
 #include <complex.h>
 #include <float.h>
-#include "openlibm.h"
+#include <math.h>
 
 #include "math_private.h"
 

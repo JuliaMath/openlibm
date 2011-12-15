@@ -11,7 +11,7 @@
  */
 
 #include <sys/cdefs.h>
-
+__FBSDID("$FreeBSD: src/lib/msun/src/s_atan.c,v 1.13 2011/02/10 07:37:50 das Exp $");
 
 /* atan(x)
  * Method
@@ -35,7 +35,7 @@
 
 #include <float.h>
 
-#include "openlibm.h"
+#include "math.h"
 #include "math_private.h"
 
 static const double atanhi[] = {

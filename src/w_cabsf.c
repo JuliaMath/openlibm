@@ -11,7 +11,7 @@ static const char rcsid[] =
 #endif /* not lint */
 
 #include <complex.h>
-#include "openlibm.h"
+#include <math.h>
 #include "math_private.h"
 
 float

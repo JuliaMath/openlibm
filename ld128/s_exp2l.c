@@ -25,13 +25,13 @@
  */
 
 #include <sys/cdefs.h>
-
+__FBSDID("$FreeBSD: src/lib/msun/ld128/s_exp2l.c,v 1.3 2008/02/13 10:44:44 bde Exp $");
 
 #include <float.h>
 #include <stdint.h>
 
 #include "fpmath.h"
-#include "openlibm.h"
+#include "math.h"
 
 #define	TBLBITS	7
 #define	TBLSIZE	(1 << TBLBITS)

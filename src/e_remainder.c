@@ -12,7 +12,7 @@
  */
 
 #include <sys/cdefs.h>
-
+__FBSDID("$FreeBSD: src/lib/msun/src/e_remainder.c,v 1.12 2008/03/30 20:47:42 das Exp $");
 
 /* __ieee754_remainder(x,p)
  * Return :                  
@@ -25,7 +25,7 @@
 
 #include <float.h>
 
-#include "openlibm.h"
+#include "math.h"
 #include "math_private.h"
 
 static const double zero = 0.0;

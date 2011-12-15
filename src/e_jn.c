@@ -12,7 +12,7 @@
  */
 
 #include <sys/cdefs.h>
-
+__FBSDID("$FreeBSD: src/lib/msun/src/e_jn.c,v 1.11 2010/11/13 10:54:10 uqs Exp $");
 
 /*
  * __ieee754_jn(n, x), __ieee754_yn(n, x)
@@ -40,7 +40,7 @@
  *	
  */
 
-#include "openlibm.h"
+#include "math.h"
 #include "math_private.h"
 
 static const double

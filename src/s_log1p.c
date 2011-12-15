@@ -11,7 +11,7 @@
  */
 
 #include <sys/cdefs.h>
-
+__FBSDID("$FreeBSD: src/lib/msun/src/s_log1p.c,v 1.10 2008/03/29 16:37:59 das Exp $");
 
 /* double log1p(double x)
  *
@@ -80,7 +80,7 @@
 
 #include <float.h>
 
-#include "openlibm.h"
+#include "math.h"
 #include "math_private.h"
 
 static const double

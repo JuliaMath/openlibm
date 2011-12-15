@@ -14,9 +14,9 @@
  */
 
 #include <sys/cdefs.h>
+__FBSDID("$FreeBSD: src/lib/msun/src/e_coshf.c,v 1.9 2011/10/21 06:28:47 das Exp $");
 
-
-#include "openlibm.h"
+#include "math.h"
 #include "math_private.h"
 
 static const float one = 1.0, half=0.5, huge = 1.0e30;
@@ -51,11 +51,8 @@ __ieee754_coshf(float x)
 	if (ix < 0x42b17217)  return half*__ieee754_expf(fabsf(x));
 
     /* |x| in [log(maxfloat), overflowthresold] */
-	if (ix<=0x42b2d4fc) {
-	    w = __ieee754_expf(half*fabsf(x));
-	    t = half*w;
-	    return t*w;
-	}
+	if (ix<=0x42b2d4fc)
+	    return __ldexp_expf(fabsf(x), -1);
 
     /* |x| > overflowthresold, cosh(x) overflow */
 	return huge*huge;

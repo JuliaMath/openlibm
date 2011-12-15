@@ -12,7 +12,7 @@
  */
 
 #include <sys/cdefs.h>
-
+__FBSDID("$FreeBSD: src/lib/msun/src/e_sqrt.c,v 1.11 2008/03/02 01:47:58 das Exp $");
 
 /* __ieee754_sqrt(x)
  * Return correctly rounded sqrt.
@@ -86,7 +86,7 @@
 
 #include <float.h>
 
-#include "openlibm.h"
+#include "math.h"
 #include "math_private.h"
 
 static	const double	one	= 1.0, tiny=1.0e-300;

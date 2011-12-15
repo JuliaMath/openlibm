@@ -13,8 +13,9 @@
  */
 
 #include <sys/cdefs.h>
+__FBSDID("$FreeBSD: src/lib/msun/src/s_cbrt.c,v 1.17 2011/03/12 16:50:39 kargl Exp $");
 
-#include "openlibm.h"
+#include "math.h"
 #include "math_private.h"
 
 /* cbrt(x)
@@ -38,7 +39,7 @@ cbrt(double x)
 	int32_t	hx;
 	union {
 	    double value;
-	    u_int64_t bits;
+	    uint64_t bits;
 	} u;
 	double r,s,t=0.0,w;
 	u_int32_t sign;

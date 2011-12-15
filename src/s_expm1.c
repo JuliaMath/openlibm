@@ -11,7 +11,7 @@
  */
 
 #include <sys/cdefs.h>
-
+__FBSDID("$FreeBSD: src/lib/msun/src/s_expm1.c,v 1.12 2011/10/21 06:26:38 das Exp $");
 
 /* expm1(x)
  * Returns exp(x)-1, the exponential of x minus 1.
@@ -108,7 +108,9 @@
  * to produce the hexadecimal values shown.
  */
 
-#include "openlibm.h"
+#include <float.h>
+
+#include "math.h"
 #include "math_private.h"
 
 static const double
@@ -135,7 +137,6 @@ expm1(double x)
 
 	GET_HIGH_WORD(hx,x);
 	xsb = hx&0x80000000;		/* sign bit of x */
-	if(xsb==0) y=x; else y= -x;	/* y = |x| */
 	hx &= 0x7fffffff;		/* high word of |x| */
 
     /* filter out huge and non-finite argument */
@@ -169,7 +170,7 @@ expm1(double x)
 		hi = x - t*ln2_hi;	/* t*ln2_hi is exact here */
 		lo = t*ln2_lo;
 	    }
-	    x  = hi - lo;
+	    STRICT_ASSIGN(double, x, hi - lo);
 	    c  = (hi-x)-lo;
 	}
 	else if(hx < 0x3c900000) {  	/* when |x|<2**-54, return x */

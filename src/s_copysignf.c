@@ -14,7 +14,7 @@
  */
 
 #include <sys/cdefs.h>
-
+__FBSDID("$FreeBSD: src/lib/msun/src/s_copysignf.c,v 1.10 2008/02/22 02:30:35 das Exp $");
 
 /*
  * copysignf(float x, float y)
@@ -22,7 +22,7 @@
  * with the sign bit of y.
  */
 
-#include "openlibm.h"
+#include "math.h"
 #include "math_private.h"
 
 float

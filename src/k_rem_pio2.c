@@ -12,7 +12,7 @@
  */
 
 #include <sys/cdefs.h>
-
+__FBSDID("$FreeBSD: src/lib/msun/src/k_rem_pio2.c,v 1.11 2008/02/25 11:43:20 bde Exp $");
 
 /*
  * __kernel_rem_pio2(x,y,e0,nx,prec)
@@ -131,7 +131,7 @@
 
 #include <float.h>
 
-#include "openlibm.h"
+#include "math.h"
 #include "math_private.h"
 
 static const int init_jk[] = {3,4,4,6}; /* initial value for jk */

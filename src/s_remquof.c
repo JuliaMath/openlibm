@@ -11,9 +11,9 @@
  */
 
 #include <sys/cdefs.h>
+__FBSDID("$FreeBSD: src/lib/msun/src/s_remquof.c,v 1.1 2005/03/25 04:40:44 das Exp $");
 
-
-#include "openlibm.h"
+#include "math.h"
 #include "math_private.h"
 
 static const float Zero[] = {0.0, -0.0,};

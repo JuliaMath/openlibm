@@ -25,7 +25,7 @@
  */
 
 #include <sys/cdefs.h>
-
+__FBSDID("$FreeBSD: src/lib/msun/src/s_tanl.c,v 1.3 2011/05/30 19:41:28 kargl Exp $");
 
 /*
  * Limited testing on pseudorandom numbers drawn within [0:4e8] shows
@@ -35,7 +35,7 @@
 
 #include <float.h>
 
-#include "openlibm.h"
+#include "math.h"
 #include "math_private.h"
 #if LDBL_MANT_DIG == 64
 #include "../ld80/e_rem_pio2l.h"

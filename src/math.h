@@ -11,15 +11,15 @@
 
 /*
  * from: @(#)fdlibm.h 5.1 93/09/24
- * $FreeBSD: src/lib/msun/src/math.h,v 1.80 2011/03/12 16:50:39 kargl Exp $
+ * $FreeBSD: src/lib/msun/src/math.h,v 1.82 2011/11/12 19:55:48 theraven Exp $
  */
 
 #ifndef _MATH_H_
 #define	_MATH_H_
 
 #include <sys/cdefs.h>
-#include <sys/types.h>
-#include <machine/limits.h>
+#include <sys/_types.h>
+#include <machine/_limits.h>
 
 /*
  * ANSI/POSIX
@@ -34,13 +34,13 @@ extern const union __nan_un {
 	float		__uf;
 } __nan;
 
-//#if __GNUC_PREREQ__(3, 3) || (defined(__INTEL_COMPILER) && __INTEL_COMPILER >= 800)
+#if __GNUC_PREREQ__(3, 3) || (defined(__INTEL_COMPILER) && __INTEL_COMPILER >= 800)
 #define	__MATH_BUILTIN_CONSTANTS
-//#endif
+#endif
 
-//#if __GNUC_PREREQ__(3, 0) && !defined(__INTEL_COMPILER)
+#if __GNUC_PREREQ__(3, 0) && !defined(__INTEL_COMPILER)
 #define	__MATH_BUILTIN_RELOPS
-//#endif
+#endif
 
 #ifdef __MATH_BUILTIN_CONSTANTS
 #define	HUGE_VAL	__builtin_huge_val()
@@ -68,14 +68,11 @@ extern const union __nan_un {
 #define	MATH_ERREXCEPT	2
 #define	math_errhandling	MATH_ERREXCEPT
 
-/* XXX We need a <machine/math.h>. */
-#if defined(__ia64__) || defined(__sparc64__)
-#define	FP_FAST_FMA	1
-#endif
+#define	FP_FAST_FMAF	1
 #ifdef __ia64__
+#define	FP_FAST_FMA	1
 #define	FP_FAST_FMAL	1
 #endif
-#define	FP_FAST_FMAF	1
 
 /* Symbolic constants to classify floating point numbers. */
 #define	FP_INFINITE	0x01
@@ -134,7 +131,7 @@ typedef	__float_t	float_t;
 /*
  * XOPEN/SVID
  */
-//#if __BSD_VISIBLE || __XSI_VISIBLE
+#if __BSD_VISIBLE || __XSI_VISIBLE
 #define	M_E		2.7182818284590452354	/* e */
 #define	M_LOG2E		1.4426950408889634074	/* log 2e */
 #define	M_LOG10E	0.43429448190325182765	/* log 10e */
@@ -151,7 +148,7 @@ typedef	__float_t	float_t;
 
 #define	MAXFLOAT	((float)3.40282346638528860e+38)
 extern int signgam;
-//#endif /* __BSD_VISIBLE || __XSI_VISIBLE */
+#endif /* __BSD_VISIBLE || __XSI_VISIBLE */
 
 #if __BSD_VISIBLE
 #if 0
@@ -398,32 +395,32 @@ float	significandf(float);
  * long double versions of ISO/POSIX math functions
  */
 #if __ISO_C_VISIBLE >= 1999
-#if 0
+#if _DECLARE_C99_LDBL_MATH
 long double	acoshl(long double);
 #endif
 long double	acosl(long double);
-#if 0
+#if _DECLARE_C99_LDBL_MATH
 long double	asinhl(long double);
 #endif
 long double	asinl(long double);
 long double	atan2l(long double, long double);
-#if 0
+#if _DECLARE_C99_LDBL_MATH
 long double	atanhl(long double);
 #endif
 long double	atanl(long double);
 long double	cbrtl(long double);
 long double	ceill(long double);
 long double	copysignl(long double, long double) __pure2;
-#if 0
+#if _DECLARE_C99_LDBL_MATH
 long double	coshl(long double);
 #endif
 long double	cosl(long double);
-#if 0
+#if _DECLARE_C99_LDBL_MATH
 long double	erfcl(long double);
 long double	erfl(long double);
 #endif
 long double	exp2l(long double);
-#if 0
+#if _DECLARE_C99_LDBL_MATH
 long double	expl(long double);
 long double	expm1l(long double);
 #endif
@@ -438,18 +435,18 @@ long double	frexpl(long double value, int *); /* fundamentally !__pure2 */
 long double	hypotl(long double, long double);
 int		ilogbl(long double) __pure2;
 long double	ldexpl(long double, int);
-#if 0
+#if _DECLARE_C99_LDBL_MATH
 long double	lgammal(long double);
 #endif
 long long	llrintl(long double);
 long long	llroundl(long double);
-#if 0
+#if _DECLARE_C99_LDBL_MATH
 long double	log10l(long double);
 long double	log1pl(long double);
 long double	log2l(long double);
 #endif
 long double	logbl(long double);
-#if 0
+#if _DECLARE_C99_LDBL_MATH
 long double	logl(long double);
 #endif
 long		lrintl(long double);
@@ -461,7 +458,7 @@ long double	nextafterl(long double, long double);
 double		nexttoward(double, long double);
 float		nexttowardf(float, long double);
 long double	nexttowardl(long double, long double);
-#if 0
+#if _DECLARE_C99_LDBL_MATH
 long double	powl(long double, long double);
 #endif
 long double	remainderl(long double, long double);
@@ -470,16 +467,16 @@ long double	rintl(long double);
 long double	roundl(long double);
 long double	scalblnl(long double, long);
 long double	scalbnl(long double, int);
-#if 0
+#if _DECLARE_C99_LDBL_MATH
 long double	sinhl(long double);
 #endif
 long double	sinl(long double);
 long double	sqrtl(long double);
-#if 0
+#if _DECLARE_C99_LDBL_MATH
 long double	tanhl(long double);
 #endif
 long double	tanl(long double);
-#if 0
+#if _DECLARE_C99_LDBL_MATH
 long double	tgammal(long double);
 #endif
 long double	truncl(long double);

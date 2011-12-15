@@ -13,7 +13,7 @@
  */
 
 #include <sys/cdefs.h>
-
+__FBSDID("$FreeBSD: src/lib/msun/src/e_lgamma_r.c,v 1.11 2011/10/15 07:00:28 das Exp $");
 
 /* __ieee754_lgamma_r(x, signgamp)
  * Reentrant version of the logarithm of the Gamma function 
@@ -83,7 +83,7 @@
  *	
  */
 
-#include "openlibm.h"
+#include "math.h"
 #include "math_private.h"
 
 static const double
@@ -269,7 +269,6 @@ __ieee754_lgamma_r(double x, int *signgamp)
 	}
 	else if(ix<0x40200000) { 			/* x < 8.0 */
 	    i = (int)x;
-	    t = zero;
 	    y = x-(double)i;
 	    p = y*(s0+y*(s1+y*(s2+y*(s3+y*(s4+y*(s5+y*s6))))));
 	    q = one+y*(r1+y*(r2+y*(r3+y*(r4+y*(r5+y*r6)))));

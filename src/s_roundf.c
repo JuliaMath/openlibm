@@ -25,9 +25,9 @@
  */
 
 #include <sys/cdefs.h>
+__FBSDID("$FreeBSD: src/lib/msun/src/s_roundf.c,v 1.4 2005/12/02 13:45:06 bde Exp $");
 
-
-#include "openlibm.h"
+#include <math.h>
 
 float
 roundf(float x)

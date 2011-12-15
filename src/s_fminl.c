@@ -25,9 +25,9 @@
  */
 
 #include <sys/cdefs.h>
+__FBSDID("$FreeBSD: src/lib/msun/src/s_fminl.c,v 1.1 2004/06/30 07:04:01 das Exp $");
 
-
-#include "openlibm.h"
+#include <math.h>
 
 #include "fpmath.h"
 

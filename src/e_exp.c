@@ -11,7 +11,7 @@
  */
 
 #include <sys/cdefs.h>
-
+__FBSDID("$FreeBSD: src/lib/msun/src/e_exp.c,v 1.14 2011/10/21 06:26:38 das Exp $");
 
 /* __ieee754_exp(x)
  * Returns the exponential of x.
@@ -76,7 +76,9 @@
  * to produce the hexadecimal values shown.
  */
 
-#include "openlibm.h"
+#include <float.h>
+
+#include "math.h"
 #include "math_private.h"
 
 static const double
@@ -133,7 +135,7 @@ __ieee754_exp(double x)	/* default IEEE double exp */
 		hi = x - t*ln2HI[0];	/* t*ln2HI is exact here */
 		lo = t*ln2LO[0];
 	    }
-	    x  = hi - lo;
+	    STRICT_ASSIGN(double, x, hi - lo);
 	} 
 	else if(hx < 0x3e300000)  {	/* when |x|<2**-28 */
 	    if(huge+x>one) return one+x;/* trigger inexact */

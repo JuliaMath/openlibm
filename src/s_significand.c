@@ -11,7 +11,7 @@
  */
 
 #include <sys/cdefs.h>
-
+__FBSDID("$FreeBSD: src/lib/msun/src/s_significand.c,v 1.10 2008/02/22 02:30:35 das Exp $");
 
 /*
  * significand(x) computes just
@@ -19,7 +19,7 @@
  * for exercising the fraction-part(F) IEEE 754-1985 test vector.
  */
 
-#include "openlibm.h"
+#include "math.h"
 #include "math_private.h"
 
 double

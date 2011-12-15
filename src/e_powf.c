@@ -14,9 +14,9 @@
  */
 
 #include <sys/cdefs.h>
+__FBSDID("$FreeBSD: src/lib/msun/src/e_powf.c,v 1.16 2011/10/21 06:26:07 das Exp $");
 
-
-#include "openlibm.h"
+#include "math.h"
 #include "math_private.h"
 
 static const float
@@ -67,6 +67,9 @@ __ieee754_powf(float x, float y)
     /* y==zero: x**0 = 1 */
 	if(iy==0) return one;
 
+    /* x==1: 1**y = 1, even if y is NaN */
+	if (hx==0x3f800000) return one;
+
     /* y!=zero: result is NaN if either arg is NaN */
 	if(ix > 0x7f800000 ||
 	   iy > 0x7f800000)
@@ -90,7 +93,7 @@ __ieee754_powf(float x, float y)
     /* special value of y */
 	if (iy==0x7f800000) {	/* y is +-inf */
 	    if (ix==0x3f800000)
-	        return  y - y;	/* inf**+-1 is NaN */
+	        return  one;	/* (-1)**+-inf is NaN */
 	    else if (ix > 0x3f800000)/* (|x|>1)**+-inf = inf,0 */
 	        return (hy>=0)? y: zero;
 	    else			/* (|x|<1)**-,+inf = inf,0 */

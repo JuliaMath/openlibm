@@ -25,10 +25,10 @@
  */
 
 #include <sys/cdefs.h>
-
+__FBSDID("$FreeBSD: src/lib/msun/src/s_cprojl.c,v 1.1 2008/08/07 15:07:48 das Exp $");
 
 #include <complex.h>
-#include "openlibm.h"
+#include <math.h>
 
 #include "math_private.h"
 

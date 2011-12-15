@@ -12,7 +12,7 @@
  */
 
 #include <sys/cdefs.h>
-
+__FBSDID("$FreeBSD: src/lib/msun/src/e_cosh.c,v 1.10 2011/10/21 06:28:47 das Exp $");
 
 /* __ieee754_cosh(x)
  * Method : 
@@ -35,7 +35,7 @@
  *	only cosh(0)=1 is exact for finite x.
  */
 
-#include "openlibm.h"
+#include "math.h"
 #include "math_private.h"
 
 static const double one = 1.0, half=0.5, huge = 1.0e300;
@@ -45,7 +45,6 @@ __ieee754_cosh(double x)
 {
 	double t,w;
 	int32_t ix;
-	u_int32_t lx;
 
     /* High word of |x|. */
 	GET_HIGH_WORD(ix,x);
@@ -72,13 +71,8 @@ __ieee754_cosh(double x)
 	if (ix < 0x40862E42)  return half*__ieee754_exp(fabs(x));
 
     /* |x| in [log(maxdouble), overflowthresold] */
-	GET_LOW_WORD(lx,x);
-	if (ix<0x408633CE ||
-	      ((ix==0x408633ce)&&(lx<=(u_int32_t)0x8fb9f87d))) {
-	    w = __ieee754_exp(half*fabs(x));
-	    t = half*w;
-	    return t*w;
-	}
+	if (ix<=0x408633CE)
+	    return __ldexp_exp(fabs(x), -1);
 
     /* |x| > overflowthresold, cosh(x) overflow */
 	return huge*huge;

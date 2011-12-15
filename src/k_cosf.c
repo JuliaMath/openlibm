@@ -16,10 +16,10 @@
 
 #ifndef INLINE_KERNEL_COSDF
 #include <sys/cdefs.h>
-
+__FBSDID("$FreeBSD: src/lib/msun/src/k_cosf.c,v 1.18 2009/06/03 08:16:34 ed Exp $");
 #endif
 
-#include "openlibm.h"
+#include "math.h"
 #include "math_private.h"
 
 /* |cos(x) - c(x)| < 2**-34.1 (~[-5.37e-11, 5.295e-11]). */
