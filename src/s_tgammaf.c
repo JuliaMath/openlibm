@@ -27,7 +27,7 @@
 #include <sys/cdefs.h>
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_tgammaf.c,v 1.1 2008/02/18 17:27:10 das Exp $");
 
-#include <math.h>
+#include <openlibm.h>
 
 /*
  * We simply call tgamma() rather than bloating the math library with

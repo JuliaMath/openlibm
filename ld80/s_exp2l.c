@@ -35,7 +35,7 @@
 #endif
 
 #include "fpmath.h"
-#include "math.h"
+#include "openlibm.h"
 
 #define	TBLBITS	7
 #define	TBLSIZE	(1 << TBLBITS)

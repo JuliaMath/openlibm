@@ -28,7 +28,7 @@
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_csqrtf.c,v 1.3 2008/08/08 00:15:16 das Exp $");
 
 #include <complex.h>
-#include <math.h>
+#include <openlibm.h>
 
 #include "math_private.h"
 

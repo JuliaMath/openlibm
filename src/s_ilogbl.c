@@ -15,9 +15,9 @@
 
 #include <float.h>
 #include <limits.h>
-#include <math.h>
+#include <openlibm.h>
 
-#include "fpmath.h"
+#include "fpopenlibm.h"
 
 int
 ilogbl(long double x)

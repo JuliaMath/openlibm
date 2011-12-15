@@ -27,9 +27,9 @@
 #include <sys/cdefs.h>
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_fminl.c,v 1.1 2004/06/30 07:04:01 das Exp $");
 
-#include <math.h>
+#include <openlibm.h>
 
-#include "fpmath.h"
+#include "fpopenlibm.h"
 
 long double
 fminl(long double x, long double y)

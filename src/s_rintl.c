@@ -28,9 +28,9 @@
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_rintl.c,v 1.5 2008/02/22 11:59:05 bde Exp $");
 
 #include <float.h>
-#include <math.h>
+#include <openlibm.h>
 
-#include "fpmath.h"
+#include "fpopenlibm.h"
 
 #if LDBL_MAX_EXP != 0x4000
 /* We also require the usual bias, min exp and expsign packing. */

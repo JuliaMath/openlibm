@@ -16,7 +16,7 @@
 #include <sys/cdefs.h>
 //__FBSDID("$FreeBSD: src/lib/msun/src/e_atan2f.c,v 1.12 2008/08/03 17:39:54 das Exp $");
 
-#include "math.h"
+#include "openlibm.h"
 #include "math_private.h"
 
 static volatile float

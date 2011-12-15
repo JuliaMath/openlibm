@@ -24,10 +24,10 @@
  */
 
 #include <float.h>
-#include <math.h>
+#include <openlibm.h>
 #include <stdint.h>
 
-#include "fpmath.h"
+#include "fpopenlibm.h"
 
 #ifdef LDBL_IMPLICIT_NBIT
 #define	MANH_SIZE	(LDBL_MANH_SIZE + 1)

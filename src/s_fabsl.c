@@ -28,9 +28,9 @@
  * $FreeBSD: src/lib/msun/src/s_fabsl.c,v 1.2 2003/10/25 19:53:28 des Exp $
  */
 
-#include <math.h>
+#include <openlibm.h>
 
-#include "fpmath.h"
+#include "fpopenlibm.h"
 
 long double
 fabsl(long double x)

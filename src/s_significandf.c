@@ -16,7 +16,7 @@
 #include <sys/cdefs.h>
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_significandf.c,v 1.8 2008/02/22 02:30:36 das Exp $");
 
-#include "math.h"
+#include "openlibm.h"
 #include "math_private.h"
 
 float

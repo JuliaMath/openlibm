@@ -28,7 +28,7 @@
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_cargl.c,v 1.1 2008/07/31 22:41:26 das Exp $");
 
 #include <complex.h>
-#include <math.h>
+#include <openlibm.h>
 
 long double
 cargl(long double complex z)

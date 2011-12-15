@@ -28,7 +28,7 @@
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_cargf.c,v 1.1 2007/12/12 23:43:51 das Exp $");
 
 #include <complex.h>
-#include <math.h>
+#include <openlibm.h>
 
 float
 cargf(float complex z)

@@ -42,7 +42,7 @@
  * acknowledged.
  */
 
-#include <math.h>
+#include <openlibm.h>
 #include "mathimpl.h"
 
 /* METHOD:

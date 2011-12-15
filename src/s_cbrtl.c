@@ -20,8 +20,8 @@
 #include <float.h>
 #include <ieeefp.h>
 
-#include "fpmath.h"    
-#include "math.h"
+#include "fpopenlibm.h"    
+#include "openlibm.h"
 #include "math_private.h"
 
 #define	BIAS	(LDBL_MAX_EXP - 1)

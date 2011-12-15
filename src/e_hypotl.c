@@ -17,8 +17,8 @@
 
 #include <float.h>
 
-#include "fpmath.h"
-#include "math.h"
+#include "fpopenlibm.h"
+#include "openlibm.h"
 #include "math_private.h"
 
 #define	GET_LDBL_MAN(h, l, v) do {	\

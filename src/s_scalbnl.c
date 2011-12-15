@@ -29,9 +29,9 @@ static char rcsid[] = "$FreeBSD: src/lib/msun/src/s_scalbnl.c,v 1.1 2005/03/07 0
 
 #include <sys/cdefs.h>
 #include <float.h>
-#include <math.h>
+#include <openlibm.h>
 
-#include "fpmath.h"
+#include "fpopenlibm.h"
 
 #if LDBL_MAX_EXP != 0x4000
 #error "Unsupported long double format"

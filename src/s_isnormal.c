@@ -26,9 +26,9 @@
  * $FreeBSD: src/lib/msun/src/s_isnormal.c,v 1.1 2004/07/09 03:32:39 das Exp $
  */
 
-#include <math.h>
+#include <openlibm.h>
 
-#include "fpmath.h"
+#include "fpopenlibm.h"
 
 int
 __isnormal(double d)

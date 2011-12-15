@@ -28,7 +28,7 @@
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_cproj.c,v 1.1 2008/08/07 15:07:48 das Exp $");
 
 #include <complex.h>
-#include <math.h>
+#include <openlibm.h>
 
 #include "math_private.h"
 

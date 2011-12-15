@@ -27,7 +27,7 @@
 #include <sys/cdefs.h>
 #include <sys/limits.h>
 #include <fenv.h>
-#include <math.h>
+#include <openlibm.h>
 
 #ifndef type
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_lround.c,v 1.2 2005/04/08 00:52:16 das Exp $");

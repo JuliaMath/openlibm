@@ -14,8 +14,8 @@
 
 #include <float.h>
 
-#include "fpmath.h"
-#include "math.h"
+#include "fpopenlibm.h"
+#include "openlibm.h"
 #include "math_private.h"
 
 #define	LDBL_INFNAN_EXP	(LDBL_MAX_EXP * 2 - 1)

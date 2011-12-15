@@ -11,7 +11,7 @@
 
 /*
  * from: @(#)fdlibm.h 5.1 93/09/24
- * $FreeBSD: src/lib/msun/src/math.h,v 1.82 2011/11/12 19:55:48 theraven Exp $
+ * $FreeBSD: src/lib/msun/src/openlibm.h,v 1.82 2011/11/12 19:55:48 theraven Exp $
  */
 
 #ifndef _MATH_H_
@@ -152,7 +152,7 @@ extern int signgam;
 
 #if __BSD_VISIBLE
 #if 0
-/* Old value from 4.4BSD-Lite math.h; this is probably better. */
+/* Old value from 4.4BSD-Lite openlibm.h; this is probably better. */
 #define	HUGE		HUGE_VAL
 #else
 #define	HUGE		MAXFLOAT

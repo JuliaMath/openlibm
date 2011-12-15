@@ -16,7 +16,7 @@
 #include <sys/cdefs.h>
 //__FBSDID("$FreeBSD: src/lib/msun/src/e_jnf.c,v 1.11 2010/11/13 10:54:10 uqs Exp $");
 
-#include "math.h"
+#include "openlibm.h"
 #include "math_private.h"
 
 static const float

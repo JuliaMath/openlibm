@@ -29,7 +29,7 @@
 
 #include <complex.h>
 
-#include "math.h"
+#include "openlibm.h"
 #include "math_private.h"
 
 static const uint32_t k = 235;			/* constant for reduction */

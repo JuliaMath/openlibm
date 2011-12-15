@@ -26,7 +26,7 @@
 
 #include <sys/cdefs.h>
 #include <fenv.h>
-#include <math.h>
+#include <openlibm.h>
 
 #ifndef type
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_lrint.c,v 1.1 2005/01/11 23:12:55 das Exp $");
