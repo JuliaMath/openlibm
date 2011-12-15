@@ -34,7 +34,7 @@
  */
 
 #include <machine/asm.h>
-__FBSDID("$FreeBSD: src/lib/msun/i387/e_log10.S,v 1.10 2011/01/07 16:13:12 kib Exp $")
+//__FBSDID("$FreeBSD: src/lib/msun/i387/e_log10.S,v 1.10 2011/01/07 16:13:12 kib Exp $")
 
 ENTRY(log10)
 	fldlg2

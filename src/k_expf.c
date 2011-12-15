@@ -25,7 +25,7 @@
  */
 
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD: src/lib/msun/src/k_expf.c,v 1.1 2011/10/21 06:27:56 das Exp $");
+//__FBSDID("$FreeBSD: src/lib/msun/src/k_expf.c,v 1.1 2011/10/21 06:27:56 das Exp $");
 
 #include <complex.h>
 

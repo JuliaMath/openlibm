@@ -5,7 +5,7 @@
 
 #include <machine/asm.h>
 
-__FBSDID("$FreeBSD: src/lib/msun/i387/e_logf.S,v 1.3 2011/01/07 16:13:12 kib Exp $");
+//__FBSDID("$FreeBSD: src/lib/msun/i387/e_logf.S,v 1.3 2011/01/07 16:13:12 kib Exp $");
 /* RCSID("$NetBSD: e_logf.S,v 1.2 1996/07/06 00:15:45 jtc Exp $") */
 
 ENTRY(logf)

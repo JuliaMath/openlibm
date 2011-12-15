@@ -13,7 +13,7 @@
  */
 
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD: src/lib/msun/src/e_lgamma_r.c,v 1.11 2011/10/15 07:00:28 das Exp $");
+//__FBSDID("$FreeBSD: src/lib/msun/src/e_lgamma_r.c,v 1.11 2011/10/15 07:00:28 das Exp $");
 
 /* __ieee754_lgamma_r(x, signgamp)
  * Reentrant version of the logarithm of the Gamma function 

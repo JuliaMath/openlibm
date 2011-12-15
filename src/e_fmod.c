@@ -12,7 +12,7 @@
  */
 
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD: src/lib/msun/src/e_fmod.c,v 1.10 2008/02/22 02:30:34 das Exp $");
+//__FBSDID("$FreeBSD: src/lib/msun/src/e_fmod.c,v 1.10 2008/02/22 02:30:34 das Exp $");
 
 /* 
  * __ieee754_fmod(x,y)

@@ -14,7 +14,7 @@
  */
 
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD: src/lib/msun/src/s_atanf.c,v 1.10 2008/08/01 01:24:25 das Exp $");
+//__FBSDID("$FreeBSD: src/lib/msun/src/s_atanf.c,v 1.10 2008/08/01 01:24:25 das Exp $");
 
 #include "math.h"
 #include "math_private.h"

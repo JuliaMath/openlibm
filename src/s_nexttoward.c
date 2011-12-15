@@ -11,7 +11,7 @@
  */
 
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD: src/lib/msun/src/s_nexttoward.c,v 1.3 2011/02/10 07:38:13 das Exp $");
+//__FBSDID("$FreeBSD: src/lib/msun/src/s_nexttoward.c,v 1.3 2011/02/10 07:38:13 das Exp $");
 
 /*
  * We assume that a long double has a 15-bit exponent.  On systems

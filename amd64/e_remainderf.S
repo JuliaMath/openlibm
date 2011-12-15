@@ -6,7 +6,7 @@
 #include <machine/asm.h>
 
 RCSID("from: $NetBSD: e_remainderf.S,v 1.2 1995/05/08 23:49:47 jtc Exp $")
-__FBSDID("$FreeBSD: src/lib/msun/amd64/e_remainderf.S,v 1.2 2011/01/07 16:13:12 kib Exp $")
+//__FBSDID("$FreeBSD: src/lib/msun/amd64/e_remainderf.S,v 1.2 2011/01/07 16:13:12 kib Exp $")
 
 ENTRY(remainderf)
 	movss	%xmm0,-4(%rsp)

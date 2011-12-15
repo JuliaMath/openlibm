@@ -25,7 +25,7 @@
  */
 
 #include <machine/asm.h>
-__FBSDID("$FreeBSD: src/lib/msun/amd64/s_scalbnf.S,v 1.4 2011/01/07 16:13:12 kib Exp $")
+//__FBSDID("$FreeBSD: src/lib/msun/amd64/s_scalbnf.S,v 1.4 2011/01/07 16:13:12 kib Exp $")
 
 ENTRY(scalbnf)
 	movss	%xmm0,-8(%rsp)

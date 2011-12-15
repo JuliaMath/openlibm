@@ -34,7 +34,7 @@
  */
 
 #include <machine/asm.h>
-__FBSDID("$FreeBSD: src/lib/msun/i387/s_logb.S,v 1.10 2011/01/07 16:13:12 kib Exp $")
+//__FBSDID("$FreeBSD: src/lib/msun/i387/s_logb.S,v 1.10 2011/01/07 16:13:12 kib Exp $")
 
 ENTRY(logb)
 	fldl	4(%esp)

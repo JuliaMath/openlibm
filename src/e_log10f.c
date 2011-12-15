@@ -10,7 +10,7 @@
  */
 
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD: src/lib/msun/src/e_log10f.c,v 1.13 2011/10/16 05:36:23 das Exp $");
+//__FBSDID("$FreeBSD: src/lib/msun/src/e_log10f.c,v 1.13 2011/10/16 05:36:23 das Exp $");
 
 /*
  * Float version of e_log10.c.  See the latter for most comments.

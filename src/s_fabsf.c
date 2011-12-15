@@ -14,7 +14,7 @@
  */
 
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD: src/lib/msun/src/s_fabsf.c,v 1.8 2008/02/22 02:30:35 das Exp $");
+//__FBSDID("$FreeBSD: src/lib/msun/src/s_fabsf.c,v 1.8 2008/02/22 02:30:35 das Exp $");
 
 /*
  * fabsf(x) returns the absolute value of x.

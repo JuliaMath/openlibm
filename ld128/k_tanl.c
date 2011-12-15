@@ -12,7 +12,7 @@
  */
 
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD: src/lib/msun/ld128/k_tanl.c,v 1.1 2008/02/17 07:32:31 das Exp $");
+//__FBSDID("$FreeBSD: src/lib/msun/ld128/k_tanl.c,v 1.1 2008/02/17 07:32:31 das Exp $");
 
 /*
  * ld128 version of k_tan.c.  See ../src/k_tan.c for most comments.

@@ -13,7 +13,7 @@
  */
 
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD: src/lib/msun/src/e_atan2.c,v 1.14 2008/08/02 19:17:00 das Exp $");
+//__FBSDID("$FreeBSD: src/lib/msun/src/e_atan2.c,v 1.14 2008/08/02 19:17:00 das Exp $");
 
 /* __ieee754_atan2(y,x)
  * Method :

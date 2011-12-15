@@ -12,7 +12,7 @@
  */
 
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD: src/lib/msun/src/s_ceill.c,v 1.9 2008/02/14 15:10:33 bde Exp $");
+//__FBSDID("$FreeBSD: src/lib/msun/src/s_ceill.c,v 1.9 2008/02/14 15:10:33 bde Exp $");
 
 /*
  * ceill(x)

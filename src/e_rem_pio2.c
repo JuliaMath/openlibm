@@ -14,7 +14,7 @@
  */
 
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD: src/lib/msun/src/e_rem_pio2.c,v 1.22 2011/06/19 17:07:58 kargl Exp $");
+//__FBSDID("$FreeBSD: src/lib/msun/src/e_rem_pio2.c,v 1.22 2011/06/19 17:07:58 kargl Exp $");
 
 /* __ieee754_rem_pio2(x,y)
  * 

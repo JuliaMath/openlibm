@@ -11,7 +11,7 @@
  */
 
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD: src/lib/msun/src/s_erf.c,v 1.8 2008/02/22 02:30:35 das Exp $");
+//__FBSDID("$FreeBSD: src/lib/msun/src/s_erf.c,v 1.8 2008/02/22 02:30:35 das Exp $");
 
 /* double erf(double x)
  * double erfc(double x)

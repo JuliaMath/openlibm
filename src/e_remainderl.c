@@ -25,7 +25,7 @@
  */
 
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD: src/lib/msun/src/e_remainderl.c,v 1.1 2008/03/30 20:47:42 das Exp $");
+//__FBSDID("$FreeBSD: src/lib/msun/src/e_remainderl.c,v 1.1 2008/03/30 20:47:42 das Exp $");
 
 #include <math.h>
 

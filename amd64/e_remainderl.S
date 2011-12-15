@@ -35,7 +35,7 @@
 
 #include <machine/asm.h>
 
-__FBSDID("$FreeBSD: src/lib/msun/amd64/e_remainderl.S,v 1.2 2011/01/07 16:13:12 kib Exp $")
+//__FBSDID("$FreeBSD: src/lib/msun/amd64/e_remainderl.S,v 1.2 2011/01/07 16:13:12 kib Exp $")
 
 ENTRY(remainderl)
 	fldt	24(%rsp)

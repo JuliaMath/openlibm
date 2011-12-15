@@ -11,7 +11,7 @@
  */
 
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD: src/lib/msun/src/s_floor.c,v 1.11 2008/02/15 07:01:40 bde Exp $");
+//__FBSDID("$FreeBSD: src/lib/msun/src/s_floor.c,v 1.11 2008/02/15 07:01:40 bde Exp $");
 
 /*
  * floor(x)

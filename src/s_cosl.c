@@ -25,7 +25,7 @@
  */
 
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD: src/lib/msun/src/s_cosl.c,v 1.3 2011/05/30 19:41:28 kargl Exp $");
+//__FBSDID("$FreeBSD: src/lib/msun/src/s_cosl.c,v 1.3 2011/05/30 19:41:28 kargl Exp $");
 
 /*
  * Limited testing on pseudorandom numbers drawn within [-2e8:4e8] shows
