@@ -39,7 +39,7 @@ cbrt(double x)
 	int32_t	hx;
 	union {
 	    double value;
-	    uint64_t bits;
+	    u_int64_t bits;
 	} u;
 	double r,s,t=0.0,w;
 	u_int32_t sign;

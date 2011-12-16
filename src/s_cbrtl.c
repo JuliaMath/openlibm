@@ -38,7 +38,7 @@ cbrtl(long double x)
 	double dr, dt, dx;
 	float ft, fx;
 	u_int32_t hx;
-	uint16_t expsign;
+	u_int16_t expsign;
 	int k;
 
 	u.e = x;

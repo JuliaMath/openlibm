@@ -75,7 +75,7 @@ static inline double
 add_adjusted(double a, double b)
 {
 	struct dd sum;
-	uint64_t hibits, lobits;
+	u_int64_t hibits, lobits;
 
 	sum = dd_add(a, b);
 	if (sum.lo != 0) {
@@ -99,7 +99,7 @@ static inline double
 add_and_denormalize(double a, double b, int scale)
 {
 	struct dd sum;
-	uint64_t hibits, lobits;
+	u_int64_t hibits, lobits;
 	int bits_lost;
 
 	sum = dd_add(a, b);

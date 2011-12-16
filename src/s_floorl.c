@@ -32,7 +32,7 @@
 #ifdef LDBL_IMPLICIT_NBIT
 #define	MANH_SIZE	(LDBL_MANH_SIZE + 1)
 #define	INC_MANH(u, c)	do {					\
-	uint64_t o = u.bits.manh;				\
+	u_int64_t o = u.bits.manh;				\
 	u.bits.manh += (c);					\
 	if (u.bits.manh < o)					\
 		u.bits.exp++;					\
@@ -40,7 +40,7 @@
 #else
 #define	MANH_SIZE	LDBL_MANH_SIZE
 #define	INC_MANH(u, c)	do {					\
-	uint64_t o = u.bits.manh;				\
+	u_int64_t o = u.bits.manh;				\
 	u.bits.manh += (c);					\
 	if (u.bits.manh < o) {					\
 		u.bits.exp++;					\
@@ -64,7 +64,7 @@ floorl(long double x)
 				    (u.bits.manh | u.bits.manl) != 0)
 					u.e = u.bits.sign ? -1.0 : 0.0;
 		} else {
-			uint64_t m = ((1llu << MANH_SIZE) - 1) >> (e + 1);
+			u_int64_t m = ((1llu << MANH_SIZE) - 1) >> (e + 1);
 			if (((u.bits.manh & m) | u.bits.manl) == 0)
 				return (x);	/* x is integral */
 			if (u.bits.sign) {
@@ -81,14 +81,14 @@ floorl(long double x)
 			}
 		}
 	} else if (e < LDBL_MANT_DIG - 1) {
-		uint64_t m = (uint64_t)-1 >> (64 - LDBL_MANT_DIG + e + 1);
+		u_int64_t m = (u_int64_t)-1 >> (64 - LDBL_MANT_DIG + e + 1);
 		if ((u.bits.manl & m) == 0)
 			return (x);	/* x is integral */
 		if (u.bits.sign) {
 			if (e == MANH_SIZE - 1)
 				INC_MANH(u, 1);
 			else {
-				uint64_t o = u.bits.manl;
+				u_int64_t o = u.bits.manl;
 				u.bits.manl += 1llu << (LDBL_MANT_DIG - e - 1);
 				if (u.bits.manl < o)	/* got a carry */
 					INC_MANH(u, 1);
