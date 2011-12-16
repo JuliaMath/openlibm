@@ -32,7 +32,7 @@
 #include "openlibm.h"
 #include "math_private.h"
 
-static const uint32_t k = 1799;		/* constant for reduction */
+static const u_int32_t k = 1799;		/* constant for reduction */
 static const double kln2 =  1246.97177782734161156;	/* k * ln2 */
 
 /*
@@ -46,7 +46,7 @@ static double
 __frexp_exp(double x, int *expt)
 {
 	double exp_x;
-	uint32_t hx;
+	u_int32_t hx;
 
 	/*
 	 * We use exp(x) = exp(x - kln2) * 2**k, carefully chosen to

@@ -28,7 +28,7 @@
 
 #include <openlibm.h>
 
-#include "fpopenlibm.h"
+#include "fpmath.h"
 
 long double
 copysignl(long double x, long double y)

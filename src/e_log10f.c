@@ -20,6 +20,9 @@
 #include "math_private.h"
 #include "k_logf.h"
 
+// VBS
+#define float_t float
+
 static const float
 two25      =  3.3554432000e+07, /* 0x4c000000 */
 ivln10hi   =  4.3432617188e-01, /* 0x3ede6000 */

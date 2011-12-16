@@ -31,7 +31,7 @@
 #include <float.h>
 #include <openlibm.h>
 
-#include "fpopenlibm.h"
+#include "fpmath.h"
 
 /*
  * A struct dd represents a floating-point number with twice the precision

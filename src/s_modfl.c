@@ -40,12 +40,12 @@
 #include <openlibm.h>
 #include <sys/types.h>
 
-#include "fpopenlibm.h"
+#include "fpmath.h"
 
 #if LDBL_MANL_SIZE > 32
 #define	MASK	((uint64_t)-1)
 #else
-#define	MASK	((uint32_t)-1)
+#define	MASK	((u_int32_t)-1)
 #endif
 /* Return the last n bits of a word, representing the fractional part. */
 #define	GETFRAC(bits, n)	((bits) & ~(MASK << (n)))

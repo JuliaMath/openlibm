@@ -18,9 +18,10 @@
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_cbrtl.c,v 1.1 2011/03/12 19:37:35 kargl Exp $");
 
 #include <float.h>
-#include <ieeefp.h>
+// VBS
+//#include <ieeefp.h>
 
-#include "fpopenlibm.h"    
+#include "fpmath.h"    
 #include "openlibm.h"
 #include "math_private.h"
 
@@ -36,7 +37,7 @@ cbrtl(long double x)
 	long double r, s, t, w;
 	double dr, dt, dx;
 	float ft, fx;
-	uint32_t hx;
+	u_int32_t hx;
 	uint16_t expsign;
 	int k;
 

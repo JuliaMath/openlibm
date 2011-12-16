@@ -29,7 +29,7 @@
 
 #include <openlibm.h>
 
-#include "fpopenlibm.h"
+#include "fpmath.h"
 
 long double
 fminl(long double x, long double y)

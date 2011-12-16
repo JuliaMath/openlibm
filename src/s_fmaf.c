@@ -43,7 +43,7 @@ float
 fmaf(float x, float y, float z)
 {
 	double xy, result;
-	uint32_t hr, lr;
+	u_int32_t hr, lr;
 
 	xy = (double)x * y;
 	result = xy + z;

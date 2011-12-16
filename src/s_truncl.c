@@ -27,7 +27,7 @@
 #include <openlibm.h>
 #include <stdint.h>
 
-#include "fpopenlibm.h"
+#include "fpmath.h"
 
 #ifdef LDBL_IMPLICIT_NBIT
 #define	MANH_SIZE	(LDBL_MANH_SIZE + 1)

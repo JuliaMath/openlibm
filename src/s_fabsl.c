@@ -30,7 +30,7 @@
 
 #include <openlibm.h>
 
-#include "fpopenlibm.h"
+#include "fpmath.h"
 
 long double
 fabsl(long double x)

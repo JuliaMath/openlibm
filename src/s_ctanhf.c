@@ -41,7 +41,7 @@ ctanhf(float complex z)
 {
 	float x, y;
 	float t, beta, s, rho, denom;
-	uint32_t hx, ix;
+	u_int32_t hx, ix;
 
 	x = crealf(z);
 	y = cimagf(z);

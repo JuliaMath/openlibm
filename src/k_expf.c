@@ -32,7 +32,7 @@
 #include "openlibm.h"
 #include "math_private.h"
 
-static const uint32_t k = 235;			/* constant for reduction */
+static const u_int32_t k = 235;			/* constant for reduction */
 static const float kln2 =  162.88958740F;	/* k * ln2 */
 
 /*
@@ -45,7 +45,7 @@ static float
 __frexp_expf(float x, int *expt)
 {
 	double exp_x;
-	uint32_t hx;
+	u_int32_t hx;
 
 	exp_x = expf(x - kln2);
 	GET_FLOAT_WORD(hx, exp_x);

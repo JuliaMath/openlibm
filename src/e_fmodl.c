@@ -16,7 +16,7 @@
 #include <float.h>
 #include <stdint.h>
 
-#include "fpopenlibm.h"
+#include "fpmath.h"
 #include "openlibm.h"
 #include "math_private.h"
 
@@ -25,13 +25,13 @@
 #if LDBL_MANL_SIZE > 32
 typedef	uint64_t manl_t;
 #else
-typedef	uint32_t manl_t;
+typedef	u_int32_t manl_t;
 #endif
 
 #if LDBL_MANH_SIZE > 32
 typedef	uint64_t manh_t;
 #else
-typedef	uint32_t manh_t;
+typedef	u_int32_t manh_t;
 #endif
 
 /*

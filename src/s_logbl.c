@@ -18,7 +18,7 @@ static char rcsid[] = "$FreeBSD: src/lib/msun/src/s_logbl.c,v 1.1 2007/12/17 03:
 #include <limits.h>
 #include <openlibm.h>
 
-#include "fpopenlibm.h"
+#include "fpmath.h"
 
 long double
 logbl(long double x)

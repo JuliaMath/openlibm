@@ -17,7 +17,7 @@
 #include <limits.h>
 #include <openlibm.h>
 
-#include "fpopenlibm.h"
+#include "fpmath.h"
 
 int
 ilogbl(long double x)

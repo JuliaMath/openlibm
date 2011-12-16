@@ -29,7 +29,7 @@
 
 #include <openlibm.h>
 
-#include "fpopenlibm.h"
+#include "fpmath.h"
 
 double
 fmin(double x, double y)

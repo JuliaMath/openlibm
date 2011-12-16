@@ -341,7 +341,7 @@ double
 exp2(double x)
 {
 	double r, t, twopk, twopkp1000, z;
-	uint32_t hx, ix, lx, i0;
+	u_int32_t hx, ix, lx, i0;
 	int k;
 
 	/* Filter out exceptional cases. */

@@ -28,7 +28,7 @@
 
 #include <openlibm.h>
 
-#include "fpopenlibm.h"
+#include "fpmath.h"
 
 int
 __isfinite(double d)

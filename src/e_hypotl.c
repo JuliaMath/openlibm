@@ -17,7 +17,7 @@
 
 #include <float.h>
 
-#include "fpopenlibm.h"
+#include "fpmath.h"
 #include "openlibm.h"
 #include "math_private.h"
 
@@ -42,7 +42,7 @@
 #if LDBL_MANL_SIZE > 32
 typedef	uint64_t man_t;
 #else
-typedef	uint32_t man_t;
+typedef	u_int32_t man_t;
 #endif
 
 long double

@@ -29,7 +29,7 @@
 
 #include <openlibm.h>
 
-#include "fpopenlibm.h"
+#include "fpmath.h"
 
 float
 fmaxf(float x, float y)

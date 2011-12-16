@@ -76,7 +76,7 @@ ctanh(double complex z)
 {
 	double x, y;
 	double t, beta, s, rho, denom;
-	uint32_t hx, ix, lx;
+	u_int32_t hx, ix, lx;
 
 	x = creal(z);
 	y = cimag(z);

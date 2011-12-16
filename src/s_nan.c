@@ -48,12 +48,12 @@
  * impossible to use nan(3) portably anyway, so this seems good enough.
  */
 void
-_scan_nan(uint32_t *words, int num_words, const char *s)
+_scan_nan(u_int32_t *words, int num_words, const char *s)
 {
 	int si;		/* index into s */
 	int bitpos;	/* index into words (in bits) */
 
-	bzero(words, num_words * sizeof(uint32_t));
+	bzero(words, num_words * sizeof(u_int32_t));
 
 	/* Allow a leading '0x'. (It's expected, but redundant.) */
 	if (s[0] == '0' && (s[1] == 'x' || s[1] == 'X'))
@@ -80,7 +80,7 @@ nan(const char *s)
 {
 	union {
 		double d;
-		uint32_t bits[2];
+		u_int32_t bits[2];
 	} u;
 
 	_scan_nan(u.bits, 2, s);
@@ -97,7 +97,7 @@ nanf(const char *s)
 {
 	union {
 		float f;
-		uint32_t bits[1];
+		u_int32_t bits[1];
 	} u;
 
 	_scan_nan(u.bits, 1, s);

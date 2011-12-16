@@ -28,7 +28,7 @@
 
 #include <openlibm.h>
 
-#include "fpopenlibm.h"
+#include "fpmath.h"
 
 /* Provided by libc */
 #if 0

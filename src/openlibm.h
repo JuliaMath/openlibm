@@ -34,6 +34,7 @@ extern const union __nan_un {
 	float		__uf;
 } __nan;
 
+/* VBS
 #if __GNUC_PREREQ__(3, 3) || (defined(__INTEL_COMPILER) && __INTEL_COMPILER >= 800)
 #define	__MATH_BUILTIN_CONSTANTS
 #endif
@@ -41,6 +42,10 @@ extern const union __nan_un {
 #if __GNUC_PREREQ__(3, 0) && !defined(__INTEL_COMPILER)
 #define	__MATH_BUILTIN_RELOPS
 #endif
+*/
+
+#define __MATH_BUILTIN_CONSTANTS
+#define	__MATH_BUILTIN_RELOPS
 
 #ifdef __MATH_BUILTIN_CONSTANTS
 #define	HUGE_VAL	__builtin_huge_val()

@@ -230,7 +230,7 @@ do {								\
 /*
  * Common routine to process the arguments to nan(), nanf(), and nanl().
  */
-void _scan_nan(uint32_t *__words, int __num_words, const char *__s);
+void _scan_nan(u_int32_t *__words, int __num_words, const char *__s);
 
 #ifdef _COMPLEX_H
 

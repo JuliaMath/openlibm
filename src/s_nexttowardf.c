@@ -14,7 +14,7 @@
 
 #include <float.h>
 
-#include "fpopenlibm.h"
+#include "fpmath.h"
 #include "openlibm.h"
 #include "math_private.h"
 

@@ -30,7 +30,7 @@
 #include <fenv.h>
 #include <float.h>
 
-#include "fpopenlibm.h"
+#include "fpmath.h"
 #include "openlibm.h"
 
 /* Return (x + ulp) for normal positive x. Assumes no overflow. */

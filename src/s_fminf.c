@@ -29,7 +29,7 @@
 
 #include <openlibm.h>
 
-#include "fpopenlibm.h"
+#include "fpmath.h"
 
 float
 fminf(float x, float y)

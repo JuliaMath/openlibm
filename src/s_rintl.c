@@ -30,7 +30,7 @@
 #include <float.h>
 #include <openlibm.h>
 
-#include "fpopenlibm.h"
+#include "fpmath.h"
 
 #if LDBL_MAX_EXP != 0x4000
 /* We also require the usual bias, min exp and expsign packing. */
@@ -55,7 +55,7 @@ long double
 rintl(long double x)
 {
 	union IEEEl2bits u;
-	uint32_t expsign;
+	u_int32_t expsign;
 	int ex, sign;
 
 	u.e = x;
