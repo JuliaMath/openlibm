@@ -26,7 +26,8 @@
  * $FreeBSD: src/lib/msun/src/s_nan.c,v 1.2 2007/12/18 23:46:32 das Exp $
  */
 
-#include <sys/endian.h>
+//VBS
+//#include <sys/endian.h>
 #include <ctype.h>
 #include <float.h>
 #include <openlibm.h>

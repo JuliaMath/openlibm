@@ -25,7 +25,10 @@
  */
 
 #include <sys/cdefs.h>
-#include <sys/limits.h>
+//VBS begin
+//#include <sys/limits.h>
+#include <limits.h>
+//VBS end
 #include <fenv.h>
 #include <openlibm.h>
 

@@ -44,8 +44,11 @@ extern const union __nan_un {
 #endif
 */
 
+//VBS begin
 #define __MATH_BUILTIN_CONSTANTS
 #define	__MATH_BUILTIN_RELOPS
+#define __ISO_C_VISIBLE 1999
+//VBS end
 
 #ifdef __MATH_BUILTIN_CONSTANTS
 #define	HUGE_VAL	__builtin_huge_val()
@@ -129,8 +132,9 @@ extern const union __nan_un {
     : (sizeof (x) == sizeof (double)) ? __signbit(x)	\
     : __signbitl(x))
 
-typedef	__double_t	double_t;
-typedef	__float_t	float_t;
+//VBS
+//typedef	__double_t	double_t;
+//typedef	__float_t	float_t;
 #endif /* __ISO_C_VISIBLE >= 1999 */
 
 /*

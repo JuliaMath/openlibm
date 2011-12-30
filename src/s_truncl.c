@@ -49,7 +49,7 @@ truncl(long double x)
 			if (huge + x > 0.0)
 				u.e = zero[u.bits.sign];
 		} else {
-			u_int64_t m = ((1llu << MANH_SIZE) - 1) >> (e + 1);
+			uint64_t m = ((1llu << MANH_SIZE) - 1) >> (e + 1);
 			if (((u.bits.manh & m) | u.bits.manl) == 0)
 				return (x);	/* x is integral */
 			if (huge + x > 0.0) {	/* raise inexact flag */
@@ -58,7 +58,7 @@ truncl(long double x)
 			}
 		}
 	} else if (e < LDBL_MANT_DIG - 1) {
-		u_int64_t m = (u_int64_t)-1 >> (64 - LDBL_MANT_DIG + e + 1);
+		uint64_t m = (uint64_t)-1 >> (64 - LDBL_MANT_DIG + e + 1);
 		if ((u.bits.manl & m) == 0)
 			return (x);	/* x is integral */
 		if (huge + x > 0.0)		/* raise inexact flag */
