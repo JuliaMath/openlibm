@@ -57,8 +57,8 @@ extern const union __nan_un {
 #endif
 
 #if __ISO_C_VISIBLE >= 1999
-#define	FP_ILOGB0	(-__INT_MAX)
-#define	FP_ILOGBNAN	__INT_MAX
+#define	FP_ILOGB0	(-INT_MAX)
+#define	FP_ILOGBNAN	INT_MAX
 
 #ifdef __MATH_BUILTIN_CONSTANTS
 #define	HUGE_VALF	__builtin_huge_valf()

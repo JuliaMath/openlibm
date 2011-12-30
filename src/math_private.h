@@ -19,6 +19,7 @@
 
 #include <sys/types.h>
 #include <machine/endian.h>
+#include <complex.h>
 
 /*
  * The original fdlibm code used statements like:
@@ -232,7 +233,8 @@ do {								\
  */
 void _scan_nan(u_int32_t *__words, int __num_words, const char *__s);
 
-#ifdef _COMPLEX_H
+//VBS
+//#ifdef _COMPLEX_H
 
 /*
  * C99 specifies that complex numbers have the same representation as
@@ -293,7 +295,8 @@ cpackl(long double x, long double y)
 	IMAGPART(z) = y;
 	return (z.f);
 }
-#endif /* _COMPLEX_H */
+//VBS
+//#endif /* _COMPLEX_H */
  
 #ifdef __GNUCLIKE_ASM
 
