@@ -1,21 +1,6 @@
-#  @(#)Makefile 5.1beta 93/09/24
-# $FreeBSD: src/lib/msun/Makefile,v 1.112 2011/10/21 06:27:56 das Exp $
-#
-#  ====================================================
-#  Copyright (C) 1993 by Sun Microsystems, Inc. All rights reserved.
-#
-#  Developed at SunPro, a Sun Microsystems, Inc. business.
-#  Permission to use, copy, modify, and distribute this
-#  software is freely granted, provided that this notice
-#  is preserved.
-#  ====================================================
-#
-#
+include ../Make.inc
 
-CC=clang
-CFLAGS=-O2 -I. -I../include -I../ld128 -D__BSD_VISIBLE -Wno-implicit-function-declaration 
-
-COMMON_SRCS= \
+SRCS= \
 	e_acos.o e_acosf.o e_acosh.o e_acoshf.o e_asin.o e_asinf.o \
 	e_atan2.o e_atan2f.o e_atanh.o e_atanhf.o e_cosh.o e_coshf.o e_exp.o \
 	e_expf.o e_fmod.o e_fmodf.o e_gamma.o e_gamma_r.o e_gammaf.o \
@@ -49,10 +34,10 @@ COMMON_SRCS= \
 	w_cabs.o w_cabsf.o w_drem.o w_dremf.o
 
 # C99 long double functions
-COMMON_SRCS+=	s_copysignl.o s_fabsl.o s_llrintl.o s_lrintl.o s_modfl.o
+SRCS+=	s_copysignl.o s_fabsl.o s_llrintl.o s_lrintl.o s_modfl.o
 
 # If long double != double use these; otherwise, we alias the double versions.
-COMMON_SRCS+=	e_acosl.o e_asinl.o e_atan2l.o e_fmodl.o \
+SRCS+=	e_acosl.o e_asinl.o e_atan2l.o e_fmodl.o \
 	e_hypotl.o e_remainderl.o e_sqrtl.o \
 	s_atanl.o s_cbrtl.o s_ceill.o s_cosl.o s_cprojl.o \
 	s_csqrtl.o s_floorl.o s_fmal.o \
@@ -61,36 +46,17 @@ COMMON_SRCS+=	e_acosl.o e_asinl.o e_atan2l.o e_fmodl.o \
 	s_sinl.o s_tanl.o s_truncl.o w_cabsl.o
 
 # C99 complex functions
-COMMON_SRCS+=	s_ccosh.o s_ccoshf.o s_cexp.o s_cexpf.o \
+SRCS+=	s_ccosh.o s_ccoshf.o s_cexp.o s_cexpf.o \
 	s_cimag.o s_cimagf.o s_cimagl.o \
 	s_conj.o s_conjf.o s_conjl.o \
 	s_cproj.o s_cprojf.o s_creal.o s_crealf.o s_creall.o \
 	s_csinh.o s_csinhf.o s_ctanh.o s_ctanhf.o
 
 # FreeBSD's C library supplies these functions. Need to build them in openlibm.
-#COMMON_SRCS+=	s_fabs.o s_frexp.o s_isnan.o s_ldexp.o s_modf.o
+#SRCS+=	s_fabs.o s_frexp.o s_isnan.o s_ldexp.o s_modf.o
 
 # These do not yet compile
-#COMMON_SRCS+=	b_exp.o b_log.o b_tgamma.o invtrig.o fenv.o k_cosl.o k_sinl.o k_tanl.o \
-	s_exp2l.o s_nanl.o s_isnan.o s_scalbnf.o s_nextafterl.o s_rintl.o s_scalbnl.o \
+#SRCS+=	b_exp.o b_log.o b_tgamma.o fenv.o s_isnan.o \
+	s_exp2l.o s_nanl.o s_scalbnf.o s_nextafterl.o s_rintl.o s_scalbnl.o \
 
-# Colors for make
-
-CCCOLOR="\033[34m"
-LINKCOLOR="\033[34;1m"
-SRCCOLOR="\033[33m"
-BINCOLOR="\033[37;1m"
-MAKECOLOR="\033[32;1m"
-ENDCOLOR="\033[0m"
-
-QUIET_CC = @printf '    %b %b\n' $(CCCOLOR)CC$(ENDCOLOR) $(SRCCOLOR)$@$(ENDCOLOR);
-QUIET_LINK = @printf '    %b %b\n' $(LINKCOLOR)LINK$(ENDCOLOR) $(BINCOLOR)$@$(ENDCOLOR);
-
-all: $(COMMON_SRCS)
-	$(QUIET_LINK)$(CC) *.o -o libopenlibm.a
-
-%.o: %.c
-	$(QUIET_CC)$(CC) $(CFLAGS) -c $< -o $@
-
-clean:
-	rm -f *.o *~
+all: $(SRCS)

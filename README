@@ -1,7 +1,0 @@
-Openlibm is an effort to have a high quality independent 
-libm library. It is meant to be used standalone in applications and
-programming language implementations, and perhaps even as a reference
-for libm implementations in OSes.
-
-The Openlibm code derives from the FreeBSD 8.2 msun implementation,
-which in turn derives from FDLIBM 5.3.
