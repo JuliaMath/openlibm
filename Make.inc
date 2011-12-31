@@ -1,5 +1,7 @@
-CC=clang
+CC=gcc
 CFLAGS=-O2 -fPIC -I. -I../include -I../ld128 -I../src -D__BSD_VISIBLE -Wno-implicit-function-declaration 
+
+default: all
 
 %.o: %.c
 	$(QUIET_CC)$(CC) $(CFLAGS) -c $< -o $@

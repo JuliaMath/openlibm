@@ -21,7 +21,7 @@ SRCS= \
 	s_floor.o s_floorf.o s_fma.o s_fmaf.o \
 	s_fmax.o s_fmaxf.o s_fmaxl.o s_fmin.o \
 	s_fminf.o s_fminl.o s_frexp.o s_frexpf.o s_ilogb.o s_ilogbf.o \
-	s_ilogbl.o s_isfinite.o s_isnormal.o \
+	s_ilogbl.o s_isfinite.o s_isnormal.o s_isnan.o \
 	s_llrint.o s_llrintf.o s_llround.o s_llroundf.o s_llroundl.o \
 	s_log1p.o s_log1pf.o s_logb.o s_logbf.o s_lrint.o s_lrintf.o \
 	s_lround.o s_lroundf.o s_lroundl.o s_modff.o \
@@ -43,7 +43,8 @@ SRCS+=	e_acosl.o e_asinl.o e_atan2l.o e_fmodl.o \
 	s_csqrtl.o s_floorl.o s_fmal.o \
 	s_frexpl.o s_logbl.o s_nexttoward.o \
 	s_remquol.o \
-	s_sinl.o s_tanl.o s_truncl.o w_cabsl.o
+	s_sinl.o s_tanl.o s_truncl.o w_cabsl.o \
+	s_scalbnf.o s_nextafterl.o s_rintl.o s_scalbnl.o 
 
 # C99 complex functions
 SRCS+=	s_ccosh.o s_ccoshf.o s_cexp.o s_cexpf.o \
@@ -53,10 +54,10 @@ SRCS+=	s_ccosh.o s_ccoshf.o s_cexp.o s_cexpf.o \
 	s_csinh.o s_csinhf.o s_ctanh.o s_ctanhf.o
 
 # FreeBSD's C library supplies these functions. Need to build them in openlibm.
-#SRCS+=	s_fabs.o s_frexp.o s_isnan.o s_ldexp.o s_modf.o
+#SRCS+=	s_fabs.o s_frexp.o s_ldexp.o s_modf.o
 
 # These do not yet compile
 #SRCS+=	b_exp.o b_log.o b_tgamma.o fenv.o s_isnan.o \
-	s_exp2l.o s_nanl.o s_scalbnf.o s_nextafterl.o s_rintl.o s_scalbnl.o \
+	s_exp2l.o s_nanl.o 
 
 all: $(SRCS)

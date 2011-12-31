@@ -208,10 +208,13 @@ do {								\
   (d) = se_u.e;							\
 } while (0)
 
+
+//VBS
+#define	STRICT_ASSIGN(type, lval, rval)	((lval) = (rval))
+
+/* VBS
 #ifdef FLT_EVAL_METHOD
-/*
- * Attempt to get strict C99 semantics for assignment with non-C99 compilers.
- */
+// Attempt to get strict C99 semantics for assignment with non-C99 compilers.
 #if FLT_EVAL_METHOD == 0 || __GNUC__ == 0
 #define	STRICT_ASSIGN(type, lval, rval)	((lval) = (rval))
 #else
@@ -227,6 +230,7 @@ do {								\
 } while (0)
 #endif
 #endif
+*/
 
 /*
  * Common routine to process the arguments to nan(), nanf(), and nanl().
