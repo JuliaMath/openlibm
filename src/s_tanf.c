@@ -20,11 +20,11 @@
 #include <float.h>
 
 #include "openlibm.h"
-#define	INLINE_KERNEL_TANDF
-#define INLINE_REM_PIO2F
+//#define	INLINE_KERNEL_TANDF
+//#define INLINE_REM_PIO2F
 #include "math_private.h"
-#include "e_rem_pio2f.c"
-#include "k_tanf.c"
+//#include "e_rem_pio2f.c"
+//#include "k_tanf.c"
 
 /* Small multiples of pi/2 rounded to double precision. */
 static const double

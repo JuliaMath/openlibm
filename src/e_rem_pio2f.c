@@ -43,7 +43,8 @@ pio2_1t =  1.58932547735281966916e-08; /* 0x3E5110b4, 0x611A6263 */
 #ifndef INLINE_REM_PIO2F
 extern
 #endif
-__inline int
+//__inline int
+int
 __ieee754_rem_pio2f(float x, double *y)
 {
 	double w,r,fn;

@@ -32,7 +32,8 @@ S4 =  0x16cd878c3b46a7.0p-71;	/*  0.0000027183114939898219064 */
 #ifndef INLINE_KERNEL_SINDF
 extern
 #endif
-__inline float
+//__inline float
+float 
 __kernel_sindf(double x)
 {
 	double r, s, w, z;

@@ -51,7 +51,8 @@ pio2_3t =  8.47842766036889956997e-32; /* 0x397B839A, 0x252049C1 */
 #ifndef INLINE_REM_PIO2
 extern
 #endif
-__inline int
+//__inline int
+int 
 __ieee754_rem_pio2(double x, double *y)
 {
 	double z,w,t,r,fn;

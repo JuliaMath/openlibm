@@ -35,7 +35,8 @@ T[] =  {
 #ifndef INLINE_KERNEL_TANDF
 extern
 #endif
-__inline float
+//__inline float
+float
 __kernel_tandf(double x, int iy)
 {
 	double z,r,w,s,t,u;
