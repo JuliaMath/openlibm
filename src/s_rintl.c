@@ -32,6 +32,10 @@
 
 #include "fpmath.h"
 
+//VBS
+#include "math_private.h"
+
+
 #if LDBL_MAX_EXP != 0x4000
 /* We also require the usual bias, min exp and expsign packing. */
 #error "Unsupported long double format"

@@ -16,7 +16,7 @@ SRCS= \
 	s_cbrt.o s_cbrtf.o s_ceil.o s_ceilf.o \
 	s_copysign.o s_copysignf.o s_cos.o s_cosf.o \
 	s_csqrt.o s_csqrtf.o s_erf.o s_erff.o \
-	s_exp2.o s_exp2f.o s_expm1.o s_expm1f.o s_fabsf.o s_fdim.o \
+	s_exp2.o s_exp2f.o s_expm1.o s_expm1f.o s_fabs.o s_fabsf.o s_fdim.o \
 	s_finite.o s_finitef.o \
 	s_floor.o s_floorf.o s_fma.o s_fmaf.o \
 	s_fmax.o s_fmaxf.o s_fmaxl.o s_fmin.o \
@@ -24,11 +24,11 @@ SRCS= \
 	s_ilogbl.o s_isfinite.o s_isnormal.o s_isnan.o \
 	s_llrint.o s_llrintf.o s_llround.o s_llroundf.o s_llroundl.o \
 	s_log1p.o s_log1pf.o s_logb.o s_logbf.o s_lrint.o s_lrintf.o \
-	s_lround.o s_lroundf.o s_lroundl.o s_modff.o \
+	s_lround.o s_lroundf.o s_lroundl.o s_modf.o s_modff.o \
 	s_nan.o s_nearbyint.o s_nextafter.o s_nextafterf.o \
 	s_nexttowardf.o s_remquo.o s_remquof.o \
 	s_rint.o s_rintf.o s_round.o s_roundf.o s_roundl.o \
-	s_scalbln.o s_scalbn.o s_signbit.o \
+	s_scalbln.o s_scalbn.o s_scalbnf.o s_signbit.o \
 	s_signgam.o s_significand.o s_significandf.o s_sin.o s_sinf.o \
 	s_tan.o s_tanf.o s_tanh.o s_tanhf.o s_tgammaf.o s_trunc.o s_truncf.o \
 	w_cabs.o w_cabsf.o w_drem.o w_dremf.o
@@ -44,7 +44,7 @@ SRCS+=	e_acosl.o e_asinl.o e_atan2l.o e_fmodl.o \
 	s_frexpl.o s_logbl.o s_nexttoward.o \
 	s_remquol.o \
 	s_sinl.o s_tanl.o s_truncl.o w_cabsl.o \
-	s_scalbnf.o s_nextafterl.o s_rintl.o s_scalbnl.o 
+	s_nextafterl.o s_rintl.o s_scalbnl.o 
 
 # C99 complex functions
 SRCS+=	s_ccosh.o s_ccoshf.o s_cexp.o s_cexpf.o \
@@ -52,12 +52,5 @@ SRCS+=	s_ccosh.o s_ccoshf.o s_cexp.o s_cexpf.o \
 	s_conj.o s_conjf.o s_conjl.o \
 	s_cproj.o s_cprojf.o s_creal.o s_crealf.o s_creall.o \
 	s_csinh.o s_csinhf.o s_ctanh.o s_ctanhf.o
-
-# FreeBSD's C library supplies these functions. Need to build them in openlibm.
-#SRCS+=	s_fabs.o s_frexp.o s_ldexp.o s_modf.o
-
-# These do not yet compile
-#SRCS+=	b_exp.o b_log.o b_tgamma.o fenv.o s_isnan.o \
-	s_exp2l.o s_nanl.o 
 
 all: $(SRCS)

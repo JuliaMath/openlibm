@@ -54,7 +54,9 @@
 static __inline void
 _b_trunc(volatile double *_dp)
 {
-	uint32_t _lw;
+        //VBS
+        //u_int32_t _lw;
+	u_int32_t _lw;
 
 	GET_LOW_WORD(_lw, *_dp);
 	SET_LOW_WORD(*_dp, _lw & 0xf8000000);
