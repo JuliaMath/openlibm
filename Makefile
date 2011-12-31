@@ -9,3 +9,4 @@ all:
 cleanall:
 	$(MAKE) -C src clean
 	$(MAKE) -C ld128 clean
+	rm -f *.a *.$(SHLIB_EXT)
