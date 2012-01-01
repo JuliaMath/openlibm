@@ -59,13 +59,13 @@ csqrtl(long double complex z)
 	/* Handle special cases. */
 	if (z == 0)
 		return (cpackl(0, b));
-	if (isinf(b))
+	if (__isinf(b))
 		return (cpackl(INFINITY, b));
 	if (isnan(a)) {
 		t = (b - b) / (b - b);	/* raise invalid if b is not a NaN */
 		return (cpackl(a, t));	/* return NaN + NaN i */
 	}
-	if (isinf(a)) {
+	if (__isinf(a)) {
 		/*
 		 * csqrt(inf + NaN i)  = inf +  NaN i
 		 * csqrt(inf + y i)    = inf +  0 i

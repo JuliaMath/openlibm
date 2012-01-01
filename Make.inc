@@ -10,6 +10,8 @@ clean:
 	rm -f *.o *~
 
 # OS-specific stuff
+OS = $(shell uname)
+ARCH = $(shell uname -m)
 
 ifeq ($(OS), Linux)
 SHLIB_EXT = so

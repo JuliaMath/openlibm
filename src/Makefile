@@ -8,8 +8,10 @@ SRCS= \
 	e_jn.o e_jnf.o e_lgamma.o e_lgamma_r.o e_lgammaf.o e_lgammaf_r.o \
 	e_log.o e_log10.o e_log10f.o e_log2.o e_log2f.o e_logf.o \
 	e_pow.o e_powf.o e_remainder.o e_remainderf.o e_scalb.o e_scalbf.o \
+	e_rem_pio2.o e_rem_pio2f.o \
 	e_sinh.o e_sinhf.o e_sqrt.o e_sqrtf.o \
 	k_cos.o k_exp.o k_expf.o k_rem_pio2.o k_sin.o k_tan.o \
+	k_cosf.o k_sinf.o k_tanf.o \
 	s_asinh.o s_asinhf.o s_atan.o s_atanf.o s_carg.o s_cargf.o s_cargl.o \
 	s_cbrt.o s_cbrtf.o s_ceil.o s_ceilf.o \
 	s_copysign.o s_copysignf.o s_cos.o s_cosf.o \
