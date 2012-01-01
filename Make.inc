@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-O2 -fPIC -I. -I../include -I../ld128 -I../src -D__BSD_VISIBLE -Wno-implicit-function-declaration 
+CFLAGS=-std=c99 -O2 -fPIC -I. -I../include -I../ld128 -I../src -D__BSD_VISIBLE -Wno-implicit-function-declaration 
 
 default: all
 
