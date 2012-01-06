@@ -24,9 +24,10 @@
 #endif
 
 #ifdef __linux__
+/* Not sure what to do about __pure2 on linux */
+#define __pure2 
 #include <sys/types.h>
 #include <limits.h>
-#define __pure2 
 #endif
 
 
