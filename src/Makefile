@@ -39,12 +39,13 @@ SRCS+=	s_copysignl.o s_fabsl.o s_llrintl.o s_lrintl.o s_modfl.o
 # If long double != double use these; otherwise, we alias the double versions.
 SRCS+=	e_acosl.o e_asinl.o e_atan2l.o e_fmodl.o \
 	e_hypotl.o e_remainderl.o e_sqrtl.o \
-	s_atanl.o s_cbrtl.o s_ceill.o s_cosl.o s_cprojl.o \
+	s_atanl.o s_ceill.o s_cosl.o s_cprojl.o \
 	s_csqrtl.o s_floorl.o s_fmal.o \
 	s_frexpl.o s_logbl.o s_nexttoward.o \
 	s_remquol.o \
 	s_sinl.o s_tanl.o s_truncl.o w_cabsl.o \
 	s_nextafterl.o s_rintl.o s_scalbnl.o 
+#	s_cbrtl.o
 
 # C99 complex functions
 SRCS+=	s_ccosh.o s_ccoshf.o s_cexp.o s_cexpf.o \

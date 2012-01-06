@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-std=c99 -O2 -fPIC -I. -I../include -I../ld128 -I../src -D__BSD_VISIBLE -Wno-implicit-function-declaration 
+CFLAGS=-O2 -fPIC -I. -I../include -I../ld128 -I../src -D__BSD_VISIBLE -Wno-implicit-function-declaration
 
 default: all
 
@@ -19,6 +19,7 @@ endif
 
 ifeq ($(OS), Darwin)
 SHLIB_EXT = dylib
+CFLAGS+=-std=c99
 endif
 
 # Colors for make

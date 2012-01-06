@@ -18,8 +18,18 @@
 #define	_MATH_H_
 
 #include <sys/cdefs.h>
+#ifdef __APPLE__
 #include <sys/_types.h>
 #include <machine/_limits.h>
+#endif
+
+#ifdef __linux__
+#include <sys/types.h>
+#include <limits.h>
+#define __pure2 
+#endif
+
+
 
 /*
  * ANSI/POSIX
