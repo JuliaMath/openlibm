@@ -8,7 +8,7 @@
 #ifndef __WIN32__
 #include "sys/cdefs.h"
 
-#else //__WIN32__
+#else /* __WIN32__ */
 
 #if defined(__cplusplus)
 #define	__BEGIN_DECLS	extern "C" {
@@ -18,9 +18,18 @@
 #define	__END_DECLS
 #endif
 
+#endif /* __WIN32__ */
+
+
+
+
 #ifdef __GNUC__
-#define __strong_reference(sym,aliassym)	\
-	extern __typeof (sym) aliassym __attribute__ ((__alias__ (#sym)));
+#ifndef __strong_reference
+#define __strong_reference(sym,aliassym)	
+	//extern __typeof (sym) aliassym __attribute__ ((__alias__ (#sym)));
+#endif /* __strong_reference */
+
+#ifndef __weak_reference
 #ifdef __ELF__
 #ifdef __STDC__
 #define	__weak_reference(sym,alias)	\
@@ -56,9 +65,8 @@
 	__asm__(".stabs \"_/**/sym\",1,0,0,0")
 #endif	/* __STDC__ */
 #endif	/* __ELF__ */
+#endif  /* __weak_reference */
 #endif	/* __GNUC__ */
 
-#endif
 
-
-#endif
+#endif /* _CDEFS_COMPAT_H_ */
