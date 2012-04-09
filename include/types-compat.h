@@ -6,7 +6,7 @@
 #endif
 
 #include <sys/types.h>
-#include <machine/limits.h>
+#include <limits.h>
 
 #ifdef __linux__
 /* Not sure what to do about __pure2 on linux */
