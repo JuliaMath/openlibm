@@ -10,7 +10,7 @@
  * ====================================================
  */
 
-#include <sys/cdefs.h>
+#include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_trunc.c,v 1.4 2008/02/22 02:27:34 das Exp $");
 
 /*

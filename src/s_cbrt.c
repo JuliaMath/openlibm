@@ -12,7 +12,7 @@
  * Optimized by Bruce D. Evans.
  */
 
-#include <sys/cdefs.h>
+#include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_cbrt.c,v 1.17 2011/03/12 16:50:39 kargl Exp $");
 
 #include "openlibm.h"

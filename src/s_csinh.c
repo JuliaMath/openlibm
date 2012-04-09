@@ -34,7 +34,7 @@
  * These values and the return value were taken from n1124.pdf.
  */
 
-#include <sys/cdefs.h>
+#include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_csinh.c,v 1.2 2011/10/21 06:29:32 das Exp $");
 
 #include <complex.h>

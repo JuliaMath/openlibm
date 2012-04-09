@@ -11,7 +11,7 @@
  * ====================================================
  */
 
-#include <sys/cdefs.h>
+#include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/k_rem_pio2.c,v 1.11 2008/02/25 11:43:20 bde Exp $");
 
 /*

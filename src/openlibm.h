@@ -17,20 +17,8 @@
 #ifndef _MATH_H_
 #define	_MATH_H_
 
-#include <sys/cdefs.h>
-#ifdef __APPLE__
-#include <sys/_types.h>
-#include <machine/_limits.h>
-#endif
-
-#ifdef __linux__
-/* Not sure what to do about __pure2 on linux */
-#define __pure2 
-#include <sys/types.h>
-#include <limits.h>
-#endif
-
-
+#include "cdefs-compat.h"
+#include "types-compat.h"
 
 /*
  * ANSI/POSIX
@@ -103,7 +91,7 @@ extern const union __nan_un {
     ((sizeof (x) == sizeof (float)) ? __fpclassifyf(x) \
     : (sizeof (x) == sizeof (double)) ? __fpclassifyd(x) \
     : __fpclassifyl(x))
-
+	
 #define	isfinite(x)					\
     ((sizeof (x) == sizeof (float)) ? __isfinitef(x)	\
     : (sizeof (x) == sizeof (double)) ? __isfinite(x)	\
@@ -503,5 +491,4 @@ long double	truncl(long double);
 
 #endif /* __ISO_C_VISIBLE >= 1999 */
 __END_DECLS
-
 #endif /* !_MATH_H_ */

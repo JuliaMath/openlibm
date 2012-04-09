@@ -28,7 +28,7 @@
  * Hyperbolic sine of a complex argument z.  See s_csinh.c for details.
  */
 
-#include <sys/cdefs.h>
+#include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_csinhf.c,v 1.2 2011/10/21 06:29:32 das Exp $");
 
 #include <complex.h>

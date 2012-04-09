@@ -32,9 +32,22 @@
 #include <float.h>
 #include <openlibm.h>
 #include <stdint.h>
-#include <strings.h>
+#include <string.h> //for memset
 
 #include "math_private.h"
+
+#if !defined(__APPLE__)
+static __inline int digittoint(int c) {
+	if ('0' <= c <= '9')
+		return (c - '0');
+	else if ('A' <= c && c <= 'F')
+		return (c - 'A' + 10);
+	else if ('a' <= c && c <= 'f')
+		return (c - 'a' + 10);
+	return 0;
+}
+#endif
+
 
 /*
  * Scan a string of hexadecimal digits (the format nan(3) expects) and
@@ -54,7 +67,7 @@ _scan_nan(u_int32_t *words, int num_words, const char *s)
 	int si;		/* index into s */
 	int bitpos;	/* index into words (in bits) */
 
-	bzero(words, num_words * sizeof(u_int32_t));
+	memset(words, 0, num_words * sizeof(u_int32_t));
 
 	/* Allow a leading '0x'. (It's expected, but redundant.) */
 	if (s[0] == '0' && (s[1] == 'x' || s[1] == 'X'))

@@ -10,7 +10,7 @@
  * ====================================================
  */
 
-#include <sys/cdefs.h>
+#include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_ceil.c,v 1.11 2008/02/15 07:01:40 bde Exp $");
 
 /*

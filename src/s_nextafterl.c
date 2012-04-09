@@ -10,7 +10,7 @@
  * ====================================================
  */
 
-#include <sys/cdefs.h>
+#include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_nextafterl.c,v 1.2 2008/02/22 02:30:36 das Exp $");
 
 /* IEEE functions

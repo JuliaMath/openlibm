@@ -11,7 +11,7 @@
  * ====================================================
  */
 
-#include <sys/cdefs.h>
+#include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/e_acos.c,v 1.13 2008/07/31 22:41:26 das Exp $");
 
 /* __ieee754_acos(x)

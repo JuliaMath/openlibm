@@ -31,9 +31,9 @@
 #include "fpmath.h"
 
 /* Provided by libc */
-#if 0
+#if 1
 int
-isnan(double d)
+(isnan) (double d)
 {
 	union IEEEd2bits u;
 

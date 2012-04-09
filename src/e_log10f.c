@@ -9,7 +9,7 @@
  * ====================================================
  */
 
-#include <sys/cdefs.h>
+#include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/e_log10f.c,v 1.13 2011/10/16 05:36:23 das Exp $");
 
 /*

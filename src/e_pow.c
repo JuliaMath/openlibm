@@ -9,7 +9,7 @@
  * ====================================================
  */
 
-#include <sys/cdefs.h>
+#include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/e_pow.c,v 1.14 2011/10/21 06:26:07 das Exp $");
 
 /* __ieee754_pow(x,y) return x**y

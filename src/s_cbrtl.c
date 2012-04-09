@@ -14,7 +14,7 @@
  * and David A. Schultz.
  */
 
-#include <sys/cdefs.h>
+#include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_cbrtl.c,v 1.1 2011/03/12 19:37:35 kargl Exp $");
 
 #include <float.h>

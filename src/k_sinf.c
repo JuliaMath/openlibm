@@ -15,7 +15,7 @@
  */
 
 #ifndef INLINE_KERNEL_SINDF
-#include <sys/cdefs.h>
+#include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/k_sinf.c,v 1.16 2009/06/03 08:16:34 ed Exp $");
 #endif
 

@@ -24,7 +24,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_csqrtl.c,v 1.2 2008/08/08 00:15:16 das Exp $");
 
 #include <complex.h>
@@ -59,13 +59,13 @@ csqrtl(long double complex z)
 	/* Handle special cases. */
 	if (z == 0)
 		return (cpackl(0, b));
-	if (__isinf(b))
+	if (isinf(b))
 		return (cpackl(INFINITY, b));
 	if (isnan(a)) {
 		t = (b - b) / (b - b);	/* raise invalid if b is not a NaN */
 		return (cpackl(a, t));	/* return NaN + NaN i */
 	}
-	if (__isinf(a)) {
+	if (isinf(a)) {
 		/*
 		 * csqrt(inf + NaN i)  = inf +  NaN i
 		 * csqrt(inf + y i)    = inf +  0 i

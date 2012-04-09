@@ -11,7 +11,7 @@
  * ====================================================
  */
 
-#include <sys/cdefs.h>
+#include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/e_asin.c,v 1.15 2011/02/10 07:37:50 das Exp $");
 
 /* __ieee754_asin(x)

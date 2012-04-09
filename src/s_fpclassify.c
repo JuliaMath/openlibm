@@ -1,5 +1,5 @@
 /*-
- * Copyright (c) 2008 David Schultz <das@FreeBSD.ORG>
+ * Copyright (c) 2004 David Schultz <das@FreeBSD.ORG>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -22,26 +22,14 @@
  * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
+ *
  */
 
-#include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_cproj.c,v 1.1 2008/08/07 15:07:48 das Exp $");
-
-#include <complex.h>
 #include <openlibm.h>
 
-#include "math_private.h"
+#include "fpmath.h"
 
-double complex
-cproj(double complex z)
-{
-
-	if (!isinf(creal(z)) && !isinf(cimag(z)))
-		return (z);
-	else
-		return (cpack(INFINITY, copysign(0.0, cimag(z))));
-}
-
-#if LDBL_MANT_DIG == 53
-__weak_reference(cproj, cprojl);
-#endif
+#warning "todo: fpclassify needs to be defined"
+int	__fpclassifyd(double);
+int	__fpclassifyf(float);
+int	__fpclassifyl(long double);

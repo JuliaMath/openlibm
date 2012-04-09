@@ -17,7 +17,7 @@
 static char rcsid[] = "$FreeBSD: src/lib/msun/src/s_scalbnf.c,v 1.8 2005/03/07 04:52:43 das Exp $";
 #endif
 
-#include <sys/cdefs.h>
+#include "cdefs-compat.h"
 
 #include "openlibm.h"
 #include "math_private.h"

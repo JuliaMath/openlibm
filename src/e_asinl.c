@@ -12,7 +12,7 @@
  * ====================================================
  */
 
-#include <sys/cdefs.h>
+#include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/e_asinl.c,v 1.2 2008/08/03 17:49:05 das Exp $");
 
 /*

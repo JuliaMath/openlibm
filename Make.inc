@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-O2 -fPIC -I. -I../include -I../ld128 -I../src -D__BSD_VISIBLE -Wno-implicit-function-declaration
+CFLAGS=-O2 -I. -I../include -I../ld128 -I../src -D__BSD_VISIBLE -Wno-implicit-function-declaration
 
 default: all
 
@@ -13,13 +13,28 @@ clean:
 OS = $(shell uname)
 ARCH = $(shell uname -m)
 
+
+ifeq ($(OS), MINGW32_NT-6.1)
+OS=WINNT
+endif
+
 ifeq ($(OS), Linux)
 SHLIB_EXT = so
+CFLAGS+=-fPIC
+endif
+
+ifeq ($(OS), FreeBSD)
+SHLIB_EXT = so
+CFLAGS+=-fPIC
 endif
 
 ifeq ($(OS), Darwin)
 SHLIB_EXT = dylib
-CFLAGS+=-std=c99
+CFLAGS+=-std=c99 -fPIC
+endif
+
+ifeq ($(OS), WINNT)
+SHLIB_EXT = dll
 endif
 
 # Colors for make

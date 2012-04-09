@@ -13,7 +13,7 @@
  * ====================================================
  */
 
-#include <sys/cdefs.h>
+#include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/e_lgammaf_r.c,v 1.12 2011/10/15 07:00:28 das Exp $");
 
 #include "openlibm.h"

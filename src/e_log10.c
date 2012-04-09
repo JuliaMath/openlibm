@@ -11,7 +11,7 @@
  * ====================================================
  */
 
-#include <sys/cdefs.h>
+#include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/e_log10.c,v 1.15 2011/10/15 05:23:28 das Exp $");
 
 /*

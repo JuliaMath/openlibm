@@ -13,7 +13,7 @@
  *
  */
 
-#include <sys/cdefs.h>
+#include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/e_atan2l.c,v 1.3 2008/08/02 19:17:00 das Exp $");
 
 /*

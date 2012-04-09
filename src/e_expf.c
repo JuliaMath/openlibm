@@ -13,7 +13,7 @@
  * ====================================================
  */
 
-#include <sys/cdefs.h>
+#include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/e_expf.c,v 1.16 2011/10/21 06:26:38 das Exp $");
 
 #include <float.h>

@@ -10,7 +10,7 @@
  * ====================================================
  */
 
-#include <sys/cdefs.h>
+#include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/e_hypotl.c,v 1.3 2011/10/16 05:36:39 das Exp $");
 
 /* long double version of hypot().  See e_hypot.c for most comments. */

@@ -11,7 +11,7 @@
  * ====================================================
  */
 
-#include <sys/cdefs.h>
+#include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/k_log.h,v 1.2 2011/10/15 05:23:28 das Exp $");
 
 /*

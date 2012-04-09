@@ -10,7 +10,7 @@
  * ====================================================
  */
 
-#include <sys/cdefs.h>
+#include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/e_fmodl.c,v 1.2 2008/07/31 20:09:47 das Exp $");
 
 #include <float.h>

@@ -26,6 +26,8 @@
  *
  * $FreeBSD: src/lib/libc/include/fpmath.h,v 1.4 2008/12/23 22:20:59 marcel Exp $
  */
+#ifndef _FPMATH_H_
+#define _FPMATH_H_
 
 // Currently assumes Intel platform
 #if defined (__i386__) || defined(__x86_64__)
@@ -58,12 +60,12 @@
 #define _LITTLE_ENDIAN 1234
 #define _BIG_ENDIAN    4321
 #define _PDP_ENDIAN    3412
-#define _BYTE_ORDER       __LITTLE_ENDIAN
-#define _FLOAT_WORD_ORDER __LITTLE_ENDIAN
-#define LITTLE_ENDIAN  __LITTLE_ENDIAN
-#define BIG_ENDIAN     __BIG_ENDIAN
-#define PDP_ENDIAN     __PDP_ENDIAN
-#define BYTE_ORDER     __BYTE_ORDER
+#define _BYTE_ORDER       _LITTLE_ENDIAN
+#define _FLOAT_WORD_ORDER _LITTLE_ENDIAN
+#define LITTLE_ENDIAN  _LITTLE_ENDIAN
+#define BIG_ENDIAN     _BIG_ENDIAN
+#define PDP_ENDIAN     _PDP_ENDIAN
+#define BYTE_ORDER     _BYTE_ORDER
 #endif
 
 #ifndef _IEEE_WORD_ORDER
@@ -109,3 +111,5 @@ union IEEEd2bits {
 #endif
 	} bits;
 };
+
+#endif

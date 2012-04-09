@@ -11,7 +11,7 @@
  * ====================================================
  */
 
-#include <sys/cdefs.h>
+#include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/ld80/k_sinl.c,v 1.1 2008/02/17 07:32:14 das Exp $");
 
 /*

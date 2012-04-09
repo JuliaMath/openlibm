@@ -24,7 +24,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_cprojl.c,v 1.1 2008/08/07 15:07:48 das Exp $");
 
 #include <complex.h>
@@ -36,7 +36,7 @@ long double complex
 cprojl(long double complex z)
 {
 
-	if (!__isinf(creall(z)) && !__isinf(cimagl(z)))
+	if (!isinf(creall(z)) && !isinf(cimagl(z)))
 		return (z);
 	else
 		return (cpackl(INFINITY, copysignl(0.0, cimagl(z))));

@@ -24,7 +24,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "cdefs-compat.h"
 //VBS begin
 //#include <sys/limits.h>
 #include <limits.h>

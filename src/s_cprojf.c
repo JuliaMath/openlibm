@@ -24,7 +24,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_cprojf.c,v 1.1 2008/08/07 15:07:48 das Exp $");
 
 #include <complex.h>

@@ -14,7 +14,7 @@
  * ====================================================
  */
 
-#include <sys/cdefs.h>
+#include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_tanf.c,v 1.17 2008/02/25 22:19:17 bde Exp $");
 
 #include <float.h>

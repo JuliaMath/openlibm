@@ -28,7 +28,7 @@
  * Hyperbolic tangent of a complex argument z.  See s_ctanh.c for details.
  */
 
-#include <sys/cdefs.h>
+#include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_ctanhf.c,v 1.2 2011/10/21 06:30:16 das Exp $");
 
 #include <complex.h>

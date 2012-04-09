@@ -17,31 +17,8 @@
 #ifndef _MATH_PRIVATE_H_
 #define	_MATH_PRIVATE_H_
 
-#include <sys/types.h>
-
-#ifdef __APPLE__
-#include <machine/endian.h>
-#ifdef __arm__
-#if defined(__VFP_FP__)
-#define	IEEE_WORD_ORDER	BYTE_ORDER
-#else
-#define	IEEE_WORD_ORDER	BIG_ENDIAN
-#endif
-#else /* __arm__ */
-#define	IEEE_WORD_ORDER	BYTE_ORDER
-#endif
-#endif
-
-#ifdef __linux__
-#include <endian.h>
-#if __BYTE_ORDER == __LITTLE_ENDIAN
-#define IEEE_WORD_ORDER LITTLE_ENDIAN
-#endif
-#if __BYTE_ORDER == __BIG_ENDIAN
-#define IEEE_WORD_ORDER BIG_ENDIAN
-#endif
-#endif
-
+#include "types-compat.h"
+#include "fpmath.h"
 #include <complex.h>
 
 /*
@@ -62,7 +39,7 @@
  * ints.
  */
 
-#if IEEE_WORD_ORDER == BIG_ENDIAN
+#if _IEEE_WORD_ORDER == _BIG_ENDIAN
 
 typedef union
 {
@@ -80,7 +57,7 @@ typedef union
 
 #endif
 
-#if IEEE_WORD_ORDER == LITTLE_ENDIAN
+#if _IEEE_WORD_ORDER == _LITTLE_ENDIAN
 
 typedef union
 {

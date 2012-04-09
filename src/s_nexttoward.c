@@ -10,7 +10,7 @@
  * ====================================================
  */
 
-#include <sys/cdefs.h>
+#include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_nexttoward.c,v 1.3 2011/02/10 07:38:13 das Exp $");
 
 /*

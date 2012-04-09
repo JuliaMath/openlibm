@@ -27,7 +27,7 @@ static char rcsid[] = "$FreeBSD: src/lib/msun/src/s_scalbnl.c,v 1.1 2005/03/07 0
  * for scalbn(), so we don't use this routine.
  */
 
-#include <sys/cdefs.h>
+#include "cdefs-compat.h"
 #include <float.h>
 #include <openlibm.h>
 

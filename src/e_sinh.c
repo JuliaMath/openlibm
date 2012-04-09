@@ -11,7 +11,7 @@
  * ====================================================
  */
 
-#include <sys/cdefs.h>
+#include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/e_sinh.c,v 1.11 2011/10/21 06:28:47 das Exp $");
 
 /* __ieee754_sinh(x)

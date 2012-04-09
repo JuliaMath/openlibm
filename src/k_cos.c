@@ -11,7 +11,7 @@
  * ====================================================
  */
 
-#include <sys/cdefs.h>
+#include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/k_cos.c,v 1.12 2008/02/19 12:54:14 bde Exp $");
 
 /*

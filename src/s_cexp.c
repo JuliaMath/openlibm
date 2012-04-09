@@ -24,7 +24,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_cexp.c,v 1.3 2011/10/21 06:27:56 das Exp $");
 
 #include <complex.h>

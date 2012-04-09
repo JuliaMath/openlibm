@@ -14,7 +14,7 @@
  * ====================================================
  */
 
-#include <sys/cdefs.h>
+#include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_cosf.c,v 1.18 2008/02/25 22:19:17 bde Exp $");
 
 #include <float.h>

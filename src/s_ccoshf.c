@@ -28,7 +28,7 @@
  * Hyperbolic cosine of a complex argument.  See s_ccosh.c for details.
  */
 
-#include <sys/cdefs.h>
+#include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_ccoshf.c,v 1.2 2011/10/21 06:29:32 das Exp $");
 
 #include <complex.h>

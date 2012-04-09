@@ -10,7 +10,7 @@
  * ====================================================
  */
 
-#include <sys/cdefs.h>
+#include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_remquof.c,v 1.1 2005/03/25 04:40:44 das Exp $");
 
 #include "openlibm.h"

@@ -11,7 +11,7 @@
  * ====================================================
  */
 
-#include <sys/cdefs.h>
+#include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/ld80/k_tanl.c,v 1.3 2008/02/18 15:39:52 bde Exp $");
 
 /*

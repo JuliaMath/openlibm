@@ -10,7 +10,7 @@
  * ====================================================
  */
 
-#include <sys/cdefs.h>
+#include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_sin.c,v 1.13 2011/02/10 07:37:50 das Exp $");
 
 /* sin(x)

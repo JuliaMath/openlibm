@@ -24,7 +24,7 @@
  * SUCH DAMAGE.
  */
 
-#include <sys/cdefs.h>
+#include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_fma.c,v 1.8 2011/10/21 06:30:43 das Exp $");
 
 #include <fenv.h>

@@ -20,8 +20,9 @@ SRCS= \
 	s_finite.o s_finitef.o \
 	s_floor.o s_floorf.o s_fma.o s_fmaf.o \
 	s_fmax.o s_fmaxf.o s_fmaxl.o s_fmin.o \
-	s_fminf.o s_fminl.o s_frexp.o s_frexpf.o s_ilogb.o s_ilogbf.o \
-	s_ilogbl.o s_isfinite.o s_isnormal.o s_isnan.o \
+	s_fminf.o s_fminl.o s_fpclassify.o \
+	s_frexp.o s_frexpf.o s_ilogb.o s_ilogbf.o \
+	s_ilogbl.o s_isinf.o s_isfinite.o s_isnormal.o s_isnan.o \
 	s_llrint.o s_llrintf.o s_llround.o s_llroundf.o s_llroundl.o \
 	s_log1p.o s_log1pf.o s_logb.o s_logbf.o s_lrint.o s_lrintf.o \
 	s_lround.o s_lroundf.o s_lroundl.o s_modf.o s_modff.o \

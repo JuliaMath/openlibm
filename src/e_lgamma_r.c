@@ -12,7 +12,7 @@
  *
  */
 
-#include <sys/cdefs.h>
+#include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/e_lgamma_r.c,v 1.11 2011/10/15 07:00:28 das Exp $");
 
 /* __ieee754_lgamma_r(x, signgamp)

@@ -12,7 +12,7 @@
  * ====================================================
  */
 
-#include <sys/cdefs.h>
+#include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/e_acosl.c,v 1.2 2008/08/02 03:56:22 das Exp $");
 
 /*

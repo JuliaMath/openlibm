@@ -14,7 +14,7 @@
  * ====================================================
  */
 
-#include <sys/cdefs.h>
+#include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/e_rem_pio2f.c,v 1.32 2009/06/03 08:16:34 ed Exp $");
 
 /* __ieee754_rem_pio2f(x,y)
