@@ -29,7 +29,80 @@
 
 #include "fpmath.h"
 
-#warning "todo: fpclassify needs to be defined"
-int	__fpclassifyd(double);
-int	__fpclassifyf(float);
-int	__fpclassifyl(long double);
+//#define FP_INFINITE     0x01
+//#define FP_NAN          0x02
+//#define FP_NORMAL       0x04
+//#define FP_SUBNORMAL    0x08
+//#define FP_ZERO         0x10
+//#define fpclassify(x) \
+//    ((sizeof (x) == sizeof (float)) ? __fpclassifyf(x) \
+//    : (sizeof (x) == sizeof (double)) ? __fpclassifyd(x) \
+//    : __fpclassifyl(x))
+//
+
+int
+__fpclassifyd(double d)
+{
+	union IEEEd2bits u;
+
+	u.d = d;
+	if (u.bits.exp == 2047) {
+		if (u.bits.manl == 0 && u.bits.manh == 0) {
+			return FP_INFINITE;
+		} else {
+			return FP_NAN;
+		}
+	} else if (u.bits.exp != 0) {
+		return FP_NORMAL;
+	} else if (u.bits.manl == 0 && u.bits.manh == 0) {
+		return FP_ZERO;
+	} else {
+		return FP_SUBNORMAL;
+	}
+}
+		
+
+int
+__fpclassifyf(float f)
+{
+	union IEEEf2bits u;
+
+	u.f = f;
+	if (u.bits.exp == 255) {
+	   if (u.bits.man == 0) {
+		   return FP_INFINITE;
+	   } else {
+		   return FP_NAN;
+	   }
+	} else if (u.bits.exp != 0) {
+		return FP_NORMAL;
+	} else if (u.bits.man == 0) {
+		return FP_ZERO;
+	} else {
+		return FP_SUBNORMAL;
+	}
+}
+
+int
+__fpclassifyl(long double e)
+{
+	union IEEEl2bits u;
+
+	u.e = e;
+	mask_nbit_l(u);
+	if (u.bits.exp == 32767) {
+		if (u.bits.manl == 0 && u.bits.manh == 0) {
+			return FP_INFINITE;
+		} else {
+			return FP_NAN;
+		}
+	} else if (u.bits.exp != 0) {
+		return FP_NORMAL;
+	} else if (u.bits.manl == 0 && u.bits.manh == 0) {
+		return FP_ZERO;
+	} else {
+		return FP_SUBNORMAL;
+	}
+}
+
+
