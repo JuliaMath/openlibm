@@ -117,7 +117,7 @@ add_and_denormalize(double a, double b, int scale)
 	if (sum.lo != 0) {
 		EXTRACT_WORD64(hibits, sum.hi);
 		bits_lost = -((int)(hibits >> 52) & 0x7ff) - scale + 1;
-		if (bits_lost != 1 ^ (int)(hibits & 1)) {
+		if ((bits_lost != 1) ^ (int)(hibits & 1)) {
 			/* hibits += (int)copysign(1.0, sum.hi * sum.lo) */
 			EXTRACT_WORD64(lobits, sum.lo);
 			hibits += 1 - (((hibits ^ lobits) >> 62) & 2);
@@ -216,17 +216,17 @@ fma(double x, double y, double z)
 		case FE_TONEAREST:
 			return (z);
 		case FE_TOWARDZERO:
-			if (x > 0.0 ^ y < 0.0 ^ z < 0.0)
+			if ((x > 0.0) ^ (y < 0.0) ^ (z < 0.0))
 				return (z);
 			else
 				return (nextafter(z, 0));
 		case FE_DOWNWARD:
-			if (x > 0.0 ^ y < 0.0)
+			if ((x > 0.0) ^ (y < 0.0))
 				return (z);
 			else
 				return (nextafter(z, -INFINITY));
 		default:	/* FE_UPWARD */
-			if (x > 0.0 ^ y < 0.0)
+			if ((x > 0.0) ^ (y < 0.0))
 				return (nextafter(z, INFINITY));
 			else
 				return (z);

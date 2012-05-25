@@ -25,7 +25,6 @@
  */
 
 #include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_csqrtl.c,v 1.2 2008/08/08 00:15:16 das Exp $");
 
 #include <complex.h>
 #include <float.h>
@@ -40,7 +39,9 @@
  * gcc generates is acceptable, since the special cases have already been
  * handled.
  */
+#ifndef __GNUC__
 #pragma	STDC CX_LIMITED_RANGE	ON
+#endif
 
 /* We risk spurious overflow for components >= LDBL_MAX / (1 + sqrt(2)). */
 #define	THRESH	(LDBL_MAX / 2.414213562373095048801688724209698L)

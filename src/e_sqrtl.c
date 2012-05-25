@@ -65,7 +65,9 @@ dec(long double x)
 	return (u.e);
 }
 
+#ifndef __GNUC__
 #pragma STDC FENV_ACCESS ON
+#endif
 
 /*
  * This is slow, but simple and portable. You should use hardware sqrt

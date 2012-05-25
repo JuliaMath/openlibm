@@ -51,7 +51,7 @@ nexttoward(double x, long double y)
 	    t = x*x;
 	    if(t==x) return t; else return x;	/* raise underflow flag */
 	}
-	if(hx>0.0 ^ x < y) {			/* x -= ulp */
+	if((hx>0.0) ^ (x < y)) {			/* x -= ulp */
 	    if(lx==0) hx -= 1;
 	    lx -= 1;
 	} else {				/* x += ulp */

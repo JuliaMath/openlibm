@@ -39,7 +39,9 @@
  * gcc generates is acceptable, since the special cases have already been
  * handled.
  */
+#ifndef __GNUC__
 #pragma	STDC CX_LIMITED_RANGE	ON
+#endif
 
 float complex
 csqrtf(float complex z)

@@ -10,10 +10,6 @@
  * ====================================================
  */
 
-#ifndef lint
-static char rcsid[] = "$FreeBSD: src/lib/msun/src/s_scalbn.c,v 1.11 2005/03/07 21:27:37 das Exp $";
-#endif
-
 /*
  * scalbn (double x, int n)
  * scalbn(x,n) returns x* 2**n  computed by  exponent
@@ -51,11 +47,12 @@ scalbn (double x, int n)
         if (k >  0x7fe) return huge*copysign(huge,x); /* overflow  */
         if (k > 0) 				/* normal result */
 	    {SET_HIGH_WORD(x,(hx&0x800fffff)|(k<<20)); return x;}
-        if (k <= -54)
+        if (k <= -54) {
             if (n > 50000) 	/* in case integer overflow in n+k */
 		return huge*copysign(huge,x);	/*overflow*/
 	    else return tiny*copysign(tiny,x); 	/*underflow*/
-        k += 54;				/* subnormal result */
+        } 
+	k += 54;				/* subnormal result */
 	SET_HIGH_WORD(x,(hx&0x800fffff)|(k<<20));
         return x*twom54;
 }

@@ -52,7 +52,7 @@ nextafterl(long double x, long double y)
 	    t = ux.e*ux.e;
 	    if(t==ux.e) return t; else return ux.e; /* raise underflow flag */
 	}
-	if(x>0.0 ^ x<y) {			/* x -= ulp */
+	if((x>0.0) ^ (x<y)) {			/* x -= ulp */
 	    if(ux.bits.manl==0) {
 		if ((ux.bits.manh&~LDBL_NBIT)==0)
 		    ux.bits.exp -= 1;

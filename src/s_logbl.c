@@ -10,10 +10,6 @@
  * ====================================================
  */
 
-#ifndef lint
-static char rcsid[] = "$FreeBSD: src/lib/msun/src/s_logbl.c,v 1.1 2007/12/17 03:53:38 das Exp $";
-#endif
-
 #include <float.h>
 #include <limits.h>
 #include <openlibm.h>
