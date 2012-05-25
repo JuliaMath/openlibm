@@ -4,7 +4,7 @@ CFLAGS= -Wall -O2 -I$(OPENLIBM_HOME) -I$(OPENLIBM_HOME)/include -I$(OPENLIBM_HOM
 default: all
 
 %.c.o: %.c
-	$(QUIET_CC)$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 %.S.o: %.S
 	$(QUIET_ASM)$(CC) $(filter -f% -m% -B% -I% -D%,$(CFLAGS)) -c $< -o $@

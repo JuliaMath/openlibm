@@ -24,8 +24,6 @@ libopenlibm.a: $(OBJS)
 	$(QUIET_LINK)ar -rcs libopenlibm.a $(OBJS)
 libopenlibm.$(SHLIB_EXT): $(OBJS)
 	$(QUIET_LINK)$(CC) -shared -fPIC $(OBJS) -o libopenlibm.$(SHLIB_EXT)
-echo:
-	echo $(TEST)
 
 cleanall:
 	rm -f $(OBJS) *.a *.$(SHLIB_EXT)
