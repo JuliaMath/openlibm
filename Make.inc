@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS= -Wall -O2 -I. -I.. -I../include -I../ld128 -I../src -DASSEMBLER -D__BSD_VISIBLE -Wno-implicit-function-declaration
+CFLAGS= -Wall -O2 -I$(OPENLIBM_HOME) -I$(OPENLIBM_HOME)/include -I$(OPENLIBM_HOME)/ld80 -I$(OPENLIBM_HOME)/src -DASSEMBLER -D__BSD_VISIBLE -Wno-implicit-function-declaration
 
 default: all
 
@@ -7,7 +7,7 @@ default: all
 	$(QUIET_CC)$(CC) $(CFLAGS) -c $< -o $@
 
 %.S.o: %.S
-	$(CC) $(filter -f% -m% -B% -I% -D%,$(CFLAGS)) -c $< -o $@
+	$(QUIET_ASM)$(CC) $(filter -f% -m% -B% -I% -D%,$(CFLAGS)) -c $< -o $@
 
 clean:
 	rm -f *.o *.c.o *.S.o *~
@@ -16,6 +16,13 @@ clean:
 OS = $(shell uname)
 ARCH = $(shell uname -m)
 
+ifeq ($(ARCH),i386)
+override ARCH = i387
+endif
+
+ifeq ($(ARCH),x86_64)
+override ARCH = amd64
+endif 
 
 ifeq ($(OS), MINGW32_NT-6.1)
 OS=WINNT

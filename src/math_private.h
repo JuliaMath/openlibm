@@ -20,6 +20,7 @@
 #include "types-compat.h"
 #include "fpmath.h"
 #include <complex.h>
+#include <stdint.h>
 
 /*
  * The original fdlibm code used statements like:
