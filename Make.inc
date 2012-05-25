@@ -10,7 +10,7 @@ default: all
 	$(CC) $(filter -f% -m% -B% -I% -D%,$(CFLAGS)) -c $< -o $@
 
 clean:
-	rm -f *.o *~
+	rm -f *.o *.c.o *.S.o *~
 
 # OS-specific stuff
 OS = $(shell uname)
