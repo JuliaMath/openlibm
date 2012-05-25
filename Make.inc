@@ -4,7 +4,7 @@ CFLAGS= -Wall -O2 -I. -I.. -I../include -I../ld128 -I../src -DASSEMBLER -D__BSD_
 default: all
 
 %.c.o: %.c
-	$(QUIET_CC)$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 %.S.o: %.S
 	$(CC) $(filter -f% -m% -B% -I% -D%,$(CFLAGS)) -c $< -o $@
