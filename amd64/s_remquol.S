@@ -28,7 +28,7 @@
  * Based on public-domain remainder routine by J.T. Conklin <jtc@NetBSD.org>.
  */
 
-#include <machine/asm.h>
+#include <amd64/bsd_asm.h>
 //__FBSDID("$FreeBSD: src/lib/msun/amd64/s_remquol.S,v 1.2 2011/01/07 16:13:12 kib Exp $"); 
 	
 ENTRY(remquol)
@@ -61,4 +61,4 @@ ENTRY(remquol)
 	movl	%eax,(%rdi)
 	ret
 
-	.section .note.GNU-stack,"",%progbits
+	

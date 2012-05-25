@@ -33,11 +33,10 @@
  *	J.T. Conklin (jtc@wimsey.com), Winning Strategies, Inc.
  */
 
-#include <machine/asm.h>
-//__FBSDID("$FreeBSD: src/lib/msun/i387/s_ceil.S,v 1.10 2011/01/07 16:13:12 kib Exp $")
+#include <i387/bsd_asm.h>
 
 ENTRY(ceil)
-	pushl	%ebp
+    pushl   %ebp
 	movl	%esp,%ebp
 	subl	$8,%esp
 
@@ -57,4 +56,4 @@ ENTRY(ceil)
 	ret
 END(ceil)
 
-	.section .note.GNU-stack,"",%progbits
+	

@@ -24,7 +24,7 @@
  * SUCH DAMAGE.
  */
 
-#include <machine/asm.h>
+#include <i387/bsd_asm.h>
 //__FBSDID("$FreeBSD: src/lib/msun/i387/s_lrint.S,v 1.3 2011/01/07 16:13:12 kib Exp $"); 
 	
 ENTRY(lrint)
@@ -35,4 +35,4 @@ ENTRY(lrint)
 	ret
 END(lrint)
 
-	.section .note.GNU-stack,"",%progbits
+	

@@ -1,10 +1,13 @@
 CC=gcc
-CFLAGS=-Wall -O2 -I. -I../include -I../ld128 -I../src -D__BSD_VISIBLE -Wno-implicit-function-declaration
+CFLAGS= -Wall -O2 -I. -I.. -I../include -I../ld128 -I../src -DASSEMBLER -D__BSD_VISIBLE -Wno-implicit-function-declaration
 
 default: all
 
-%.o: %.c
+%.c.o: %.c
 	$(QUIET_CC)$(CC) $(CFLAGS) -c $< -o $@
+
+%.S.o: %.S
+	$(CC) $(filter -f% -m% -B% -I% -D%,$(CFLAGS)) -c $< -o $@
 
 clean:
 	rm -f *.o *~
@@ -20,17 +23,17 @@ endif
 
 ifeq ($(OS), Linux)
 SHLIB_EXT = so
-CFLAGS+=-fPIC
+CFLAGS+=-std=gnu99 -fPIC
 endif
 
 ifeq ($(OS), FreeBSD)
 SHLIB_EXT = so
-CFLAGS+=-fPIC
+CFLAGS+=-std=gnu99 -fPIC
 endif
 
 ifeq ($(OS), Darwin)
 SHLIB_EXT = dylib
-CFLAGS+=-std=c99 -fPIC
+CFLAGS+=-std=gnu99 -fPIC
 endif
 
 ifeq ($(OS), WINNT)
@@ -47,4 +50,5 @@ MAKECOLOR="\033[32;1m"
 ENDCOLOR="\033[0m"
 
 QUIET_CC = @printf '    %b %b\n' $(CCCOLOR)CC$(ENDCOLOR) $(SRCCOLOR)$@$(ENDCOLOR);
+QUIET_ASM = @printf '    %b %b\n' $(CCCOLOR)ASM$(ENDCOLOR) $(SRCCOLOR)$@$(ENDCOLOR);
 QUIET_LINK = @printf '    %b %b\n' $(LINKCOLOR)LINK$(ENDCOLOR) $(BINCOLOR)$@$(ENDCOLOR);

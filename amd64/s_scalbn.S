@@ -24,7 +24,7 @@
  * SUCH DAMAGE.
  */
 
-#include <machine/asm.h>
+#include <amd64/bsd_asm.h>
 //__FBSDID("$FreeBSD: src/lib/msun/amd64/s_scalbn.S,v 1.3 2011/01/07 16:13:12 kib Exp $")
 
 ENTRY(scalbn)
@@ -39,4 +39,4 @@ ENTRY(scalbn)
 	ret
 END(scalbn)
 
-	.section .note.GNU-stack,"",%progbits
+	

@@ -33,10 +33,10 @@
  *	J.T. Conklin (jtc@wimsey.com), Winning Strategies, Inc.
  */
 
-#include <machine/asm.h>
-//__FBSDID("$FreeBSD: src/lib/msun/i387/e_exp.S,v 1.14 2011/01/07 16:13:12 kib Exp $")
+#include <i387/bsd_asm.h>
 
 /* e^x = 2^(x * log2(e)) */
+
 ENTRY(exp)
 	/*
 	 * If x is +-Inf, then the subtraction would give Inf-Inf = NaN.
@@ -97,4 +97,4 @@ x_not_minus_Inf:
 	ret
 END(exp)
 
-	.section .note.GNU-stack,"",%progbits
+    //

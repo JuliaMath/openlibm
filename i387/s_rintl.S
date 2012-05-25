@@ -33,7 +33,7 @@
  *	J.T. Conklin (jtc@wimsey.com), Winning Strategies, Inc.
  */
 
-#include <machine/asm.h>
+#include <i387/bsd_asm.h>
 //__FBSDID("$FreeBSD: src/lib/msun/i387/s_rintl.S,v 1.3 2011/01/07 16:13:12 kib Exp $")
 
 ENTRY(rintl)
@@ -41,4 +41,4 @@ ENTRY(rintl)
 	frndint
 	ret
 
-	.section .note.GNU-stack,"",%progbits
+	

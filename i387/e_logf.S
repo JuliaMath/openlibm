@@ -3,7 +3,7 @@
  * Public domain.
  */
 
-#include <machine/asm.h>
+#include <i387/bsd_asm.h>
 
 //__FBSDID("$FreeBSD: src/lib/msun/i387/e_logf.S,v 1.3 2011/01/07 16:13:12 kib Exp $");
 /* RCSID("$NetBSD: e_logf.S,v 1.2 1996/07/06 00:15:45 jtc Exp $") */
@@ -14,4 +14,4 @@ ENTRY(logf)
 	fyl2x
 	ret
 
-	.section .note.GNU-stack,"",%progbits
+	

@@ -24,7 +24,7 @@
  * SUCH DAMAGE.
  */
 
-#include <machine/asm.h>
+#include <amd64/bsd_asm.h>
 //__FBSDID("$FreeBSD: src/lib/msun/amd64/s_llrintl.S,v 1.2 2011/01/07 16:13:12 kib Exp $"); 
 	
 ENTRY(llrintl)
@@ -34,4 +34,4 @@ ENTRY(llrintl)
 	popq	%rax
 	ret
 
-	.section .note.GNU-stack,"",%progbits
+	

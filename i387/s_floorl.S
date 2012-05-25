@@ -3,7 +3,7 @@
  * Public domain.
  */
 
-#include <machine/asm.h>
+#include <i387/bsd_asm.h>
 //__FBSDID("$FreeBSD: src/lib/msun/i387/s_floorl.S,v 1.3 2011/01/07 16:13:12 kib Exp $")
 
 ENTRY(floorl)
@@ -27,4 +27,4 @@ ENTRY(floorl)
 	ret
 END(floorl)
 
-	.section .note.GNU-stack,"",%progbits
+	

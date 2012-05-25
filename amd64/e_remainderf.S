@@ -3,9 +3,9 @@
  * Public domain.
  */
 
-#include <machine/asm.h>
+#include <amd64/bsd_asm.h>
 
-RCSID("from: $NetBSD: e_remainderf.S,v 1.2 1995/05/08 23:49:47 jtc Exp $")
+//RCSID("from: $NetBSD: e_remainderf.S,v 1.2 1995/05/08 23:49:47 jtc Exp $")
 //__FBSDID("$FreeBSD: src/lib/msun/amd64/e_remainderf.S,v 1.2 2011/01/07 16:13:12 kib Exp $")
 
 ENTRY(remainderf)
@@ -22,4 +22,4 @@ ENTRY(remainderf)
 	fstp	%st
 	ret
 
-	.section .note.GNU-stack,"",%progbits
+	

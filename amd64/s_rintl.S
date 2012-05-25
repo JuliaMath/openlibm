@@ -35,11 +35,11 @@
  *	J.T. Conklin (jtc@wimsey.com), Winning Strategies, Inc.
  */
 
-#include <machine/asm.h>
+#include <amd64/bsd_asm.h>
 
 ENTRY(rintl)
 	fldt	8(%rsp)
 	frndint
 	ret
 
-	.section .note.GNU-stack,"",%progbits
+	

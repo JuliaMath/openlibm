@@ -33,7 +33,7 @@
  *	J.T. Conklin (jtc@wimsey.com), Winning Strategies, Inc.
  */
 
-#include <machine/asm.h>
+#include <amd64/bsd_asm.h>
 //__FBSDID("$FreeBSD: src/lib/msun/amd64/s_logbl.S,v 1.4 2011/01/07 16:13:12 kib Exp $")
 
 ENTRY(logbl)
@@ -42,4 +42,4 @@ ENTRY(logbl)
 	fstp	%st
 	ret
 
-	.section .note.GNU-stack,"",%progbits
+	

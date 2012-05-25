@@ -3,7 +3,7 @@
  * Public domain.
  */
 
-#include <machine/asm.h>
+#include <i387/bsd_asm.h>
 
 //__FBSDID("$FreeBSD: src/lib/msun/i387/s_copysignf.S,v 1.3 2011/01/07 16:13:12 kib Exp $");
 /* RCSID("$NetBSD: s_copysignf.S,v 1.3 1995/05/08 23:53:25 jtc Exp $") */
@@ -19,4 +19,4 @@ ENTRY(copysignf)
 	ret
 END(copysignf)
 
-	.section .note.GNU-stack,"",%progbits
+	

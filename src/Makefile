@@ -1,58 +1,58 @@
 include ../Make.inc
 
 SRCS= \
-	e_acos.o e_acosf.o e_acosh.o e_acoshf.o e_asin.o e_asinf.o \
-	e_atan2.o e_atan2f.o e_atanh.o e_atanhf.o e_cosh.o e_coshf.o e_exp.o \
-	e_expf.o e_fmod.o e_fmodf.o e_gamma.o e_gamma_r.o e_gammaf.o \
-	e_gammaf_r.o e_hypot.o e_hypotf.o e_j0.o e_j0f.o e_j1.o e_j1f.o \
-	e_jn.o e_jnf.o e_lgamma.o e_lgamma_r.o e_lgammaf.o e_lgammaf_r.o \
-	e_log.o e_log10.o e_log10f.o e_log2.o e_log2f.o e_logf.o \
-	e_pow.o e_powf.o e_remainder.o e_remainderf.o e_scalb.o e_scalbf.o \
-	e_rem_pio2.o e_rem_pio2f.o \
-	e_sinh.o e_sinhf.o e_sqrt.o e_sqrtf.o \
-	k_cos.o k_exp.o k_expf.o k_rem_pio2.o k_sin.o k_tan.o \
-	k_cosf.o k_sinf.o k_tanf.o \
-	s_asinh.o s_asinhf.o s_atan.o s_atanf.o s_carg.o s_cargf.o s_cargl.o \
-	s_cbrt.o s_cbrtf.o s_ceil.o s_ceilf.o \
-	s_copysign.o s_copysignf.o s_cos.o s_cosf.o \
-	s_csqrt.o s_csqrtf.o s_erf.o s_erff.o \
-	s_exp2.o s_exp2f.o s_expm1.o s_expm1f.o s_fabs.o s_fabsf.o s_fdim.o \
-	s_finite.o s_finitef.o \
-	s_floor.o s_floorf.o s_fma.o s_fmaf.o \
-	s_fmax.o s_fmaxf.o s_fmaxl.o s_fmin.o \
-	s_fminf.o s_fminl.o s_fpclassify.o \
-	s_frexp.o s_frexpf.o s_ilogb.o s_ilogbf.o \
-	s_ilogbl.o s_isinf.o s_isfinite.o s_isnormal.o s_isnan.o \
-	s_llrint.o s_llrintf.o s_llround.o s_llroundf.o s_llroundl.o \
-	s_log1p.o s_log1pf.o s_logb.o s_logbf.o s_lrint.o s_lrintf.o \
-	s_lround.o s_lroundf.o s_lroundl.o s_modf.o s_modff.o \
-	s_nan.o s_nearbyint.o s_nextafter.o s_nextafterf.o \
-	s_nexttowardf.o s_remquo.o s_remquof.o \
-	s_rint.o s_rintf.o s_round.o s_roundf.o s_roundl.o \
-	s_scalbln.o s_scalbn.o s_scalbnf.o s_signbit.o \
-	s_signgam.o s_significand.o s_significandf.o s_sin.o s_sinf.o \
-	s_tan.o s_tanf.o s_tanh.o s_tanhf.o s_tgammaf.o s_trunc.o s_truncf.o \
-	w_cabs.o w_cabsf.o w_drem.o w_dremf.o
+        e_acos.c e_acosf.c e_acosh.c e_acoshf.c e_asin.c e_asinf.c \
+        e_atan2.c e_atan2f.c e_atanh.c e_atanhf.c e_cosh.c e_coshf.c e_exp.c \
+        e_expf.c e_fmod.c e_fmodf.c e_gamma.c e_gamma_r.c e_gammaf.c \
+        e_gammaf_r.c e_hypot.c e_hypotf.c e_j0.c e_j0f.c e_j1.c e_j1f.c \
+        e_jn.c e_jnf.c e_lgamma.c e_lgamma_r.c e_lgammaf.c e_lgammaf_r.c \
+        e_log.c e_log10.c e_log10f.c e_log2.c e_log2f.c e_logf.c \
+        e_pow.c e_powf.c e_remainder.c e_remainderf.c e_scalb.c e_scalbf.c \
+        e_rem_pio2.c e_rem_pio2f.c \
+        e_sinh.c e_sinhf.c e_sqrt.c e_sqrtf.c \
+        k_cos.c k_exp.c k_expf.c k_rem_pio2.c k_sin.c k_tan.c \
+        k_cosf.c k_sinf.c k_tanf.c \
+        s_asinh.c s_asinhf.c s_atan.c s_atanf.c s_carg.c s_cargf.c s_cargl.c \
+        s_cbrt.c s_cbrtf.c s_ceil.c s_ceilf.c \
+        s_copysign.c s_copysignf.c s_cos.c s_cosf.c \
+        s_csqrt.c s_csqrtf.c s_erf.c s_erff.c \
+        s_exp2.c s_exp2f.c s_expm1.c s_expm1f.c s_fabs.c s_fabsf.c s_fdim.c \
+        s_finite.c s_finitef.c \
+        s_floor.c s_floorf.c s_fma.c s_fmaf.c \
+        s_fmax.c s_fmaxf.c s_fmaxl.c s_fmin.c \
+        s_fminf.c s_fminl.c s_fpclassify.c \
+        s_frexp.c s_frexpf.c s_ilogb.c s_ilogbf.c \
+        s_ilogbl.c s_isinf.c s_isfinite.c s_isnormal.c s_isnan.c \
+        s_llrint.c s_llrintf.c s_llround.c s_llroundf.c s_llroundl.c \
+        s_log1p.c s_log1pf.c s_logb.c s_logbf.c s_lrint.c s_lrintf.c \
+        s_lround.c s_lroundf.c s_lroundl.c s_modf.c s_modff.c \
+        s_nan.c s_nearbyint.c s_nextafter.c s_nextafterf.c \
+        s_nexttowardf.c s_remquo.c s_remquof.c \
+        s_rint.c s_rintf.c s_round.c s_roundf.c s_roundl.c \
+        s_scalbln.c s_scalbn.c s_scalbnf.c s_signbit.c \
+        s_signgam.c s_significand.c s_significandf.c s_sin.c s_sinf.c \
+        s_tan.c s_tanf.c s_tanh.c s_tanhf.c s_tgammaf.c s_trunc.c s_truncf.c \
+        w_cabs.c w_cabsf.c w_drem.c w_dremf.c
 
 # C99 long double functions
-SRCS+=	s_copysignl.o s_fabsl.o s_llrintl.o s_lrintl.o s_modfl.o
+SRCS+=	s_copysignl.c s_fabsl.c s_llrintl.c s_lrintl.c s_modfl.c
 
 # If long double != double use these; otherwise, we alias the double versions.
-SRCS+=	e_acosl.o e_asinl.o e_atan2l.o e_fmodl.o \
-	e_hypotl.o e_remainderl.o e_sqrtl.o \
-	s_atanl.o s_ceill.o s_cosl.o s_cprojl.o \
-	s_csqrtl.o s_floorl.o s_fmal.o \
-	s_frexpl.o s_logbl.o s_nexttoward.o \
-	s_remquol.o \
-	s_sinl.o s_tanl.o s_truncl.o w_cabsl.o \
-	s_nextafterl.o s_rintl.o s_scalbnl.o 
-#	s_cbrtl.o
+SRCS+=	e_acosl.c e_asinl.c e_atan2l.c e_fmodl.c \
+        e_hypotl.c e_remainderl.c e_sqrtl.c \
+        s_atanl.c s_ceill.c s_cosl.c s_cprojl.c \
+        s_csqrtl.c s_floorl.c s_fmal.c \
+        s_frexpl.c s_logbl.c s_nexttoward.c \
+        s_remquol.c \
+        s_sinl.c s_tanl.c s_truncl.c w_cabsl.c \
+        s_nextafterl.c s_rintl.c s_scalbnl.c
+#	s_cbrtl.c
 
 # C99 complex functions
-SRCS+=	s_ccosh.o s_ccoshf.o s_cexp.o s_cexpf.o \
-	s_cimag.o s_cimagf.o s_cimagl.o \
-	s_conj.o s_conjf.o s_conjl.o \
-	s_cproj.o s_cprojf.o s_creal.o s_crealf.o s_creall.o \
-	s_csinh.o s_csinhf.o s_ctanh.o s_ctanhf.o
+SRCS+=	s_ccosh.c s_ccoshf.c s_cexp.c s_cexpf.c \
+        s_cimag.c s_cimagf.c s_cimagl.c \
+        s_conj.c s_conjf.c s_conjl.c \
+        s_cproj.c s_cprojf.c s_creal.c s_crealf.c s_creall.c \
+        s_csinh.c s_csinhf.c s_ctanh.c s_ctanhf.c
 
-all: $(SRCS)
+all: $(patsubst %.c,%.c.o,$(SRCS))

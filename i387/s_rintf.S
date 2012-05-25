@@ -3,7 +3,7 @@
  * Public domain.
  */
 
-#include <machine/asm.h>
+#include <i387/bsd_asm.h>
 
 //__FBSDID("$FreeBSD: src/lib/msun/i387/s_rintf.S,v 1.3 2011/01/07 16:13:12 kib Exp $");
 /* RCSID("$NetBSD: s_rintf.S,v 1.3 1995/05/09 00:17:22 jtc Exp $") */
@@ -14,4 +14,4 @@ ENTRY(rintf)
 	ret
 END(rintf)
 
-	.section .note.GNU-stack,"",%progbits
+	

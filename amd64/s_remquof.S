@@ -28,7 +28,7 @@
  * Based on public-domain remainder routine by J.T. Conklin <jtc@NetBSD.org>.
  */
 
-#include <machine/asm.h>
+#include <amd64/bsd_asm.h>
 //__FBSDID("$FreeBSD: src/lib/msun/amd64/s_remquof.S,v 1.3 2011/01/07 16:13:12 kib Exp $"); 
 	
 ENTRY(remquof)
@@ -65,4 +65,4 @@ ENTRY(remquof)
 	ret
 END(remquof)
 
-	.section .note.GNU-stack,"",%progbits
+	

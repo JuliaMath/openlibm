@@ -33,7 +33,7 @@
  *	J.T. Conklin (jtc@wimsey.com), Winning Strategies, Inc.
  */
 
-#include <machine/asm.h>
+#include <i387/bsd_asm.h>
 //__FBSDID("$FreeBSD: src/lib/msun/i387/e_log10.S,v 1.10 2011/01/07 16:13:12 kib Exp $")
 
 ENTRY(log10)
@@ -43,4 +43,4 @@ ENTRY(log10)
 	ret
 END(log10)
 
-	.section .note.GNU-stack,"",%progbits
+	
