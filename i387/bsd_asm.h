@@ -68,17 +68,19 @@
  * to a possibly-modified form that will be invisible to C programs.
  */
 
-#define CNAME(csym)		csym
-#define HIDENAME(asmsym)	.asmsym
 
 /* XXX should use .p2align 4,0x90 for -m486. */
 #define _START_ENTRY	.text; .p2align 2,0x90
 
 #if defined(__linux__) || defined(__FreeBSD__) || defined(__ELF__)
+#define CNAME(csym)		csym
+#define HIDENAME(asmsym)	.asmsym
 #define _ENTRY(x)	_START_ENTRY; \
 			.globl CNAME(x); .type CNAME(x),@function; CNAME(x):
 #define	END(x)		.size x, . - x
 #elif defined(__WIN32__)
+#define CNAME(csym)		_##csym
+#define HIDENAME(asmsym)	.asmsym
 #define _ENTRY(x) \
 	_START_ENTRY; .globl CNAME(x) ; .def CNAME(X);\
 	.scl	2;.type	32;.endef; CNAME(x):
