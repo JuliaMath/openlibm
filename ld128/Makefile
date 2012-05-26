@@ -1,5 +1,0 @@
-include ../Make.inc
-
-SRCS = invtrig.c k_cosl.c k_sinl.c k_tanl.c # s_nanl.c s_exp2l.c 
-
-all: $(patsubst %.c,%.c.o,$(SRCS))
