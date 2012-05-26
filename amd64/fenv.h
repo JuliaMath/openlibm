@@ -29,8 +29,8 @@
 #ifndef	_FENV_H_
 #define	_FENV_H_
 
-#include <sys/cdefs.h>
-#include <sys/_types.h>
+#include "include/cdefs-compat.h" 
+#include "include/types-compat.h" 
 
 #ifndef	__fenv_static
 #define	__fenv_static	static
@@ -38,15 +38,15 @@
 
 typedef struct {
 	struct {
-		__uint32_t	__control;
-		__uint32_t	__status;
-		__uint32_t	__tag;
+		uint32_t	__control;
+		uint32_t	__status;
+		uint32_t	__tag;
 		char		__other[16];
 	} __x87;
-	__uint32_t		__mxcsr;
+	uint32_t		__mxcsr;
 } fenv_t;
 
-typedef	__uint16_t	fexcept_t;
+typedef	uint16_t	fexcept_t;
 
 /* Exception flags */
 #define	FE_INVALID	0x01
@@ -114,8 +114,8 @@ feclearexcept(int __excepts)
 __fenv_static inline int
 fegetexceptflag(fexcept_t *__flagp, int __excepts)
 {
-	__uint32_t __mxcsr;
-	__uint16_t __status;
+	uint32_t __mxcsr;
+	uint16_t __status;
 
 	__stmxcsr(&__mxcsr);
 	__fnstsw(&__status);
@@ -129,8 +129,8 @@ int feraiseexcept(int __excepts);
 __fenv_static inline int
 fetestexcept(int __excepts)
 {
-	__uint32_t __mxcsr;
-	__uint16_t __status;
+	uint32_t __mxcsr;
+	uint16_t __status;
 
 	__stmxcsr(&__mxcsr);
 	__fnstsw(&__status);
@@ -140,7 +140,7 @@ fetestexcept(int __excepts)
 __fenv_static inline int
 fegetround(void)
 {
-	__uint16_t __control;
+	uint16_t __control;
 
 	/*
 	 * We assume that the x87 and the SSE unit agree on the
@@ -155,8 +155,8 @@ fegetround(void)
 __fenv_static inline int
 fesetround(int __round)
 {
-	__uint32_t __mxcsr;
-	__uint16_t __control;
+	uint32_t __mxcsr;
+	uint16_t __control;
 
 	if (__round & ~_ROUND_MASK)
 		return (-1);
@@ -205,7 +205,7 @@ int fedisableexcept(int __mask);
 static inline int
 fegetexcept(void)
 {
-	__uint16_t __control;
+	uint16_t __control;
 
 	/*
 	 * We assume that the masks for the x87 and the SSE unit are
