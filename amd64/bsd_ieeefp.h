@@ -41,9 +41,8 @@
 
 #ifndef _MACHINE_IEEEFP_H_
 #define _MACHINE_IEEEFP_H_
-#warning test
 
-#ifndef _SYS_CDEFS_H_
+#if !defined(_SYS_CDEFS_H_) && !defined(_CDEFS_H_)
 #error this file needs sys/cdefs.h as a prerequisite
 #endif
 
@@ -125,8 +124,6 @@ typedef enum {
 #if (defined(__GNUCLIKE_ASM) && defined(__CC_SUPPORTS___INLINE__)) || defined(__WIN32__) \
     && !defined(__cplusplus)
 
-#warning test2
-	
 #define	__fldenv(addr)	__asm __volatile("fldenv %0" : : "m" (*(addr)))
 #define	__fnstenv(addr)	__asm __volatile("fnstenv %0" : "=m" (*(addr)))
 #define	__fldcw(addr)	__asm __volatile("fldcw %0" : : "m" (*(addr)))

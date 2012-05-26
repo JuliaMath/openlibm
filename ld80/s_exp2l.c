@@ -30,11 +30,7 @@
 #include <float.h>
 #include <stdint.h>
 
-#ifdef __WIN32__
 #include "amd64/bsd_ieeefp.h"
-#else
-#include <ieeefp.h>
-#endif
 
 #include "fpmath.h"
 #include "openlibm.h"
