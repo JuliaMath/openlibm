@@ -39,7 +39,7 @@
 #if defined(__APPLE__)
 #include "osx_asm.h"
 #define CNAME(x) EXT(x)
-#elif defined(__FreeBSD__) || defined(__linux__)
+#elif defined(__FreeBSD__) || defined(__linux__) || defined(__WIN32__)
 #include "bsd_cdefs.h"
 
 #ifdef PIC
@@ -68,29 +68,22 @@
  * to a possibly-modified form that will be invisible to C programs.
  */
 
-#if defined(__FreeBSD__) || defined(__linux__)
 #define CNAME(csym)		csym
 #define HIDENAME(asmsym)	.asmsym
 
 /* XXX should use .p2align 4,0x90 for -m486. */
 #define _START_ENTRY	.text; .p2align 2,0x90
 
+#if defined(__linux__) || defined(__FreeBSD__) || defined(__ELF__)
 #define _ENTRY(x)	_START_ENTRY; \
 			.globl CNAME(x); .type CNAME(x),@function; CNAME(x):
 #define	END(x)		.size x, . - x
-#else
-#define CNAME(csym)		_csym
-#define HIDENAME(asmsym)	.asmsym
-
-/* XXX should use .p2align 4,0x90 for -m486. */
-#define _START_ENTRY	.text; .p2align 2,0x90
-
-#define _ENTRY(x)	_START_ENTRY; \
-            .globl CNAME(x); CNAME(x):
-#define	END(x)		.size x, . - x
+#elif defined(__WIN32__)
+#define _ENTRY(x) \
+	_START_ENTRY; .globl CNAME(x) ; .def CNAME(X);\
+	.scl	2;.type	32;.endef; CNAME(x):
+#define END(x) .end
 #endif
-
-
 
 #ifdef PROF
 #define	ALTENTRY(x)	_ENTRY(x); \

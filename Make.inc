@@ -1,5 +1,7 @@
 CC=gcc
-CFLAGS= -Wall -O2 -I$(OPENLIBM_HOME) -I$(OPENLIBM_HOME)/include -I$(OPENLIBM_HOME)/ld80 -I$(OPENLIBM_HOME)/src -DASSEMBLER -D__BSD_VISIBLE -Wno-implicit-function-declaration
+OS = $(shell uname)
+ARCH = $(shell uname -m)
+CFLAGS= -std=gnu99 -Wall -O2 -I$(OPENLIBM_HOME) -I$(OPENLIBM_HOME)/include -I$(OPENLIBM_HOME)/ld80 -I$(OPENLIBM_HOME)/$(ARCH) -I$(OPENLIBM_HOME)/src -DASSEMBLER -D__BSD_VISIBLE -Wno-implicit-function-declaration
 
 default: all
 
@@ -13,9 +15,6 @@ clean:
 	rm -f *.o *.c.o *.S.o *~
 
 # OS-specific stuff
-OS = $(shell uname)
-ARCH = $(shell uname -m)
-
 ifeq ($(ARCH),i386)
 override ARCH = i387
 endif
@@ -24,23 +23,28 @@ ifeq ($(ARCH),x86_64)
 override ARCH = amd64
 endif 
 
+ifeq ($(ARCH),i686)
+override ARCH = amd64
+endif
+
 ifeq ($(OS), MINGW32_NT-6.1)
 OS=WINNT
+CFLAGS+=-nodefaultlibs
 endif
 
 ifeq ($(OS), Linux)
 SHLIB_EXT = so
-CFLAGS+=-std=gnu99 -fPIC
+CFLAGS+=-fPIC
 endif
 
 ifeq ($(OS), FreeBSD)
 SHLIB_EXT = so
-CFLAGS+=-std=gnu99 -fPIC
+CFLAGS+=-fPIC
 endif
 
 ifeq ($(OS), Darwin)
 SHLIB_EXT = dylib
-CFLAGS+=-std=gnu99 -fPIC
+CFLAGS+=-fPIC
 endif
 
 ifeq ($(OS), WINNT)

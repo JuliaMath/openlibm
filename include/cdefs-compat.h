@@ -7,7 +7,6 @@
 
 #ifndef __WIN32__
 #include "sys/cdefs.h"
-
 #else /* __WIN32__ */
 
 #if defined(__cplusplus)
@@ -17,6 +16,8 @@
 #define	__BEGIN_DECLS
 #define	__END_DECLS
 #endif
+
+#define _SYS_CDEFS_H_
 
 #endif /* __WIN32__ */
 

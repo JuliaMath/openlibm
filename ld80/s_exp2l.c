@@ -30,7 +30,9 @@
 #include <float.h>
 #include <stdint.h>
 
-#ifdef __i386__
+#ifdef __WIN32__
+#include "amd64/bsd_ieeefp.h"
+#else
 #include <ieeefp.h>
 #endif
 
@@ -243,9 +245,10 @@ exp2l(long double x)
 	 * The default precision on i386 is 53 bits, so long doubles are
 	 * broken. Call exp2() to get an accurate (double precision) result.
 	 */
-	if (fpgetprec() != FP_PE)
+	if (__fpgetprec() != FP_PE)
 		return (exp2(x));
 #endif
+
 
 	/*
 	 * Reduce x, computing z, i0, and k. The low bits of x + redux

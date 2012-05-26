@@ -24,6 +24,9 @@
 #include "fpmath.h"    
 #include "openlibm.h"
 #include "math_private.h"
+#if defined(__WIN32__) && defined(__i386__)
+#include "i387/bsd_ieeefp.h"
+#endif
 
 #define	BIAS	(LDBL_MAX_EXP - 1)
 

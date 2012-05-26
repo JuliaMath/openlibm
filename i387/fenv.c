@@ -26,9 +26,13 @@
  * $FreeBSD: src/lib/msun/i387/fenv.c,v 1.8 2011/10/21 06:25:31 das Exp $
  */
 
-#include <sys/cdefs.h>
-#include <sys/types.h>
+#include <include/cdefs-compat.h>
+#include <include/types-compat.h>
+#ifdef __WIN32__
+#include <i387/bsd_npx.h>
+#else
 #include <machine/npx.h>
+#endif
 
 #define	__fenv_static
 #include "fenv.h"
@@ -96,7 +100,7 @@ int
 fesetexceptflag(const fexcept_t *flagp, int excepts)
 {
 	fenv_t env;
-	__uint32_t mxcsr;
+	uint32_t mxcsr;
 
 	__fnstenv(&env);
 	env.__status &= ~excepts;
@@ -130,7 +134,7 @@ extern inline int fesetround(int __round);
 int
 fegetenv(fenv_t *envp)
 {
-	__uint32_t mxcsr;
+	uint32_t mxcsr;
 
 	__fnstenv(envp);
 	/*
@@ -148,7 +152,7 @@ fegetenv(fenv_t *envp)
 int
 feholdexcept(fenv_t *envp)
 {
-	__uint32_t mxcsr;
+	uint32_t mxcsr;
 
 	__fnstenv(envp);
 	__fnclex();
@@ -167,8 +171,8 @@ extern inline int fesetenv(const fenv_t *__envp);
 int
 feupdateenv(const fenv_t *envp)
 {
-	__uint32_t mxcsr;
-	__uint16_t status;
+	uint32_t mxcsr;
+	uint16_t status;
 
 	__fnstsw(&status);
 	if (__HAS_SSE())
@@ -183,8 +187,8 @@ feupdateenv(const fenv_t *envp)
 int
 __feenableexcept(int mask)
 {
-	__uint32_t mxcsr, omask;
-	__uint16_t control;
+	uint32_t mxcsr, omask;
+	uint16_t control;
 
 	mask &= FE_ALL_EXCEPT;
 	__fnstcw(&control);
@@ -205,8 +209,8 @@ __feenableexcept(int mask)
 int
 __fedisableexcept(int mask)
 {
-	__uint32_t mxcsr, omask;
-	__uint16_t control;
+	uint32_t mxcsr, omask;
+	uint16_t control;
 
 	mask &= FE_ALL_EXCEPT;
 	__fnstcw(&control);
