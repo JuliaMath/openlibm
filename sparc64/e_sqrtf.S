@@ -24,7 +24,7 @@
  * SUCH DAMAGE.
  */
 
-#include <machine/asm.h>
+#include <bsd_asm.h>
 //__FBSDID("$FreeBSD: src/lib/msun/sparc64/e_sqrtf.S,v 1.1 2005/02/21 18:27:57 das Exp $")
 
 ENTRY(sqrtf)

@@ -28,7 +28,7 @@
 
 #include <include/cdefs-compat.h>
 #include <include/types-compat.h>
-#ifdef __WIN32__
+#if defined(__WIN32__) || defined(__linux__)
 #include <i387/bsd_npx.h>
 #else
 #include <machine/npx.h>
