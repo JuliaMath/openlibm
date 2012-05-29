@@ -24,7 +24,7 @@ override ARCH = amd64
 endif 
 
 ifeq ($(ARCH),i686)
-override ARCH = amd64
+override ARCH = i387
 endif
 
 ifeq ($(OS), MINGW32_NT-6.1)
