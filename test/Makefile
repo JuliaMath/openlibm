@@ -1,7 +1,7 @@
 OPENLIBM_HOME=$(abspath ..)
 include ../Make.inc
 
-all: test-double test-float test-double-system test-float-system
+all: test-double test-float test-double-system
 
 test-double: test-double.c libm-test.c
 	$(CC) -g $< -D__BSD_VISIBLE -I ../include -I../src ../libopenlibm.a -o $@
