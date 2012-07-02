@@ -1,4 +1,3 @@
-test-float.c   [plain text]
 /* Copyright (C) 1997, 1999 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
    Contributed by Andreas Jaeger <aj@suse.de>, 1997.

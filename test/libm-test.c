@@ -122,12 +122,12 @@
 #include <float.h>
 #include <fenv.h>
 #else
-#include "math.h"
+#include "openlibm.h"
 #include "float.h"
 #include "fenv.h"
 #endif
 
-#if 1 /* XXX scp XXX */
+#if 0 /* XXX scp XXX */
 #define FE_INEXACT FE_INEXACT
 #define FE_DIVBYZERO FE_DIVBYZERO
 #define FE_UNDERFLOW FE_UNDERFLOW
