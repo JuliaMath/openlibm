@@ -116,7 +116,7 @@
 #endif
 
 #include "libm-test-ulps.h"
-#if 0 /* XXX scp XXX */
+#ifdef SYS_MATH_H /* XXX scp XXX */
 #include <complex.h>
 #include <math.h>
 #include <float.h>
