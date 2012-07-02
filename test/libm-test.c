@@ -4538,7 +4538,9 @@ main (int argc, char **argv)
   /* Nearest integer functions:  */
   ceil_test ();
   floor_test ();
+  /*
   nearbyint_test ();
+  */
   rint_test ();
   lrint_test ();
   llrint_test ();
