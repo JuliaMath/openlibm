@@ -16,5 +16,4 @@ test-float-system: test-float.c libm-test.c
 	$(CC) -g $< -DSYS_MATH_H -lm -o $@
 
 clean:
-	rm -f *~ *# test-double test-float test-double-system test-float-system
-
+	rm -fr *~ *# test-double test-float test-double-system test-float-system *.dSYM
