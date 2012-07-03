@@ -50,9 +50,15 @@
 	__asm__(".previous")
 #endif	/* __STDC__ */
 #elif defined(__clang__) /* CLANG */
-#define __weak_reference(sym,alias)    \
-       __asm__(".weak_reference alias");\
-       __asm__(".set alias, sym")
+#ifdef __STDC__
+#define __weak_reference(sym,alias)     \
+    __asm__(".weak_reference " #alias); \
+    __asm__(".set " #alias ", " #sym)
+#else
+#define __weak_reference(sym,alias)     \
+    __asm__(".weak_reference alias");\
+    __asm__(".set alias, sym")
+#endif
 #else	/* !__ELF__ */
 #ifdef __STDC__
 #define __weak_reference(sym,alias)	\
