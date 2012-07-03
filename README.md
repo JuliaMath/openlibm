@@ -11,5 +11,5 @@ in turn derives from FDLIBM 5.3.
 
 Build instructions:
 
-`make` or `make USEGCC=1` to build with GCC.
-`make USECLANG=1` to build with clang.
+1. `make` or `make USEGCC=1` to build with GCC.
+2. `make USECLANG=1` to build with clang.
