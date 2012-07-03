@@ -19,7 +19,9 @@ DUPLICATE_SRCS = $(addsuffix .c,$(DUPLICATE_NAMES))
 
 OBJS = $(patsubst %.S,%.S.o,\
 	$(patsubst %.c,%.c.o,$(filter-out $(addprefix src/,$(DUPLICATE_SRCS)),$(SRCS))))
+
 all: libopenlibm.a libopenlibm.$(SHLIB_EXT) 
+	$(MAKE) -C test
 libopenlibm.a: $(OBJS)  
 	$(QUIET_LINK)ar -rcs libopenlibm.a $(OBJS)
 libopenlibm.$(SHLIB_EXT): $(OBJS)
@@ -27,3 +29,4 @@ libopenlibm.$(SHLIB_EXT): $(OBJS)
 
 cleanall:
 	rm -f $(OBJS) *.a *.$(SHLIB_EXT)
+	$(MAKE) -C test clean
