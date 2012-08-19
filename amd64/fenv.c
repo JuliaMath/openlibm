@@ -28,7 +28,7 @@
 
 #include <sys/cdefs.h>
 #include <sys/types.h>
-#include <machine/fpu.h>
+#include "bsd_fpu.h"
 
 #define	__fenv_static
 #include "fenv.h"

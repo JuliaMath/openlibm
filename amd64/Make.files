@@ -1,4 +1,4 @@
-$(CUR_SRCS) = e_remainder.S e_remainderf.S e_remainderl.S \
+$(CUR_SRCS) = fenv.c e_remainder.S e_remainderf.S e_remainderl.S \
 	    e_sqrt.S e_sqrtf.S e_sqrtl.S \
 	    s_llrint.S s_llrintf.S s_llrintl.S \
 	    s_logbl.S s_lrint.S s_lrintf.S s_lrintl.S \
