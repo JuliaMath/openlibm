@@ -224,7 +224,7 @@ static FLOAT max_error, real_max_error, imag_max_error;
 #define MANT_DIG CHOOSE ((LDBL_MANT_DIG-1), (DBL_MANT_DIG-1), (FLT_MANT_DIG-1),  \
                          (LDBL_MANT_DIG-1), (DBL_MANT_DIG-1), (FLT_MANT_DIG-1))
 
-#if defined(__WIN32__) || defined(__APPLE__)
+#ifndef SYS_MATH_H
 void FUNC(sincos) (int n, FLOAT *s, FLOAT *c)
 {
 	*s = FUNC(sin) ( *s );
