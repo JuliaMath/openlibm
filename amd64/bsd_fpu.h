@@ -41,6 +41,8 @@
 #ifndef _X86_FPU_H_
 #define	_X86_FPU_H_
 
+#include "types-compat.h"
+
 /* Environment information of floating point unit. */
 struct env87 {
 	int32_t		en_cw;		/* control word (16bits) */
@@ -128,7 +130,7 @@ struct savexmm {
 	} sv_fp[8];
 	struct xmmacc		sv_xmm[8];
 	uint8_t			sv_pad[224];
-} __aligned(16);
+} __attribute__ ((aligned(16)));
 
 #ifdef __i386__
 union savefpu {
@@ -145,7 +147,7 @@ struct savefpu {
 	} sv_fp[8];
 	struct xmmacc		sv_xmm[16];
 	uint8_t			sv_pad[96];
-} __aligned(16);
+} __attribute__ ((aligned(16)));
 #endif
 
 struct xstate_hdr {
@@ -168,7 +170,7 @@ struct savexmm_ymm {
 	struct xmmacc		sv_xmm[16];
 	uint8_t			sv_pad[96];
 	struct savexmm_xstate	sv_xstate;
-} __aligned(64);
+} __attribute__ ((aligned(16)));
 
 struct savefpu_xstate {
 	struct xstate_hdr	sx_hd;
@@ -184,7 +186,7 @@ struct savefpu_ymm {
 	struct xmmacc		sv_xmm[16];
 	uint8_t			sv_pad[96];
 	struct savefpu_xstate	sv_xstate;
-} __aligned(64);
+} __attribute__ ((aligned(64)));
 
 #undef __envxmm32
 #undef __envxmm64

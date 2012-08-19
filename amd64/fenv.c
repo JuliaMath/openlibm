@@ -26,11 +26,9 @@
  * $FreeBSD: src/lib/msun/amd64/fenv.c,v 1.8 2011/10/21 06:25:31 das Exp $
  */
 
-#include <sys/cdefs.h>
-#include <sys/types.h>
 #include "bsd_fpu.h"
 
-#define	__fenv_static
+#define _fenv_static
 #include "fenv.h"
 
 #ifdef __GNUC_GNU_INLINE__

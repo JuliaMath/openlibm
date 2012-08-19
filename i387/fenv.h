@@ -29,8 +29,8 @@
 #ifndef	_FENV_H_
 #define	_FENV_H_
 
-#include "include/cdefs-compat.h"
-#include "include/types-compat.h"
+#include "cdefs-compat.h"
+#include "types-compat.h"
 
 #ifndef	__fenv_static
 #define	__fenv_static	static

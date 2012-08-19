@@ -93,7 +93,7 @@ extern const fenv_t	__fe_dfl_env;
 #define	__ldmxcsr(__csr)	__asm __volatile("ldmxcsr %0" : : "m" (__csr))
 #define	__stmxcsr(__csr)	__asm __volatile("stmxcsr %0" : "=m" (*(__csr)))
 
-__fenv_static inline int
+__fenv_static __attribute__((always_inline)) inline int
 feclearexcept(int __excepts)
 {
 	fenv_t __env;
@@ -126,7 +126,7 @@ fegetexceptflag(fexcept_t *__flagp, int __excepts)
 int fesetexceptflag(const fexcept_t *__flagp, int __excepts);
 int feraiseexcept(int __excepts);
 
-__fenv_static inline int
+__fenv_static __attribute__((always_inline)) inline int
 fetestexcept(int __excepts)
 {
 	uint32_t __mxcsr;

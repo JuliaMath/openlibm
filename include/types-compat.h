@@ -15,7 +15,7 @@
 #endif
 
 #ifdef __WIN32__
-/* Not sure what to do about __pure2 on linux */
+/* Not sure what to do about __pure2 on windows */
 #define __pure2 
 typedef uint8_t               u_int8_t;
 typedef uint16_t              u_int16_t;
