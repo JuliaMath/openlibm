@@ -1,4 +1,4 @@
-## OpenLIBM v0.1
+## OpenLIBM v0.2
 
 OpenLIBM is an effort to have a high quality standalone LIBM
 library. It is meant to be used standalone in applications and
