@@ -1,8 +1,8 @@
 ## OpenLIBM 
 
-Openlibm is licensed under the MIT LICENSE.
+OpenLIBM is licensed under the MIT LICENSE.
 
-      Copyright (c) 2011-12 Viral B. Shah.
+      Copyright (c) 2011-12 Viral B. Shah, Keno Fischer, Jameson Nash.
 
       Permission is hereby granted, free of charge, to any person obtaining
       a copy of this software and associated documentation files (the
