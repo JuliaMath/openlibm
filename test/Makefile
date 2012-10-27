@@ -14,6 +14,3 @@ test-double-system: test-double.c libm-test.c
 
 test-float-system: test-float.c libm-test.c
 	$(CC) -g $< -DSYS_MATH_H -lm -o $@
-
-clean:
-	rm -fr *~ *# test-double test-float test-double-system test-float-system *.dSYM

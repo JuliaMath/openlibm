@@ -7,7 +7,7 @@ USECLANG = 0
 ifeq ($(USECLANG),1)
 USEGCC = 0
 CC = clang
-CFLAGS= -std=c99 -Wall -O3 -I$(OPENLIBM_HOME) -I$(OPENLIBM_HOME)/include -I$(OPENLIBM_HOME)/ld80 -I$(OPENLIBM_HOME)/$(ARCH) -I$(OPENLIBM_HOME)/src -DASSEMBLER -D__BSD_VISIBLE -Wno-implicit-function-declaration
+CFLAGS= -std=c99 -Wall -O3 -I$(OPENLIBM_HOME) -I$(OPENLIBM_HOME)/include -I$(OPENLIBM_HOME)/ld80 -I$(OPENLIBM_HOME)/$(ARCH) -I$(OPENLIBM_HOME)/src -DASSEMBLER -D__BSD_VISIBLE -Wno-implicit-function-declaration -fno-builtin
 endif
 
 ifeq ($(USEGCC),1)
@@ -24,7 +24,7 @@ default: all
 	$(QUIET_ASM)$(CC) $(filter -f% -m% -B% -I% -D%,$(CFLAGS)) -c $< -o $@
 
 clean:
-	rm -f *.o *.c.o *.S.o *~
+	rm -fr *.o *.c.o *.S.o *~ test-double test-float test-double-system test-float-system *.dSYM
 
 # OS-specific stuff
 ifeq ($(ARCH),i386)

@@ -27,6 +27,6 @@ libopenlibm.a: $(OBJS)
 libopenlibm.$(SHLIB_EXT): $(OBJS)
 	$(QUIET_LINK)$(CC) -shared $(OBJS) -o libopenlibm.$(SHLIB_EXT)
 
-cleanall:
+distclean:
 	rm -f $(OBJS) *.a *.$(SHLIB_EXT)
 	$(MAKE) -C test clean
