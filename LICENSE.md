@@ -23,7 +23,7 @@ OpenLIBM is licensed under the MIT LICENSE.
       OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
       WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-## Derived from FREEBSD MSUN
+## FREEBSD MSUN
 
       Copyright 1992-2011 The FreeBSD Project. All rights reserved.
 
@@ -54,7 +54,7 @@ OpenLIBM is licensed under the MIT LICENSE.
       official policies, either expressed or implied, of the FreeBSD
       Project.
 
-## Derived from FDLIBM
+## FDLIBM
 
       Copyright (C) 1993 by Sun Microsystems, Inc. All rights reserved.
 
@@ -62,3 +62,19 @@ OpenLIBM is licensed under the MIT LICENSE.
       Permission to use, copy, modify, and distribute this
       software is freely granted, provided that this notice
       is preserved.
+
+## AMOS
+
+The AMOS library is part of SLATEC and covered by the same license. The following
+is reproduced from Section 4 of the SLATEC guide (http://www.netlib.org/slatec/guide).
+
+      The Library is in the public domain and distributed by the Energy Science
+      and Technology Software Center.
+ 
+               Energy Science and Technology Software Center
+               P.O. Box 1020
+               Oak Ridge, TN  37831
+ 
+               Telephone  615-576-2606
+               E-mail  estsc%a1.adonis.mrouter@zeus.osti.gov
+

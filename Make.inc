@@ -1,5 +1,10 @@
+# -*- mode: makefile-gmake -*-
+
 OS = $(shell uname)
 ARCH = $(shell uname -m)
+
+FC = gfortran
+FFLAGS = -O3
 
 USEGCC = 1
 USECLANG = 0
@@ -18,10 +23,13 @@ endif
 default: all
 
 %.c.o: %.c
-	$(QUIET_CC)$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
+
+%.f.o: %.f
+	$(FC) $(FFLAGS) -c $< -o $@
 
 %.S.o: %.S
-	$(QUIET_ASM)$(CC) $(filter -f% -m% -B% -I% -D%,$(CFLAGS)) -c $< -o $@
+	$(CC) $(filter -f% -m% -B% -I% -D%,$(CFLAGS)) -c $< -o $@
 
 clean:
 	rm -fr *.o *.c.o *.S.o *~ test-double test-float test-double-system test-float-system *.dSYM
@@ -42,36 +50,27 @@ endif
 ifeq ($(OS), MINGW32_NT-6.1)
 OS=WINNT
 CFLAGS+=-nodefaultlibs
+FFLAGS+=-nodefaultlibs
 endif
 
 ifeq ($(OS), Linux)
 SHLIB_EXT = so
 CFLAGS+=-fPIC
+FFLAGS+=-fPIC
 endif
 
 ifeq ($(OS), FreeBSD)
 SHLIB_EXT = so
 CFLAGS+=-fPIC
+FFLAGS+=-fPIC
 endif
 
 ifeq ($(OS), Darwin)
 SHLIB_EXT = dylib
 CFLAGS+=-fPIC
+FFLAGS+=-fPIC
 endif
 
 ifeq ($(OS), WINNT)
 SHLIB_EXT = dll
 endif
-
-# Colors for make
-
-CCCOLOR="\033[34m"
-LINKCOLOR="\033[34;1m"
-SRCCOLOR="\033[33m"
-BINCOLOR="\033[37;1m"
-MAKECOLOR="\033[32;1m"
-ENDCOLOR="\033[0m"
-
-QUIET_CC = @printf '    %b %b\n' $(CCCOLOR)CC$(ENDCOLOR) $(SRCCOLOR)$@$(ENDCOLOR);
-QUIET_ASM = @printf '    %b %b\n' $(CCCOLOR)ASM$(ENDCOLOR) $(SRCCOLOR)$@$(ENDCOLOR);
-QUIET_LINK = @printf '    %b %b\n' $(LINKCOLOR)LINK$(ENDCOLOR) $(BINCOLOR)$@$(ENDCOLOR);

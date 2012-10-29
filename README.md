@@ -1,10 +1,15 @@
-## OpenLIBM v0.2
+## OpenLibm
 
-OpenLIBM is an effort to have a high quality standalone LIBM
+OpenLibm is an effort to have a high quality standalone LIBM
 library. It is meant to be used standalone in applications and
 programming language implementations.
 
-OpenLIBM builds on Linux, Mac OS X, and Windows, and with little effort, 
+OpenLibm also includes the AMOS library from Netlib, which is 
+a portable package for Bessel Functions of a Complex Argument
+and Nonnegative Order. AMOS contains subroutines for computing Bessel
+functions and Airy functions.
+
+OpenLibm builds on Linux, Mac OS X, and Windows, and with little effort, 
 should build on FreeBSD as well. It builds with both, GCC and clang.
 
 The OpenLIBM code derives from the FreeBSD msun implementation, which
