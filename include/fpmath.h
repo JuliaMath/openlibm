@@ -55,6 +55,9 @@
 #define _BYTE_ORDER     BYTE_ORDER
 #endif
 
+#ifdef __FreeBSD__
+#include <machine/endian.h>
+#endif
 
 #ifdef WIN32
 #define _LITTLE_ENDIAN 1234

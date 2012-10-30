@@ -303,7 +303,7 @@ irint(double x)
 {
 	int n;
 
-	asm("cvtsd2si %1,%0" : "=r" (n) : "x" (x));
+	__asm__("cvtsd2si %1,%0" : "=r" (n) : "x" (x));
 	return (n);
 }
 #define	HAVE_EFFICIENT_IRINT
@@ -315,7 +315,7 @@ irint(double x)
 {
 	int n;
 
-	asm("fistl %0" : "=m" (n) : "t" (x));
+	__asm__("fistl %0" : "=m" (n) : "t" (x));
 	return (n);
 }
 #define	HAVE_EFFICIENT_IRINT
