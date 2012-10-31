@@ -9,15 +9,17 @@ FFLAGS = -O3
 USEGCC = 1
 USECLANG = 0
 
+CFLAGS= -std=c99 -Wall -O3 -I$(OPENLIBM_HOME) -I$(OPENLIBM_HOME)/include -I$(OPENLIBM_HOME)/ld80 -I$(OPENLIBM_HOME)/$(ARCH) -I$(OPENLIBM_HOME)/src -DASSEMBLER -D__BSD_VISIBLE -Wno-implicit-function-declaration
+
 ifeq ($(USECLANG),1)
 USEGCC = 0
 CC = clang
-CFLAGS= -std=c99 -Wall -O3 -I$(OPENLIBM_HOME) -I$(OPENLIBM_HOME)/include -I$(OPENLIBM_HOME)/ld80 -I$(OPENLIBM_HOME)/$(ARCH) -I$(OPENLIBM_HOME)/src -DASSEMBLER -D__BSD_VISIBLE -Wno-implicit-function-declaration -fno-builtin
+CFLAGS += -fno-builtin
 endif
 
 ifeq ($(USEGCC),1)
 CC = gcc
-CFLAGS= -std=c99 -Wall -O3 -I$(OPENLIBM_HOME) -I$(OPENLIBM_HOME)/include -I$(OPENLIBM_HOME)/ld80 -I$(OPENLIBM_HOME)/$(ARCH) -I$(OPENLIBM_HOME)/src -DASSEMBLER -D__BSD_VISIBLE -Wno-implicit-function-declaration
+CFLAGS += -fno-gnu89-inline
 endif
 
 default: all
@@ -29,7 +31,7 @@ default: all
 	$(FC) $(FFLAGS) -c $< -o $@
 
 %.S.o: %.S
-	$(CC) $(filter -f% -m% -B% -I% -D%,$(CFLAGS)) -c $< -o $@
+	$(CC) $(filter -m% -B% -I% -D%,$(CFLAGS)) -c $< -o $@
 
 clean:
 	rm -fr *.o *.c.o *.S.o *~ test-double test-float test-double-system test-float-system *.dSYM
