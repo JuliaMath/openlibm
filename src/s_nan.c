@@ -38,7 +38,7 @@
 
 #if !defined(__APPLE__) && !defined(__FreeBSD__)
 static __inline int digittoint(int c) {
-	if ('0' <= c <= '9')
+	if ('0' <= c && c <= '9')
 		return (c - '0');
 	else if ('A' <= c && c <= 'F')
 		return (c - 'A' + 10);
