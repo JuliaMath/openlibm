@@ -1,0 +1,1 @@
+$(CUR_SRCS) = fenv.c s_fma.S  s_fmaf.S s_fmal.S
