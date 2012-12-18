@@ -4,12 +4,12 @@ OS = $(shell uname)
 ARCH = $(shell uname -m)
 
 FC = gfortran
-FFLAGS = -O3
+FFLAGS += -O3
 
 USEGCC = 1
 USECLANG = 0
 
-CFLAGS= -std=c99 -Wall -O3 -I$(OPENLIBM_HOME) -I$(OPENLIBM_HOME)/include -I$(OPENLIBM_HOME)/ld80 -I$(OPENLIBM_HOME)/$(ARCH) -I$(OPENLIBM_HOME)/src -DASSEMBLER -D__BSD_VISIBLE -Wno-implicit-function-declaration
+CFLAGS += -std=c99 -Wall -O3 -I$(OPENLIBM_HOME) -I$(OPENLIBM_HOME)/include -I$(OPENLIBM_HOME)/ld80 -I$(OPENLIBM_HOME)/$(ARCH) -I$(OPENLIBM_HOME)/src -DASSEMBLER -D__BSD_VISIBLE -Wno-implicit-function-declaration
 
 ifeq ($(USECLANG),1)
 USEGCC = 0
@@ -25,7 +25,7 @@ endif
 default: all
 
 %.c.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
 
 %.f.o: %.f
 	$(FC) $(FFLAGS) -c $< -o $@

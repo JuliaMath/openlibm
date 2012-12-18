@@ -26,7 +26,7 @@ all: libopenlibm.a libopenlibm.$(SHLIB_EXT)
 libopenlibm.a: $(OBJS)  
 	ar -rcs libopenlibm.a $(OBJS)
 libopenlibm.$(SHLIB_EXT): $(OBJS)
-	$(FC) -shared $(OBJS) -o libopenlibm.$(SHLIB_EXT)
+	$(FC) -shared $(OBJS) $(LDFLAGS) -o libopenlibm.$(SHLIB_EXT)
 
 distclean:
 	rm -f $(OBJS) *.a *.$(SHLIB_EXT)
