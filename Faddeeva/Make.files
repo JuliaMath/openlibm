@@ -1,0 +1,3 @@
+# complex error functions from the Faddeeva package
+# (http://ab-initio.mit.edu/Faddeeva)
+$(CUR_SRCS) += Faddeeva.c
