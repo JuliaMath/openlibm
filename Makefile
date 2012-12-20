@@ -1,7 +1,7 @@
 OPENLIBM_HOME=$(abspath .)
 include ./Make.inc
 
-SUBDIRS = src ld80 $(ARCH) bsdsrc amos
+SUBDIRS = src ld80 $(ARCH) bsdsrc amos Faddeeva
 
 define INC_template
 TEST=test
