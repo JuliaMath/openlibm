@@ -21,6 +21,7 @@ ifeq ($(USEGCC),1)
 CC = gcc
 CFLAGS += -fno-gnu89-inline
 endif
+AR = ar
 
 default: all
 

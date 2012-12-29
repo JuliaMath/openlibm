@@ -24,7 +24,7 @@ OBJS =  $(patsubst %.f,%.f.o,\
 all: libopenlibm.a libopenlibm.$(SHLIB_EXT) 
 	$(MAKE) -C test
 libopenlibm.a: $(OBJS)  
-	ar -rcs libopenlibm.a $(OBJS)
+	$(AR) -rcs libopenlibm.a $(OBJS)
 libopenlibm.$(SHLIB_EXT): $(OBJS)
 	$(FC) -shared $(OBJS) $(LDFLAGS) -o libopenlibm.$(SHLIB_EXT)
 
