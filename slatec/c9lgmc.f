@@ -1,0 +1,89 @@
+*DECK C9LGMC
+      COMPLEX FUNCTION C9LGMC (ZIN)
+C***BEGIN PROLOGUE  C9LGMC
+C***SUBSIDIARY
+C***PURPOSE  Compute the log gamma correction factor so that
+C            LOG(CGAMMA(Z)) = 0.5*LOG(2.*PI) + (Z-0.5)*LOG(Z) - Z
+C            + C9LGMC(Z).
+C***LIBRARY   SLATEC (FNLIB)
+C***CATEGORY  C7A
+C***TYPE      COMPLEX (R9LGMC-S, D9LGMC-D, C9LGMC-C)
+C***KEYWORDS  COMPLETE GAMMA FUNCTION, CORRECTION TERM, FNLIB,
+C             LOG GAMMA, LOGARITHM, SPECIAL FUNCTIONS
+C***AUTHOR  Fullerton, W., (LANL)
+C***DESCRIPTION
+C
+C Compute the LOG GAMMA correction term for large ABS(Z) when REAL(Z)
+C .GE. 0.0 and for large ABS(AIMAG(Y)) when REAL(Z) .LT. 0.0.  We find
+C C9LGMC so that
+C   LOG(Z) = 0.5*LOG(2.*PI) + (Z-0.5)*LOG(Z) - Z + C9LGMC(Z)
+C
+C***REFERENCES  (NONE)
+C***ROUTINES CALLED  R1MACH, XERMSG
+C***REVISION HISTORY  (YYMMDD)
+C   780401  DATE WRITTEN
+C   890531  Changed all specific intrinsics to generic.  (WRB)
+C   890531  REVISION DATE from Version 3.2
+C   891214  Prologue converted to Version 4.0 format.  (BAB)
+C   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
+C   900326  Removed duplicate information from DESCRIPTION section.
+C           (WRB)
+C   900720  Routine changed from user-callable to subsidiary.  (WRB)
+C***END PROLOGUE  C9LGMC
+      COMPLEX ZIN, Z, Z2INV
+      DIMENSION BERN(11)
+      LOGICAL FIRST
+      SAVE BERN, NTERM, BOUND, XBIG, XMAX, FIRST
+      DATA BERN( 1) /    .08333333333 3333333E0   /
+      DATA BERN( 2) /   -.002777777777 7777778E0  /
+      DATA BERN( 3) /    .0007936507936 5079365E0 /
+      DATA BERN( 4) /   -.0005952380952 3809524E0 /
+      DATA BERN( 5) /    .0008417508417 5084175E0 /
+      DATA BERN( 6) /   -.001917526917 5269175E0  /
+      DATA BERN( 7) /    .006410256410 2564103E0  /
+      DATA BERN( 8) /   -.02955065359 4771242E0   /
+      DATA BERN( 9) /    .1796443723 6883057E0    /
+      DATA BERN(10) /  -1.392432216 9059011E0     /
+      DATA BERN(11) /  13.40286404 4168392E0      /
+      DATA FIRST /.TRUE./
+C***FIRST EXECUTABLE STATEMENT  C9LGMC
+      IF (FIRST) THEN
+         NTERM = -0.30*LOG(R1MACH(3))
+         BOUND = 0.1170*NTERM*(0.1*R1MACH(3))**(-1./(2*NTERM-1))
+         XBIG = 1.0/SQRT(R1MACH(3))
+         XMAX = EXP (MIN(LOG(R1MACH(2)/12.0), -LOG(12.*R1MACH(1))) )
+      ENDIF
+      FIRST = .FALSE.
+C
+      Z = ZIN
+      X = REAL (Z)
+      Y = AIMAG(Z)
+      CABSZ = ABS(Z)
+C
+      IF (X .LT. 0.0 .AND. ABS(Y) .LT. BOUND) CALL XERMSG ('SLATEC',
+     +   'C9LGMC', 'NOT VALID FOR NEGATIVE REAL(Z) AND SMALL ' //
+     +   'ABS(AIMAG(Z))', 2, 2)
+      IF (CABSZ .LT. BOUND) CALL XERMSG ('SLATEC', 'C9LGMC',
+     +   'NOT VALID FOR SMALL ABS(Z)', 3, 2)
+C
+      IF (CABSZ.GE.XMAX) GO TO 50
+C
+      IF (CABSZ.GE.XBIG) C9LGMC = 1.0/(12.0*Z)
+      IF (CABSZ.GE.XBIG) RETURN
+C
+      Z2INV = 1.0/Z**2
+      C9LGMC = (0.0, 0.0)
+      DO 40 I=1,NTERM
+        NDX = NTERM + 1 - I
+        C9LGMC = BERN(NDX) + C9LGMC*Z2INV
+ 40   CONTINUE
+C
+      C9LGMC = C9LGMC/Z
+      RETURN
+C
+ 50   C9LGMC = (0.0, 0.0)
+      CALL XERMSG ('SLATEC', 'C9LGMC', 'Z SO BIG C9LGMC UNDERFLOWS', 1,
+     +   1)
+      RETURN
+C
+      END

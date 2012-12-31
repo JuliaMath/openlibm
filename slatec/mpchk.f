@@ -1,0 +1,66 @@
+*DECK MPCHK
+      SUBROUTINE MPCHK (I, J)
+C***BEGIN PROLOGUE  MPCHK
+C***SUBSIDIARY
+C***PURPOSE  Subsidiary to DQDOTA and DQDOTI
+C***LIBRARY   SLATEC
+C***TYPE      ALL (MPCHK-A)
+C***AUTHOR  (UNKNOWN)
+C***DESCRIPTION
+C
+C  Checks legality of B, T, M, MXR and LUN which should be set
+C  in COMMON. The condition on MXR (the dimension of the EP arrays)
+C  is that  MXR .GE. (I*T + J)
+C
+C***SEE ALSO  DQDOTA, DQDOTI, MPBLAS
+C***ROUTINES CALLED  I1MACH, MPERR
+C***COMMON BLOCKS    MPCOM
+C***REVISION HISTORY  (YYMMDD)
+C   791001  DATE WRITTEN
+C   ??????  Modified for use with BLAS.  Blank COMMON changed to named
+C           COMMON.  R given dimension 12.
+C   891009  Removed unreferenced statement label.  (WRB)
+C   891009  REVISION DATE from Version 3.2
+C   891214  Prologue converted to Version 4.0 format.  (BAB)
+C   900402  Added TYPE section.  (WRB)
+C   930124  Increased Array size in MPCON for SUN -r8.  (RWC)
+C***END PROLOGUE  MPCHK
+      COMMON /MPCOM/ B, T, M, LUN, MXR, R(30)
+      INTEGER B, T, R
+C***FIRST EXECUTABLE STATEMENT  MPCHK
+      LUN = I1MACH(4)
+C NOW CHECK LEGALITY OF B, T AND M
+      IF (B.GT.1) GO TO 40
+      WRITE (LUN, 30) B
+   30 FORMAT (' *** B =', I10, ' ILLEGAL IN CALL TO MPCHK,'/
+     1 ' PERHAPS NOT SET BEFORE CALL TO AN MP ROUTINE ***')
+      CALL MPERR
+   40 IF (T.GT.1) GO TO 60
+      WRITE (LUN, 50) T
+   50 FORMAT (' *** T =', I10, ' ILLEGAL IN CALL TO MPCHK,'/
+     1 ' PERHAPS NOT SET BEFORE CALL TO AN MP ROUTINE ***')
+      CALL MPERR
+   60 IF (M.GT.T) GO TO 80
+      WRITE (LUN, 70)
+   70 FORMAT (' *** M .LE. T IN CALL TO MPCHK,'/
+     1 ' PERHAPS NOT SET BEFORE CALL TO AN MP ROUTINE ***')
+      CALL MPERR
+C 8*B*B-1 SHOULD BE REPRESENTABLE, IF NOT WILL OVERFLOW
+C AND MAY BECOME NEGATIVE, SO CHECK FOR THIS
+   80 IB = 4*B*B - 1
+      IF ((IB.GT.0).AND.((2*IB+1).GT.0)) GO TO 100
+      WRITE (LUN, 90)
+   90 FORMAT (' *** B TOO LARGE IN CALL TO MPCHK ***')
+      CALL MPERR
+C CHECK THAT SPACE IN COMMON IS SUFFICIENT
+  100 MX = I*T + J
+      IF (MXR.GE.MX) RETURN
+C HERE COMMON IS TOO SMALL, SO GIVE ERROR MESSAGE.
+      WRITE (LUN, 110) I, J, MX, MXR, T
+  110 FORMAT (' *** MXR TOO SMALL OR NOT SET TO DIM(R) BEFORE CALL',
+     1 ' TO AN MP ROUTINE *** ' /
+     2 ' *** MXR SHOULD BE AT LEAST', I3, '*T +', I4, ' =', I6, '  ***'
+     3 / ' *** ACTUALLY MXR =', I10, ', AND T =', I10, '  ***')
+      CALL MPERR
+      RETURN
+      END

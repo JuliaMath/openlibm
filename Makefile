@@ -1,7 +1,7 @@
 OPENLIBM_HOME=$(abspath .)
 include ./Make.inc
 
-SUBDIRS = src ld80 $(ARCH) bsdsrc amos Faddeeva
+SUBDIRS = src ld80 $(ARCH) bsdsrc
 
 define INC_template
 TEST=test
@@ -23,6 +23,7 @@ OBJS =  $(patsubst %.f,%.f.o,\
 
 all: libopenlibm.a libopenlibm.$(SHLIB_EXT) 
 	$(MAKE) -C test
+	$(MAKE) -f Makefile.extras
 libopenlibm.a: $(OBJS)  
 	$(AR) -rcs libopenlibm.a $(OBJS)
 libopenlibm.$(SHLIB_EXT): $(OBJS)
@@ -30,4 +31,5 @@ libopenlibm.$(SHLIB_EXT): $(OBJS)
 
 distclean:
 	rm -f $(OBJS) *.a *.$(SHLIB_EXT)
+	$(MAKE) -f Makefile.extras distclean
 	$(MAKE) -C test clean

@@ -1,0 +1,10 @@
+16Jul94 ehg@research.att.com
+rd.f	fixed comment for "E(K) =";  "RD(3" should have been "RD(0".
+	Thanks to Richard Chen for pointing this out.
+
+Thu Nov 18 10:16:30 EST 1999 mcmahan@cs.utk.edu
+sgeir.f	fixed error in driver routine sgeir.f on line 169 which said :
+	        IF (XNORM.NE.0.0) THEN
+	instead of :
+	        IF (XNORM.EQ.0.0) THEN
+	Thanks to Eric Thiebaut for pointing this out.

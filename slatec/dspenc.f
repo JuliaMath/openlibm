@@ -1,0 +1,140 @@
+*DECK DSPENC
+      DOUBLE PRECISION FUNCTION DSPENC (X)
+C***BEGIN PROLOGUE  DSPENC
+C***PURPOSE  Compute a form of Spence's integral due to K. Mitchell.
+C***LIBRARY   SLATEC (FNLIB)
+C***CATEGORY  C5
+C***TYPE      DOUBLE PRECISION (SPENC-S, DSPENC-D)
+C***KEYWORDS  FNLIB, SPECIAL FUNCTIONS, SPENCE'S INTEGRAL
+C***AUTHOR  Fullerton, W., (LANL)
+C***DESCRIPTION
+C
+C DSPENC(X) calculates the double precision Spence's integral
+C for double precision argument X.  Spence's function defined by
+C        integral from 0 to X of  -LOG(1-Y)/Y  DY.
+C For ABS(X) .LE. 1, the uniformly convergent expansion
+C        DSPENC = sum K=1,infinity  X**K / K**2     is valid.
+C This is a form of Spence's integral due to K. Mitchell which differs
+C from the definition in the NBS Handbook of Mathematical Functions.
+C
+C Spence's function can be used to evaluate much more general integral
+C forms.  For example,
+C        integral from 0 to Z of  LOG(A*X+B)/(C*X+D)  DX  =
+C             LOG(ABS(B-A*D/C))*LOG(ABS(A*(C*X+D)/(A*D-B*C)))/C
+C             - DSPENC (A*(C*Z+D)/(A*D-B*C)) / C.
+C
+C Ref -- K. Mitchell, Philosophical Magazine, 40, p.351 (1949).
+C        Stegun and Abromowitz, AMS 55, p.1004.
+C
+C
+C Series for SPEN       on the interval  0.          to  5.00000E-01
+C                                        with weighted error   4.74E-32
+C                                         log weighted error  31.32
+C                               significant figures required  30.37
+C                                    decimal places required  32.11
+C
+C***REFERENCES  (NONE)
+C***ROUTINES CALLED  D1MACH, DCSEVL, INITDS
+C***REVISION HISTORY  (YYMMDD)
+C   780201  DATE WRITTEN
+C   890531  Changed all specific intrinsics to generic.  (WRB)
+C   891115  Corrected third argument in reference to INITDS.  (WRB)
+C   891115  REVISION DATE from Version 3.2
+C   891214  Prologue converted to Version 4.0 format.  (BAB)
+C***END PROLOGUE  DSPENC
+      DOUBLE PRECISION X, SPENCS(38), ALN, PI26, XBIG, D1MACH, DCSEVL
+      LOGICAL FIRST
+      SAVE SPENCS, PI26, NSPENC, XBIG, FIRST
+      DATA SPENCS(  1) / +.1527365598 8924058729 4668491002 8 D+0      /
+      DATA SPENCS(  2) / +.8169658058 0510144035 0183818527 1 D-1      /
+      DATA SPENCS(  3) / +.5814157140 7787308729 7735064118 2 D-2      /
+      DATA SPENCS(  4) / +.5371619814 5415275422 4788900531 9 D-3      /
+      DATA SPENCS(  5) / +.5724704675 1858262332 1060305478 2 D-4      /
+      DATA SPENCS(  6) / +.6674546121 6493363436 0783543858 9 D-5      /
+      DATA SPENCS(  7) / +.8276467339 7156769815 8439168901 1 D-6      /
+      DATA SPENCS(  8) / +.1073315673 0306789512 7000587335 4 D-6      /
+      DATA SPENCS(  9) / +.1440077294 3032394023 3459033151 3 D-7      /
+      DATA SPENCS( 10) / +.1984442029 9659063678 9887713960 8 D-8      /
+      DATA SPENCS( 11) / +.2794005822 1636387202 0199482161 5 D-9      /
+      DATA SPENCS( 12) / +.4003991310 8833118230 7258044590 8 D-10     /
+      DATA SPENCS( 13) / +.5823462892 0446384713 6813583575 7 D-11     /
+      DATA SPENCS( 14) / +.8576708692 6386892780 9791477122 4 D-12     /
+      DATA SPENCS( 15) / +.1276862586 2801930459 8948303343 3 D-12     /
+      DATA SPENCS( 16) / +.1918826209 0425170811 6238041606 2 D-13     /
+      DATA SPENCS( 17) / +.2907319206 9771381777 9579971967 3 D-14     /
+      DATA SPENCS( 18) / +.4437112685 2767804625 5747364174 5 D-15     /
+      DATA SPENCS( 19) / +.6815727787 4145995278 6735913560 7 D-16     /
+      DATA SPENCS( 20) / +.1053017386 0155744295 4701941664 4 D-16     /
+      DATA SPENCS( 21) / +.1635389806 7523771000 5182173457 0 D-17     /
+      DATA SPENCS( 22) / +.2551852874 9404639323 1090164258 1 D-18     /
+      DATA SPENCS( 23) / +.3999020621 9993601127 7047037951 9 D-19     /
+      DATA SPENCS( 24) / +.6291501645 2168118765 1414917119 9 D-20     /
+      DATA SPENCS( 25) / +.9933827435 6756776438 0388775253 3 D-21     /
+      DATA SPENCS( 26) / +.1573679570 7499648167 2176380586 6 D-21     /
+      DATA SPENCS( 27) / +.2500595316 8494761293 6927095466 6 D-22     /
+      DATA SPENCS( 28) / +.3984740918 3838111392 1066325333 3 D-23     /
+      DATA SPENCS( 29) / +.6366473210 0828438926 9132629333 3 D-24     /
+      DATA SPENCS( 30) / +.1019674287 2396783670 7706197333 3 D-24     /
+      DATA SPENCS( 31) / +.1636881058 9135188411 1107413333 3 D-25     /
+      DATA SPENCS( 32) / +.2633310439 4176501173 4527999999 9 D-26     /
+      DATA SPENCS( 33) / +.4244811560 1239768172 2436266666 6 D-27     /
+      DATA SPENCS( 34) / +.6855411983 6800529168 2474666666 6 D-28     /
+      DATA SPENCS( 35) / +.1109122433 4380564340 1898666666 6 D-28     /
+      DATA SPENCS( 36) / +.1797431304 9998914573 6533333333 3 D-29     /
+      DATA SPENCS( 37) / +.2917505845 9760951732 9066666666 6 D-30     /
+      DATA SPENCS( 38) / +.4742646808 9286710613 3333333333 3 D-31     /
+      DATA PI26 / +1.644934066 8482264364 7241516664 6025189219 D0 /
+      DATA FIRST /.TRUE./
+C***FIRST EXECUTABLE STATEMENT  DSPENC
+      IF (FIRST) THEN
+         NSPENC = INITDS (SPENCS, 38, 0.1*REAL(D1MACH(3)))
+         XBIG = 1.0D0/D1MACH(3)
+      ENDIF
+      FIRST = .FALSE.
+C
+      IF (X.GT.2.0D0) GO TO 60
+      IF (X.GT.1.0D0) GO TO 50
+      IF (X.GT.0.5D0) GO TO 40
+      IF (X.GE.0.0D0) GO TO 30
+      IF (X.GT.(-1.D0)) GO TO 20
+C
+C HERE IF X .LE. -1.0
+C
+      ALN = LOG(1.0D0-X)
+      DSPENC = -PI26 - 0.5D0*ALN*(2.0D0*LOG(-X)-ALN)
+      IF (X.GT.(-XBIG)) DSPENC = DSPENC
+     1  + (1.D0 + DCSEVL (4.D0/(1.D0-X)-1.D0, SPENCS, NSPENC))/(1.D0-X)
+      RETURN
+C
+C -1.0 .LT. X .LT. 0.0
+C
+ 20   DSPENC = -0.5D0*LOG(1.0D0-X)**2
+     1  - X*(1.D0+DCSEVL(4.D0*X/(X-1.D0)-1.D0, SPENCS, NSPENC))/(X-1.D0)
+      RETURN
+C
+C 0.0 .LE. X .LE. 0.5
+C
+ 30   DSPENC = X*(1.D0 + DCSEVL (4.D0*X-1.D0, SPENCS, NSPENC))
+      RETURN
+C
+C 0.5 .LT. X .LE. 1.0
+C
+ 40   DSPENC = PI26
+      IF (X.NE.1.D0) DSPENC = PI26 - LOG(X)*LOG(1.0D0-X)
+     1  - (1.D0-X)*(1.D0+DCSEVL(4.D0*(1.D0-X)-1.D0, SPENCS, NSPENC))
+      RETURN
+C
+C 1.0 .LT. X .LE. 2.0
+C
+ 50   DSPENC = PI26 - 0.5D0*LOG(X)*LOG((X-1.D0)**2/X)
+     1  + (X-1.D0)*(1.D0+DCSEVL(4.D0*(X-1.D0)/X-1.D0, SPENCS, NSPENC))/X
+      RETURN
+C
+C X .GT. 2.0
+C
+ 60   DSPENC = 2.0D0*PI26 - 0.5D0*LOG(X)**2
+      IF (X.LT.XBIG) DSPENC = DSPENC
+     1  - (1.D0 + DCSEVL (4.D0/X-1.D0, SPENCS, NSPENC))/X
+      RETURN
+C
+      END

@@ -1,0 +1,25 @@
+*DECK INDXA
+      SUBROUTINE INDXA (I, IR, IDXA, NA)
+C***BEGIN PROLOGUE  INDXA
+C***SUBSIDIARY
+C***PURPOSE  Subsidiary to BLKTRI
+C***LIBRARY   SLATEC
+C***TYPE      INTEGER (INDXA-I)
+C***AUTHOR  (UNKNOWN)
+C***SEE ALSO  BLKTRI
+C***ROUTINES CALLED  (NONE)
+C***COMMON BLOCKS    CBLKT
+C***REVISION HISTORY  (YYMMDD)
+C   801001  DATE WRITTEN
+C   891214  Prologue converted to Version 4.0 format.  (BAB)
+C   900402  Added TYPE section.  (WRB)
+C***END PROLOGUE  INDXA
+      COMMON /CBLKT/  NPP        ,K          ,EPS        ,CNV        ,
+     1                NM         ,NCMPLX     ,IK
+C***FIRST EXECUTABLE STATEMENT  INDXA
+      NA = 2**IR
+      IDXA = I-NA+1
+      IF (I-NM) 102,102,101
+  101 NA = 0
+  102 RETURN
+      END

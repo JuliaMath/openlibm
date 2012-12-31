@@ -1,0 +1,30 @@
+*DECK PGSF
+      FUNCTION PGSF (X, IZ, C, A, BH)
+C***BEGIN PROLOGUE  PGSF
+C***SUBSIDIARY
+C***PURPOSE  Subsidiary to CBLKTR
+C***LIBRARY   SLATEC
+C***TYPE      SINGLE PRECISION (PGSF-S)
+C***AUTHOR  (UNKNOWN)
+C***SEE ALSO  CBLKTR
+C***ROUTINES CALLED  (NONE)
+C***REVISION HISTORY  (YYMMDD)
+C   801001  DATE WRITTEN
+C   891214  Prologue converted to Version 4.0 format.  (BAB)
+C   900402  Added TYPE section.  (WRB)
+C***END PROLOGUE  PGSF
+      DIMENSION       A(*)       ,C(*)       ,BH(*)
+C***FIRST EXECUTABLE STATEMENT  PGSF
+      FSG = 1.
+      HSG = 1.
+      DO 101 J=1,IZ
+         DD = 1./(X-BH(J))
+         FSG = FSG*A(J)*DD
+         HSG = HSG*C(J)*DD
+  101 CONTINUE
+      IF (MOD(IZ,2)) 103,102,103
+  102 PGSF = 1.-FSG-HSG
+      RETURN
+  103 PGSF = 1.+FSG+HSG
+      RETURN
+      END

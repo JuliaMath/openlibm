@@ -1,0 +1,330 @@
+*DECK SPELI4
+      SUBROUTINE SPELI4 (IORDER, A, B, M, MBDCND, BDA, ALPHA, BDB, BETA,
+     +   C, D, N, NBDCND, BDC, BDD, COFX, AN, BN, CN, DN, UN, ZN, AM,
+     +   BM, CM, DM, UM, ZM, GRHS, USOL, IDMN, W, PERTRB, IERROR)
+C***BEGIN PROLOGUE  SPELI4
+C***SUBSIDIARY
+C***PURPOSE  Subsidiary to SEPX4
+C***LIBRARY   SLATEC
+C***TYPE      SINGLE PRECISION (SPELI4-S)
+C***AUTHOR  (UNKNOWN)
+C***DESCRIPTION
+C
+C     SPELI4 sets up vectors and arrays for input to BLKTRI
+C     and computes a second order solution in USOL.  A return jump to
+C     SEPX4 occurs if IORDER=2.  If IORDER=4 a fourth order
+C     solution is generated in USOL.
+C
+C***SEE ALSO  SEPX4
+C***ROUTINES CALLED  CHKSN4, DEFE4, GENBUN, MINSO4, ORTHO4, TRIS4
+C***COMMON BLOCKS    SPL4
+C***REVISION HISTORY  (YYMMDD)
+C   801001  DATE WRITTEN
+C   890531  Changed all specific intrinsics to generic.  (WRB)
+C   891009  Removed unreferenced variable.  (WRB)
+C   891214  Prologue converted to Version 4.0 format.  (BAB)
+C   900402  Added TYPE section.  (WRB)
+C***END PROLOGUE  SPELI4
+C
+      DIMENSION       BDA(*)     ,BDB(*)     ,BDC(*)     ,BDD(*)     ,
+     1                W(*)
+      DIMENSION       GRHS(IDMN,*)           ,USOL(IDMN,*)
+      DIMENSION       AN(*)      ,BN(*)      ,CN(*)      ,DN(*)      ,
+     1                UN(*)      ,ZN(*)
+      DIMENSION       AM(*)      ,BM(*)      ,CM(*)      ,DM(*)      ,
+     1                UM(*)      ,ZM(*)
+      COMMON /SPL4/   KSWX       ,KSWY       ,K          ,L          ,
+     1                AIT        ,BIT        ,CIT        ,DIT        ,
+     2                MIT        ,NIT        ,IS         ,MS         ,
+     3                JS         ,NS         ,DLX        ,DLY        ,
+     4                TDLX3      ,TDLY3      ,DLX4       ,DLY4
+      LOGICAL         SINGLR
+      EXTERNAL COFX
+C***FIRST EXECUTABLE STATEMENT  SPELI4
+      KSWX = MBDCND+1
+      KSWY = NBDCND+1
+      K = M+1
+      L = N+1
+      AIT = A
+      BIT = B
+      CIT = C
+      DIT = D
+      DLY=(DIT-CIT)/N
+C
+C     SET RIGHT HAND SIDE VALUES FROM GRHS IN USOL ON THE INTERIOR
+C     AND NON-SPECIFIED BOUNDARIES.
+C
+      DO  20 I=2,M
+         DO  10 J=2,N
+      USOL(I,J)=DLY**2*GRHS(I,J)
+   10    CONTINUE
+   20 CONTINUE
+      IF (KSWX.EQ.2 .OR. KSWX.EQ.3) GO TO  40
+      DO  30 J=2,N
+      USOL(1,J)=DLY**2*GRHS(1,J)
+   30 CONTINUE
+   40 CONTINUE
+      IF (KSWX.EQ.2 .OR. KSWX.EQ.5) GO TO  60
+      DO  50 J=2,N
+      USOL(K,J)=DLY**2*GRHS(K,J)
+   50 CONTINUE
+   60 CONTINUE
+      IF (KSWY.EQ.2 .OR. KSWY.EQ.3) GO TO  80
+      DO  70 I=2,M
+      USOL(I,1)=DLY**2*GRHS(I,1)
+   70 CONTINUE
+   80 CONTINUE
+      IF (KSWY.EQ.2 .OR. KSWY.EQ.5) GO TO 100
+      DO  90 I=2,M
+      USOL(I,L)=DLY**2*GRHS(I,L)
+   90 CONTINUE
+  100 CONTINUE
+      IF (KSWX.NE.2 .AND. KSWX.NE.3 .AND. KSWY.NE.2 .AND. KSWY.NE.3)
+     1USOL(1,1)=DLY**2*GRHS(1,1)
+      IF (KSWX.NE.2 .AND. KSWX.NE.5 .AND. KSWY.NE.2 .AND. KSWY.NE.3)
+     1USOL(K,1)=DLY**2*GRHS(K,1)
+      IF (KSWX.NE.2 .AND. KSWX.NE.3 .AND. KSWY.NE.2 .AND. KSWY.NE.5)
+     1USOL(1,L)=DLY**2*GRHS(1,L)
+      IF (KSWX.NE.2 .AND. KSWX.NE.5 .AND. KSWY.NE.2 .AND. KSWY.NE.5)
+     1USOL(K,L)=DLY**2*GRHS(K,L)
+C
+C     SET SWITCHES FOR PERIODIC OR NON-PERIODIC BOUNDARIES
+C
+      MP=1
+      IF(KSWX.EQ.1) MP=0
+      NP=NBDCND
+C
+C     SET DLX,DLY AND SIZE OF BLOCK TRI-DIAGONAL SYSTEM GENERATED
+C     IN NINT,MINT
+C
+      DLX = (BIT-AIT)/M
+      MIT = K-1
+      IF (KSWX .EQ. 2) MIT = K-2
+      IF (KSWX .EQ. 4) MIT = K
+      DLY = (DIT-CIT)/N
+      NIT = L-1
+      IF (KSWY .EQ. 2) NIT = L-2
+      IF (KSWY .EQ. 4) NIT = L
+      TDLX3 = 2.0*DLX**3
+      DLX4 = DLX**4
+      TDLY3 = 2.0*DLY**3
+      DLY4 = DLY**4
+C
+C     SET SUBSCRIPT LIMITS FOR PORTION OF ARRAY TO INPUT TO BLKTRI
+C
+      IS = 1
+      JS = 1
+      IF (KSWX.EQ.2 .OR. KSWX.EQ.3) IS = 2
+      IF (KSWY.EQ.2 .OR. KSWY.EQ.3) JS = 2
+      NS = NIT+JS-1
+      MS = MIT+IS-1
+C
+C     SET X - DIRECTION
+C
+      DO 110 I=1,MIT
+         XI = AIT+(IS+I-2)*DLX
+         CALL COFX (XI,AI,BI,CI)
+         AXI = (AI/DLX-0.5*BI)/DLX
+         BXI = -2.*AI/DLX**2+CI
+         CXI = (AI/DLX+0.5*BI)/DLX
+      AM(I)=DLY**2*AXI
+      BM(I)=DLY**2*BXI
+      CM(I)=DLY**2*CXI
+  110 CONTINUE
+C
+C     SET Y DIRECTION
+C
+      DO 120 J=1,NIT
+      DYJ=1.0
+      EYJ=-2.0
+      FYJ=1.0
+         AN(J) = DYJ
+         BN(J) = EYJ
+         CN(J) = FYJ
+  120 CONTINUE
+C
+C     ADJUST EDGES IN X DIRECTION UNLESS PERIODIC
+C
+      AX1 = AM(1)
+      CXM = CM(MIT)
+      GO TO (170,130,150,160,140),KSWX
+C
+C     DIRICHLET-DIRICHLET IN X DIRECTION
+C
+  130 AM(1) = 0.0
+      CM(MIT) = 0.0
+      GO TO 170
+C
+C     MIXED-DIRICHLET IN X DIRECTION
+C
+  140 AM(1) = 0.0
+      BM(1) = BM(1)+2.*ALPHA*DLX*AX1
+      CM(1) = CM(1)+AX1
+      CM(MIT) = 0.0
+      GO TO 170
+C
+C     DIRICHLET-MIXED IN X DIRECTION
+C
+  150 AM(1) = 0.0
+      AM(MIT) = AM(MIT)+CXM
+      BM(MIT) = BM(MIT)-2.*BETA*DLX*CXM
+      CM(MIT) = 0.0
+      GO TO 170
+C
+C     MIXED - MIXED IN X DIRECTION
+C
+  160 CONTINUE
+      AM(1) = 0.0
+      BM(1) = BM(1)+2.*DLX*ALPHA*AX1
+      CM(1) = CM(1)+AX1
+      AM(MIT) = AM(MIT)+CXM
+      BM(MIT) = BM(MIT)-2.*DLX*BETA*CXM
+      CM(MIT) = 0.0
+  170 CONTINUE
+C
+C     ADJUST IN Y DIRECTION UNLESS PERIODIC
+C
+      DY1 = AN(1)
+      FYN = CN(NIT)
+      GAMA=0.0
+      XNU=0.0
+      GO TO (220,180,200,210,190),KSWY
+C
+C     DIRICHLET-DIRICHLET IN Y DIRECTION
+C
+  180 CONTINUE
+      AN(1) = 0.0
+      CN(NIT) = 0.0
+      GO TO 220
+C
+C     MIXED-DIRICHLET IN Y DIRECTION
+C
+  190 CONTINUE
+      AN(1) = 0.0
+      BN(1) = BN(1)+2.*DLY*GAMA*DY1
+      CN(1) = CN(1)+DY1
+      CN(NIT) = 0.0
+      GO TO 220
+C
+C     DIRICHLET-MIXED IN Y DIRECTION
+C
+  200 AN(1) = 0.0
+      AN(NIT) = AN(NIT)+FYN
+      BN(NIT) = BN(NIT)-2.*DLY*XNU*FYN
+      CN(NIT) = 0.0
+      GO TO 220
+C
+C     MIXED - MIXED DIRECTION IN Y DIRECTION
+C
+  210 CONTINUE
+      AN(1) = 0.0
+      BN(1) = BN(1)+2.*DLY*GAMA*DY1
+      CN(1) = CN(1)+DY1
+      AN(NIT) = AN(NIT)+FYN
+      BN(NIT) = BN(NIT)-2.0*DLY*XNU*FYN
+      CN(NIT) = 0.0
+  220 IF (KSWX .EQ. 1) GO TO 270
+C
+C     ADJUST USOL ALONG X EDGE
+C
+      DO 260 J=JS,NS
+         IF (KSWX.NE.2 .AND. KSWX.NE.3) GO TO 230
+         USOL(IS,J) = USOL(IS,J)-AX1*USOL(1,J)
+         GO TO 240
+  230    USOL(IS,J) = USOL(IS,J)+2.0*DLX*AX1*BDA(J)
+  240    IF (KSWX.NE.2 .AND. KSWX.NE.5) GO TO 250
+         USOL(MS,J) = USOL(MS,J)-CXM*USOL(K,J)
+         GO TO 260
+  250    USOL(MS,J) = USOL(MS,J)-2.0*DLX*CXM*BDB(J)
+  260 CONTINUE
+  270 IF (KSWY .EQ. 1) GO TO 320
+C
+C     ADJUST USOL ALONG Y EDGE
+C
+      DO 310 I=IS,MS
+         IF (KSWY.NE.2 .AND. KSWY.NE.3) GO TO 280
+         USOL(I,JS) = USOL(I,JS)-DY1*USOL(I,1)
+         GO TO 290
+  280    USOL(I,JS) = USOL(I,JS)+2.0*DLY*DY1*BDC(I)
+  290    IF (KSWY.NE.2 .AND. KSWY.NE.5) GO TO 300
+         USOL(I,NS) = USOL(I,NS)-FYN*USOL(I,L)
+         GO TO 310
+  300    USOL(I,NS) = USOL(I,NS)-2.0*DLY*FYN*BDD(I)
+  310 CONTINUE
+  320 CONTINUE
+C
+C     SAVE ADJUSTED EDGES IN GRHS IF IORDER=4
+C
+      IF (IORDER .NE. 4) GO TO 350
+      DO 330 J=JS,NS
+         GRHS(IS,J) = USOL(IS,J)
+         GRHS(MS,J) = USOL(MS,J)
+  330 CONTINUE
+      DO 340 I=IS,MS
+         GRHS(I,JS) = USOL(I,JS)
+         GRHS(I,NS) = USOL(I,NS)
+  340 CONTINUE
+  350 CONTINUE
+      IORD = IORDER
+      PERTRB = 0.0
+C
+C     CHECK IF OPERATOR IS SINGULAR
+C
+      CALL CHKSN4(MBDCND,NBDCND,ALPHA,BETA,COFX,SINGLR)
+C
+C     COMPUTE NON-ZERO EIGENVECTOR IN NULL SPACE OF TRANSPOSE
+C     IF SINGULAR
+C
+      IF (SINGLR) CALL TRIS4 (MIT,AM,BM,CM,DM,UM,ZM)
+      IF (SINGLR) CALL TRIS4 (NIT,AN,BN,CN,DN,UN,ZN)
+C
+C     ADJUST RIGHT HAND SIDE IF NECESSARY
+C
+  360 CONTINUE
+      IF (SINGLR) CALL ORTHO4 (USOL,IDMN,ZN,ZM,PERTRB)
+C
+C     COMPUTE SOLUTION
+C
+C     SAVE ADJUSTED RIGHT HAND SIDE IN GRHS
+      DO 444 J=JS,NS
+      DO 444 I=IS,MS
+      GRHS(I,J)=USOL(I,J)
+  444 CONTINUE
+      CALL GENBUN(NP,NIT,MP,MIT,AM,BM,CM,IDMN,USOL(IS,JS),IEROR,W)
+C     CHECK IF ERROR DETECTED IN POIS
+C     THIS CAN ONLY CORRESPOND TO IERROR=12
+      IF(IEROR.EQ.0) GO TO 224
+C     SET ERROR FLAG IF IMPROPER COEFFICIENTS INPUT TO POIS
+      IERROR=12
+      RETURN
+  224 CONTINUE
+      IF (IERROR .NE. 0) RETURN
+C
+C     SET PERIODIC BOUNDARIES IF NECESSARY
+C
+      IF (KSWX .NE. 1) GO TO 380
+      DO 370 J=1,L
+         USOL(K,J) = USOL(1,J)
+  370 CONTINUE
+  380 IF (KSWY .NE. 1) GO TO 400
+      DO 390 I=1,K
+         USOL(I,L) = USOL(I,1)
+  390 CONTINUE
+  400 CONTINUE
+C
+C     MINIMIZE SOLUTION WITH RESPECT TO WEIGHTED LEAST SQUARES
+C     NORM IF OPERATOR IS SINGULAR
+C
+      IF (SINGLR) CALL MINSO4 (USOL,IDMN,ZN,ZM,PRTRB)
+C
+C     RETURN IF DEFERRED CORRECTIONS AND A FOURTH ORDER SOLUTION ARE
+C     NOT FLAGGED
+C
+      IF (IORD .EQ. 2) RETURN
+      IORD = 2
+C
+C     COMPUTE NEW RIGHT HAND SIDE FOR FOURTH ORDER SOLUTION
+C
+      CALL DEFE4(COFX,IDMN,USOL,GRHS)
+      GO TO 360
+      END

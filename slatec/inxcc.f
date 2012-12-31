@@ -1,0 +1,25 @@
+*DECK INXCC
+      SUBROUTINE INXCC (I, IR, IDXC, NC)
+C***BEGIN PROLOGUE  INXCC
+C***SUBSIDIARY
+C***PURPOSE  Subsidiary to CBLKTR
+C***LIBRARY   SLATEC
+C***TYPE      INTEGER (INXCC-I)
+C***AUTHOR  (UNKNOWN)
+C***SEE ALSO  CBLKTR
+C***ROUTINES CALLED  (NONE)
+C***COMMON BLOCKS    CCBLK
+C***REVISION HISTORY  (YYMMDD)
+C   801001  DATE WRITTEN
+C   891214  Prologue converted to Version 4.0 format.  (BAB)
+C   900402  Added TYPE section.  (WRB)
+C***END PROLOGUE  INXCC
+      COMMON /CCBLK/  NPP        ,K          ,EPS        ,CNV        ,
+     1                NM         ,NCMPLX     ,IK
+C***FIRST EXECUTABLE STATEMENT  INXCC
+      NC = 2**IR
+      IDXC = I
+      IF (IDXC+NC-1-NM) 102,102,101
+  101 NC = 0
+  102 RETURN
+      END

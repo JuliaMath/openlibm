@@ -1,0 +1,24 @@
+*DECK PPSGF
+      FUNCTION PPSGF (X, IZ, C, A, BH)
+C***BEGIN PROLOGUE  PPSGF
+C***SUBSIDIARY
+C***PURPOSE  Subsidiary to BLKTRI
+C***LIBRARY   SLATEC
+C***TYPE      SINGLE PRECISION (PPSGF-S)
+C***AUTHOR  (UNKNOWN)
+C***SEE ALSO  BLKTRI
+C***ROUTINES CALLED  (NONE)
+C***REVISION HISTORY  (YYMMDD)
+C   801001  DATE WRITTEN
+C   891214  Prologue converted to Version 4.0 format.  (BAB)
+C   900402  Added TYPE section.  (WRB)
+C***END PROLOGUE  PPSGF
+      DIMENSION       A(*)       ,C(*)       ,BH(*)
+C***FIRST EXECUTABLE STATEMENT  PPSGF
+      SUM = 0.
+      DO 101 J=1,IZ
+         SUM = SUM-1./(X-BH(J))**2
+  101 CONTINUE
+      PPSGF = SUM
+      RETURN
+      END

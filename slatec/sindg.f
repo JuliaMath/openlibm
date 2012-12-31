@@ -1,0 +1,37 @@
+*DECK SINDG
+      FUNCTION SINDG (X)
+C***BEGIN PROLOGUE  SINDG
+C***PURPOSE  Compute the sine of an argument in degrees.
+C***LIBRARY   SLATEC (FNLIB)
+C***CATEGORY  C4A
+C***TYPE      SINGLE PRECISION (SINDG-S, DSINDG-D)
+C***KEYWORDS  DEGREES, ELEMENTARY FUNCTIONS, FNLIB, SINE, TRIGONOMETRIC
+C***AUTHOR  Fullerton, W., (LANL)
+C***DESCRIPTION
+C
+C SINDG(X) evaluates the single precision sine of X where
+C X is in degrees.
+C
+C***REFERENCES  (NONE)
+C***ROUTINES CALLED  (NONE)
+C***REVISION HISTORY  (YYMMDD)
+C   770601  DATE WRITTEN
+C   890531  Changed all specific intrinsics to generic.  (WRB)
+C   890531  REVISION DATE from Version 3.2
+C   891214  Prologue converted to Version 4.0 format.  (BAB)
+C***END PROLOGUE  SINDG
+C JUNE 1977 EDITION.   W. FULLERTON, C3, LOS ALAMOS SCIENTIFIC LAB.
+      SAVE RADDEG
+      DATA RADDEG / .017453292519943296E0 /
+C
+C***FIRST EXECUTABLE STATEMENT  SINDG
+      SINDG = SIN (RADDEG*X)
+C
+      IF (MOD(X,90.).NE.0.) RETURN
+      N = ABS(X)/90.0 + 0.5
+      N = MOD (N, 2)
+      IF (N.EQ.0) SINDG = 0.
+      IF (N.EQ.1) SINDG = SIGN (1.0, SINDG)
+C
+      RETURN
+      END

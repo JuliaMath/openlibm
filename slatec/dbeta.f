@@ -1,0 +1,53 @@
+*DECK DBETA
+      DOUBLE PRECISION FUNCTION DBETA (A, B)
+C***BEGIN PROLOGUE  DBETA
+C***PURPOSE  Compute the complete Beta function.
+C***LIBRARY   SLATEC (FNLIB)
+C***CATEGORY  C7B
+C***TYPE      DOUBLE PRECISION (BETA-S, DBETA-D, CBETA-C)
+C***KEYWORDS  COMPLETE BETA FUNCTION, FNLIB, SPECIAL FUNCTIONS
+C***AUTHOR  Fullerton, W., (LANL)
+C***DESCRIPTION
+C
+C DBETA(A,B) calculates the double precision complete beta function
+C for double precision arguments A and B.
+C
+C***REFERENCES  (NONE)
+C***ROUTINES CALLED  D1MACH, DGAMLM, DGAMMA, DLBETA, XERMSG
+C***REVISION HISTORY  (YYMMDD)
+C   770601  DATE WRITTEN
+C   890531  Changed all specific intrinsics to generic.  (WRB)
+C   890531  REVISION DATE from Version 3.2
+C   891214  Prologue converted to Version 4.0 format.  (BAB)
+C   900315  CALLs to XERROR changed to CALLs to XERMSG.  (THJ)
+C   900727  Added EXTERNAL statement.  (WRB)
+C***END PROLOGUE  DBETA
+      DOUBLE PRECISION A, B, ALNSML, XMAX, XMIN, DLBETA, DGAMMA, D1MACH
+      LOGICAL FIRST
+      EXTERNAL DGAMMA
+      SAVE XMAX, ALNSML, FIRST
+      DATA FIRST /.TRUE./
+C***FIRST EXECUTABLE STATEMENT  DBETA
+      IF (FIRST) THEN
+         CALL DGAMLM (XMIN, XMAX)
+         ALNSML = LOG (D1MACH(1))
+      ENDIF
+      FIRST = .FALSE.
+C
+      IF (A .LE. 0.D0 .OR. B .LE. 0.D0) CALL XERMSG ('SLATEC', 'DBETA',
+     +   'BOTH ARGUMENTS MUST BE GT 0', 2, 2)
+C
+      IF (A+B.LT.XMAX) DBETA = DGAMMA(A)*DGAMMA(B)/DGAMMA(A+B)
+      IF (A+B.LT.XMAX) RETURN
+C
+      DBETA = DLBETA (A, B)
+      IF (DBETA.LT.ALNSML) GO TO 20
+      DBETA = EXP (DBETA)
+      RETURN
+C
+ 20   DBETA = 0.D0
+      CALL XERMSG ('SLATEC', 'DBETA',
+     +   'A AND/OR B SO BIG BETA UNDERFLOWS', 1, 1)
+      RETURN
+C
+      END

@@ -1,0 +1,28 @@
+*DECK CGAMMA
+      COMPLEX FUNCTION CGAMMA (Z)
+C***BEGIN PROLOGUE  CGAMMA
+C***PURPOSE  Compute the complete Gamma function.
+C***LIBRARY   SLATEC (FNLIB)
+C***CATEGORY  C7A
+C***TYPE      COMPLEX (GAMMA-S, DGAMMA-D, CGAMMA-C)
+C***KEYWORDS  COMPLETE GAMMA FUNCTION, FNLIB, SPECIAL FUNCTIONS
+C***AUTHOR  Fullerton, W., (LANL)
+C***DESCRIPTION
+C
+C CGAMMA(Z) calculates the complete gamma function for COMPLEX
+C argument Z.  This is a preliminary version that is portable
+C but not accurate.
+C
+C***REFERENCES  (NONE)
+C***ROUTINES CALLED  CLNGAM
+C***REVISION HISTORY  (YYMMDD)
+C   770701  DATE WRITTEN
+C   861211  REVISION DATE from Version 3.2
+C   891214  Prologue converted to Version 4.0 format.  (BAB)
+C***END PROLOGUE  CGAMMA
+      COMPLEX Z, CLNGAM
+C***FIRST EXECUTABLE STATEMENT  CGAMMA
+      CGAMMA = EXP (CLNGAM(Z))
+C
+      RETURN
+      END
