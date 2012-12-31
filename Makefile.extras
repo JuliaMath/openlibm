@@ -1,0 +1,33 @@
+OPENLIBM_HOME=$(abspath .)
+include ./Make.inc
+
+SUBDIRS = slatec Faddeeva
+
+define INC_template
+TEST=test
+override CUR_SRCS = $(1)_SRCS
+include $(1)/Make.files
+SRCS += $$(addprefix $(1)/,$$($(1)_SRCS))
+endef
+
+DIR=test
+
+$(foreach dir,$(SUBDIRS),$(eval $(call INC_template,$(dir))))
+
+DUPLICATE_NAMES = $(filter $(patsubst %.S,%,$($(ARCH)_SRCS)),$(patsubst %.c,%,$(src_SRCS)))
+DUPLICATE_SRCS = $(addsuffix .c,$(DUPLICATE_NAMES))
+
+OBJS =  $(patsubst %.f,%.f.o,\
+	$(patsubst %.S,%.S.o,\
+	$(patsubst %.c,%.c.o,$(filter-out $(addprefix src/,$(DUPLICATE_SRCS)),$(SRCS)))))
+
+all: libopenlibm-extras.a libopenlibm-extras.$(SHLIB_EXT) 
+	$(MAKE) -C test
+libopenlibm-extras.a: $(OBJS)  
+	$(AR) -rcs libopenlibm-extras.a $(OBJS)
+libopenlibm-extras.$(SHLIB_EXT): $(OBJS)
+	$(FC) -shared $(OBJS) $(LDFLAGS) -o libopenlibm-extras.$(SHLIB_EXT)
+
+distclean:
+	rm -f $(OBJS) *.a *.$(SHLIB_EXT)
+	$(MAKE) -C test clean
