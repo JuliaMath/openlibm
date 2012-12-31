@@ -23,7 +23,6 @@ OBJS =  $(patsubst %.f,%.f.o,\
 
 all: libopenlibm.a libopenlibm.$(SHLIB_EXT) 
 	$(MAKE) -C test
-	$(MAKE) -f Makefile.extras
 libopenlibm.a: $(OBJS)  
 	$(AR) -rcs libopenlibm.a $(OBJS)
 libopenlibm.$(SHLIB_EXT): $(OBJS)
@@ -31,5 +30,4 @@ libopenlibm.$(SHLIB_EXT): $(OBJS)
 
 distclean:
 	rm -f $(OBJS) *.a *.$(SHLIB_EXT)
-	$(MAKE) -f Makefile.extras distclean
 	$(MAKE) -C test clean

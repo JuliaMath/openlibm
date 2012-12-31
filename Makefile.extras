@@ -22,7 +22,6 @@ OBJS =  $(patsubst %.f,%.f.o,\
 	$(patsubst %.c,%.c.o,$(filter-out $(addprefix src/,$(DUPLICATE_SRCS)),$(SRCS)))))
 
 all: libopenlibm-extras.a libopenlibm-extras.$(SHLIB_EXT) 
-	$(MAKE) -C test
 libopenlibm-extras.a: $(OBJS)  
 	$(AR) -rcs libopenlibm-extras.a $(OBJS)
 libopenlibm-extras.$(SHLIB_EXT): $(OBJS)
@@ -30,4 +29,3 @@ libopenlibm-extras.$(SHLIB_EXT): $(OBJS)
 
 distclean:
 	rm -f $(OBJS) *.a *.$(SHLIB_EXT)
-	$(MAKE) -C test clean
