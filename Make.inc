@@ -9,30 +9,30 @@ FFLAGS += -O3
 USEGCC = 1
 USECLANG = 0
 
-CFLAGS += -std=c99 -Wall -O3 -I$(OPENLIBM_HOME) -I$(OPENLIBM_HOME)/include -I$(OPENLIBM_HOME)/ld80 -I$(OPENLIBM_HOME)/$(ARCH) -I$(OPENLIBM_HOME)/src -DASSEMBLER -D__BSD_VISIBLE -Wno-implicit-function-declaration
+CFLAGS_add += -std=c99 -Wall -O3 -I$(OPENLIBM_HOME) -I$(OPENLIBM_HOME)/include -I$(OPENLIBM_HOME)/ld80 -I$(OPENLIBM_HOME)/$(ARCH) -I$(OPENLIBM_HOME)/src -DASSEMBLER -D__BSD_VISIBLE -Wno-implicit-function-declaration
 
 ifeq ($(USECLANG),1)
 USEGCC = 0
 CC = clang
-CFLAGS += -fno-builtin
+CFLAGS_add += -fno-builtin
 endif
 
 ifeq ($(USEGCC),1)
 CC = gcc
-CFLAGS += -fno-gnu89-inline
+CFLAGS_add += -fno-gnu89-inline
 endif
 AR = ar
 
 default: all
 
 %.c.o: %.c
-	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
+	$(CC) $(CPPFLAGS) $(CFLAGS_add) $(CFLAGS) -c $< -o $@
 
 %.f.o: %.f
 	$(FC) $(FFLAGS) -c $< -o $@
 
 %.S.o: %.S
-	$(CC) $(filter -m% -B% -I% -D%,$(CFLAGS)) -c $< -o $@
+	$(CC) $(SFLAGS) $(filter -m% -B% -I% -D%,$(CFLAGS_add)) -c $< -o $@
 
 clean:
 	rm -fr *.o *.c.o *.S.o *~ test-double test-float test-double-system test-float-system *.dSYM
@@ -52,25 +52,28 @@ endif
 
 ifeq ($(OS), MINGW32_NT-6.1)
 OS=WINNT
-CFLAGS+=-nodefaultlibs
+endif
+#keep these if statements these separate
+ifeq ($(OS), WINNT)
+CFLAGS_add+=-nodefaultlibs
 FFLAGS+=-nodefaultlibs
 endif
 
 ifeq ($(OS), Linux)
 SHLIB_EXT = so
-CFLAGS+=-fPIC
+CFLAGS_add+=-fPIC
 FFLAGS+=-fPIC
 endif
 
 ifeq ($(OS), FreeBSD)
 SHLIB_EXT = so
-CFLAGS+=-fPIC
+CFLAGS_add+=-fPIC
 FFLAGS+=-fPIC
 endif
 
 ifeq ($(OS), Darwin)
 SHLIB_EXT = dylib
-CFLAGS+=-fPIC
+CFLAGS_add+=-fPIC
 FFLAGS+=-fPIC
 endif
 
