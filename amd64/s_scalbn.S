@@ -39,4 +39,5 @@ ENTRY(scalbn)
 	ret
 END(scalbn)
 
-	
+.globl CNAME(ldexp)
+.set   CNAME(ldexp),CNAME(scalbn)

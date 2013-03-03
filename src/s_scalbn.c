@@ -61,3 +61,5 @@ scalbn (double x, int n)
 __weak_reference(scalbn, ldexpl);
 __weak_reference(scalbn, scalbnl);
 #endif
+
+__strong_reference(scalbn, ldexp);
