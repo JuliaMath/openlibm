@@ -62,8 +62,17 @@
 
 #define _START_ENTRY	.text; .p2align 4,0x90
 
+#if defined(__linux__) || defined(__FreeBSD__) || defined(__ELF__)
 #define _ENTRY(x)	_START_ENTRY; \
 			.globl CNAME(x); .type CNAME(x),@function; CNAME(x):
+#define	END(x)		.size x, . - x
+
+#elif defined(__WIN32__)
+#define _ENTRY(x)	_START_ENTRY; \
+			.globl CNAME(x); .def CNAME(x); .scl 2; .type 32; .endef; CNAME(x):
+#define END(x) .end
+
+#endif
 
 #ifdef PROF
 #define	ALTENTRY(x)	_ENTRY(x); \
@@ -81,7 +90,6 @@
 #define	ENTRY(x)	_ENTRY(x)
 #endif
 
-#define	END(x)		.size x, . - x
 
 #define RCSID(x)	.text; .asciz x
 

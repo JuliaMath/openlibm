@@ -97,7 +97,7 @@ fegetenv(fenv_t *envp)
 int
 feholdexcept(fenv_t *envp)
 {
-	__uint32_t mxcsr;
+	uint32_t mxcsr;
 
 	__stmxcsr(&mxcsr);
 	__fnstenv(&envp->__x87);
@@ -114,8 +114,8 @@ extern inline int fesetenv(const fenv_t *__envp);
 int
 feupdateenv(const fenv_t *envp)
 {
-	__uint32_t mxcsr;
-	__uint16_t status;
+	uint32_t mxcsr;
+	uint16_t status;
 
 	__fnstsw(&status);
 	__stmxcsr(&mxcsr);
@@ -127,8 +127,8 @@ feupdateenv(const fenv_t *envp)
 int
 __feenableexcept(int mask)
 {
-	__uint32_t mxcsr, omask;
-	__uint16_t control;
+	uint32_t mxcsr, omask;
+	uint16_t control;
 
 	mask &= FE_ALL_EXCEPT;
 	__fnstcw(&control);
@@ -144,8 +144,8 @@ __feenableexcept(int mask)
 int
 __fedisableexcept(int mask)
 {
-	__uint32_t mxcsr, omask;
-	__uint16_t control;
+	uint32_t mxcsr, omask;
+	uint16_t control;
 
 	mask &= FE_ALL_EXCEPT;
 	__fnstcw(&control);

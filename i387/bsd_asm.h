@@ -81,9 +81,8 @@
 #elif defined(__WIN32__)
 #define CNAME(csym)		_##csym
 #define HIDENAME(asmsym)	.asmsym
-#define _ENTRY(x) \
-	_START_ENTRY; .globl CNAME(x) ; .def CNAME(X);\
-	.scl	2;.type	32;.endef; CNAME(x):
+#define _ENTRY(x)   _START_ENTRY; \
+            .globl CNAME(x); .def CNAME(x); .scl 2; .type 32; .endef; CNAME(x):
 #define END(x) .end
 #endif
 
