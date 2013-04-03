@@ -102,10 +102,15 @@ __ieee754_powf(float x, float y)
 	if(iy==0x3f800000) {	/* y is  +-1 */
 	    if(hy<0) return one/x; else return x;
 	}
-	if(hy==0x40000000) return x*x; /* y is  2 */
-	if(hy==0x3f000000) {	/* y is  0.5 */
+        if(hy==0x40000000) return x*x;   /* y is  2 */
+        if(hy==0x40400000) return x*x*x; /* y is  3 */
+        if(hy==0x40800000) {             /* y is  4 */
+            u = x*x;
+            return u*u;
+        }
+        if(hy==0x3f000000) {             /* y is  0.5 */
 	    if(hx>=0)	/* x >= +0 */
-	    return __ieee754_sqrtf(x);
+                return __ieee754_sqrtf(x);
 	}
 
 	ax   = fabsf(x);

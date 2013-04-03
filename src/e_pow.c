@@ -150,10 +150,15 @@ __ieee754_pow(double x, double y)
 	    if(iy==0x3ff00000) {	/* y is  +-1 */
 		if(hy<0) return one/x; else return x;
 	    }
-	    if(hy==0x40000000) return x*x; /* y is  2 */
-	    if(hy==0x3fe00000) {	/* y is  0.5 */
+            if(hy==0x40000000) return x*x;   /* y is  2 */
+            if(hy==0x40080000) return x*x*x; /* y is  3 */
+            if(hy==0x40100000) {             /* y is  4 */
+                u = x*x;
+                return u*u;
+            }
+	    if(hy==0x3fe00000) {             /* y is  0.5 */
 		if(hx>=0)	/* x >= +0 */
-		return sqrt(x);	
+                    return sqrt(x);
 	    }
 	}
 
