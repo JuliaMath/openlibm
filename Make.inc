@@ -50,8 +50,8 @@ ifeq ($(ARCH),i686)
 override ARCH = i387
 endif
 
-ifeq ($(OS), MINGW32_NT-6.1)
-OS=WINNT
+ifneq (,$(findstring MINGW,$(OS)))
+override OS=WINNT
 endif
 #keep these if statements these separate
 ifeq ($(OS), WINNT)
