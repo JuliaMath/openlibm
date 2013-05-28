@@ -1,7 +1,6 @@
 # -*- mode: makefile-gmake -*-
 
-OS = $(shell uname)
-ARCH = $(shell uname -m)
+OS := $(shell uname)
 
 FC = gfortran
 FFLAGS += -O3
@@ -9,7 +8,6 @@ FFLAGS += -O3
 USEGCC = 1
 USECLANG = 0
 
-CFLAGS_add += -std=c99 -Wall -O3 -I$(OPENLIBM_HOME) -I$(OPENLIBM_HOME)/include -I$(OPENLIBM_HOME)/ld80 -I$(OPENLIBM_HOME)/$(ARCH) -I$(OPENLIBM_HOME)/src -DASSEMBLER -D__BSD_VISIBLE -Wno-implicit-function-declaration
 
 ifeq ($(USECLANG),1)
 USEGCC = 0
@@ -22,6 +20,10 @@ CC = gcc
 CFLAGS_add += -fno-gnu89-inline
 endif
 AR = ar
+
+ARCH := $(shell $(CC) -dumpmachine | sed "s/\([^-]*\).*$$/\1/")
+
+CFLAGS_add += -std=c99 -Wall -O3 -I$(OPENLIBM_HOME) -I$(OPENLIBM_HOME)/include -I$(OPENLIBM_HOME)/ld80 -I$(OPENLIBM_HOME)/$(ARCH) -I$(OPENLIBM_HOME)/src -DASSEMBLER -D__BSD_VISIBLE -Wno-implicit-function-declaration
 
 default: all
 
@@ -39,15 +41,15 @@ clean:
 
 # OS-specific stuff
 ifeq ($(ARCH),i386)
-override ARCH = i387
+override ARCH := i387
 endif
 
 ifeq ($(ARCH),x86_64)
-override ARCH = amd64
+override ARCH := amd64
 endif 
 
 ifeq ($(ARCH),i686)
-override ARCH = i387
+override ARCH := i387
 endif
 
 ifneq (,$(findstring MINGW,$(OS)))
