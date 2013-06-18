@@ -46,14 +46,16 @@ clean:
 ifeq ($(ARCH),i386)
 override ARCH := i387
 endif
+ifeq ($(ARCH),i486)
+override ARCH := i387
+endif
+ifeq ($(ARCH),i686)
+override ARCH := i387
+endif
 
 ifeq ($(ARCH),x86_64)
 override ARCH := amd64
 endif 
-
-ifeq ($(ARCH),i686)
-override ARCH := i387
-endif
 
 ifneq (,$(findstring MINGW,$(OS)))
 override OS=WINNT
