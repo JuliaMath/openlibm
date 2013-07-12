@@ -59,7 +59,11 @@ ENTRY(remquof)
 	andl	$1,%ecx
 	addl	%ecx,%eax
 /* Store the quotient and return. */
+#ifndef _WIN64
 	movl	%eax,(%rdi)
+#else
+    movl    %eax,(%r8)
+#endif
 	fstps	-4(%rsp)
 	movss	-4(%rsp),%xmm0
 	ret

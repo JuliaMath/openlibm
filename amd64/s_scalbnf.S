@@ -29,7 +29,11 @@
 
 ENTRY(scalbnf)
 	movss	%xmm0,-8(%rsp)
+#ifndef _WIN64
 	movl	%edi,-4(%rsp)
+#else
+	movl	%edx,-4(%rsp)
+#endif
 	fildl	-4(%rsp)
 	flds	-8(%rsp)
 	fscale

@@ -8,11 +8,23 @@
 /* //RCSID("$NetBSD: s_scalbnf.S,v 1.4 1999/01/02 05:15:40 kristerw Exp $") */
 
 ENTRY(scalbnl)
+#ifndef _WIN64
 	movl	%edi,-4(%rsp)
 	fildl	-4(%rsp)
 	fldt	8(%rsp)
+#else
+    mov     %r8,%rax
+	movl	%eax,-4(%rsp)
+	fildl	-4(%rsp)
+	fldt	(%rdx)
+#endif
 	fscale
 	fstp	%st(1)
+#ifdef _WIN64
+    mov     %rcx,%rax
+    movq    $0x0,0x8(%rcx)
+    fstpt   (%rcx)
+#endif
 	ret
 END(scalbnl)
 

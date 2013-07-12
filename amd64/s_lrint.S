@@ -26,14 +26,15 @@
 
 #include <amd64/bsd_asm.h>
 
-#ifndef fn
 //__FBSDID("$FreeBSD: src/lib/msun/amd64/s_lrint.S,v 1.3 2011/01/07 16:13:12 kib Exp $")
-#define	fn	lrint
-#endif
 
-ENTRY(fn)
+ENTRY(lrint)
+#ifndef _WIN64
 	cvtsd2si %xmm0, %rax
+#else
+	cvtsd2si %xmm0, %eax
+#endif
 	ret
-END(fn)
+END(lrint)
 
 	

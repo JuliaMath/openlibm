@@ -32,8 +32,14 @@
 //__FBSDID("$FreeBSD: src/lib/msun/amd64/s_remquol.S,v 1.2 2011/01/07 16:13:12 kib Exp $"); 
 	
 ENTRY(remquol)
+#ifndef _WIN64
 	fldt    24(%rsp)
 	fldt    8(%rsp)
+#else
+    fldt    (%r8)
+    fldt    (%rdx)
+    mov     %rcx,%r8
+#endif
 1:	fprem1
 	fstsw	%ax
 	btw	$10,%ax
@@ -58,7 +64,14 @@ ENTRY(remquol)
 	andl	$1,%ecx
 	addl	%ecx,%eax
 /* Store the quotient and return. */
+#ifndef _WIN64
 	movl	%eax,(%rdi)
+#else
+    movl    %eax,(%r9)
+    mov     %r8,%rax
+    movq    $0x0,0x8(%r8)
+    fstpt   (%r8)
+#endif
 	ret
 
 	

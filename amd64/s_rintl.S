@@ -7,8 +7,16 @@
 #include <amd64/bsd_asm.h>
 
 ENTRY(rintl)
+#ifndef _WIN64
 	fldt	8(%rsp)
 	frndint
+#else
+    fldt    (%rdx)
+    frndint
+    mov     %rcx,%rax
+    movq    $0x0,0x8(%rcx)
+    fstpt   (%rcx)
+#endif
 	ret
 
 	

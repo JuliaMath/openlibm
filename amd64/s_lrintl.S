@@ -28,7 +28,11 @@
 //__FBSDID("$FreeBSD: src/lib/msun/amd64/s_lrintl.S,v 1.2 2011/01/07 16:13:12 kib Exp $"); 
 	
 ENTRY(lrintl)
+#ifndef _WIN64
 	fldt	8(%rsp)
+#else
+	fldt	(%rcx)
+#endif
 	subq	$8,%rsp
 	fistpll	(%rsp)
 	popq	%rax
