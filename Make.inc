@@ -8,6 +8,12 @@ FFLAGS += -O3
 USEGCC = 1
 USECLANG = 0
 
+ifeq ($(OS), Darwin)
+USEGCC = 0
+USECLANG = 1
+endif
+
+AR = ar
 
 ifeq ($(USECLANG),1)
 USEGCC = 0
@@ -19,7 +25,6 @@ ifeq ($(USEGCC),1)
 CC = gcc
 CFLAGS_add += -fno-gnu89-inline
 endif
-AR = ar
 
 ARCH := $(shell $(CC) -dumpmachine | sed "s/\([^-]*\).*$$/\1/")
 ifeq ($(ARCH),mingw32)
