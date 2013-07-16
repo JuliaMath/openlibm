@@ -50,24 +50,22 @@ cosf(float x)
 	    return __kernel_cosdf(x);
 	}
 	if(ix<=0x407b53d1) {		/* |x| ~<= 5*pi/4 */
-	    if(ix>0x4016cbe3)		/* |x|  ~> 3*pi/4 */
-		return -__kernel_cosdf(x + (hx > 0 ? -c2pio2 : c2pio2));
-	    else {
+	    if(ix<=0x4016cbe3) {	/* |x|  ~> 3*pi/4 */
 		if(hx>0)
 		    return __kernel_sindf(c1pio2 - x);
 		else
 		    return __kernel_sindf(x + c1pio2);
-	    }
+	    } else
+	    	return -__kernel_cosdf(x + (hx > 0 ? -c2pio2 : c2pio2));
 	}
 	if(ix<=0x40e231d5) {		/* |x| ~<= 9*pi/4 */
-	    if(ix>0x40afeddf)		/* |x|  ~> 7*pi/4 */
-		return __kernel_cosdf(x + (hx > 0 ? -c4pio2 : c4pio2));
-	    else {
+	    if(ix<=0x40afeddf) {	/* |x|  ~> 7*pi/4 */
 		if(hx>0)
 		    return __kernel_sindf(x - c3pio2);
 		else
 		    return __kernel_sindf(-c3pio2 - x);
-	    }
+	    } else
+	    	return __kernel_cosdf(x + (hx > 0 ? -c4pio2 : c4pio2));
 	}
 
     /* cos(Inf or NaN) is NaN */
