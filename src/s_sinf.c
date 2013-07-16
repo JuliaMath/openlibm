@@ -56,7 +56,7 @@ sinf(float x)
 		else
 		    return -__kernel_cosdf(x + s1pio2);
 	    } else
-		return __kernel_sindf((hx > 0 ? s2pio2 : -s2pio2) - x);
+			return __kernel_sindf((hx > 0 ? s2pio2 : -s2pio2) - x);
 	}
 	if(ix<=0x40e231d5) {		/* |x| ~<= 9*pi/4 */
 	    if(ix<=0x40afeddf) {	/* |x| ~<= 7*pi/4 */
@@ -65,7 +65,7 @@ sinf(float x)
 		else
 		    return __kernel_cosdf(x + s3pio2);
 	    } else
-		return __kernel_sindf(x + (hx > 0 ? -s4pio2 : s4pio2));
+			return __kernel_sindf(x + (hx > 0 ? -s4pio2 : s4pio2));
 	}
 
     /* sin(Inf or NaN) is NaN */
@@ -79,7 +79,7 @@ sinf(float x)
 		case 1: return  __kernel_cosdf(y);
 		case 2: return  __kernel_sindf(-y);
 		default:
-			return -__kernel_cosdf(y);
+				return -__kernel_cosdf(y);
 	    }
 	}
 }
