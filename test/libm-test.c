@@ -145,6 +145,9 @@
 #include <argp.h>
 #endif
 
+// Some native libm implementations don't have sincos defined, so we have to do it ourselves
+void FUNC(sincos) (FLOAT x, FLOAT * s, FLOAT * c);
+
 /* Possible exceptions */
 #define NO_EXCEPTION			0x0
 #define INVALID_EXCEPTION		0x1
@@ -224,13 +227,6 @@ static FLOAT max_error, real_max_error, imag_max_error;
 #define MANT_DIG CHOOSE ((LDBL_MANT_DIG-1), (DBL_MANT_DIG-1), (FLT_MANT_DIG-1),  \
                          (LDBL_MANT_DIG-1), (DBL_MANT_DIG-1), (FLT_MANT_DIG-1))
 
-#ifndef SYS_MATH_H
-void FUNC(sincos) (int n, FLOAT *s, FLOAT *c)
-{
-	*s = FUNC(sin) ( *s );
-	*c = FUNC(cos) ( *c );
-}
-#endif
 
 static void
 init_max_error (void)
@@ -3952,7 +3948,7 @@ sin_test (void)
 
 }
 
-#if 0 /* XXX scp XXX */
+
 static void
 sincos_test (void)
 {
@@ -3999,7 +3995,6 @@ sincos_test (void)
 
   print_max_error ("sincos", DELTAsincos, 0);
 }
-#endif
 
 static void
 sinh_test (void)
@@ -4434,7 +4429,6 @@ check_ulp (void)
 int
 main (int argc, char **argv)
 {
-
 #if 0 /* XXX scp XXX */
   int remaining;
 #endif
@@ -4490,9 +4484,7 @@ main (int argc, char **argv)
   atan2_test ();
   cos_test ();
   sin_test ();
-#if 0 /* XXX scp XXX */
   sincos_test ();
-#endif
   tan_test ();
 
   /* Hyperbolic functions:  */
