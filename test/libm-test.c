@@ -4129,8 +4129,8 @@ tgamma_test (void)
   init_max_error ();
 
   check_float ("tgamma (inf) == inf",  FUNC(tgamma) (plus_infty), plus_infty, 0, 0, 0);
-  check_float ("tgamma (0) == NaN plus invalid exception",  FUNC(tgamma) (0), nan_value, 0, 0, INVALID_EXCEPTION);
-  check_float ("tgamma (-0) == NaN plus invalid exception",  FUNC(tgamma) (minus_zero), nan_value, 0, 0, INVALID_EXCEPTION);
+  check_float ("tgamma (0) == inf plus divide-by-zero",  FUNC(tgamma) (0), plus_infty, 0, 0, DIVIDE_BY_ZERO_EXCEPTION);
+  check_float ("tgamma (-0) == inf plus divide-by-zero",  FUNC(tgamma) (minus_zero), minus_infty, 0, 0, DIVIDE_BY_ZERO_EXCEPTION);
   /* tgamma (x) == NaN plus invalid exception for integer x <= 0.  */
   check_float ("tgamma (-2) == NaN plus invalid exception",  FUNC(tgamma) (-2), nan_value, 0, 0, INVALID_EXCEPTION);
   check_float ("tgamma (-inf) == NaN plus invalid exception",  FUNC(tgamma) (minus_infty), nan_value, 0, 0, INVALID_EXCEPTION);
@@ -4196,8 +4196,8 @@ y0_test (void)
   /* y0 is the Bessel function of the second kind of order 0 */
   init_max_error ();
 
-  check_float ("y0 (-1.0) == -inf",  FUNC(y0) (-1.0), minus_infty, 0, 0, 0);
-  check_float ("y0 (0.0) == -inf",  FUNC(y0) (0.0), minus_infty, 0, 0, 0);
+  check_float ("y0 (-1.0) == NaN",  FUNC(y0) (-1.0), nan_value, 0, 0, INVALID_EXCEPTION);
+  check_float ("y0 (0.0) == -inf",  FUNC(y0) (0.0), minus_infty, 0, 0, DIVIDE_BY_ZERO_EXCEPTION);
   check_float ("y0 (NaN) == NaN",  FUNC(y0) (nan_value), nan_value, 0, 0, 0);
   check_float ("y0 (inf) == 0",  FUNC(y0) (plus_infty), 0, 0, 0, 0);
 
@@ -4230,8 +4230,8 @@ y1_test (void)
   /* y1 is the Bessel function of the second kind of order 1 */
   init_max_error ();
 
-  check_float ("y1 (-1.0) == -inf",  FUNC(y1) (-1.0), minus_infty, 0, 0, 0);
-  check_float ("y1 (0.0) == -inf",  FUNC(y1) (0.0), minus_infty, 0, 0, 0);
+  check_float ("y1 (-1.0) == NaN",  FUNC(y1) (-1.0), nan_value, 0, 0, INVALID_EXCEPTION);
+  check_float ("y1 (0.0) == -inf",  FUNC(y1) (0.0), minus_infty, 0, 0, DIVIDE_BY_ZERO_EXCEPTION);
   check_float ("y1 (inf) == 0",  FUNC(y1) (plus_infty), 0, 0, 0, 0);
   check_float ("y1 (NaN) == NaN",  FUNC(y1) (nan_value), nan_value, 0, 0, 0);
 
@@ -4264,8 +4264,8 @@ yn_test (void)
   init_max_error ();
 
   /* yn (0, x) == y0 (x)  */
-  check_float ("yn (0, -1.0) == -inf",  FUNC(yn) (0, -1.0), minus_infty, 0, 0, 0);
-  check_float ("yn (0, 0.0) == -inf",  FUNC(yn) (0, 0.0), minus_infty, 0, 0, 0);
+  check_float ("yn (0, -1.0) == NaN",  FUNC(yn) (0, -1.0), nan_value, 0, 0, INVALID_EXCEPTION);
+  check_float ("yn (0, 0.0) == -inf",  FUNC(yn) (0, 0.0), minus_infty, 0, 0, DIVIDE_BY_ZERO_EXCEPTION);
   check_float ("yn (0, NaN) == NaN",  FUNC(yn) (0, nan_value), nan_value, 0, 0, 0);
   check_float ("yn (0, inf) == 0",  FUNC(yn) (0, plus_infty), 0, 0, 0, 0);
 
@@ -4278,8 +4278,8 @@ yn_test (void)
   check_float ("yn (0, 10.0) == 0.055671167283599391424",  FUNC(yn) (0, 10.0), 0.055671167283599391424L, DELTA1642, 0, 0);
 
   /* yn (1, x) == y1 (x)  */
-  check_float ("yn (1, -1.0) == -inf",  FUNC(yn) (1, -1.0), minus_infty, 0, 0, 0);
-  check_float ("yn (1, 0.0) == -inf",  FUNC(yn) (1, 0.0), minus_infty, 0, 0, 0);
+  check_float ("yn (1, -1.0) == NaN",  FUNC(yn) (1, -1.0), nan_value, 0, 0, INVALID_EXCEPTION);
+  check_float ("yn (1, 0.0) == -inf",  FUNC(yn) (1, 0.0), minus_infty, 0, 0, DIVIDE_BY_ZERO_EXCEPTION);
   check_float ("yn (1, inf) == 0",  FUNC(yn) (1, plus_infty), 0, 0, 0, 0);
   check_float ("yn (1, NaN) == NaN",  FUNC(yn) (1, nan_value), nan_value, 0, 0, 0);
 
