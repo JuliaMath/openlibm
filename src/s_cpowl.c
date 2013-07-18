@@ -46,7 +46,7 @@
  */
 
 #include <complex.h>
-#include <math.h>
+#include <openlibm.h>
 
 long double complex
 cpowl(long double complex a, long double complex z)

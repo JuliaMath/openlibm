@@ -45,7 +45,7 @@
  */
 
 #include <complex.h>
-#include <math.h>
+#include <openlibm.h>
 
 float complex
 cpowf(float complex a, float complex z)
