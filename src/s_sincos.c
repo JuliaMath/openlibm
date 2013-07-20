@@ -118,7 +118,6 @@ sincos(double x, double * s, double * c)
     /*argument reduction needed*/
     else {
         double k_c, k_s;
-        printf( "bleh?\n");
 
         /* Calculate remainer, then sub out to kernel */
         int32_t n = __ieee754_rem_pio2(x,y);
