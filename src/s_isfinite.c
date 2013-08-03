@@ -27,10 +27,10 @@
  */
 
 #include <openlibm.h>
-
+#include "math_private.h"
 #include "fpmath.h"
 
-int
+DLLEXPORT int
 __isfinite(double d)
 {
 	union IEEEd2bits u;
@@ -39,7 +39,7 @@ __isfinite(double d)
 	return (u.bits.exp != 2047);
 }
 
-int
+DLLEXPORT int
 __isfinitef(float f)
 {
 	union IEEEf2bits u;
@@ -48,7 +48,7 @@ __isfinitef(float f)
 	return (u.bits.exp != 255);
 }
 
-int
+DLLEXPORT int
 __isfinitel(long double e)
 {
 	union IEEEl2bits u;

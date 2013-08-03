@@ -22,7 +22,7 @@
 #include "openlibm.h"
 #include "math_private.h"
 
-double
+DLLEXPORT double
 significand(double x)
 {
 	return __ieee754_scalb(x,(double) -ilogb(x));

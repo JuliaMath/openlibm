@@ -43,7 +43,7 @@
 #pragma	STDC CX_LIMITED_RANGE	ON
 #endif
 
-float complex
+DLLEXPORT float complex
 csqrtf(float complex z)
 {
 	float a = crealf(z), b = cimagf(z);

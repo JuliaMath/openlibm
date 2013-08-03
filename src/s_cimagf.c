@@ -29,7 +29,7 @@
 #include <complex.h>
 #include "math_private.h"
 
-float
+DLLEXPORT float
 cimagf(float complex z)
 {
 	const float_complex z1 = { .f = z };

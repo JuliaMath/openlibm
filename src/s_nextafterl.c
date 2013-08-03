@@ -30,7 +30,7 @@
 #error "Unsupported long double format"
 #endif
 
-long double
+DLLEXPORT long double
 nextafterl(long double x, long double y)
 {
 	volatile long double t;

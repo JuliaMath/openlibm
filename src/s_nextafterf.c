@@ -19,7 +19,7 @@
 #include "openlibm.h"
 #include "math_private.h"
 
-float
+DLLEXPORT float
 nextafterf(float x, float y)
 {
 	volatile float t;

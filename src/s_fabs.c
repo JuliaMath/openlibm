@@ -17,7 +17,7 @@
 #include "openlibm.h"
 #include "math_private.h"
 
-double
+DLLEXPORT double
 fabs(double x)
 {
 	u_int32_t high;

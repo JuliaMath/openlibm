@@ -29,8 +29,9 @@
 
 #include <complex.h>
 #include <openlibm.h>
+#include "math_private.h"
 
-float
+DLLEXPORT float
 cargf(float complex z)
 {
 

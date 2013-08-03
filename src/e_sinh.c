@@ -37,7 +37,7 @@
 
 static const double one = 1.0, shuge = 1.0e307;
 
-double
+DLLEXPORT double
 __ieee754_sinh(double x)
 {
 	double t,h;

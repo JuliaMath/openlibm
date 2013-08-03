@@ -28,14 +28,14 @@
 
 #include <float.h>
 #include <openlibm.h>
-
+#include "math_private.h"
 #include "fpmath.h"
 
 #if LDBL_MAX_EXP != 0x4000
 #error "Unsupported long double format"
 #endif
 
-long double
+DLLEXPORT long double
 frexpl(long double x, int *ex)
 {
 	union IEEEl2bits u;

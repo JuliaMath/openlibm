@@ -31,6 +31,7 @@
 //VBS end
 #include <fenv.h>
 #include <openlibm.h>
+#include "math_private.h"
 
 #ifndef type
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_lround.c,v 1.2 2005/04/08 00:52:16 das Exp $");
@@ -55,7 +56,7 @@ static const type dtype_max = DTYPE_MAX + 0.5;
 #define	INRANGE(x)	(dtype_max - DTYPE_MAX != 0.5 || \
 			 ((x) > dtype_min && (x) < dtype_max))
 
-dtype
+DLLEXPORT dtype
 fn(type x)
 {
 

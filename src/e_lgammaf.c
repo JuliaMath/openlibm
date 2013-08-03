@@ -27,7 +27,7 @@
 
 extern int signgam;
 
-float
+DLLEXPORT float
 __ieee754_lgammaf(float x)
 {
 	return __ieee754_lgammaf_r(x,&signgam);

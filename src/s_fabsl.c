@@ -29,10 +29,10 @@
  */
 
 #include <openlibm.h>
-
+#include "math_private.h"
 #include "fpmath.h"
 
-long double
+DLLEXPORT long double
 fabsl(long double x)
 {
 	union IEEEl2bits u;

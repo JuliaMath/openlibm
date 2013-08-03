@@ -36,7 +36,7 @@
 
 #include "math_private.h"
 
-float complex
+DLLEXPORT float complex
 ctanhf(float complex z)
 {
 	float x, y;
@@ -74,7 +74,7 @@ ctanhf(float complex z)
 	return (cpackf((beta * rho * s) / denom, t / denom));
 }
 
-float complex
+DLLEXPORT float complex
 ctanf(float complex z)
 {
 

@@ -23,9 +23,9 @@
 #error "Unsupported long double format"
 #endif
 
- void
- sincosl( long double x, long double * s, long double * c )
- {
- 	*s = cosl( x );
- 	*c = sinl( x );
- }
+DLLEXPORT void
+sincosl( long double x, long double * s, long double * c )
+{
+    *s = cosl( x );
+    *c = sinl( x );
+}

@@ -27,12 +27,12 @@
  */
 
 #include <openlibm.h>
-
+#include "math_private.h"
 #include "fpmath.h"
 
 /* Provided by libc */
 #if 1
-int
+DLLEXPORT int
 (isnan) (double d)
 {
 	union IEEEd2bits u;
@@ -42,7 +42,7 @@ int
 }
 #endif
 
-int
+DLLEXPORT int
 __isnanf(float f)
 {
 	union IEEEf2bits u;
@@ -51,7 +51,7 @@ __isnanf(float f)
 	return (u.bits.exp == 255 && u.bits.man != 0);
 }
 
-int
+DLLEXPORT int
 __isnanl(long double e)
 {
 	union IEEEl2bits u;

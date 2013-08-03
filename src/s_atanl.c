@@ -29,7 +29,7 @@ static const long double
 one   = 1.0,
 huge   = 1.0e300;
 
-long double
+DLLEXPORT long double
 atanl(long double x)
 {
 	union IEEEl2bits u;

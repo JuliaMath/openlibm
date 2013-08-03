@@ -24,7 +24,8 @@
 #include "openlibm.h"
 #include "math_private.h"
 
-	int finitef(float x)
+DLLEXPORT int
+finitef(float x)
 {
 	int32_t ix;
 	GET_FLOAT_WORD(ix,x);

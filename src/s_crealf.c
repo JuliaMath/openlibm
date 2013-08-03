@@ -27,8 +27,9 @@
  */
 
 #include <complex.h>
+#include "math_private.h"
 
-float
+DLLEXPORT float
 crealf(float complex z)
 {
 	return z;

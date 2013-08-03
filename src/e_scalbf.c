@@ -20,10 +20,10 @@
 #include "math_private.h"
 
 #ifdef _SCALB_INT
-float
+DLLEXPORT float
 __ieee754_scalbf(float x, int fn)
 #else
-float
+DLLEXPORT float
 __ieee754_scalbf(float x, float fn)
 #endif
 {

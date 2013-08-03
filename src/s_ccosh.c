@@ -44,7 +44,7 @@
 
 static const double huge = 0x1p1023;
 
-double complex
+DLLEXPORT double complex
 ccosh(double complex z)
 {
 	double x, y, h;
@@ -146,7 +146,7 @@ ccosh(double complex z)
 	return (cpack((x * x) * (y - y), (x + x) * (y - y)));
 }
 
-double complex
+DLLEXPORT double complex
 ccos(double complex z)
 {
 

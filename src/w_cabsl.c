@@ -12,8 +12,9 @@
 
 #include <complex.h>
 #include <openlibm.h>
+#include "math_private.h"
 
-long double
+DLLEXPORT long double
 cabsl(long double complex z)
 {
 	return hypotl(creall(z), cimagl(z));

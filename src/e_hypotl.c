@@ -45,7 +45,7 @@ typedef	u_int64_t man_t;
 typedef	u_int32_t man_t;
 #endif
 
-long double
+DLLEXPORT long double
 hypotl(long double x, long double y)
 {
 	long double a=x,b=y,t1,t2,y1,y2,w;

@@ -29,7 +29,7 @@
 #error "Unsupported long double format"
 #endif
 
-double
+DLLEXPORT double
 nexttoward(double x, long double y)
 {
 	union IEEEl2bits uy;

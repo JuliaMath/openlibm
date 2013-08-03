@@ -51,7 +51,7 @@
 #include "math_private.h"
 //#include "e_rem_pio2.c"
 
-double
+DLLEXPORT double
 sin(double x)
 {
 	double y[2],z=0.0;

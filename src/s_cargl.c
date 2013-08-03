@@ -29,8 +29,9 @@
 
 #include <complex.h>
 #include <openlibm.h>
+#include "math_private.h"
 
-long double
+DLLEXPORT long double
 cargl(long double complex z)
 {
 

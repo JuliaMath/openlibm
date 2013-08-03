@@ -46,7 +46,7 @@
 /* We risk spurious overflow for components >= LDBL_MAX / (1 + sqrt(2)). */
 #define	THRESH	(LDBL_MAX / 2.414213562373095048801688724209698L)
 
-long double complex
+DLLEXPORT long double complex
 csqrtl(long double complex z)
 {
 	long double complex result;

@@ -20,7 +20,7 @@
 
 #define	LDBL_INFNAN_EXP	(LDBL_MAX_EXP * 2 - 1)
 
-float
+DLLEXPORT float
 nexttowardf(float x, long double y)
 {
 	union IEEEl2bits uy;

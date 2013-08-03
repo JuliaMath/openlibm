@@ -40,7 +40,7 @@ static const long double
 pi =  3.14159265358979323846264338327950280e+00L;
 #endif
 
-long double
+DLLEXPORT long double
 acosl(long double x)
 {
 	union IEEEl2bits u;

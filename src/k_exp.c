@@ -71,7 +71,7 @@ __frexp_exp(double x, int *expt)
  * has filtered out very large x, for which overflow would be inevitable.
  */
 
-double
+DLLEXPORT double
 __ldexp_exp(double x, int expt)
 {
 	double exp_x, scale;
@@ -83,7 +83,7 @@ __ldexp_exp(double x, int expt)
 	return (exp_x * scale);
 }
 
-double complex
+DLLEXPORT double complex
 __ldexp_cexp(double complex z, int expt)
 {
 	double x, y, exp_x, scale1, scale2;

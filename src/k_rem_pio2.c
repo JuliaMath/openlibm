@@ -290,7 +290,7 @@ one    = 1.0,
 two24   =  1.67772160000000000000e+07, /* 0x41700000, 0x00000000 */
 twon24  =  5.96046447753906250000e-08; /* 0x3E700000, 0x00000000 */
 
-int
+DLLEXPORT int
 __kernel_rem_pio2(double *x, double *y, int e0, int nx, int prec)
 {
 	int32_t jz,jx,jv,jp,jk,carry,n,iq[20],i,j,k,m,q0,ih;

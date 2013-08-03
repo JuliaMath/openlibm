@@ -28,10 +28,10 @@
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_fmin.c,v 1.1 2004/06/30 07:04:01 das Exp $");
 
 #include <openlibm.h>
-
+#include "math_private.h"
 #include "fpmath.h"
 
-double
+DLLEXPORT double
 fmin(double x, double y)
 {
 	union IEEEd2bits u[2];

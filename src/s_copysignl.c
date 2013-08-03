@@ -27,10 +27,10 @@
  */
 
 #include <openlibm.h>
-
+#include "math_private.h"
 #include "fpmath.h"
 
-long double
+DLLEXPORT long double
 copysignl(long double x, long double y)
 {
 	union IEEEl2bits ux, uy;

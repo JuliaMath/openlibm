@@ -13,10 +13,10 @@
 #include <float.h>
 #include <limits.h>
 #include <openlibm.h>
-
+#include "math_private.h"
 #include "fpmath.h"
 
-long double
+DLLEXPORT long double
 logbl(long double x)
 {
 	union IEEEl2bits u;

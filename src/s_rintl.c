@@ -55,7 +55,7 @@ shift[2] = {
 };
 static const float zero[2] = { 0.0, -0.0 };
 
-long double
+DLLEXPORT long double
 rintl(long double x)
 {
 	union IEEEl2bits u;

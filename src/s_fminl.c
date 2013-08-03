@@ -28,10 +28,10 @@
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_fminl.c,v 1.1 2004/06/30 07:04:01 das Exp $");
 
 #include <openlibm.h>
-
+#include "math_private.h"
 #include "fpmath.h"
 
-long double
+DLLEXPORT long double
 fminl(long double x, long double y)
 {
 	union IEEEl2bits u[2];

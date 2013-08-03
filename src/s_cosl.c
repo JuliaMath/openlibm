@@ -44,7 +44,7 @@
 #error "Unsupported long double format"
 #endif
 
-long double
+DLLEXPORT long double
 cosl(long double x)
 {
 	union IEEEl2bits z;

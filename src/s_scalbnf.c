@@ -25,7 +25,7 @@ twom25  =  2.9802322388e-08,	/* 0x33000000 */
 huge   = 1.0e+30,
 tiny   = 1.0e-30;
 
-float
+DLLEXPORT float
 scalbnf (float x, int n)
 {
 	int32_t k,ix;

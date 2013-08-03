@@ -32,7 +32,7 @@
 
 #include "math_private.h"
 
-double complex
+DLLEXPORT double complex
 cproj(double complex z)
 {
 

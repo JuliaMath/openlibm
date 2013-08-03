@@ -19,7 +19,7 @@
 #include "openlibm.h"
 #include "math_private.h"
 
-float
+DLLEXPORT float
 significandf(float x)
 {
 	return __ieee754_scalbf(x,(float) -ilogbf(x));

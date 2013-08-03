@@ -21,7 +21,8 @@
 #include "openlibm.h"
 #include "math_private.h"
 
-	int ilogbf(float x)
+DLLEXPORT int
+ilogbf(float x)
 {
 	int32_t hx,ix;
 

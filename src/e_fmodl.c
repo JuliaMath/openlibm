@@ -61,7 +61,7 @@ static const long double one = 1.0, Zero[] = {0.0, -0.0,};
  * - The high part of the mantissa fits in an int64_t with enough room
  *   for an explicit integer bit in front of the fractional bits.
  */
-long double
+DLLEXPORT long double
 fmodl(long double x, long double y)
 {
 	union IEEEl2bits ux, uy;

@@ -29,6 +29,7 @@
 
 #include <fenv.h>
 #include <openlibm.h>
+#include "math_private.h"
 
 /*
  * We save and restore the floating-point environment to avoid raising
@@ -38,7 +39,7 @@
  * rounding can't overflow as long as emax >= p.
  */
 #define	DECL(type, fn, rint)	\
-type				\
+DLLEXPORT type				\
 fn(type x)			\
 {				\
 	type ret;		\

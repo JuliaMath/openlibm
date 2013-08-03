@@ -27,8 +27,9 @@
  */
 
 #include <complex.h>
+#include "math_private.h"
 
-double
+DLLEXPORT double
 creal(double complex z)
 {
 	return z;

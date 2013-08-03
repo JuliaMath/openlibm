@@ -25,7 +25,7 @@
 
 static const double one = 1.0, Zero[] = {0.0, -0.0,};
 
-double
+DLLEXPORT double
 __ieee754_fmod(double x, double y)
 {
 	int32_t n,hx,hy,hz,ix,iy,sx,i;

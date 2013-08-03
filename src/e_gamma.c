@@ -26,7 +26,7 @@
 
 extern int signgam;
 
-double
+DLLEXPORT double
 __ieee754_gamma(double x)
 {
 	return __ieee754_gamma_r(x,&signgam);

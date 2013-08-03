@@ -26,12 +26,12 @@
  */
 
 #include <openlibm.h>
-
+#include "math_private.h"
 #include "fpmath.h"
 
 /* Provided by libc */
 #if 1
-int
+DLLEXPORT int
 (isinf) (double d)
 {
 	union IEEEd2bits u;
@@ -41,7 +41,7 @@ int
 }
 #endif
 
-int
+DLLEXPORT int
 __isinff(float f)
 {
 	union IEEEf2bits u;
@@ -50,7 +50,7 @@ __isinff(float f)
 	return (u.bits.exp == 255 && u.bits.man == 0);
 }
 
-int
+DLLEXPORT int
 __isinfl(long double e)
 {
 	union IEEEl2bits u;

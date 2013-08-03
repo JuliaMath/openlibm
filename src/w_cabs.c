@@ -11,8 +11,9 @@
 #include <complex.h>
 #include <float.h>
 #include <openlibm.h>
+#include "math_private.h"
 
-double
+DLLEXPORT double
 cabs(double complex z)
 {
 	return hypot(creal(z), cimag(z));

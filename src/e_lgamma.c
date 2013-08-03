@@ -26,7 +26,7 @@
 
 extern int signgam;
 
-double
+DLLEXPORT double
 __ieee754_lgamma(double x)
 {
 	return __ieee754_lgamma_r(x,&signgam);

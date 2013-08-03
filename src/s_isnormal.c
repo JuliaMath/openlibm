@@ -27,10 +27,10 @@
  */
 
 #include <openlibm.h>
-
+#include "math_private.h"
 #include "fpmath.h"
 
-int
+DLLEXPORT int
 __isnormal(double d)
 {
 	union IEEEd2bits u;
@@ -39,7 +39,7 @@ __isnormal(double d)
 	return (u.bits.exp != 0 && u.bits.exp != 2047);
 }
 
-int
+DLLEXPORT int
 __isnormalf(float f)
 {
 	union IEEEf2bits u;
@@ -48,7 +48,7 @@ __isnormalf(float f)
 	return (u.bits.exp != 0 && u.bits.exp != 255);
 }
 
-int
+DLLEXPORT int
 __isnormall(long double e)
 {
 	union IEEEl2bits u;

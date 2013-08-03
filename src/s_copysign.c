@@ -22,7 +22,7 @@
 #include "openlibm.h"
 #include "math_private.h"
 
-double
+DLLEXPORT double
 copysign(double x, double y)
 {
 	u_int32_t hx,hy;

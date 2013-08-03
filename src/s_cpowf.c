@@ -46,8 +46,9 @@
 
 #include <complex.h>
 #include <openlibm.h>
+#include "math_private.h"
 
-float complex
+DLLEXPORT float complex
 cpowf(float complex a, float complex z)
 {
 	float complex w;

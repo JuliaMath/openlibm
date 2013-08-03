@@ -27,6 +27,7 @@
 #include "cdefs-compat.h"
 #include <fenv.h>
 #include <openlibm.h>
+#include "math_private.h"
 
 #ifndef type
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_lrint.c,v 1.1 2005/01/11 23:12:55 das Exp $");
@@ -43,7 +44,7 @@
  * significant bits than 'type'.  Hence, we bend over backwards for the
  * sake of correctness; an MD implementation could be more efficient.
  */
-dtype
+DLLEXPORT dtype
 fn(type x)
 {
 	fenv_t env;

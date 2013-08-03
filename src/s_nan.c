@@ -61,7 +61,7 @@ static __inline int digittoint(int c) {
  * consider valid, so we might be violating the C standard. But it's
  * impossible to use nan(3) portably anyway, so this seems good enough.
  */
-void
+DLLEXPORT void
 _scan_nan(u_int32_t *words, int num_words, const char *s)
 {
 	int si;		/* index into s */
@@ -89,7 +89,7 @@ _scan_nan(u_int32_t *words, int num_words, const char *s)
 	}
 }
 
-double
+DLLEXPORT double
 nan(const char *s)
 {
 	union {
@@ -106,7 +106,7 @@ nan(const char *s)
 	return (u.d);
 }
 
-float
+DLLEXPORT float
 nanf(const char *s)
 {
 	union {

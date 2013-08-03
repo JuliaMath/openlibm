@@ -81,7 +81,7 @@ S04  =  1.16614003333790000205e-09; /* 0x3E1408BC, 0xF4745D8F */
 
 static const double zero = 0.0;
 
-double
+DLLEXPORT double
 __ieee754_j0(double x)
 {
 	double z, s,c,ss,cc,r,u,v;
@@ -142,7 +142,7 @@ v02  =  7.60068627350353253702e-05, /* 0x3F13ECBB, 0xF578C6C1 */
 v03  =  2.59150851840457805467e-07, /* 0x3E91642D, 0x7FF202FD */
 v04  =  4.41110311332675467403e-10; /* 0x3DFE5018, 0x3BD6D9EF */
 
-double
+DLLEXPORT double
 __ieee754_y0(double x)
 {
 	double z, s,c,ss,cc,u,v;

@@ -64,7 +64,7 @@ static const long double Zero[] = {0.0L, -0.0L};
  * - The high part of the mantissa fits in an int64_t with enough room
  *   for an explicit integer bit in front of the fractional bits.
  */
-long double
+DLLEXPORT long double
 remquol(long double x, long double y, int *quo)
 {
 	union IEEEl2bits ux, uy;

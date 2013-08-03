@@ -32,7 +32,7 @@
 
 #include "math_private.h"
 
-float complex
+DLLEXPORT float complex
 cprojf(float complex z)
 {
 

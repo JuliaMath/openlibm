@@ -33,7 +33,7 @@
 static const unsigned
     B1 = 709958130;	/* B1 = (127-127.0/3-0.03306235651)*2**23 */
 
-long double
+DLLEXPORT long double
 cbrtl(long double x)
 {
 	union IEEEl2bits u, v;

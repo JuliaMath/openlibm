@@ -24,10 +24,10 @@
 #include "math_private.h"
 
 #ifdef _SCALB_INT
-double
+DLLEXPORT double
 __ieee754_scalb(double x, int fn)
 #else
-double
+DLLEXPORT double
 __ieee754_scalb(double x, double fn)
 #endif
 {

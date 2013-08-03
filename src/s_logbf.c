@@ -22,7 +22,7 @@
 static const float
 two25 = 3.355443200e+07;		/* 0x4c000000 */
 
-float
+DLLEXPORT float
 logbf(float x)
 {
 	int32_t ix;

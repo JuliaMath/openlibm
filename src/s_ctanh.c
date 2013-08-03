@@ -71,7 +71,7 @@
 
 #include "math_private.h"
 
-double complex
+DLLEXPORT double complex
 ctanh(double complex z)
 {
 	double x, y;
@@ -134,7 +134,7 @@ ctanh(double complex z)
 	return (cpack((beta * rho * s) / denom, t / denom));
 }
 
-double complex
+DLLEXPORT double complex
 ctan(double complex z)
 {
 

@@ -30,7 +30,7 @@
 
 #include "math_private.h"
 
-double complex
+DLLEXPORT double complex
 conj(double complex z)
 {
 

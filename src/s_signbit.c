@@ -27,10 +27,10 @@
  */
 
 #include <openlibm.h>
-
+#include "math_private.h"
 #include "fpmath.h"
 
-int
+DLLEXPORT int
 __signbit(double d)
 {
 	union IEEEd2bits u;
@@ -39,7 +39,7 @@ __signbit(double d)
 	return (u.bits.sign);
 }
 
-int
+DLLEXPORT int
 __signbitf(float f)
 {
 	union IEEEf2bits u;
@@ -48,7 +48,7 @@ __signbitf(float f)
 	return (u.bits.sign);
 }
 
-int
+DLLEXPORT int
 __signbitl(long double e)
 {
 	union IEEEl2bits u;

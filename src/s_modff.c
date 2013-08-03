@@ -21,7 +21,7 @@
 
 static const float one = 1.0;
 
-float
+DLLEXPORT float
 modff(float x, float *iptr)
 {
 	int32_t i0,j0;

@@ -38,7 +38,7 @@
 
 static const float huge = 0x1p127;
 
-float complex
+DLLEXPORT float complex
 csinhf(float complex z)
 {
 	float x, y, h;
@@ -96,7 +96,7 @@ csinhf(float complex z)
 	return (cpackf((x * x) * (y - y), (x + x) * (y - y)));
 }
 
-float complex
+DLLEXPORT float complex
 csinf(float complex z)
 {
 

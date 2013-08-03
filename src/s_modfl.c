@@ -38,6 +38,7 @@
 
 #include <float.h>
 #include <openlibm.h>
+#include "math_private.h"
 #include <sys/types.h>
 
 #include "fpmath.h"
@@ -54,7 +55,7 @@
 
 static const long double zero[] = { 0.0L, -0.0L };
 
-long double
+DLLEXPORT long double
 modfl(long double x, long double *iptr)
 {
 	union IEEEl2bits ux;

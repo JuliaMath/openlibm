@@ -22,7 +22,7 @@
 static const float zero = 0.0;
 
 
-float
+DLLEXPORT float
 __ieee754_remainderf(float x, float p)
 {
 	int32_t hx,hp;

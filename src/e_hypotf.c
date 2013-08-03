@@ -19,7 +19,7 @@
 #include "openlibm.h"
 #include "math_private.h"
 
-float
+DLLEXPORT float
 __ieee754_hypotf(float x, float y)
 {
 	float a,b,t1,t2,y1,y2,w;

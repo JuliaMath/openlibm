@@ -29,7 +29,7 @@
 
 static const double huge = 1.0e300;
 
-double
+DLLEXPORT double
 ceil(double x)
 {
 	int32_t i0,i1,j0;

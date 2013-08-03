@@ -21,7 +21,7 @@
 
 static const float huge = 1.0e30;
 
-float
+DLLEXPORT float
 ceilf(float x)
 {
 	int32_t i0,j0;

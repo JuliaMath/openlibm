@@ -29,8 +29,9 @@
 
 #include <limits.h>
 #include <openlibm.h>
+#include "math_private.h"
 
-double
+DLLEXPORT double
 scalbln (double x, long n)
 {
 	int in;
@@ -45,7 +46,7 @@ scalbln (double x, long n)
 	return (scalbn(x, in));
 }
 
-float
+DLLEXPORT float
 scalblnf (float x, long n)
 {
 	int in;
@@ -60,7 +61,7 @@ scalblnf (float x, long n)
 	return (scalbnf(x, in));
 }
 
-long double
+DLLEXPORT long double
 scalblnl (long double x, long n)
 {
 	int in;

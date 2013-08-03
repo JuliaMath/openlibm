@@ -44,7 +44,7 @@ pio2_1t =  1.58932547735281966916e-08; /* 0x3E5110b4, 0x611A6263 */
 extern
 #endif
 //__inline int
-int
+DLLEXPORT int
 __ieee754_rem_pio2f(float x, double *y)
 {
 	double w,r,fn;

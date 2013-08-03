@@ -32,6 +32,7 @@
 
 #include "fpmath.h"
 #include "openlibm.h"
+#include "math_private.h"
 
 /* Return (x + ulp) for normal positive x. Assumes no overflow. */
 static inline long double
@@ -74,7 +75,7 @@ dec(long double x)
  * if possible.
  */
 
-long double
+DLLEXPORT long double
 sqrtl(long double x)
 {
 	union IEEEl2bits u;

@@ -82,7 +82,7 @@ s05  =  1.23542274426137913908e-11; /* 0x3DAB2ACF, 0xCFB97ED8 */
 
 static const double zero    = 0.0;
 
-double
+DLLEXPORT double
 __ieee754_j1(double x)
 {
 	double z, s,c,ss,cc,r,u,v,y;
@@ -139,7 +139,7 @@ static const double V0[5] = {
   1.66559246207992079114e-11, /* 0x3DB25039, 0xDACA772A */
 };
 
-double
+DLLEXPORT double
 __ieee754_y1(double x)
 {
 	double z, s,c,ss,cc,u,v;

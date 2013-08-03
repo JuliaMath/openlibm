@@ -23,7 +23,7 @@
 #include "openlibm.h"
 #include "math_private.h"
 
-float
+DLLEXPORT float
 fabsf(float x)
 {
 	u_int32_t ix;

@@ -21,7 +21,8 @@
 #include "openlibm.h"
 #include "math_private.h"
 
-	int finite(double x)
+DLLEXPORT int
+finite(double x)
 {
 	int32_t hx;
 	GET_HIGH_WORD(hx,x);

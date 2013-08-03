@@ -29,7 +29,7 @@
 #include <complex.h>
 #include "math_private.h"
 
-double
+DLLEXPORT double
 cimag(double complex z)
 {
 	const double_complex z1 = { .f = z };

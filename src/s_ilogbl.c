@@ -16,10 +16,10 @@
 #include <float.h>
 #include <limits.h>
 #include <openlibm.h>
-
+#include "math_private.h"
 #include "fpmath.h"
 
-int
+DLLEXPORT int
 ilogbl(long double x)
 {
 	union IEEEl2bits u;

@@ -14,7 +14,7 @@ static const char rcsid[] =
 #include <openlibm.h>
 #include "math_private.h"
 
-float
+DLLEXPORT float
 cabsf(z)
 	float complex z;
 {

@@ -28,10 +28,10 @@
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_fmaxf.c,v 1.1 2004/06/30 07:04:01 das Exp $");
 
 #include <openlibm.h>
-
+#include "math_private.h"
 #include "fpmath.h"
 
-float
+DLLEXPORT float
 fmaxf(float x, float y)
 {
 	union IEEEf2bits u[2];

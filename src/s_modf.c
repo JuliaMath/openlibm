@@ -25,7 +25,7 @@
 
 static const double one = 1.0;
 
-double
+DLLEXPORT double
 modf(double x, double *iptr)
 {
 	int32_t i0,i1,j0;

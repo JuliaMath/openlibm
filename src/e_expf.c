@@ -41,7 +41,7 @@ P2 = -2.7667332906e-3;		/* -0xb55215.0p-32 */
 
 static volatile float twom100 = 7.8886090522e-31;      /* 2**-100=0x0d800000 */
 
-float
+DLLEXPORT float
 __ieee754_expf(float x)
 {
 	float y,hi=0.0,lo=0.0,c,t,twopk;

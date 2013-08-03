@@ -90,7 +90,7 @@ static const double exp2ft[TBLSIZE] = {
  *	Tang, P.  Table-driven Implementation of the Exponential Function
  *	in IEEE Floating-Point Arithmetic.  TOMS 15(2), 144-157 (1989).
  */
-float
+DLLEXPORT float
 exp2f(float x)
 {
 	double tv, twopk, u, z;

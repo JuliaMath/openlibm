@@ -47,8 +47,9 @@
 
 #include <complex.h>
 #include <openlibm.h>
+#include "math_private.h"
 
-long double complex
+DLLEXPORT long double complex
 cpowl(long double complex a, long double complex z)
 {
 	long double complex w;

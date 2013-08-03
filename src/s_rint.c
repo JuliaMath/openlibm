@@ -34,7 +34,7 @@ TWO52[2]={
  -4.50359962737049600000e+15, /* 0xC3300000, 0x00000000 */
 };
 
-double
+DLLEXPORT double
 rint(double x)
 {
 	int32_t i0,j0,sx;

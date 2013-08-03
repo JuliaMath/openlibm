@@ -25,7 +25,7 @@
 #include "openlibm.h"
 #include "math_private.h"
 
-double
+DLLEXPORT double
 __ieee754_gamma_r(double x, int *signgamp)
 {
 	return __ieee754_lgamma_r(x,signgamp);

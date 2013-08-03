@@ -186,7 +186,7 @@ sb5  =  2.55305040643316442583e+03, /* 0x40A3F219, 0xCEDF3BE6 */
 sb6  =  4.74528541206955367215e+02, /* 0x407DA874, 0xE79FE763 */
 sb7  = -2.24409524465858183362e+01; /* 0xC03670E2, 0x42712D62 */
 
-double
+DLLEXPORT double
 erf(double x)
 {
 	int32_t hx,ix,i;
@@ -238,7 +238,7 @@ erf(double x)
 	if(hx>=0) return one-r/x; else return  r/x-one;
 }
 
-double
+DLLEXPORT double
 erfc(double x)
 {
 	int32_t hx,ix;

@@ -25,6 +25,7 @@
 
 #include <float.h>
 #include <openlibm.h>
+#include "math_private.h"
 #include <stdint.h>
 
 #include "fpmath.h"
@@ -51,7 +52,7 @@
 
 static const long double huge = 1.0e300;
 
-long double
+DLLEXPORT long double
 floorl(long double x)
 {
 	union IEEEl2bits u = { .e = x };

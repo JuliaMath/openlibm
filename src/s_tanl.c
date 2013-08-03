@@ -45,7 +45,7 @@
 #error "Unsupported long double format"
 #endif
 
-long double
+DLLEXPORT long double
 tanl(long double x)
 {
 	union IEEEl2bits z;

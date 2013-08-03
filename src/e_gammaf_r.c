@@ -26,7 +26,7 @@
 #include "openlibm.h"
 #include "math_private.h"
 
-float
+DLLEXPORT float
 __ieee754_gammaf_r(float x, int *signgamp)
 {
 	return __ieee754_lgammaf_r(x,signgamp);
