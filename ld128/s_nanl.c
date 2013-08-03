@@ -29,9 +29,9 @@
 #include "openlibm.h"
 
 #include "fpmath.h"
-#include "../src/math_private.h"
+#include "math_private.h"
 
-long double
+DLLEXPORT long double
 nanl(const char *s)
 {
 	union {

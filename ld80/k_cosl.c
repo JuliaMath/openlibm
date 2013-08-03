@@ -65,7 +65,7 @@ C5 =  0.0000000020876754400407278,	/*  0x11eed8caaeccf1.0p-81 */
 C6 = -1.1470297442401303e-11,		/* -0x19393412bd1529.0p-89 */
 C7 =  4.7383039476436467e-14;		/*  0x1aac9d9af5c43e.0p-97 */
 
-long double
+DLLEXPORT long double
 __kernel_cosl(long double x, long double y)
 {
 	long double hz,z,r,w;

@@ -61,7 +61,7 @@ T53 =  0.0000000015468200913196612,	/*  0x1a92fc98c29554.0p-82 */
 T55 = -0.00000000061311613386849674,	/* -0x151106cbc779a9.0p-83 */
 T57 =  1.4912469681508012e-10;		/*  0x147edbdba6f43a.0p-85 */
 
-long double
+DLLEXPORT long double
 __kernel_tanl(long double x, long double y, int iy) {
 	long double z, r, v, w, s;
 	long double osign;

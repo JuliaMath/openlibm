@@ -69,7 +69,7 @@ T29 =  0.0000078293456938132840,	/*  0x106b59141a6cb3.0p-69 */
 T31 = -0.0000032609076735050182,	/* -0x1b5abef3ba4b59.0p-71 */
 T33 =  0.0000023261313142559411;	/*  0x13835436c0c87f.0p-71 */
 
-long double
+DLLEXPORT long double
 __kernel_tanl(long double x, long double y, int iy) {
 	long double z, r, v, w, s;
 	long double osign;

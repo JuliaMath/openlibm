@@ -32,6 +32,7 @@
 
 #include "fpmath.h"
 #include "openlibm.h"
+#include "math_private.h"
 
 #define	TBLBITS	7
 #define	TBLSIZE	(1 << TBLBITS)
@@ -353,7 +354,7 @@ static const float eps[TBLSIZE] = {
  *	Gal, S. and Bachelis, B.  An Accurate Elementary Mathematical Library
  *	for the IEEE Floating Point Standard.  TOMS 17(1), 26-46 (1991).
  */
-long double
+DLLEXPORT long double
 exp2l(long double x)
 {
 	union IEEEl2bits u, v;
