@@ -121,7 +121,7 @@ static struct Double ratfun_gam(double, double);
 
 static const double zero = 0., one = 1.0, tiny = 1e-300;
 
-double
+DLLEXPORT double
 tgamma(x)
 	double x;
 {

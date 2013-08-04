@@ -352,7 +352,7 @@ static double logF_tail[N+1] = {
 };
 
 #if 0
-double
+DLLEXPORT double
 #ifdef _ANSI_SOURCE
 log(double x)
 #else
