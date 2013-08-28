@@ -27,6 +27,7 @@
  */
 
 #include "bsd_fpu.h"
+#include "math_private.h"
 
 #define _fenv_static
 #include "fenv.h"
@@ -45,10 +46,10 @@ const fenv_t __fe_dfl_env = {
 	__INITIAL_MXCSR__
 };
 
-extern inline int feclearexcept(int __excepts);
-extern inline int fegetexceptflag(fexcept_t *__flagp, int __excepts);
+extern inline DLLEXPORT int feclearexcept(int __excepts);
+extern inline DLLEXPORT int fegetexceptflag(fexcept_t *__flagp, int __excepts);
 
-int
+DLLEXPORT int
 fesetexceptflag(const fexcept_t *flagp, int excepts)
 {
 	fenv_t env;
@@ -66,7 +67,7 @@ fesetexceptflag(const fexcept_t *flagp, int excepts)
 	return (0);
 }
 
-int
+DLLEXPORT int
 feraiseexcept(int excepts)
 {
 	fexcept_t ex = excepts;
@@ -76,11 +77,11 @@ feraiseexcept(int excepts)
 	return (0);
 }
 
-extern inline int fetestexcept(int __excepts);
-extern inline int fegetround(void);
-extern inline int fesetround(int __round);
+extern inline DLLEXPORT int fetestexcept(int __excepts);
+extern inline DLLEXPORT int fegetround(void);
+extern inline DLLEXPORT int fesetround(int __round);
 
-int
+DLLEXPORT int
 fegetenv(fenv_t *envp)
 {
 
@@ -94,7 +95,7 @@ fegetenv(fenv_t *envp)
 	return (0);
 }
 
-int
+DLLEXPORT int
 feholdexcept(fenv_t *envp)
 {
 	uint32_t mxcsr;
@@ -109,9 +110,9 @@ feholdexcept(fenv_t *envp)
 	return (0);
 }
 
-extern inline int fesetenv(const fenv_t *__envp);
+extern inline DLLEXPORT int fesetenv(const fenv_t *__envp);
 
-int
+DLLEXPORT int
 feupdateenv(const fenv_t *envp)
 {
 	uint32_t mxcsr;
