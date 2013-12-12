@@ -125,6 +125,11 @@ __ieee754_exp(double x)	/* default IEEE double exp */
 	    if(x < u_threshold) return twom1000*twom1000; /* underflow */
 	}
 
+        /* by pure bad luck, this implementation's error for x==1.0 is
+           unusually large, although still within 1 ulp. */
+        if (x == 1.0)
+            return 2.718281828459045235360;
+
     /* argument reduction */
 	if(hx > 0x3fd62e42) {		/* if  |x| > 0.5 ln2 */ 
 	    if(hx < 0x3FF0A2B2) {	/* and |x| < 1.5 ln2 */
