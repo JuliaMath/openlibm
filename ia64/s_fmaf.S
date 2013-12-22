@@ -33,3 +33,8 @@ ENTRY(fmaf, 3)
 	br.ret.sptk	b0
 }
 END(fmaf)
+
+/* Enable stack protection */
+#if defined(__linux__) && defined(__ELF__)
+.section .note.GNU-stack,"",%progbits
+#endif
