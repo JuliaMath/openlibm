@@ -44,9 +44,6 @@ default: all
 %.S.o: %.S
 	$(CC) $(SFLAGS) $(filter -m% -B% -I% -D%,$(CFLAGS_add)) -c $< -o $@
 
-clean:
-	rm -fr *.o *.c.o *.S.o *~ test-double test-float test-double-system test-float-system *.dSYM
-
 # OS-specific stuff
 ifeq ($(ARCH),i386)
 override ARCH := i387

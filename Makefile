@@ -28,6 +28,9 @@ libopenlibm.a: $(OBJS)
 libopenlibm.$(SHLIB_EXT): $(OBJS)
 	$(FC) -shared $(OBJS) $(LDFLAGS) -o libopenlibm.$(SHLIB_EXT)
 
+clean:
+	rm -fr {./,*}/*{.o,~}
+
 distclean:
 	rm -f $(OBJS) *.a *.$(SHLIB_EXT)
 	$(MAKE) -C test clean
