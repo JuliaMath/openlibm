@@ -1,80 +1,76 @@
-## OpenLIBM 
+## OpenLIBM
 
-OpenLIBM is licensed under the MIT LICENSE.
+OpenLIBM contains code that is covered by various licenses. 
 
-      Copyright (c) 2011-12 Viral B. Shah, Keno Fischer, Jameson Nash.
+The OpenLIBM code derives from the FreeBSD msun implementation, which
+in turn derives from FDLIBM 5.3. As a result, it has a number of fixes
+and updates that have accumulated over the years in msun, and also
+optimized assembly versions of many functions. These improvements are
+provided under the BSD license. The msun library also includes work
+placed under the public domain, whih is noted in the individual
+files. Further work on making a standalone OpenLIBM library from msun,
+as part of the Julia project is covered under the MIT license.
 
-      Permission is hereby granted, free of charge, to any person obtaining
-      a copy of this software and associated documentation files (the
-      "Software"), to deal in the Software without restriction, including
-      without limitation the rights to use, copy, modify, merge, publish,
-      distribute, sublicense, and/or sell copies of the Software, and to
-      permit persons to whom the Software is furnished to do so, subject to
-      the following conditions:
+## Parts copyrighted by the Julia project
 
-      The above copyright notice and this permission notice shall be
-      included in all copies or substantial portions of the Software.
-
-      THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-      EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-      MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-      NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-      LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-      OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-      WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+>       Copyright (c) 2011-13 Viral B. Shah, Keno Fischer, Jameson Nash,
+>       https://github.com/JuliaLang/openlibm/graphs/contributors
+>
+>       Permission is hereby granted, free of charge, to any person obtaining
+>       a copy of this software and associated documentation files (the
+>       "Software"), to deal in the Software without restriction, including
+>       without limitation the rights to use, copy, modify, merge, publish,
+>       distribute, sublicense, and/or sell copies of the Software, and to
+>       permit persons to whom the Software is furnished to do so, subject to
+>       the following conditions:
+>
+>       The above copyright notice and this permission notice shall be
+>       included in all copies or substantial portions of the Software.
+>
+>       THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+>       EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+>       MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+>       NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+>       LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+>       OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+>       WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 ## FREEBSD MSUN
 
-      Copyright 1992-2011 The FreeBSD Project. All rights reserved.
-
-      Redistribution and use in source and binary forms, with or without
-      modification, are permitted provided that the following conditions are
-      met:
-
-      1. Redistributions of source code must retain the above copyright
-      notice, this list of conditions and the following disclaimer.
-
-      2. Redistributions in binary form must reproduce the above copyright
-      notice, this list of conditions and the following disclaimer in the
-      documentation and/or other materials provided with the distribution.
-      THIS SOFTWARE IS PROVIDED BY THE FREEBSD PROJECT ``AS IS'' AND ANY
-      EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-      IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
-      PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE FREEBSD PROJECT OR
-      CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
-      EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
-      PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
-      PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-      LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-      NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-      SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
-      The views and conclusions contained in the software and documentation
-      are those of the authors and should not be interpreted as representing
-      official policies, either expressed or implied, of the FreeBSD
-      Project.
+>       Copyright 1992-2011 The FreeBSD Project. All rights reserved.
+>
+>       Redistribution and use in source and binary forms, with or without
+>       modification, are permitted provided that the following conditions are
+>       met:
+>
+>       1. Redistributions of source code must retain the above copyright
+>       notice, this list of conditions and the following disclaimer.
+>
+>       2. Redistributions in binary form must reproduce the above copyright
+>       notice, this list of conditions and the following disclaimer in the
+>       documentation and/or other materials provided with the distribution.
+>       THIS SOFTWARE IS PROVIDED BY THE FREEBSD PROJECT ``AS IS'' AND ANY
+>       EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+>       IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+>       PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE FREEBSD PROJECT OR
+>       CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+>       EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+>       PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+>       PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+>       LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+>       NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+>       SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+>
+>       The views and conclusions contained in the software and documentation
+>       are those of the authors and should not be interpreted as representing
+>       official policies, either expressed or implied, of the FreeBSD
+>       Project.
 
 ## FDLIBM
 
-      Copyright (C) 1993 by Sun Microsystems, Inc. All rights reserved.
-
-      Developed at SunPro, a Sun Microsystems, Inc. business.
-      Permission to use, copy, modify, and distribute this
-      software is freely granted, provided that this notice
-      is preserved.
-
-## AMOS
-
-The AMOS library is part of SLATEC and covered by the same license. The following
-is reproduced from Section 4 of the SLATEC guide (http://www.netlib.org/slatec/guide).
-
-      The Library is in the public domain and distributed by the Energy Science
-      and Technology Software Center.
- 
-               Energy Science and Technology Software Center
-               P.O. Box 1020
-               Oak Ridge, TN  37831
- 
-               Telephone  615-576-2606
-               E-mail  estsc%a1.adonis.mrouter@zeus.osti.gov
-
+>      Copyright (C) 1993 by Sun Microsystems, Inc. All rights reserved.
+>
+>      Developed at SunPro, a Sun Microsystems, Inc. business.
+>      Permission to use, copy, modify, and distribute this
+>      software is freely granted, provided that this notice
+>      is preserved.
