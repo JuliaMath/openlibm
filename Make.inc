@@ -1,6 +1,11 @@
 # -*- mode: makefile-gmake -*-
 
 OS := $(shell uname)
+VERSION = 0.1.0
+VERSION_SPLIT = $(subst ., , $(VERSION))
+DESTDIR =
+PREFIX = /usr/local
+libdir = $(PREFIX)/lib
 
 FC = gfortran
 FFLAGS += -O3

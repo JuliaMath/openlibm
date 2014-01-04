@@ -26,11 +26,23 @@ all: libopenlibm.a libopenlibm.$(SHLIB_EXT)
 libopenlibm.a: $(OBJS)  
 	$(AR) -rcs libopenlibm.a $(OBJS)
 libopenlibm.$(SHLIB_EXT): $(OBJS)
-	$(FC) -shared $(OBJS) $(LDFLAGS) -o libopenlibm.$(SHLIB_EXT)
+	$(FC) -shared $(OBJS) $(LDFLAGS) -o libopenlibm.$(SHLIB_EXT).$(VERSION)
+	ln -s libopenlibm.$(SHLIB_EXT).$(VERSION) libopenlibm.$(SHLIB_EXT).$(word 1,$(VERSION_SPLIT)).$(word 2,$(VERSION_SPLIT))
+	ln -s libopenlibm.$(SHLIB_EXT).$(VERSION) libopenlibm.$(SHLIB_EXT).$(word 1,$(VERSION_SPLIT))
+	ln -s libopenlibm.$(SHLIB_EXT).$(VERSION) libopenlibm.$(SHLIB_EXT)
+
 
 clean:
-	rm -fr {./,*}/*{.o,~}
+	@for dir in $(SUBDIRS) .; do \
+		rm -fr $$dir/*.o $$dir/*.a $$dir/*.$(SHLIB_EXT)*; \
+	done
 
 distclean:
 	rm -f $(OBJS) *.a *.$(SHLIB_EXT)
 	$(MAKE) -C test clean
+
+install: all
+	mkdir -p $(DESTDIR)$(libdir)
+	mkdir -p $(DESTDIR)$(PREFIX)/include
+	cp -a libopenlibm.$(SHLIB_EXT)* libopenlibm.a $(DESTDIR)$(libdir)/
+	cp -a src/openlibm.h $(DESTDIR)$(PREFIX)/include/
