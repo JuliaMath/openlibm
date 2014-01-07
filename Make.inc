@@ -6,6 +6,7 @@ VERSION_SPLIT = $(subst ., , $(VERSION))
 DESTDIR =
 prefix = /usr/local
 libdir = $(prefix)/lib
+includedir = $(prefix)/include
 
 FC = gfortran
 FFLAGS += -O3
