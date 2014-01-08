@@ -4,8 +4,9 @@ OS := $(shell uname)
 VERSION = 0.1.0
 VERSION_SPLIT = $(subst ., , $(VERSION))
 DESTDIR =
-PREFIX = /usr/local
-libdir = $(PREFIX)/lib
+prefix = /usr/local
+libdir = $(prefix)/lib
+includedir = $(prefix)/include
 
 FC = gfortran
 FFLAGS += -O3
@@ -69,28 +70,29 @@ override OS=WINNT
 endif
 #keep these if statements these separate
 ifeq ($(OS), WINNT)
+SHLIB_EXT = dll
+SONAME_FLAG = -soname
 CFLAGS_add+=-nodefaultlibs
 FFLAGS+=-nodefaultlibs
 endif
 
 ifeq ($(OS), Linux)
 SHLIB_EXT = so
+SONAME_FLAG = -soname
 CFLAGS_add+=-fPIC
 FFLAGS+=-fPIC
 endif
 
 ifeq ($(OS), FreeBSD)
 SHLIB_EXT = so
+SONAME_FLAG = -soname
 CFLAGS_add+=-fPIC
 FFLAGS+=-fPIC
 endif
 
 ifeq ($(OS), Darwin)
 SHLIB_EXT = dylib
+SONAME_FLAG = -install_name
 CFLAGS_add+=-fPIC
 FFLAGS+=-fPIC
-endif
-
-ifeq ($(OS), WINNT)
-SHLIB_EXT = dll
 endif
