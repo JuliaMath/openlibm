@@ -29,7 +29,9 @@
 #include "bsd_fpu.h"
 #include "math_private.h"
 
-#define _fenv_static
+#ifdef _WIN32
+#define __fenv_static
+#endif
 #include "fenv.h"
 
 #ifdef __GNUC_GNU_INLINE__
