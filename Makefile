@@ -27,9 +27,9 @@ libopenlibm.a: $(OBJS)
 	$(AR) -rcs libopenlibm.a $(OBJS)
 libopenlibm.$(SHLIB_EXT): $(OBJS)
 	$(FC) -shared $(OBJS) $(LDFLAGS) -Wl,$(SONAME_FLAG),libopenlibm.$(SHLIB_EXT).$(VERSION) -o libopenlibm.$(SHLIB_EXT).$(VERSION)
-	ln -s libopenlibm.$(SHLIB_EXT).$(VERSION) libopenlibm.$(SHLIB_EXT).$(word 1,$(VERSION_SPLIT)).$(word 2,$(VERSION_SPLIT))
-	ln -s libopenlibm.$(SHLIB_EXT).$(VERSION) libopenlibm.$(SHLIB_EXT).$(word 1,$(VERSION_SPLIT))
-	ln -s libopenlibm.$(SHLIB_EXT).$(VERSION) libopenlibm.$(SHLIB_EXT)
+	@-ln -sf libopenlibm.$(SHLIB_EXT).$(VERSION) libopenlibm.$(SHLIB_EXT).$(word 1,$(VERSION_SPLIT)).$(word 2,$(VERSION_SPLIT))
+	@-ln -sf libopenlibm.$(SHLIB_EXT).$(VERSION) libopenlibm.$(SHLIB_EXT).$(word 1,$(VERSION_SPLIT))
+	@-ln -sf libopenlibm.$(SHLIB_EXT).$(VERSION) libopenlibm.$(SHLIB_EXT)
 
 
 clean:
