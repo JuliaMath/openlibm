@@ -43,6 +43,7 @@ distclean:
 
 install: all
 	mkdir -p $(DESTDIR)$(libdir)
-	mkdir -p $(DESTDIR)$(includedir)
+	mkdir -p $(DESTDIR)$(includedir)/openlibm
 	cp -a libopenlibm.$(SHLIB_EXT)* libopenlibm.a $(DESTDIR)$(libdir)/
 	cp -a src/openlibm.h $(DESTDIR)$(includedir)/
+	cp -a include/*.h $(DESTDIR)$(includedir)/openlibm/
