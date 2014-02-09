@@ -17,8 +17,11 @@
 #ifndef _MATH_H_
 #define	_MATH_H_
 
-#include "cdefs-compat.h"
-#include "types-compat.h"
+#if (defined(_WIN32) || defined (_MSC_VER)) && !defined(__WIN32__)
+    #define __WIN32__
+#endif
+
+#define __pure2
 
 /*
  * ANSI/POSIX
@@ -172,7 +175,10 @@ extern int signgam;
  * effect of raising floating-point exceptions, so they are not declared
  * as __pure2.  In C99, FENV_ACCESS affects the purity of these functions.
  */
-__BEGIN_DECLS
+
+#if defined(__cplusplus)
+extern "C" {
+#endif
 /*
  * ANSI/POSIX
  */
@@ -490,5 +496,7 @@ long double	tgammal(long double);
 long double	truncl(long double);
 
 #endif /* __ISO_C_VISIBLE >= 1999 */
-__END_DECLS
+#if defined(__cplusplus)
+}
+#endif
 #endif /* !_MATH_H_ */
