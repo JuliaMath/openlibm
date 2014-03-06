@@ -38,8 +38,8 @@ clean:
 	done
 
 distclean:
-	rm -f $(OBJS) *.a *.$(SHLIB_EXT)
-	$(MAKE) -C test clean
+	-rm -f $(OBJS) *.a *.$(SHLIB_EXT) libopenlibm.*
+	-$(MAKE) -C test clean
 
 install: all
 	mkdir -p $(DESTDIR)$(libdir)
