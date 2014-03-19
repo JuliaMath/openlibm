@@ -1,13 +1,13 @@
 #ifndef _CDEFS_COMPAT_H_
 #define	_CDEFS_COMPAT_H_
 
-#if (defined(_WIN32) || defined (_MSC_VER)) && !defined(__WIN32__)
-    #define __WIN32__
+#if defined(_MSC_VER) && !defined(_WIN32)
+    #define _WIN32
 #endif
 
-#ifndef __WIN32__
+#ifndef _WIN32
 #include "sys/cdefs.h"
-#else /* __WIN32__ */
+#else /* _WIN32 */
 
 #if defined(__cplusplus)
 #define	__BEGIN_DECLS	extern "C" {
@@ -19,7 +19,7 @@
 
 #define _SYS_CDEFS_H_
 
-#endif /* __WIN32__ */
+#endif /* _WIN32 */
 
 
 

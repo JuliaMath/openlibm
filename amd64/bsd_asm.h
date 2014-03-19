@@ -67,7 +67,7 @@
 			.globl CNAME(x); .type CNAME(x),@function; CNAME(x):
 #define	END(x)		.size x, . - x
 
-#elif defined(__WIN32__)
+#elif defined(_WIN32)
 #define _ENTRY(x)	_START_ENTRY; \
             .globl CNAME(x); .section .drectve; .ascii " -export:" #x; \
             .section .text; .def CNAME(x); .scl 2; .type 32; .endef; CNAME(x):

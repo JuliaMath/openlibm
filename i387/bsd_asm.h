@@ -39,7 +39,7 @@
 #if defined(__APPLE__)
 #include "osx_asm.h"
 #define CNAME(x) EXT(x)
-#elif defined(__FreeBSD__) || defined(__linux__) || defined(__WIN32__)
+#elif defined(__FreeBSD__) || defined(__linux__) || defined(_WIN32)
 #include "bsd_cdefs.h"
 
 #ifdef PIC
@@ -78,7 +78,7 @@
 #define _ENTRY(x)	_START_ENTRY; \
 			.globl CNAME(x); .type CNAME(x),@function; CNAME(x):
 #define	END(x)		.size x, . - x
-#elif defined(__WIN32__)
+#elif defined(_WIN32)
 #define CNAME(csym)		_##csym
 #define HIDENAME(asmsym)	.asmsym
 #define _ENTRY(x)   _START_ENTRY; \

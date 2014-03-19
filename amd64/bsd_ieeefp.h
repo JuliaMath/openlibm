@@ -117,7 +117,7 @@ typedef enum {
 #define	SSE_RND_OFF	13	/* rounding control offset */
 #define	SSE_FZ_OFF	15	/* flush to zero offset */
 
-#if (defined(__GNUCLIKE_ASM) && defined(__CC_SUPPORTS___INLINE__)) || defined(__WIN32__) \
+#if (defined(__GNUCLIKE_ASM) && defined(__CC_SUPPORTS___INLINE__)) || defined(_WIN32) \
     && !defined(__cplusplus)
 
 #define	__fldenv(addr)	__asm __volatile("fldenv %0" : : "m" (*(addr)))

@@ -29,7 +29,7 @@
 #include <cdefs-compat.h>
 #include <types-compat.h>
 #include <math_private.h>
-#if defined(__WIN32__) || defined(__linux__)
+#if defined(_WIN32) || defined(__linux__)
 #include <i387/bsd_npx.h>
 #else
 #include <machine/npx.h>
