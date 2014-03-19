@@ -1,10 +1,6 @@
 #ifndef _TYPES_COMPAT_H_
 #define	_TYPES_COMPAT_H_
 
-#if defined(_MSC_VER) && !defined(_WIN32)
-    #define _WIN32
-#endif
-
 #include <sys/types.h>
 #include <limits.h>
 #include <stdint.h>

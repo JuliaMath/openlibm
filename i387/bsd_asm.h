@@ -70,21 +70,29 @@
 
 
 /* XXX should use .p2align 4,0x90 for -m486. */
-#define _START_ENTRY	.text; .p2align 2,0x90
+#define _START_ENTRY .p2align 2,0x90
 
 #if defined(__linux__) || defined(__FreeBSD__) || defined(__ELF__)
 #define CNAME(csym)		csym
 #define HIDENAME(asmsym)	.asmsym
-#define _ENTRY(x)	_START_ENTRY; \
+#define _ENTRY(x) .text; _START_ENTRY; \
 			.globl CNAME(x); .type CNAME(x),@function; CNAME(x):
 #define	END(x)		.size x, . - x
 #elif defined(_WIN32)
+#ifndef _MSC_VER
+#define END(x) .end
+#define HEX(Y) 0x#Y
+#define _START_ENTRY_WIN .text; _START_ENTRY
+#else
+#define END(x) end
+#define HEX(Y) Y#h
+#define _START_ENTRY_WIN .model small; .code; _START_ENTRY
+#endif
 #define CNAME(csym)		_##csym
 #define HIDENAME(asmsym)	.asmsym
-#define _ENTRY(x)   _START_ENTRY; \
+#define _ENTRY(x) _START_ENTRY_WIN; \
             .globl CNAME(x); .section .drectve; .ascii " -export:" #x; \
             .section .text; .def CNAME(x); .scl 2; .type 32; .endef; CNAME(x):
-#define END(x) .end
 #endif
 
 #ifdef PROF
