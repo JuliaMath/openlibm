@@ -81,11 +81,9 @@
 #elif defined(_WIN32)
 #ifndef _MSC_VER
 #define END(x) .end
-#define HEX(Y) 0x#Y
 #define _START_ENTRY_WIN .text; _START_ENTRY
 #else
 #define END(x) end
-#define HEX(Y) Y#h
 #define _START_ENTRY_WIN .model small; .code; _START_ENTRY
 #endif
 #define CNAME(csym)		_##csym

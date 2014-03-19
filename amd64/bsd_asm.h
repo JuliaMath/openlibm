@@ -68,11 +68,16 @@
 #define	END(x)		.size x, . - x
 
 #elif defined(_WIN32)
-#define _ENTRY(x)	_START_ENTRY; \
+#ifndef _MSC_VER
+#define END(x) .end
+#define _START_ENTRY_WIN .text; _START_ENTRY
+#else
+#define END(x) end
+#define _START_ENTRY_WIN .model small; .code; _START_ENTRY
+#endif
+#define _ENTRY(x)	_START_ENTRY_WIN; \
             .globl CNAME(x); .section .drectve; .ascii " -export:" #x; \
             .section .text; .def CNAME(x); .scl 2; .type 32; .endef; CNAME(x):
-#define END(x) .end
-
 #endif
 
 #ifdef PROF
