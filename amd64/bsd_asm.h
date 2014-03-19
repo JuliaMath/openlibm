@@ -60,10 +60,10 @@
 #define CNAME(csym)		csym
 #define HIDENAME(asmsym)	.asmsym
 
-#define _START_ENTRY	.text; .p2align 4,0x90
+#define _START_ENTRY	.p2align 4,0x90
 
 #if defined(__linux__) || defined(__FreeBSD__) || defined(__ELF__)
-#define _ENTRY(x)	_START_ENTRY; \
+#define _ENTRY(x)	.text; _START_ENTRY; \
 			.globl CNAME(x); .type CNAME(x),@function; CNAME(x):
 #define	END(x)		.size x, . - x
 
@@ -73,7 +73,7 @@
 #define _START_ENTRY_WIN .text; _START_ENTRY
 #else
 #define END(x) end
-#define _START_ENTRY_WIN .model small; .code; _START_ENTRY
+#define _START_ENTRY_WIN .code; _START_ENTRY
 #endif
 #define _ENTRY(x)	_START_ENTRY_WIN; \
             .globl CNAME(x); .section .drectve; .ascii " -export:" #x; \

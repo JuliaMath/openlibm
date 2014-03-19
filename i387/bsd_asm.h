@@ -84,7 +84,7 @@
 #define _START_ENTRY_WIN .text; _START_ENTRY
 #else
 #define END(x) end
-#define _START_ENTRY_WIN .model small; .code; _START_ENTRY
+#define _START_ENTRY_WIN .code; _START_ENTRY
 #endif
 #define CNAME(csym)		_##csym
 #define HIDENAME(asmsym)	.asmsym
