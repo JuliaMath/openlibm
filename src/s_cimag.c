@@ -27,6 +27,7 @@
  */
 
 #include <complex.h>
+#include "openlibm.h"
 #include "math_private.h"
 
 DLLEXPORT double

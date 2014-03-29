@@ -17,6 +17,7 @@
 #ifndef _MATH_H_
 #define	_MATH_H_
 
+#include <complex.h>
 #include "cdefs-compat.h"
 #include "types-compat.h"
 
@@ -166,6 +167,86 @@ extern int signgam;
 #define	HUGE		MAXFLOAT
 #endif
 #endif /* __BSD_VISIBLE */
+
+//VBS
+//#ifdef _COMPLEX_H
+
+/*
+ * C99 specifies that complex numbers have the same representation as
+ * an array of two elements, where the first element is the real part
+ * and the second element is the imaginary part.
+ */
+typedef union {
+	float complex f;
+	float a[2];
+} float_complex;
+typedef union {
+	double complex f;
+	double a[2];
+} double_complex;
+typedef union {
+	long double complex f;
+	long double a[2];
+} long_double_complex;
+#define	REALPART(z)	((z).a[0])
+#define	IMAGPART(z)	((z).a[1])
+
+/*
+ * Inline functions that can be used to construct complex values.
+ *
+ * The C99 standard intends x+I*y to be used for this, but x+I*y is
+ * currently unusable in general since gcc introduces many overflow,
+ * underflow, sign and efficiency bugs by rewriting I*y as
+ * (0.0+I)*(y+0.0*I) and laboriously computing the full complex product.
+ * In particular, I*Inf is corrupted to NaN+I*Inf, and I*-0 is corrupted
+ * to -0.0+I*0.0.
+ *
+ * In C11, a CMPLX(x,y) macro was added to circumvent this limitation,
+ * and gcc 4.7 added a __builtin_complex feature to simplify implementation
+ * of CMPLX in libc, so we can take advantage of these features if they
+ * are available.
+ */
+#if defined(CMPLXF) && defined(CMPLX) && defined(CMPLXL) /* C11 */
+#  define cpackf(x,y) CMPLXF(x,y)
+#  define cpack(x,y) CMPLX(x,y)
+#  define cpackl(x,y) CMPLXL(x,y)
+#elif (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 7)) && !defined(__INTEL_COMPILER)
+#  define cpackf(x,y) __builtin_complex ((float) (x), (float) (y))
+#  define cpack(x,y) __builtin_complex ((double) (x), (double) (y))
+#  define cpackl(x,y) __builtin_complex ((long double) (x), (long double) (y))
+#else /* define our own cpack functions */
+static __inline float complex
+cpackf(float x, float y)
+{
+	float_complex z;
+
+	REALPART(z) = x;
+	IMAGPART(z) = y;
+	return (z.f);
+}
+
+static __inline double complex
+cpack(double x, double y)
+{
+	double_complex z;
+
+	REALPART(z) = x;
+	IMAGPART(z) = y;
+	return (z.f);
+}
+
+static __inline long double complex
+cpackl(long double x, long double y)
+{
+	long_double_complex z;
+
+	REALPART(z) = x;
+	IMAGPART(z) = y;
+	return (z.f);
+}
+#endif /* define our own cpack functions */
+//VBS
+//#endif /* _COMPLEX_H */
 
 /*
  * Most of these functions depend on the rounding mode and have the side
