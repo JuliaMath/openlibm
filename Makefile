@@ -47,3 +47,9 @@ install: all
 	cp -a libopenlibm.$(SHLIB_EXT)* libopenlibm.a $(DESTDIR)$(libdir)/
 	cp -a src/openlibm.h $(DESTDIR)$(includedir)/
 	cp -a include/*.h $(DESTDIR)$(includedir)/openlibm/
+ifneq ($(wildcard $(ARCH)/bsd_asm.h),)
+	cp -a $(ARCH)/bsd_asm.h $(DESTDIR)$(includedir)/openlibm/
+endif
+ifneq ($(wildcard $(ARCH)/bsd_cdefs.h),)
+	cp -a $(ARCH)/bsd_cdefs.h $(DESTDIR)$(includedir)/openlibm/
+endif
