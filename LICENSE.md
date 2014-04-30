@@ -6,12 +6,12 @@ The OpenLIBM code derives from the FreeBSD msun implementation, which
 in turn derives from FDLIBM 5.3. As a result, it has a number of fixes
 and updates that have accumulated over the years in msun, and also
 optimized assembly versions of many functions. These improvements are
-provided under the BSD license. The msun library also includes work
-placed under the public domain, whih is noted in the individual
+provided under the BSD and ISC licenses. The msun library also includes
+work placed under the public domain, which is noted in the individual
 files. Further work on making a standalone OpenLIBM library from msun,
 as part of the Julia project is covered under the MIT license.
 
-## Parts copyrighted by the Julia project
+## Parts copyrighted by the Julia project (MIT License)
 
 >       Copyright (c) 2011-13 Viral B. Shah, Keno Fischer, Jameson Nash,
 >       https://github.com/JuliaLang/openlibm/graphs/contributors
@@ -35,7 +35,23 @@ as part of the Julia project is covered under the MIT license.
 >       OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 >       WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-## FREEBSD MSUN
+## Parts copyrighted by Stephen L. Moshier (ISC License)
+
+> Copyright (c) 2008 Stephen L. Moshier <steve@moshier.net>
+>
+> Permission to use, copy, modify, and distribute this software for any
+> purpose with or without fee is hereby granted, provided that the above
+> copyright notice and this permission notice appear in all copies.
+>
+> THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+> WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+> MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+> ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+> WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+> ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+> OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+## FREEBSD MSUN (FreeBSD/2-clause BSD/Simplified BSD License)
 
 >       Copyright 1992-2011 The FreeBSD Project. All rights reserved.
 >
