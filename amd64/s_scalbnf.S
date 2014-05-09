@@ -41,12 +41,14 @@ ENTRY(scalbnf)
 	fstps	-8(%rsp)
 	movss	-8(%rsp),%xmm0
 	ret
+#ifndef _WIN64
 END(scalbnf)
-
 .globl CNAME(ldexpf)
-.set	CNAME(ldexpf),CNAME(scalbnf)
+#else
+.globl CNAME(ldexpf); .section .drectve; .ascii " -export:ldexpf"
+#endif
+.set   CNAME(ldexpf),CNAME(scalbnf)
 
-	
 /* Enable stack protection */
 #if defined(__linux__) && defined(__ELF__)
 .section .note.GNU-stack,"",%progbits
