@@ -41,10 +41,14 @@ ENTRY(scalbn)
 	fstpl	-8(%rsp)
 	movsd	-8(%rsp),%xmm0
 	ret
+#ifndef _WIN64
 END(scalbn)
-
 .globl CNAME(ldexp)
+#else
+.globl CNAME(ldexp); .section .drectve; .ascii " -export:ldexp"
+#endif
 .set   CNAME(ldexp),CNAME(scalbn)
+
 /* Enable stack protection */
 #if defined(__linux__) && defined(__ELF__)
 .section .note.GNU-stack,"",%progbits

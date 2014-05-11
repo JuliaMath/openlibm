@@ -26,12 +26,14 @@ ENTRY(scalbnl)
     fstpt   (%rcx)
 #endif
 	ret
+#ifndef _WIN64
 END(scalbnl)
+.globl CNAME(ldexpl)
+#else
+.globl CNAME(ldexpl); .section .drectve; .ascii " -export:ldexpl"
+#endif
+.set   CNAME(ldexpl),CNAME(scalbnl)
 
-.globl	CNAME(ldexpl)
-.set	CNAME(ldexpl),CNAME(scalbnl)
-
-	
 /* Enable stack protection */
 #if defined(__linux__) && defined(__ELF__)
 .section .note.GNU-stack,"",%progbits
