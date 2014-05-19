@@ -44,14 +44,19 @@ distclean:
 	-rm -f $(OBJS) *.a *.$(SHLIB_EXT) libopenlibm.*
 	-$(MAKE) -C test clean
 
-install: all
+openlibm.pc: openlibm.pc.in Make.inc Makefile
+	echo "prefix=${prefix}" > openlibm.pc
+	echo "version=${VERSION}" >> openlibm.pc
+	cat openlibm.pc.in >> openlibm.pc
+
+install: all openlibm.pc
 	mkdir -p $(DESTDIR)$(shlibdir)
-	mkdir -p $(DESTDIR)$(libdir)
+	mkdir -p $(DESTDIR)$(libdir)/pkgconfig
 	mkdir -p $(DESTDIR)$(includedir)/openlibm
 	cp -a libopenlibm.$(SHLIB_EXT)* $(DESTDIR)$(shlibdir)/
 	cp -a libopenlibm.a $(DESTDIR)$(libdir)/
 	cp -a src/openlibm.h $(DESTDIR)$(includedir)/
-	cp -a include/*.h $(DESTDIR)$(includedir)/openlibm/
+	cp -a openlibm.pc $(DESTDIR)$(libdir)/pkgconfig/
 ifneq ($(wildcard $(ARCH)/bsd_asm.h),)
 	cp -a $(ARCH)/bsd_asm.h $(DESTDIR)$(includedir)/openlibm/
 endif
