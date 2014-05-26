@@ -1,7 +1,10 @@
 OPENLIBM_HOME=$(abspath .)
 include ./Make.inc
 
-SUBDIRS = src ld80 $(ARCH) bsdsrc
+SUBDIRS = src $(ARCH) bsdsrc
+ifneq ($(ARCH), arm)
+SUBDIRS += ld80
+endif
 
 define INC_template
 TEST=test

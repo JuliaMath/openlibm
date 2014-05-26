@@ -48,6 +48,7 @@ __isfinitef(float f)
 	return (u.bits.exp != 255);
 }
 
+#ifdef LONG_DOUBLE
 DLLEXPORT int
 __isfinitel(long double e)
 {
@@ -56,3 +57,4 @@ __isfinitel(long double e)
 	u.e = e;
 	return (u.bits.exp != 32767);
 }
+#endif

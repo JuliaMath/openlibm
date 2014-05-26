@@ -17,10 +17,10 @@ $(CUR_SRCS) = common.c \
 	s_exp2.c s_exp2f.c s_expm1.c s_expm1f.c s_fabs.c s_fabsf.c s_fdim.c \
 	s_finite.c s_finitef.c \
 	s_floor.c s_floorf.c s_fma.c s_fmaf.c \
-	s_fmax.c s_fmaxf.c s_fmaxl.c s_fmin.c \
-	s_fminf.c s_fminl.c s_fpclassify.c \
+	s_fmax.c s_fmaxf.c s_fmin.c \
+	s_fminf.c s_fpclassify.c \
 	s_frexp.c s_frexpf.c s_ilogb.c s_ilogbf.c \
-	s_ilogbl.c s_isinf.c s_isfinite.c s_isnormal.c s_isnan.c \
+	s_isinf.c s_isfinite.c s_isnormal.c s_isnan.c \
 	s_llrint.c s_llrintf.c s_llround.c s_llroundf.c s_llroundl.c \
 	s_log1p.c s_log1pf.c s_logb.c s_logbf.c s_lrint.c s_lrintf.c \
 	s_lround.c s_lroundf.c s_lroundl.c s_modf.c s_modff.c \
@@ -37,11 +37,13 @@ ifneq ($(OS), WINNT)
 $(CUR_SRCS) += s_nan.c
 endif		
 		
+ifneq ($(ARCH), arm)
 # C99 long double functions
 $(CUR_SRCS) +=	s_copysignl.c s_fabsl.c s_llrintl.c s_lrintl.c s_modfl.c
 
 # If long double != double use these; otherwise, we alias the double versions.
 $(CUR_SRCS) +=	e_acosl.c e_asinl.c e_atan2l.c e_fmodl.c \
+	s_fmaxl.c s_fminl.c s_ilogbl.c \
 	e_hypotl.c e_remainderl.c e_sqrtl.c \
 	s_atanl.c s_ceill.c s_cosl.c s_cprojl.c \
 	s_csqrtl.c s_floorl.c s_fmal.c \
@@ -50,6 +52,7 @@ $(CUR_SRCS) +=	e_acosl.c e_asinl.c e_atan2l.c e_fmodl.c \
 	s_sinl.c s_sincosl.c s_tanl.c s_truncl.c w_cabsl.c \
 	s_nextafterl.c s_rintl.c s_scalbnl.c
 #	s_cbrtl.c
+endif
 
 # C99 complex functions
 $(CUR_SRCS) +=	s_ccosh.c s_ccoshf.c s_cexp.c s_cexpf.c \

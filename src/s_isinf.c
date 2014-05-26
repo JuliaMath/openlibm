@@ -50,6 +50,7 @@ __isinff(float f)
 	return (u.bits.exp == 255 && u.bits.man == 0);
 }
 
+#ifdef LONG_DOUBLE
 DLLEXPORT int
 __isinfl(long double e)
 {
@@ -59,5 +60,6 @@ __isinfl(long double e)
 	mask_nbit_l(u);
 	return (u.bits.exp == 32767 && u.bits.manl == 0 && u.bits.manh == 0);
 }
+#endif
 
 __weak_reference(__isinff, isinff);

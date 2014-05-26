@@ -48,6 +48,7 @@ __signbitf(float f)
 	return (u.bits.sign);
 }
 
+#ifdef LONG_DOUBLE
 DLLEXPORT int
 __signbitl(long double e)
 {
@@ -56,3 +57,4 @@ __signbitl(long double e)
 	u.e = e;
 	return (u.bits.sign);
 }
+#endif
