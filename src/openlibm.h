@@ -23,6 +23,10 @@
     #define __WIN32__
 #endif
 
+#ifndef __arm__
+#define LONG_DOUBLE
+#endif
+
 #define __pure2
 
 /*

@@ -48,6 +48,7 @@ __isnormalf(float f)
 	return (u.bits.exp != 0 && u.bits.exp != 255);
 }
 
+#ifdef LONG_DOUBLE
 DLLEXPORT int
 __isnormall(long double e)
 {
@@ -56,3 +57,4 @@ __isnormall(long double e)
 	u.e = e;
 	return (u.bits.exp != 0 && u.bits.exp != 32767);
 }
+#endif

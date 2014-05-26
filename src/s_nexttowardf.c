@@ -20,6 +20,7 @@
 
 #define	LDBL_INFNAN_EXP	(LDBL_MAX_EXP * 2 - 1)
 
+#ifdef LONG_DOUBLE
 DLLEXPORT float
 nexttowardf(float x, long double y)
 {
@@ -57,3 +58,4 @@ nexttowardf(float x, long double y)
 	SET_FLOAT_WORD(x,hx);
 	return x;
 }
+#endif
