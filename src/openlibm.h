@@ -27,7 +27,9 @@
 #define LONG_DOUBLE
 #endif
 
+#ifndef __pure2
 #define __pure2
+#endif
 
 /*
  * ANSI/POSIX
