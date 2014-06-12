@@ -1,18 +1,34 @@
-## OpenLIBM
+## OpenLibm
 
-OpenLIBM is an effort to have a high quality standalone LIBM
-library. It is meant to be used standalone in applications and
-programming language implementations.
+OpenLibm is an effort to have a high quality, portable, standalone
+`libm` library. It can be used standalone in applications and
+programming language implementations. 
 
-OpenLibm builds on Linux, Mac OS X, and Windows, and with little effort, 
-should build on FreeBSD as well. It builds with both, GCC and clang.
+The project was born out of a need to have a good `libm` for the
+[Julia programming langage](http://www.julialang.org) that worked
+consistently across compilers and operating systems, and in 32-bit and
+64-bit environments.
 
-The OpenLIBM code derives from the FreeBSD msun implementation, which
-in turn derives from FDLIBM 5.3. As a result, it has a number of fixes and
-updates that have accumulated over the years in msun, and also optimized
-assembly versions of many functions.
+### History
 
-### Build instructions:
+The OpenLibm code derives from the [FreeBSD
+msun](http://ftp.freebsd.org/pub/FreeBSD/FreeBSD/development/FreeBSD-CVS/src/lib/msun/)
+implementation, which in turn derives from [FDLIBM
+5.3](http://www.netlib.org/fdlibm/). As a result, it includes a number
+of fixes and updates to FDLIBM that have accumulated over the years in
+`msun`, and optimized versions of many functions.
 
-1. `make` or `make USEGCC=1` to build with GCC.
-2. `make USECLANG=1` to build with clang.
+### Platform support
+
+OpenLibm builds on Linux, Mac OS X, and Windows, and with little
+effort, should build on FreeBSD as well. It builds with both, GCC and
+clang. Although largely tested on x86, it also includes experimental
+support for ARM. The original `msun` also includes support for mips,
+sparc64, powerpc, ia64, and alpha. These are present in the OpenLibm
+source tree, but no attempt has been made to build any of these.
+
+### Build instructions
+
+1. `make` or `make USEGCC=1` to build with GCC. This is the default on
+Linux and Windows.  
+2. `make USECLANG=1` to build with clang. This is the default on OS X.
