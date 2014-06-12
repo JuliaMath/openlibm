@@ -1,3 +1,4 @@
+
 /* @(#)k_rem_pio2.c 1.3 95/01/18 */
 /*
  * ====================================================
@@ -310,7 +311,7 @@ __kernel_rem_pio2(double *x, double *y, int e0, int nx, int prec)
 
     /* compute q[0],q[1],...q[jk] */
 	for (i=0;i<=jk;i++) {
-	    for(j=0,fw=zero;j<=jx;j++) fw += x[j]*f[jx+i-j]; q[i] = fw;
+	    for(j=0,fw=0.0;j<=jx;j++) fw += x[j]*f[jx+i-j]; q[i] = fw;
 	}
 
 	jz = jk;
@@ -369,7 +370,7 @@ recompute:
 
 		for(i=jz+1;i<=jz+k;i++) {   /* add q[jz+1] to q[jz+k] */
 		    f[jx+i] = (double) ipio2[jv+i];
-		    for(j=0,fw=zero;j<=jx;j++) fw += x[j]*f[jx+i-j];
+		    for(j=0,fw=0.0;j<=jx;j++) fw += x[j]*f[jx+i-j];
 		    q[i] = fw;
 		}
 		jz += k;
@@ -378,7 +379,7 @@ recompute:
 	}
 
     /* chop off zero terms */
-	if(z==zero) {
+	if(z==0.0) {
 	    jz -= 1; q0 -= 24;
 	    while(iq[jz]==0) { jz--; q0-=24;}
 	} else { /* break z into 24-bit if necessary */
@@ -399,20 +400,20 @@ recompute:
 
     /* compute PIo2[0,...,jp]*q[jz,...,0] */
 	for(i=jz;i>=0;i--) {
-	    for(fw=zero,k=0;k<=jp&&k<=jz-i;k++) fw += PIo2[k]*q[i+k];
+	    for(fw=0.0,k=0;k<=jp&&k<=jz-i;k++) fw += PIo2[k]*q[i+k];
 	    fq[jz-i] = fw;
 	}
 
     /* compress fq[] into y[] */
 	switch(prec) {
 	    case 0:
-		fw = zero;
+		fw = 0.0;
 		for (i=jz;i>=0;i--) fw += fq[i];
 		y[0] = (ih==0)? fw: -fw; 
 		break;
 	    case 1:
 	    case 2:
-		fw = zero;
+		fw = 0.0;
 		for (i=jz;i>=0;i--) fw += fq[i]; 
 		STRICT_ASSIGN(double,fw,fw);
 		y[0] = (ih==0)? fw: -fw; 
@@ -431,7 +432,7 @@ recompute:
 		    fq[i]  += fq[i-1]-fw;
 		    fq[i-1] = fw;
 		}
-		for (fw=zero,i=jz;i>=2;i--) fw += fq[i]; 
+		for (fw=0.0,i=jz;i>=2;i--) fw += fq[i]; 
 		if(ih==0) {
 		    y[0] =  fq[0]; y[1] =  fq[1]; y[2] =  fw;
 		} else {
