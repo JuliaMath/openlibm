@@ -32,7 +32,7 @@ libopenlibm.$(SHLIB_EXT): $(OBJS)
 ifeq ($(OS),WINNT)
 	$(CC) -shared $(OBJS) $(LDFLAGS) -Wl,$(SONAME_FLAG),libopenlibm.$(SHLIB_EXT) -o libopenlibm.$(SHLIB_EXT)
 else
-	$(CC) -shared $(OBJS) $(LDFLAGS) -Wl,$(SONAME_FLAG),libopenlibm.$(SHLIB_EXT).$(VERSION) -o libopenlibm.$(SHLIB_EXT).$(VERSION)
+	$(CC) -shared $(OBJS) $(LDFLAGS) -Wl,$(SONAME_FLAG),libopenlibm.$(SHLIB_EXT).$(SONAME_VERSION) -o libopenlibm.$(SHLIB_EXT).$(VERSION)
 	@-ln -sf libopenlibm.$(SHLIB_EXT).$(VERSION) libopenlibm.$(SHLIB_EXT).$(word 1,$(VERSION_SPLIT)).$(word 2,$(VERSION_SPLIT))
 	@-ln -sf libopenlibm.$(SHLIB_EXT).$(VERSION) libopenlibm.$(SHLIB_EXT).$(word 1,$(VERSION_SPLIT))
 	@-ln -sf libopenlibm.$(SHLIB_EXT).$(VERSION) libopenlibm.$(SHLIB_EXT)

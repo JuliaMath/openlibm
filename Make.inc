@@ -2,6 +2,9 @@
 
 OS := $(shell uname)
 VERSION = 0.3.0
+# This SONAME_VERSION is independent of the major version decimal.
+# It should only be incremented when backwards-incompatible changes are made
+SONAME_VERSION = 0
 VERSION_SPLIT = $(subst ., , $(VERSION))
 DESTDIR =
 prefix = /usr/local
