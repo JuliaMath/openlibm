@@ -4,3 +4,4 @@
 *.dll*
 *.so*
 *.dylib*
+*.pc
