@@ -58,6 +58,9 @@ endif
 ifeq ($(ARCH),i486)
 override ARCH := i387
 endif
+ifeq ($(ARCH),i586)
+override ARCH := i387
+endif
 ifeq ($(ARCH),i686)
 override ARCH := i387
 endif
