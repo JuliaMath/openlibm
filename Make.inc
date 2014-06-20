@@ -9,9 +9,6 @@ bindir = $(prefix)/bin
 libdir = $(prefix)/lib
 includedir = $(prefix)/include
 
-FC = gfortran
-FFLAGS += -O3
-
 USEGCC = 1
 USECLANG = 0
 
@@ -45,9 +42,6 @@ default: all
 %.c.o: %.c
 	$(CC) $(CPPFLAGS) $(CFLAGS_add) $(CFLAGS) -c $< -o $@
 
-%.f.o: %.f
-	$(FC) $(FFLAGS) -c $< -o $@
-
 %.S.o: %.S
 	$(CC) $(SFLAGS) $(filter -m% -B% -I% -D%,$(CFLAGS_add)) -c $< -o $@
 
@@ -78,7 +72,6 @@ ifeq ($(OS), WINNT)
 SHLIB_EXT = dll
 SONAME_FLAG = -soname
 CFLAGS_add += -nodefaultlibs
-FFLAGS += -nodefaultlibs
 shlibdir = $(bindir)
 else
 shlibdir = $(libdir)
@@ -88,19 +81,16 @@ ifeq ($(OS), Linux)
 SHLIB_EXT = so
 SONAME_FLAG = -soname
 CFLAGS_add+=-fPIC
-FFLAGS+=-fPIC
 endif
 
 ifeq ($(OS), FreeBSD)
 SHLIB_EXT = so
 SONAME_FLAG = -soname
 CFLAGS_add+=-fPIC
-FFLAGS+=-fPIC
 endif
 
 ifeq ($(OS), Darwin)
 SHLIB_EXT = dylib
 SONAME_FLAG = -install_name
 CFLAGS_add+=-fPIC
-FFLAGS+=-fPIC
 endif
