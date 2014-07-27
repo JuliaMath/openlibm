@@ -1,8 +1,11 @@
 # -*- mode: makefile-gmake -*-
 
 OS := $(shell uname)
+# Do not forget to bump SOMINOR when changing VERSION,
+# and SOMAJOR when changing API
 VERSION = 0.4
-VERSION_SPLIT = $(subst ., , $(VERSION))
+SOMAJOR = 1
+SOMINOR = 0
 DESTDIR =
 prefix = /usr/local
 bindir = $(prefix)/bin
