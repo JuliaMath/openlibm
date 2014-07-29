@@ -2,7 +2,7 @@
 
 OS := $(shell uname)
 # Do not forget to bump SOMINOR when changing VERSION,
-# and SOMAJOR when changing API
+# and SOMAJOR when breaking ABI in a backward-incompatible way
 VERSION = 0.4
 SOMAJOR = 1
 SOMINOR = 0
