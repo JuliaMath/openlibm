@@ -219,6 +219,7 @@ static const float ps2[5] = {
   8.3646392822e+00, /* 0x4105d590 */
 };
 
+	/* Note: This function is only called for ix>=0x40000000 (see above) */
 	static float ponef(float x)
 {
 	const float *p,*q;
@@ -315,6 +316,7 @@ static const float qs2[6] = {
  -4.9594988823e+00, /* 0xc09eb437 */
 };
 
+	/* Note: This function is only called for ix>=0x40000000 (see above) */
 	static float qonef(float x)
 {
 	const float *p,*q;

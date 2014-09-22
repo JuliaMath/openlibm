@@ -268,6 +268,7 @@ static const double pS2[5] = {
   1.46576176948256193810e+01, /* 0x402D50B3, 0x44391809 */
 };
 
+	/* Note: This function is only called for ix>=0x40000000 (see above) */
 	static double pzero(double x)
 {
 	const double *p,*q;
@@ -363,6 +364,7 @@ static const double qS2[6] = {
  -5.31095493882666946917e+00, /* 0xC0153E6A, 0xF8B32931 */
 };
 
+	/* Note: This function is only called for ix>=0x40000000 (see above) */
 	static double qzero(double x)
 {
 	const double *p,*q;

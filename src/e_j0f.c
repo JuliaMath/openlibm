@@ -224,6 +224,7 @@ static const float pS2[5] = {
   1.4657617569e+01, /* 0x416a859a */
 };
 
+	/* Note: This function is only called for ix>=0x40000000 (see above) */
 	static float pzerof(float x)
 {
 	const float *p,*q;
@@ -319,6 +320,7 @@ static const float qS2[6] = {
  -5.3109550476e+00, /* 0xc0a9f358 */
 };
 
+	/* Note: This function is only called for ix>=0x40000000 (see above) */
 	static float qzerof(float x)
 {
 	const float *p,*q;
