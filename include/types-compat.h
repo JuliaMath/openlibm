@@ -1,7 +1,7 @@
 #ifndef _TYPES_COMPAT_H_
 #define	_TYPES_COMPAT_H_
 
-#include <sys/types.h>
+#include <stdint.h>
 #include <limits.h>
 #include <stdint.h>
 
