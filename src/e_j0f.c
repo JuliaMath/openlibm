@@ -13,6 +13,8 @@
  * ====================================================
  */
 
+#include <assert.h>
+
 #include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/e_j0f.c,v 1.8 2008/02/22 02:30:35 das Exp $");
 
@@ -224,6 +226,7 @@ static const float pS2[5] = {
   1.4657617569e+01, /* 0x416a859a */
 };
 
+	/* Note: This function is only called for ix>=0x40000000 (see above) */
 	static float pzerof(float x)
 {
 	const float *p,*q;
@@ -231,10 +234,11 @@ static const float pS2[5] = {
 	int32_t ix;
 	GET_FLOAT_WORD(ix,x);
 	ix &= 0x7fffffff;
+        assert(ix>=0x40000000 && ix<=0x48000000);
 	if(ix>=0x41000000)     {p = pR8; q= pS8;}
 	else if(ix>=0x40f71c58){p = pR5; q= pS5;}
 	else if(ix>=0x4036db68){p = pR3; q= pS3;}
-	else if(ix>=0x40000000){p = pR2; q= pS2;}
+	else                   {p = pR2; q= pS2;}
 	z = one/(x*x);
 	r = p[0]+z*(p[1]+z*(p[2]+z*(p[3]+z*(p[4]+z*p[5]))));
 	s = one+z*(q[0]+z*(q[1]+z*(q[2]+z*(q[3]+z*q[4]))));
@@ -319,6 +323,7 @@ static const float qS2[6] = {
  -5.3109550476e+00, /* 0xc0a9f358 */
 };
 
+	/* Note: This function is only called for ix>=0x40000000 (see above) */
 	static float qzerof(float x)
 {
 	const float *p,*q;
@@ -326,10 +331,11 @@ static const float qS2[6] = {
 	int32_t ix;
 	GET_FLOAT_WORD(ix,x);
 	ix &= 0x7fffffff;
+        assert(ix>=0x40000000 && ix<=0x48000000);
 	if(ix>=0x41000000)     {p = qR8; q= qS8;}
 	else if(ix>=0x40f71c58){p = qR5; q= qS5;}
 	else if(ix>=0x4036db68){p = qR3; q= qS3;}
-	else if(ix>=0x40000000){p = qR2; q= qS2;}
+	else                   {p = qR2; q= qS2;}
 	z = one/(x*x);
 	r = p[0]+z*(p[1]+z*(p[2]+z*(p[3]+z*(p[4]+z*p[5]))));
 	s = one+z*(q[0]+z*(q[1]+z*(q[2]+z*(q[3]+z*(q[4]+z*q[5])))));

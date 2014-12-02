@@ -35,8 +35,8 @@ $(CUR_SRCS) = common.c \
 
 ifneq ($(OS), WINNT)
 $(CUR_SRCS) += s_nan.c
-endif		
-		
+endif
+
 ifneq ($(ARCH), arm)
 # C99 long double functions
 $(CUR_SRCS) +=	s_copysignl.c s_fabsl.c s_llrintl.c s_lrintl.c s_modfl.c
