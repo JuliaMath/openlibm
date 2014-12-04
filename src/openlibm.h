@@ -102,7 +102,7 @@ extern const union __nan_un {
     ((sizeof (x) == sizeof (float)) ? __fpclassifyf(x) \
     : (sizeof (x) == sizeof (double)) ? __fpclassifyd(x) \
     : __fpclassifyl(x))
-	
+
 #define	isfinite(x)					\
     ((sizeof (x) == sizeof (float)) ? __isfinitef(x)	\
     : (sizeof (x) == sizeof (double)) ? __isfinite(x)	\
@@ -584,6 +584,9 @@ long double	tgammal(long double);
 long double	truncl(long double);
 
 #endif /* __ISO_C_VISIBLE >= 1999 */
+
+#include "openlibm_complex.h"
+
 #if defined(__cplusplus)
 }
 #endif
