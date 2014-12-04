@@ -58,7 +58,7 @@
 
 #include <complex.h>
 #include <float.h>
-#include <math.h>
+#include "openlibm.h"
 
 #define MACHEP 1.1e-16
 #define MAXNUM 1.0e308

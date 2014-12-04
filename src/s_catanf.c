@@ -60,7 +60,7 @@
  */
 
 #include <complex.h>
-#include <math.h>
+#include "openlibm.h"
 
 #define MAXNUMF 1.0e38F
 

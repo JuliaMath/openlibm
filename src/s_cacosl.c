@@ -48,7 +48,7 @@
  */
 
 #include <complex.h>
-#include <math.h>
+#include "openlibm.h"
 
 static const long double PIO2L = 1.570796326794896619231321691639751442098585L;
 

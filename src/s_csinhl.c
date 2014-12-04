@@ -43,7 +43,7 @@
  */
 
 #include <complex.h>
-#include <math.h>
+#include "openlibm.h"
 
 long double complex
 csinhl(long double complex z)

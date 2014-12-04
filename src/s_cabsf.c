@@ -16,7 +16,7 @@
  */
 
 #include <complex.h>
-#include <math.h>
+#include "openlibm.h"
 
 float
 cabsf(float complex z)

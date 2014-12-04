@@ -43,7 +43,7 @@
  */
 
 #include <complex.h>
-#include <math.h>
+#include "openlibm.h"
 
 float complex
 casinhf(float complex z)

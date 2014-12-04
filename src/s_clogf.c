@@ -54,7 +54,7 @@
  */
 
 #include <complex.h>
-#include <math.h>
+#include "openlibm.h"
 
 float complex
 clogf(float complex z)

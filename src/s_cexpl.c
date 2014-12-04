@@ -55,7 +55,7 @@
  */
 
 #include <complex.h>
-#include <math.h>
+#include "openlibm.h"
 
 long double complex
 cexpl(long double complex z)
