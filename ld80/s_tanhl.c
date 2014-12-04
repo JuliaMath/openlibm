@@ -34,7 +34,7 @@
  *	only tanhl(0)=0 is exact for finite argument.
  */
 
-#include <math.h>
+#include <openlibm.h>
 
 #include "math_private.h"
 

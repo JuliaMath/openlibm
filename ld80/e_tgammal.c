@@ -58,9 +58,10 @@
  */
 
 #include <float.h>
-#include <math.h>
+#include <openlibm.h>
 
 #include "math_private.h"
+extern int signgam;
 
 /*
 tgamma(x+2)  = tgamma(x+2) P(x)/Q(x)

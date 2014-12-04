@@ -17,7 +17,7 @@
  *   Special cases:
  */
 
-#include <math.h>
+#include <openlibm.h>
 
 #include "math_private.h"
 
@@ -87,4 +87,4 @@ nextafterl(long double x, long double y)
 	return x;
 }
 
-__strong_alias(nexttowardl, nextafterl);
+//__strong_alias(nexttowardl, nextafterl);

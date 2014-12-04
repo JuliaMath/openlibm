@@ -22,6 +22,7 @@
 #include "fpmath.h"
 #include <complex.h>
 #include <stdint.h>
+#include "math_private_openbsd.h"
 
 /*
  * The original fdlibm code used statements like:
@@ -228,7 +229,7 @@ do {								\
  * Common routine to process the arguments to nan(), nanf(), and nanl().
  */
 void _scan_nan(u_int32_t *__words, int __num_words, const char *__s);
- 
+
 #ifdef __GNUCLIKE_ASM
 
 /* Asm versions of some functions. */

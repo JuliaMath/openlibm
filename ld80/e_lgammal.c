@@ -86,9 +86,10 @@
  *
  */
 
-#include <math.h>
+#include <openlibm.h>
 
 #include "math_private.h"
+extern int signgam;
 
 static const long double
   half = 0.5L,

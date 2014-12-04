@@ -72,7 +72,7 @@
 
 /*	Exponential function	*/
 
-#include <math.h>
+#include <openlibm.h>
 
 #include "math_private.h"
 

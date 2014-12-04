@@ -59,7 +59,7 @@
  * log domain:       x-1 < 0; returns NAN
  */
 
-#include <math.h>
+#include <openlibm.h>
 
 #include "math_private.h"
 

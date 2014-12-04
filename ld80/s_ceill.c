@@ -19,7 +19,7 @@
  *	Inexact flag raised if x not equal to ceil(x).
  */
 
-#include <math.h>
+#include <openlibm.h>
 
 #include "math_private.h"
 
