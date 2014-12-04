@@ -2,16 +2,16 @@
 
 OpenLibm contains code that is covered by various licenses.
 
-The OpenLibm code derives from the FreeBSD msun implementation, which
-in turn derives from FDLIBM 5.3. As a result, it has a number of fixes
-and updates that have accumulated over the years in msun, and also
-optimized assembly versions of many functions. These improvements are
-provided under the BSD and ISC licenses. The msun library also
-includes work placed under the public domain, which is noted in the
-individual files. Further work on making a standalone OpenLibm library
-from msun, as part of the Julia project is covered under the MIT
-license. The test files, test-double.c and test-float.c are under the
-LGPL.
+The OpenLibm code derives from the FreeBSD msun and OpenBSD libm
+implementations, which in turn derives from FDLIBM 5.3. As a result, it
+has a number of fixes and updates that have accumulated over the years
+in msun, and also optimized assembly versions of many functions. These
+improvements are provided under the BSD and ISC licenses. The msun
+library also includes work placed under the public domain, which is
+noted in the individual files. Further work on making a standalone
+OpenLibm library from msun, as part of the Julia project is covered
+under the MIT license. The test files, test-double.c and test-float.c
+are under the LGPL.
 
 ## Parts copyrighted by the Julia project (MIT License)
 
