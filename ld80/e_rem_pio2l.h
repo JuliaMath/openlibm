@@ -6,7 +6,7 @@
  *
  * Developed at SunSoft, a Sun Microsystems, Inc. business.
  * Permission to use, copy, modify, and distribute this
- * software is freely granted, provided that this notice 
+ * software is freely granted, provided that this notice
  * is preserved.
  * ====================================================
  *
@@ -17,8 +17,8 @@
 //__FBSDID("$FreeBSD: src/lib/msun/ld80/e_rem_pio2l.h,v 1.3 2011/06/18 13:56:33 benl Exp $");
 
 /* ld80 version of __ieee754_rem_pio2l(x,y)
- * 
- * return the remainder of x rem pi/2 in y[0]+y[1] 
+ *
+ * return the remainder of x rem pi/2 in y[0]+y[1]
  * use __kernel_rem_pio2()
  */
 
@@ -26,7 +26,7 @@
 
 #include "openlibm.h"
 #include "math_private.h"
-#include "fpmath.h"
+#include "openlibm.h"
 
 #define	BIAS	(LDBL_MAX_EXP - 1)
 
@@ -102,24 +102,24 @@ __ieee754_rem_pio2l(long double x, long double *y)
 		union IEEEl2bits u2;
 	        int ex1;
 	        j  = ex;
-	        y[0] = r-w; 
+	        y[0] = r-w;
 		u2.e = y[0];
 		ex1 = u2.xbits.expsign & 0x7fff;
 	        i = j-ex1;
 	        if(i>22) {  /* 2nd iteration needed, good to 141 */
 		    t  = r;
-		    w  = fn*pio2_2;	
+		    w  = fn*pio2_2;
 		    r  = t-w;
-		    w  = fn*pio2_2t-((t-r)-w);	
+		    w  = fn*pio2_2t-((t-r)-w);
 		    y[0] = r-w;
 		    u2.e = y[0];
 		    ex1 = u2.xbits.expsign & 0x7fff;
 		    i = j-ex1;
 		    if(i>61) {	/* 3rd iteration need, 180 bits acc */
 		    	t  = r;	/* will cover all possible cases */
-		    	w  = fn*pio2_3;	
+		    	w  = fn*pio2_3;
 		    	r  = t-w;
-		    	w  = fn*pio2_3t-((t-r)-w);	
+		    	w  = fn*pio2_3t-((t-r)-w);
 		    	y[0] = r-w;
 		    }
 		}
@@ -127,7 +127,7 @@ __ieee754_rem_pio2l(long double x, long double *y)
 	    y[1] = (r-y[0])-w;
 	    return n;
 	}
-    /* 
+    /*
      * all other (large) arguments
      */
 	if(ex==0x7fff) {		/* x is inf or NaN */

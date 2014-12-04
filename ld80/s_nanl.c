@@ -28,7 +28,7 @@
 
 #include "openlibm.h"
 
-#include "fpmath.h"
+#include "openlibm.h"
 #include "math_private.h"
 
 DLLEXPORT long double

@@ -50,7 +50,7 @@ $(CUR_SRCS) +=	e_acosl.c e_asinl.c e_atan2l.c e_fmodl.c \
 	s_frexpl.c s_logbl.c s_nexttoward.c \
 	s_remquol.c \
 	s_sinl.c s_sincosl.c s_tanl.c s_truncl.c w_cabsl.c \
-	s_nextafterl.c s_rintl.c s_scalbnl.c
+	s_nextafterl.c s_rintl.c s_scalbnl.c polevll.c
 #	s_cbrtl.c
 endif
 
