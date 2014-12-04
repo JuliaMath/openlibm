@@ -5,11 +5,6 @@
  * Placed into the Public Domain, 1994.
  */
 
-#ifndef lint
-static const char rcsid[] =
-  "$FreeBSD: src/lib/msun/src/w_cabsf.c,v 1.3 2001/06/13 15:16:30 ru Exp $";
-#endif /* not lint */
-
 #include <complex.h>
 #include <openlibm.h>
 #include "math_private.h"

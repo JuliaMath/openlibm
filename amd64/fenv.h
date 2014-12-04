@@ -29,8 +29,8 @@
 #ifndef	_FENV_H_
 #define	_FENV_H_
 
-#include "include/cdefs-compat.h" 
-#include "include/types-compat.h" 
+#include "include/cdefs-compat.h"
+#include "include/types-compat.h"
 
 #ifndef	__fenv_static
 #define	__fenv_static	static
@@ -93,7 +93,7 @@ extern const fenv_t	__fe_dfl_env;
 #define	__ldmxcsr(__csr)	__asm __volatile("ldmxcsr %0" : : "m" (__csr))
 #define	__stmxcsr(__csr)	__asm __volatile("stmxcsr %0" : "=m" (*(__csr)))
 
-__fenv_static __attribute__((always_inline)) inline int
+__fenv_static __attribute__((always_inline)) DLLEXPORT inline int
 feclearexcept(int __excepts)
 {
 	fenv_t __env;
@@ -111,7 +111,7 @@ feclearexcept(int __excepts)
 	return (0);
 }
 
-__fenv_static inline int
+__fenv_static DLLEXPORT inline int
 fegetexceptflag(fexcept_t *__flagp, int __excepts)
 {
 	uint32_t __mxcsr;
@@ -123,10 +123,10 @@ fegetexceptflag(fexcept_t *__flagp, int __excepts)
 	return (0);
 }
 
-int fesetexceptflag(const fexcept_t *__flagp, int __excepts);
-int feraiseexcept(int __excepts);
+DLLEXPORT int fesetexceptflag(const fexcept_t *__flagp, int __excepts);
+DLLEXPORT int feraiseexcept(int __excepts);
 
-__fenv_static __attribute__((always_inline)) inline int
+__fenv_static __attribute__((always_inline)) DLLEXPORT inline int
 fetestexcept(int __excepts)
 {
 	uint32_t __mxcsr;
@@ -137,7 +137,7 @@ fetestexcept(int __excepts)
 	return ((__status | __mxcsr) & __excepts);
 }
 
-__fenv_static inline int
+__fenv_static DLLEXPORT inline int
 fegetround(void)
 {
 	uint16_t __control;
@@ -152,7 +152,7 @@ fegetround(void)
 	return (__control & _ROUND_MASK);
 }
 
-__fenv_static inline int
+__fenv_static DLLEXPORT inline int
 fesetround(int __round)
 {
 	uint32_t __mxcsr;
@@ -174,10 +174,10 @@ fesetround(int __round)
 	return (0);
 }
 
-int fegetenv(fenv_t *__envp);
-int feholdexcept(fenv_t *__envp);
+DLLEXPORT int fegetenv(fenv_t *__envp);
+DLLEXPORT int feholdexcept(fenv_t *__envp);
 
-__fenv_static inline int
+__fenv_static DLLEXPORT inline int
 fesetenv(const fenv_t *__envp)
 {
 
@@ -194,15 +194,15 @@ fesetenv(const fenv_t *__envp)
 	return (0);
 }
 
-int feupdateenv(const fenv_t *__envp);
+DLLEXPORT int feupdateenv(const fenv_t *__envp);
 
 #if __BSD_VISIBLE
 
-int feenableexcept(int __mask);
-int fedisableexcept(int __mask);
+DLLEXPORT int feenableexcept(int __mask);
+DLLEXPORT int fedisableexcept(int __mask);
 
 /* We currently provide no external definition of fegetexcept(). */
-static inline int
+static inline DLLEXPORT int
 fegetexcept(void)
 {
 	uint16_t __control;
