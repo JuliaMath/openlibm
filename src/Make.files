@@ -59,4 +59,11 @@ $(CUR_SRCS) +=	s_ccosh.c s_ccoshf.c s_cexp.c s_cexpf.c \
 	s_cimag.c s_cimagf.c s_cimagl.c \
 	s_conj.c s_conjf.c s_conjl.c \
 	s_cproj.c s_cprojf.c s_creal.c s_crealf.c s_creall.c \
-	s_csinh.c s_csinhf.c s_ctanh.c s_ctanhf.c
+	s_csinh.c s_csinhf.c s_ctanh.c s_ctanhf.c \
+        s_cacos.c s_cacosf.c \
+        s_cacosh.c s_cacoshf.c s_cacoshl.c s_cacosl.c \
+        s_casin.c s_casinf.c s_casinh.c s_casinhf.c s_casinhl.c \
+        s_casinl.c s_catan.c s_catanf.c s_catanh.c s_catanhf.c s_catanhl.c \
+        s_catanl.c s_ccoshl.c s_ccosl.c s_cexpl.c \
+        s_clog.c s_clogf.c s_clogl.c \
+        s_csinhl.c s_csinl.c s_ctanhl.c s_ctanl.c
