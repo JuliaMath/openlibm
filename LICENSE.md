@@ -1,19 +1,21 @@
-## OpenLIBM
+## OpenLibm
 
-OpenLIBM contains code that is covered by various licenses. 
+OpenLibm contains code that is covered by various licenses.
 
-The OpenLIBM code derives from the FreeBSD msun implementation, which
+The OpenLibm code derives from the FreeBSD msun implementation, which
 in turn derives from FDLIBM 5.3. As a result, it has a number of fixes
 and updates that have accumulated over the years in msun, and also
 optimized assembly versions of many functions. These improvements are
-provided under the BSD and ISC licenses. The msun library also includes
-work placed under the public domain, which is noted in the individual
-files. Further work on making a standalone OpenLIBM library from msun,
-as part of the Julia project is covered under the MIT license.
+provided under the BSD and ISC licenses. The msun library also
+includes work placed under the public domain, which is noted in the
+individual files. Further work on making a standalone OpenLibm library
+from msun, as part of the Julia project is covered under the MIT
+license. The test files, test-double.c and test-float.c are under the
+LGPL.
 
 ## Parts copyrighted by the Julia project (MIT License)
 
->       Copyright (c) 2011-13 Viral B. Shah, Keno Fischer, Jameson Nash,
+>       Copyright (c) 2011-14 The Julia Project.
 >       https://github.com/JuliaLang/openlibm/graphs/contributors
 >
 >       Permission is hereby granted, free of charge, to any person obtaining
@@ -90,3 +92,24 @@ as part of the Julia project is covered under the MIT license.
 >      Permission to use, copy, modify, and distribute this
 >      software is freely granted, provided that this notice
 >      is preserved.
+
+## Tests
+
+>   Copyright (C) 1997, 1999 Free Software Foundation, Inc.
+>   This file is part of the GNU C Library.
+>   Contributed by Andreas Jaeger <aj@suse.de>, 1997.
+>
+>   The GNU C Library is free software; you can redistribute it and/or
+>   modify it under the terms of the GNU Lesser General Public
+>   License as published by the Free Software Foundation; either
+>   version 2.1 of the License, or (at your option) any later version.
+>
+>   The GNU C Library is distributed in the hope that it will be useful,
+>   but WITHOUT ANY WARRANTY; without even the implied warranty of
+>   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+>   Lesser General Public License for more details.
+>
+>   You should have received a copy of the GNU Lesser General Public
+>   License along with the GNU C Library; if not, write to the Free
+>   Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
+>   02111-1307 USA.
