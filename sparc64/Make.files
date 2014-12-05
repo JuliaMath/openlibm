@@ -1,1 +1,0 @@
-$(CUR_SRCS) = fenv.c e_sqrt.S e_sqrtf.S
