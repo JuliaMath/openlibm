@@ -1,3 +1,5 @@
+// Copyright (C) Dahua Lin, 2014. Provided under the MIT license.
+
 // Benchmark on libm functions
 
 #include <math.h>
