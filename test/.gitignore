@@ -4,5 +4,6 @@
 /test-double
 /test-double-system
 /test-double.dSYM
-/libm-bench
+/bench-openlibm
+/bench-syslibm
 /*.exe
