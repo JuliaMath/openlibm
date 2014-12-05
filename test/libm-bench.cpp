@@ -3,7 +3,7 @@
 // Benchmark on libm functions
 
 #include <math.h>
-#include <sys/time.h>
+#include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
 
