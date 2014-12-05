@@ -4,8 +4,8 @@ OS := $(shell uname)
 # Do not forget to bump SOMINOR when changing VERSION,
 # and SOMAJOR when breaking ABI in a backward-incompatible way
 VERSION = 0.5
-SOMAJOR = 2
-SOMINOR = 0
+SOMAJOR = 1
+SOMINOR = 1
 DESTDIR =
 prefix = /usr/local
 bindir = $(prefix)/bin
