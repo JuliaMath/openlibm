@@ -20,3 +20,7 @@ $(CUR_SRCS)+= e_remainderl.S e_sqrtl.S s_ceill.S s_copysignl.S \
 	    s_logbl.S s_lrintl.S s_remquol.S s_rintl.S s_truncl.S
 
 $(CUR_SRCS)+= fenv.c
+
+$(CUR_SRCS)+= ashldi3.S ashrdi3.S divdi3.S floatdidf.S floatdisf.S \
+        floatdixf.S floatundidf.S floatundisf.S floatundixf.S      \
+        lshrdi3.S moddi3.S muldi3.S udivdi3.S umoddi3.S fixunsdfdi.c

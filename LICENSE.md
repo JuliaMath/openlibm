@@ -13,6 +13,13 @@ OpenLibm library from msun, as part of the Julia project is covered
 under the MIT license. The test files, test-double.c and test-float.c
 are under the LGPL.
 
+Additional code is due to the LLVM project''s compiler_rt project, which
+is dual licensed under both the University of Illinois "BSD-Like" license
+and the MIT license. As a contributor, you agree to allow your modifications to
+those files used under either license, while users may use thi scode under
+either license. The full text of these licenses is appended to the end of
+this file.
+
 ## Parts copyrighted by the Julia project (MIT License)
 
 >       Copyright (c) 2011-14 The Julia Project.
@@ -113,3 +120,108 @@ are under the LGPL.
 >   License along with the GNU C Library; if not, write to the Free
 >   Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
 >   02111-1307 USA.
+
+## LLVM (University of Illinois, BSD-like)
+
+> University of Illinois/NCSA
+> Open Source License
+>
+> Copyright (c) 2009-2014 by the contributors listed below.
+>
+> All rights reserved.
+>
+> Developed by:
+>
+>     LLVM Team
+>
+>     University of Illinois at Urbana-Champaign
+>
+>     http://llvm.org
+>
+> Permission is hereby granted, free of charge, to any person obtaining a copy of
+> this software and associated documentation files (the "Software"), to deal with
+> the Software without restriction, including without limitation the rights to
+> use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+> of the Software, and to permit persons to whom the Software is furnished to do
+> so, subject to the following conditions:
+>
+>     * Redistributions of source code must retain the above copyright notice,
+>       this list of conditions and the following disclaimers.
+>
+>     * Redistributions in binary form must reproduce the above copyright notice,
+>       this list of conditions and the following disclaimers in the
+>       documentation and/or other materials provided with the distribution.
+>
+>     * Neither the names of the LLVM Team, University of Illinois at
+>       Urbana-Champaign, nor the names of its contributors may be used to
+>       endorse or promote products derived from this Software without specific
+>       prior written permission.
+>
+> THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+> IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+> FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE
+> CONTRIBUTORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+> LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+> OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS WITH THE
+> SOFTWARE.
+
+## LLVM (MIT)
+
+> Copyright (c) 2009-2014 by the contributors listed below
+>
+> Permission is hereby granted, free of charge, to any person obtaining a copy
+> of this software and associated documentation files (the "Software"), to deal
+> in the Software without restriction, including without limitation the rights
+> to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+> copies of the Software, and to permit persons to whom the Software is
+> furnished to do so, subject to the following conditions:
+>
+> The above copyright notice and this permission notice shall be included in
+> all copies or substantial portions of the Software.
+>
+> THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+> IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+> FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+> AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+> LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+> OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+> THE SOFTWARE.
+
+## LLVM (Contributors)
+
+> This file is a partial list of people who have contributed to the LLVM/CompilerRT
+> project.  If you have contributed a patch or made some other contribution to
+> LLVM/CompilerRT, please submit a patch to this file to add yourself, and it will be
+> done!
+>
+> The list is sorted by surname and formatted to allow easy grepping and
+> beautification by scripts.  The fields are: name (N), email (E), web-address
+> (W), PGP key ID and fingerprint (P), description (D), and snail-mail address
+> (S).
+>
+> N: Craig van Vliet
+> E: cvanvliet@auroraux.org
+> W: http://www.auroraux.org
+> D: Code style and Readability fixes.
+>
+> N: Edward O'Callaghan
+> E: eocallaghan@auroraux.org
+> W: http://www.auroraux.org
+> D: CMake'ify Compiler-RT build system
+> D: Maintain Solaris & AuroraUX ports of Compiler-RT
+>
+> N: Howard Hinnant
+> E: hhinnant@apple.com
+> D: Architect and primary author of compiler-rt
+>
+> N: Guan-Hong Liu
+> E: koviankevin@hotmail.com
+> D: IEEE Quad-precision functions
+>
+> N: Joerg Sonnenberger
+> E: joerg@NetBSD.org
+> D: Maintains NetBSD port.
+>
+> N: Matt Thomas
+> E: matt@NetBSD.org
+> D: ARM improvements.
