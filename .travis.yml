@@ -3,3 +3,5 @@ script: ./.travis.sh
 env:
 - TARGET=host
 - TARGET=arm32
+notifications:
+  email: false
