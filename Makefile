@@ -41,6 +41,7 @@ clean:
 	@for dir in $(SUBDIRS) .; do \
 		rm -fr $$dir/*.o $$dir/*.a $$dir/*.$(SHLIB_EXT)*; \
 	done
+	@rm -f test/test-double test/test-float
 
 distclean:
 	-rm -f $(OBJS) *.a *.$(SHLIB_EXT) libopenlibm.*
