@@ -1,7 +1,10 @@
 language: c
 script: ./.travis.sh
+os:
+    - linux
+    - osx
 env:
-- TARGET=host
-- TARGET=arm32
+    - TARGET=host
+    - TARGET=arm32
 notifications:
-  email: false
+    email: false

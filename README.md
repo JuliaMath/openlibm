@@ -1,5 +1,7 @@
 ## OpenLibm
 
+[![Build Status](https://travis-ci.org/JuliaLang/openlibm.svg?branch=master)](https://travis-ci.org/JuliaLang/openlibm)
+
 [OpenLibm](http://www.openlibm.org) is an effort to have a high quality, portable, standalone
 C mathematical library ([`libm`](http://en.wikipedia.org/wiki/libm)).
 It can be used standalone in applications and programming language
