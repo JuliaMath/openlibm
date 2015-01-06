@@ -6,5 +6,9 @@ os:
 env:
     - TARGET=host
     - TARGET=arm32
+matrix:
+    exclude:
+        - os: osx
+        env: TARGET="arm32"
 notifications:
     email: false
