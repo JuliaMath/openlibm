@@ -56,13 +56,13 @@ install: all openlibm.pc
 	mkdir -p $(DESTDIR)$(shlibdir)
 	mkdir -p $(DESTDIR)$(libdir)/pkgconfig
 	mkdir -p $(DESTDIR)$(includedir)/openlibm
-	cp -a libopenlibm.$(SHLIB_EXT)* $(DESTDIR)$(shlibdir)/
-	cp -a libopenlibm.a $(DESTDIR)$(libdir)/
-	cp -a src/openlibm.h $(DESTDIR)$(includedir)/
-	cp -a openlibm.pc $(DESTDIR)$(libdir)/pkgconfig/
+	cp -f -a libopenlibm.$(SHLIB_EXT)* $(DESTDIR)$(shlibdir)/
+	cp -f -a libopenlibm.a $(DESTDIR)$(libdir)/
+	cp -f -a src/openlibm.h $(DESTDIR)$(includedir)/
+	cp -f -a openlibm.pc $(DESTDIR)$(libdir)/pkgconfig/
 ifneq ($(wildcard $(ARCH)/bsd_asm.h),)
-	cp -a $(ARCH)/bsd_asm.h $(DESTDIR)$(includedir)/openlibm/
+	cp -f -a $(ARCH)/bsd_asm.h $(DESTDIR)$(includedir)/openlibm/
 endif
 ifneq ($(wildcard $(ARCH)/bsd_cdefs.h),)
-	cp -a $(ARCH)/bsd_cdefs.h $(DESTDIR)$(includedir)/openlibm/
+	cp -f -a $(ARCH)/bsd_cdefs.h $(DESTDIR)$(includedir)/openlibm/
 endif

@@ -9,6 +9,6 @@ env:
 matrix:
     exclude:
         - os: osx
-          env: TARGET="arm32"
+          env: TARGET=arm32
 notifications:
     email: false
