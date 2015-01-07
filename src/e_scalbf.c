@@ -30,8 +30,8 @@ __ieee754_scalbf(float x, float fn)
 #ifdef _SCALB_INT
 	return scalbnf(x,fn);
 #else
-	if ((__isnanf)(x)||(__isnanf)(fn)) return x*fn;
-	if (!finitef(fn)) {
+	if (isnan(x)||isnan(fn)) return x*fn;
+	if (!isfinite(fn)) {
 	    if(fn>(float)0.0) return x*fn;
 	    else       return x/(-fn);
 	}

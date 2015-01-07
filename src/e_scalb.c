@@ -35,7 +35,7 @@ __ieee754_scalb(double x, double fn)
 	return scalbn(x,fn);
 #else
 	if (isnan(x)||isnan(fn)) return x*fn;
-	if (!finite(fn)) {
+	if (!isfinite(fn)) {
 	    if(fn>0.0) return x*fn;
 	    else       return x/(-fn);
 	}

@@ -140,7 +140,7 @@ tgamma(x)
 		if (x != 0.0)
 			u.a = one - tiny;	/* raise inexact */
 		return (one/x);
-	} else if (!finite(x))
+	} else if (!isfinite(x))
 		return (x - x);		/* x is NaN or -Inf */
 	else
 		return (neg_gam(x));

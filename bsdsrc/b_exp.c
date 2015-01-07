@@ -152,13 +152,13 @@ double x, c;
 			c= x - z*(p1+z*(p2+z*(p3+z*(p4+z*p5))));
 			c = (x*c)/(2.0-c);
 
-			return  scalb(1.+(hi-(lo - c)), k);
+			return  scalbn(1.+(hi-(lo - c)), k);
 		}
 		/* end of x > lntiny */
 
 		else
 		     /* exp(-big#) underflows to zero */
-		     if(finite(x))  return(scalb(1.0,-5000));
+		     if(isfinite(x))  return(scalbn(1.0,-5000));
 
 		     /* exp(-INF) is zero */
 		     else return(0.0);
@@ -167,5 +167,5 @@ double x, c;
 
 	else
 	/* exp(INF) is INF, exp(+big#) overflows to INF */
-	    return( finite(x) ?  scalb(1.0,5000)  : x);
+	    return( isfinite(x) ?  scalbn(1.0,5000)  : x);
 }
