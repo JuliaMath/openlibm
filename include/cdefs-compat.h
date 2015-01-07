@@ -1,9 +1,11 @@
 #ifndef _CDEFS_COMPAT_H_
 #define	_CDEFS_COMPAT_H_
 
-#ifndef _WIN32
-#include "sys/cdefs.h"
-#else /* _WIN32 */
+/*
+ * We cannot be certain that this operating system has <sys/cdefs.h>.
+ * Instead, include a header file that is likely to pull in this header.
+ */
+#include <stdio.h>
 
 #if defined(__cplusplus)
 #define	__BEGIN_DECLS	extern "C" {
@@ -12,13 +14,6 @@
 #define	__BEGIN_DECLS
 #define	__END_DECLS
 #endif
-
-#define _SYS_CDEFS_H_
-
-#endif /* _WIN32 */
-
-
-
 
 #ifdef __GNUC__
 #ifndef __strong_reference
