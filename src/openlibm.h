@@ -204,7 +204,7 @@ typedef union {
 #define	IMAGPART(z)	((z).a[1])
 
 /*
- * Inline functions that can be used to construct complex values.
+ * Macros that can be used to construct complex values.
  *
  * The C99 standard intends x+I*y to be used for this, but x+I*y is
  * currently unusable in general since gcc introduces many overflow,
@@ -217,18 +217,20 @@ typedef union {
  * and gcc 4.7 added a __builtin_complex feature to simplify implementation
  * of CMPLX in libc, so we can take advantage of these features if they
  * are available.
+ *
+ * If __builtin_complex is not available, resort to using inline
+ * functions instead. These can unfortunately not be used to construct
+ * compile-time constants.
  */
-#if defined(CMPLXF) && defined(CMPLX) && defined(CMPLXL) /* C11 */
-#  define cpackf(x,y) CMPLXF(x,y)
-#  define cpack(x,y) CMPLX(x,y)
-#  define cpackl(x,y) CMPLXL(x,y)
-#elif (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 7)) && !defined(__INTEL_COMPILER)
-#  define cpackf(x,y) __builtin_complex ((float) (x), (float) (y))
-#  define cpack(x,y) __builtin_complex ((double) (x), (double) (y))
-#  define cpackl(x,y) __builtin_complex ((long double) (x), (long double) (y))
-#else /* define our own cpack functions */
+
+#define HAVE_BUILTIN_COMPLEX (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 7)) && !defined(__INTEL_COMPILER)
+
+#ifndef CMPLXF
+#if HAVE_BUILTIN_COMPLEX
+#  define CMPLXF(x,y) __builtin_complex ((float) (x), (float) (y))
+#else
 static __inline float complex
-cpackf(float x, float y)
+CMPLXF(float x, float y)
 {
 	float_complex z;
 
@@ -236,9 +238,15 @@ cpackf(float x, float y)
 	IMAGPART(z) = y;
 	return (z.f);
 }
+#endif
+#endif
 
+#ifndef CMPLX
+#if HAVE_BUILTIN_COMPLEX
+#  define CMPLX(x,y) __builtin_complex ((double) (x), (double) (y))
+#else
 static __inline double complex
-cpack(double x, double y)
+CMPLX(double x, double y)
 {
 	double_complex z;
 
@@ -246,9 +254,15 @@ cpack(double x, double y)
 	IMAGPART(z) = y;
 	return (z.f);
 }
+#endif
+#endif
 
+#ifndef CMPLXL
+#if HAVE_BUILTIN_COMPLEX
+#  define CMPLXL(x,y) __builtin_complex ((long double) (x), (long double) (y))
+#else
 static __inline long double complex
-cpackl(long double x, long double y)
+CMPLXL(long double x, long double y)
 {
 	long_double_complex z;
 
@@ -256,7 +270,9 @@ cpackl(long double x, long double y)
 	IMAGPART(z) = y;
 	return (z.f);
 }
-#endif /* define our own cpack functions */
+#endif
+#endif
+
 //VBS
 //#endif /* _COMPLEX_H */
 
