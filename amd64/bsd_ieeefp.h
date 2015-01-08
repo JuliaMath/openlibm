@@ -38,10 +38,6 @@
 #ifndef _MACHINE_IEEEFP_H_
 #define _MACHINE_IEEEFP_H_
 
-#if !defined(_SYS_CDEFS_H) && !defined(_SYS_CDEFS_H_) && !defined(_CDEFS_H_)
-#error this file needs sys/cdefs.h as a prerequisite
-#endif
-
 /*
  * FP rounding modes
  */

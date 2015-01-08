@@ -57,7 +57,9 @@ extern const union __nan_un {
 //VBS begin
 #define __MATH_BUILTIN_CONSTANTS
 #define	__MATH_BUILTIN_RELOPS
+#ifndef __ISO_C_VISIBLE
 #define __ISO_C_VISIBLE 1999
+#endif
 //VBS end
 
 #ifdef __MATH_BUILTIN_CONSTANTS

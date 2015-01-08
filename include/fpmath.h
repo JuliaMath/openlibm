@@ -38,28 +38,37 @@
 #endif
 #endif
 
-#ifdef __linux
+#if defined(__BYTE_ORDER__) && defined(__ORDER_LITTLE_ENDIAN__)
+
+/* Definitions provided directly by GCC and Clang. */
+#define _LITTLE_ENDIAN    __ORDER_LITTLE_ENDIAN__
+#define _BIG_ENDIAN       __ORDER_BIG_ENDIAN__
+#define _PDP_ENDIAN       __ORDER_PDP_ENDIAN__
+#define _BYTE_ORDER       __BYTE_ORDER__
+
+#elif defined(__linux)
+
 #include <features.h>
 #include <endian.h>
 #define _LITTLE_ENDIAN  __LITTLE_ENDIAN
 #define _BIG_ENDIAN     __BIG_ENDIAN
 #define _PDP_ENDIAN     __PDP_ENDIAN
 #define _BYTE_ORDER     __BYTE_ORDER
-#endif
 
-#ifdef __APPLE__
+#elif defined(__APPLE__)
+
 #include <machine/endian.h>
 #define _LITTLE_ENDIAN  LITTLE_ENDIAN
 #define _BIG_ENDIAN     BIG_ENDIAN
 #define _PDP_ENDIAN     PDP_ENDIAN
 #define _BYTE_ORDER     BYTE_ORDER
-#endif
 
-#ifdef __FreeBSD__
+#elif defined(__FreeBSD__)
+
 #include <machine/endian.h>
-#endif
 
-#ifdef _WIN32
+#elif defined(_WIN32)
+
 #define _LITTLE_ENDIAN 1234
 #define _BIG_ENDIAN    4321
 #define _PDP_ENDIAN    3412
@@ -69,6 +78,7 @@
 #define BIG_ENDIAN     _BIG_ENDIAN
 #define PDP_ENDIAN     _PDP_ENDIAN
 #define BYTE_ORDER     _BYTE_ORDER
+
 #endif
 
 #ifndef _IEEE_WORD_ORDER
