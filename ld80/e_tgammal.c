@@ -25,7 +25,6 @@
  * SYNOPSIS:
  *
  * long double x, y, tgammal();
- * extern int signgam;
  *
  * y = tgammal( x );
  *
@@ -33,10 +32,8 @@
  *
  * DESCRIPTION:
  *
- * Returns gamma function of the argument.  The result is
- * correctly signed, and the sign (+1 or -1) is also
- * returned in a global (extern) variable named signgam.
- * This variable is also filled in by the logarithmic gamma
+ * Returns gamma function of the argument.  The result is correctly
+ * signed.  This variable is also filled in by the logarithmic gamma
  * function lgamma().
  *
  * Arguments |x| <= 13 are reduced by recurrence and the function
@@ -61,7 +58,6 @@
 #include <openlibm.h>
 
 #include "math_private.h"
-extern int signgam;
 
 /*
 tgamma(x+2)  = tgamma(x+2) P(x)/Q(x)
@@ -224,7 +220,6 @@ tgammal(long double x)
 long double p, q, z;
 int i;
 
-signgam = 1;
 if( isnan(x) )
 	return(NAN);
 if(x == INFINITY)
@@ -237,6 +232,7 @@ q = fabsl(x);
 
 if( q > 13.0L )
 	{
+	int sign = 1;
 	if( q > MAXGAML )
 		goto goverf;
 	if( x < 0.0L )
@@ -246,7 +242,7 @@ if( q > 13.0L )
 			return (x - x) / (x - x);
 		i = p;
 		if( (i & 1) == 0 )
-			signgam = -1;
+			sign = -1;
 		z = q - p;
 		if( z > 0.5L )
 			{
@@ -258,7 +254,7 @@ if( q > 13.0L )
 		if( z <= PIL/LDBL_MAX )
 			{
 goverf:
-			return( signgam * INFINITY);
+			return( sign * INFINITY);
 			}
 		z = PIL/z;
 		}
@@ -266,7 +262,7 @@ goverf:
 		{
 		z = stirf(x);
 		}
-	return( signgam * z );
+	return( sign * z );
 	}
 
 z = 1.0L;
@@ -298,8 +294,6 @@ x -= 2.0L;
 p = __polevll( x, P, 7 );
 q = __polevll( x, Q, 8 );
 z = z * p / q;
-if( z < 0 )
-	signgam = -1;
 return z;
 
 small:
@@ -311,7 +305,6 @@ else
 		{
 		x = -x;
 		q = z / (x * __polevll( x, SN, 8 ));
-		signgam = -1;
 		}
 	else
 		q = z / (x * __polevll( x, S, 8 ));
