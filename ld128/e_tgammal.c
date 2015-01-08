@@ -26,20 +26,14 @@ tgammal(long double x)
 	int64_t i0,i1;
 
 	GET_LDOUBLE_WORDS64(i0,i1,x);
-	if (((i0&0x7fffffffffffffffLL)|i1) == 0) {
-		signgam = 0;
+	if (((i0&0x7fffffffffffffffLL)|i1) == 0)
 		return (1.0/x);
-	}
 
-	if (i0<0 && (u_int64_t)i0<0xffff000000000000ULL && rintl(x)==x) {
-		signgam = 0;
+	if (i0<0 && (u_int64_t)i0<0xffff000000000000ULL && rintl(x)==x)
 		return (x-x)/(x-x);
-	}
 
-	if (i0==0xffff000000000000ULL && i1==0) {
-		signgam = 0;
+	if (i0==0xffff000000000000ULL && i1==0)
 		return (x-x);
-	}
 
 	return expl(lgammal(x));
 }

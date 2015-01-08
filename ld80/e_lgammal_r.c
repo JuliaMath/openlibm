@@ -25,7 +25,7 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-/* lgammal(x)
+/* lgammal_r(x, signgamp)
  * Reentrant version of the logarithm of the Gamma function
  * with user provide pointer for the sign of Gamma(x).
  *
@@ -89,7 +89,6 @@
 #include <openlibm.h>
 
 #include "math_private.h"
-extern int signgam;
 
 static const long double
   half = 0.5L,
@@ -267,20 +266,20 @@ sin_pi(long double x)
 
 
 long double
-lgammal(long double x)
+lgammal_r(long double x, int *signgamp)
 {
   long double t, y, z, nadj, p, p1, p2, q, r, w;
   int i, ix;
   u_int32_t se, i0, i1;
 
-  signgam = 1;
+  *signgamp = 1;
   GET_LDOUBLE_WORDS (se, i0, i1, x);
   ix = se & 0x7fff;
 
   if ((ix | i0 | i1) == 0)
     {
       if (se & 0x8000)
-	signgam = -1;
+	*signgamp = -1;
       return one / fabsl (x);
     }
 
@@ -294,7 +293,7 @@ lgammal(long double x)
     {				/* |x|<2**-63, return -log(|x|) */
       if (se & 0x8000)
 	{
-	  signgam = -1;
+	  *signgamp = -1;
 	  return -logl (-x);
 	}
       else
@@ -307,7 +306,7 @@ lgammal(long double x)
 	return one / fabsl (t);	/* -integer */
       nadj = logl (pi / fabsl (t * x));
       if (t < zero)
-	signgam = -1;
+	*signgamp = -1;
       x = -x;
     }
 
