@@ -558,8 +558,12 @@ long double	tanhl(long double);
 long double	tanl(long double);
 long double	tgammal(long double);
 long double	truncl(long double);
-
 #endif /* __ISO_C_VISIBLE >= 1999 */
+
+/* Reentrant version of lgammal. */
+#if __BSD_VISIBLE
+long double	lgammal_r(long double, int *);
+#endif	/* __BSD_VISIBLE */
 
 #include "openlibm_complex.h"
 

@@ -16,7 +16,7 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-/*                                                      lgammal
+/*                                                      lgammal_r
  *
  *      Natural logarithm of gamma function
  *
@@ -24,10 +24,10 @@
  *
  * SYNOPSIS:
  *
- * long double x, y, lgammal();
- * extern int signgam;
+ * long double x, y, lgammal_r();
+ * int signgam;
  *
- * y = lgammal(x);
+ * y = lgammal_r(x, &signgam);
  *
  *
  *
@@ -35,8 +35,7 @@
  *
  * Returns the base e (2.718...) logarithm of the absolute
  * value of the gamma function of the argument.
- * The sign (+1 or -1) of the gamma function is returned in a
- * global (extern) variable named signgam.
+ * The sign (+1 or -1) of the gamma function is returned through signgamp.
  *
  * The positive domain is partitioned into numerous segments for approximation.
  * For x > 10,
@@ -757,12 +756,12 @@ deval (long double x, const long double *p, int n)
 
 
 long double
-lgammal(long double x)
+lgammal_r(long double x, int *signgamp)
 {
   long double p, q, w, z, nx;
   int i, nn;
 
-  signgam = 1;
+  *signgamp = 1;
 
   if (! finite (x))
     return x * x;
@@ -770,7 +769,7 @@ lgammal(long double x)
   if (x == 0.0L)
     {
       if (signbit (x))
-	signgam = -1;
+	*signgamp = -1;
       return one / fabsl (x);
     }
 
@@ -782,9 +781,9 @@ lgammal(long double x)
 	return (one / (p - p));
       i = p;
       if ((i & 1) == 0)
-	signgam = -1;
+	*signgamp = -1;
       else
-	signgam = 1;
+	*signgamp = 1;
       z = q - p;
       if (z > 0.5L)
 	{
@@ -793,7 +792,7 @@ lgammal(long double x)
 	}
       z = q * sinl (PIL * z);
       if (z == 0.0L)
-	return (signgam * huge * huge);
+	return (*signgamp * huge * huge);
       w = lgammal (q);
       z = logl (PIL / z) - w;
       return (z);
@@ -1025,7 +1024,7 @@ lgammal(long double x)
     }
 
   if (x > MAXLGM)
-    return (signgam * huge * huge);
+    return (*signgamp * huge * huge);
 
   q = ls2pi - x;
   q = (x - 0.5L) * logl (x) + q;
