@@ -17,8 +17,8 @@
  *   Special cases:
  */
 
-#include <math.h>
 #include <float.h>
+#include <openlibm.h>
 
 #include "math_private.h"
 

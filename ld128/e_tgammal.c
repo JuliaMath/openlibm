@@ -16,7 +16,7 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-#include <math.h>
+#include <openlibm.h>
 
 #include "math_private.h"
 

@@ -46,7 +46,7 @@
  *      only coshl(0)=1 is exact for finite x.
  */
 
-#include <math.h>
+#include <openlibm.h>
 
 #include "math_private.h"
 

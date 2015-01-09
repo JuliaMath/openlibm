@@ -42,7 +42,7 @@
  * 	than 1 ulps (units in the last place)
  */
 
-#include <math.h>
+#include <openlibm.h>
 
 #include "math_private.h"
 

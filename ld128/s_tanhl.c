@@ -50,7 +50,8 @@
  *      only tanhl(0)=0 is exact for finite argument.
  */
 
-#include "math.h"
+#include <openlibm.h>
+
 #include "math_private.h"
 
 static const long double one = 1.0, two = 2.0, tiny = 1.0e-4900L;
