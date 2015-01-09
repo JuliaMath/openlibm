@@ -16,9 +16,9 @@
 /* long double version of hypot().  See e_hypot.c for most comments. */
 
 #include <float.h>
+#include <openlibm.h>
 
 #include "fpmath.h"
-#include "openlibm.h"
 #include "math_private.h"
 
 #define	GET_LDBL_MAN(h, l, v) do {	\

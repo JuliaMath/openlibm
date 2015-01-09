@@ -16,7 +16,8 @@
 #include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_significandf.c,v 1.8 2008/02/22 02:30:36 das Exp $");
 
-#include "openlibm.h"
+#include <openlibm.h>
+
 #include "math_private.h"
 
 DLLEXPORT float

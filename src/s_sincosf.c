@@ -10,8 +10,9 @@
 */
 
 #include "cdefs-compat.h"
+
 #include <float.h>
-#include "openlibm.h"
+#include <openlibm.h>
 
 //#define	INLINE_KERNEL_COSDF
 //#define	INLINE_KERNEL_SINDF

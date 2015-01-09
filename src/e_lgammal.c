@@ -1,5 +1,7 @@
 #include "cdefs-compat.h"
-#include "openlibm.h"
+
+#include <openlibm.h>
+
 #include "math_private.h"
 
 extern int signgam;

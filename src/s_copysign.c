@@ -19,7 +19,8 @@
  * with the sign bit of y.
  */
 
-#include "openlibm.h"
+#include <openlibm.h>
+
 #include "math_private.h"
 
 DLLEXPORT double

@@ -18,11 +18,11 @@
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_cbrtl.c,v 1.1 2011/03/12 19:37:35 kargl Exp $");
 
 #include <float.h>
+#include <openlibm.h>
 // VBS
 //#include <ieeefp.h>
 
-#include "fpmath.h"    
-#include "openlibm.h"
+#include "fpmath.h"
 #include "math_private.h"
 #if defined(_WIN32) && defined(__i386__)
 #include "i387/bsd_ieeefp.h"

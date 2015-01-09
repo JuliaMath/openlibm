@@ -32,7 +32,8 @@
  *	only sinh(0)=0 is exact for finite x.
  */
 
-#include "openlibm.h"
+#include <openlibm.h>
+
 #include "math_private.h"
 
 static const double one = 1.0, shuge = 1.0e307;

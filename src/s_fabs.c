@@ -14,7 +14,8 @@
  * fabs(x) returns the absolute value of x.
  */
 
-#include "openlibm.h"
+#include <openlibm.h>
+
 #include "math_private.h"
 
 DLLEXPORT double

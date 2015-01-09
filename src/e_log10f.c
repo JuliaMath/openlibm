@@ -16,7 +16,8 @@
  * Float version of e_log10.c.  See the latter for most comments.
  */
 
-#include "openlibm.h"
+#include <openlibm.h>
+
 #include "math_private.h"
 #include "k_logf.h"
 

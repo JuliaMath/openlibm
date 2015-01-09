@@ -22,7 +22,8 @@
  * Method: See __ieee754_lgamma_r
  */
 
-#include "openlibm.h"
+#include <openlibm.h>
+
 #include "math_private.h"
 
 DLLEXPORT double
