@@ -24,6 +24,74 @@
 #define I _Complex_I
 
 /*
+ * Macros that can be used to construct complex values.
+ *
+ * The C99 standard intends x+I*y to be used for this, but x+I*y is
+ * currently unusable in general since gcc introduces many overflow,
+ * underflow, sign and efficiency bugs by rewriting I*y as
+ * (0.0+I)*(y+0.0*I) and laboriously computing the full complex product.
+ * In particular, I*Inf is corrupted to NaN+I*Inf, and I*-0 is corrupted
+ * to -0.0+I*0.0.
+ *
+ * In C11, a CMPLX(x,y) macro was added to circumvent this limitation,
+ * and gcc 4.7 added a __builtin_complex feature to simplify implementation
+ * of CMPLX in libc, so we can take advantage of these features if they
+ * are available. Clang simply allows complex values to be constructed
+ * using a compound literal.
+ *
+ * If __builtin_complex is not available, resort to using inline
+ * functions instead. These can unfortunately not be used to construct
+ * compile-time constants.
+ *
+ * C99 specifies that complex numbers have the same representation as
+ * an array of two elements, where the first element is the real part
+ * and the second element is the imaginary part.
+ */
+
+#ifdef __clang__
+#  define CMPLXF(x, y) ((float complex){x, y})
+#  define CMPLX(x, y) ((double complex){x, y})
+#  define CMPLXL(x, y) ((long double complex){x, y})
+#elif (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 7)) && !defined(__INTEL_COMPILER)
+#  define CMPLXF(x,y) __builtin_complex ((float) (x), (float) (y))
+#  define CMPLX(x,y) __builtin_complex ((double) (x), (double) (y))
+#  define CMPLXL(x,y) __builtin_complex ((long double) (x), (long double) (y))
+#else
+static inline float complex
+CMPLXF(float x, float y)
+{
+	union {
+		float a[2];
+		float complex f;
+	} z = {{ x, y }};
+
+	return (z.f);
+}
+
+static inline double complex
+CMPLX(double x, double y)
+{
+	union {
+		double a[2];
+		double complex f;
+	} z = {{ x, y }};
+
+	return (z.f);
+}
+
+static inline long double complex
+CMPLXL(long double x, long double y)
+{
+	union {
+		long double a[2];
+		long double complex f;
+	} z = {{ x, y }};
+
+	return (z.f);
+}
+#endif
+
+/*
  * Double versions of C99 functions
  */
 double complex cacos(double complex);
