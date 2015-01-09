@@ -14,6 +14,10 @@
  * $FreeBSD: src/lib/msun/src/openlibm.h,v 1.82 2011/11/12 19:55:48 theraven Exp $
  */
 
+#ifdef OPENLIBM_USE_HOST_MATH_H
+#include <math.h>
+#else /* !OPENLIBM_USE_HOST_MATH_H */
+
 #ifndef OPENLIBM_H
 #define	OPENLIBM_H
 
@@ -487,3 +491,5 @@ long double	lgammal_r(long double, int *);
 }
 #endif
 #endif /* !OPENLIBM_H */
+
+#endif /* OPENLIBM_USE_HOST_MATH_H */
