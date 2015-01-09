@@ -25,8 +25,8 @@
  */
 
 #include "cdefs-compat.h"
-#include <fenv.h>
 #include <openlibm.h>
+#include <openlibm_fenv.h>
 #include "math_private.h"
 
 #ifndef type

@@ -123,8 +123,8 @@
 #include <fenv.h>
 #else
 #include "openlibm.h"
+#include "openlibm_fenv.h"
 #include "float.h"
-#include "fenv.h"
 #endif
 
 #if 0 /* XXX scp XXX */

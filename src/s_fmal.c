@@ -27,9 +27,9 @@
 #include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_fmal.c,v 1.7 2011/10/21 06:30:43 das Exp $");
 
-#include <fenv.h>
 #include <float.h>
 #include <openlibm.h>
+#include <openlibm_fenv.h>
 #include "math_private.h"
 #include "fpmath.h"
 
