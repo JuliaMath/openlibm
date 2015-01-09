@@ -26,7 +26,6 @@
  * $FreeBSD: src/lib/msun/src/s_cimagf.c,v 1.3 2009/03/14 18:24:15 das Exp $
  */
 
-#include <openlibm.h>
 #include <openlibm_complex.h>
 
 #include "math_private.h"
@@ -34,7 +33,5 @@
 DLLEXPORT float
 cimagf(float complex z)
 {
-	const float_complex z1 = { .f = z };
-
-	return (IMAGPART(z1));
+	return (__imag__ z);
 }
