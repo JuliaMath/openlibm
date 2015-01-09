@@ -116,16 +116,10 @@
 #endif
 
 #include "libm-test-ulps.h"
-#ifdef SYS_MATH_H /* XXX scp XXX */
-#include <complex.h>
-#include <math.h>
 #include <float.h>
-#include <fenv.h>
-#else
-#include "openlibm.h"
-#include "openlibm_fenv.h"
-#include "float.h"
-#endif
+#include <openlibm.h>
+#include <openlibm_complex.h>
+#include <openlibm_fenv.h>
 
 #if 0 /* XXX scp XXX */
 #define FE_INEXACT FE_INEXACT
