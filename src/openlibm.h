@@ -14,10 +14,10 @@
  * $FreeBSD: src/lib/msun/src/openlibm.h,v 1.82 2011/11/12 19:55:48 theraven Exp $
  */
 
-#ifndef _MATH_H_
-#define	_MATH_H_
+#ifndef OPENLIBM_H
+#define	OPENLIBM_H
 
-#include <complex.h>
+#include <openlibm_complex.h>
 
 #if (defined(_WIN32) || defined (_MSC_VER)) && !defined(__WIN32__)
     #define __WIN32__
@@ -581,9 +581,7 @@ long double	truncl(long double);
 long double	lgammal_r(long double, int *);
 #endif	/* __BSD_VISIBLE */
 
-#include "openlibm_complex.h"
-
 #if defined(__cplusplus)
 }
 #endif
-#endif /* !_MATH_H_ */
+#endif /* !OPENLIBM_H */

@@ -42,8 +42,8 @@
  *
  */
 
-#include <complex.h>
-#include "openlibm.h"
+#include <openlibm.h>
+#include <openlibm_complex.h>
 
 long double complex
 csinhl(long double complex z)

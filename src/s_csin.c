@@ -51,9 +51,9 @@
  *
  */
 
-#include <complex.h>
 #include <float.h>
-#include "openlibm.h"
+#include <openlibm.h>
+#include <openlibm_complex.h>
 
 /* calculate cosh and sinh */
 

@@ -62,9 +62,9 @@
  * 2.9e-17.  See also clog().
  */
 
-#include <complex.h>
 #include <float.h>
-#include "openlibm.h"
+#include <openlibm.h>
+#include <openlibm_complex.h>
 
 #define MAXNUM 1.0e308
 

@@ -15,10 +15,13 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-#ifndef _OPENLIBM_COMPLEX_H_
-#define	_OPENLIBM_COMPLEX_H_
+#ifndef OPENLIBM_COMPLEX_H
+#define	OPENLIBM_COMPLEX_H
 
-#include <sys/cdefs.h>
+#define complex _Complex
+
+#define _Complex_I 1.0fi
+#define I _Complex_I
 
 /*
  * Double versions of C99 functions
@@ -99,4 +102,4 @@ long double complex conjl(long double complex);
 long double complex cprojl(long double complex);
 long double creall(long double complex);
 
-#endif /* !_OPENLIBM_COMPLEX_H_ */
+#endif /* !OPENLIBM_COMPLEX_H */

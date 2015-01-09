@@ -8,9 +8,10 @@
 #include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/w_cabs.c,v 1.7 2008/03/30 20:03:06 das Exp $");
 
-#include <complex.h>
 #include <float.h>
 #include <openlibm.h>
+#include <openlibm_complex.h>
+
 #include "math_private.h"
 
 DLLEXPORT double

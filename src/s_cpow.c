@@ -44,9 +44,10 @@
  *
  */
 
-#include <complex.h>
 #include <float.h>
 #include <openlibm.h>
+#include <openlibm_complex.h>
+
 #include "math_private.h"
 
 DLLEXPORT double complex

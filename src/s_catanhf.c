@@ -42,8 +42,8 @@
  *
  */
 
-#include <complex.h>
-#include "openlibm.h"
+#include <openlibm.h>
+#include <openlibm_complex.h>
 
 float complex
 catanhf(float complex z)
