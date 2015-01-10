@@ -74,5 +74,5 @@ floor(double x)
 }
 
 #if LDBL_MANT_DIG == 53
-__strong_reference(floor, floorl);
+__weak_reference(floor, floorl);
 #endif

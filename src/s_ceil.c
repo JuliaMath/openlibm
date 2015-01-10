@@ -73,5 +73,5 @@ ceil(double x)
 }
 
 #if LDBL_MANT_DIG == 53
-__strong_reference(ceil, ceill);
+__weak_reference(ceil, ceill);
 #endif

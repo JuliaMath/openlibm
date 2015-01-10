@@ -127,5 +127,5 @@ __ieee754_hypot(double x, double y)
 }
 
 #if LDBL_MANT_DIG == 53
-__strong_reference(hypot, hypotl);
+__weak_reference(hypot, hypotl);
 #endif
