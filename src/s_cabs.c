@@ -15,9 +15,9 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-#include <complex.h>
 #include <float.h>
-#include "openlibm.h"
+#include <openlibm.h>
+#include <openlibm_complex.h>
 
 double
 cabs(double complex z)

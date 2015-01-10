@@ -24,7 +24,8 @@
  *		 := sign(x)*log1p(|x| + x^2/(1 + sqrt(1+x^2)))
  */
 
-#include "openlibm.h"
+#include <openlibm.h>
+
 #include "math_private.h"
 
 static const double

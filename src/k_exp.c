@@ -27,9 +27,9 @@
 #include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/k_exp.c,v 1.1 2011/10/21 06:27:56 das Exp $");
 
-#include <complex.h>
+#include <openlibm.h>
+#include <openlibm_complex.h>
 
-#include "openlibm.h"
 #include "math_private.h"
 
 static const u_int32_t k = 1799;		/* constant for reduction */

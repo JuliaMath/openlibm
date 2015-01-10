@@ -18,9 +18,10 @@
  */
 
 #include "cdefs-compat.h"
-#include <float.h>
 
-#include "openlibm.h"
+#include <float.h>
+#include <openlibm.h>
+
 #include "math_private.h"
 
 static const double

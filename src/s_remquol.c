@@ -14,10 +14,10 @@
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_remquol.c,v 1.2 2008/07/31 20:09:47 das Exp $");
 
 #include <float.h>
+#include <openlibm.h>
 #include <stdint.h>
 
 #include "fpmath.h"
-#include "openlibm.h"
 #include "math_private.h"
 
 #define	BIAS (LDBL_MAX_EXP - 1)

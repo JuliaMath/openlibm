@@ -116,16 +116,10 @@
 #endif
 
 #include "libm-test-ulps.h"
-#ifdef SYS_MATH_H /* XXX scp XXX */
-#include <complex.h>
-#include <math.h>
 #include <float.h>
-#include <fenv.h>
-#else
-#include "openlibm.h"
-#include "float.h"
-#include "fenv.h"
-#endif
+#include <openlibm.h>
+#include <openlibm_complex.h>
+#include <openlibm_fenv.h>
 
 #if 0 /* XXX scp XXX */
 #define FE_INEXACT FE_INEXACT
@@ -2741,7 +2735,7 @@ fpclassify_test (void)
   check_int ("fpclassify (-inf) == FP_INFINITE", fpclassify (minus_infty), FP_INFINITE, 0, 0, 0);
   check_int ("fpclassify (+0) == FP_ZERO", fpclassify (plus_zero), FP_ZERO, 0, 0, 0);
   check_int ("fpclassify (-0) == FP_ZERO", fpclassify (minus_zero), FP_ZERO, 0, 0, 0);
-  check_int ("fpclassify (1000) == FP_NORMAL", fpclassify (1000), FP_NORMAL, 0, 0, 0);
+  check_int ("fpclassify (1000) == FP_NORMAL", fpclassify (1000.0), FP_NORMAL, 0, 0, 0);
 
   print_max_error ("fpclassify", 0, 0);
 }
@@ -2886,9 +2880,9 @@ isfinite_test (void)
 {
   init_max_error ();
 
-  check_bool ("isfinite (0) == true", isfinite (0), 1, 0, 0, 0);
+  check_bool ("isfinite (0) == true", isfinite (0.0), 1, 0, 0, 0);
   check_bool ("isfinite (-0) == true", isfinite (minus_zero), 1, 0, 0, 0);
-  check_bool ("isfinite (10) == true", isfinite (10), 1, 0, 0, 0);
+  check_bool ("isfinite (10) == true", isfinite (10.0), 1, 0, 0, 0);
   check_bool ("isfinite (inf) == false", isfinite (plus_infty), 0, 0, 0, 0);
   check_bool ("isfinite (-inf) == false", isfinite (minus_infty), 0, 0, 0, 0);
   check_bool ("isfinite (NaN) == false", isfinite (nan_value), 0, 0, 0, 0);
@@ -2901,9 +2895,9 @@ isnormal_test (void)
 {
   init_max_error ();
 
-  check_bool ("isnormal (0) == false", isnormal (0), 0, 0, 0, 0);
+  check_bool ("isnormal (0) == false", isnormal (0.0), 0, 0, 0, 0);
   check_bool ("isnormal (-0) == false", isnormal (minus_zero), 0, 0, 0, 0);
-  check_bool ("isnormal (10) == true", isnormal (10), 1, 0, 0, 0);
+  check_bool ("isnormal (10) == true", isnormal (10.0), 1, 0, 0, 0);
   check_bool ("isnormal (inf) == false", isnormal (plus_infty), 0, 0, 0, 0);
   check_bool ("isnormal (-inf) == false", isnormal (minus_infty), 0, 0, 0, 0);
   check_bool ("isnormal (NaN) == false", isnormal (nan_value), 0, 0, 0, 0);
@@ -3908,15 +3902,15 @@ signbit_test (void)
 
   init_max_error ();
 
-  check_bool ("signbit (0) == false", signbit (0), 0, 0, 0, 0);
+  check_bool ("signbit (0) == false", signbit (0.0), 0, 0, 0, 0);
   check_bool ("signbit (-0) == true", signbit (minus_zero), 1, 0, 0, 0);
   check_bool ("signbit (inf) == false", signbit (plus_infty), 0, 0, 0, 0);
   check_bool ("signbit (-inf) == true", signbit (minus_infty), 1, 0, 0, 0);
 
   /* signbit (x) != 0 for x < 0.  */
-  check_bool ("signbit (-1) == true", signbit (-1), 1, 0, 0, 0);
+  check_bool ("signbit (-1) == true", signbit (-1.0), 1, 0, 0, 0);
   /* signbit (x) == 0 for x >= 0.  */
-  check_bool ("signbit (1) == false", signbit (1), 0, 0, 0, 0);
+  check_bool ("signbit (1) == false", signbit (1.0), 0, 0, 0, 0);
 
   print_max_error ("signbit", 0, 0);
 }

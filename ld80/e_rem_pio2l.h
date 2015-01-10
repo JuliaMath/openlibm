@@ -23,10 +23,9 @@
  */
 
 #include <float.h>
+#include <openlibm.h>
 
-#include "openlibm.h"
 #include "math_private.h"
-#include "openlibm.h"
 
 #define	BIAS	(LDBL_MAX_EXP - 1)
 

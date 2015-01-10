@@ -34,8 +34,8 @@
  */
 
 #include <float.h>
+#include <openlibm.h>
 
-#include "openlibm.h"
 #include "math_private.h"
 #if LDBL_MANT_DIG == 64
 #include "../ld80/e_rem_pio2l.h"

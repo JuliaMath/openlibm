@@ -46,9 +46,9 @@
  *    IEEE      -10,+10     30000      1.8e-14      2.2e-15
  */
 
-#include <complex.h>
 #include <float.h>
-#include "openlibm.h"
+#include <openlibm.h>
+#include <openlibm_complex.h>
 
 double complex
 cacos(double complex z)

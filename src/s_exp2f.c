@@ -28,8 +28,8 @@
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_exp2f.c,v 1.9 2008/02/22 02:27:34 das Exp $");
 
 #include <float.h>
+#include <openlibm.h>
 
-#include "openlibm.h"
 #include "math_private.h"
 
 #define	TBLBITS	4

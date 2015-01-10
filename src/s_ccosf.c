@@ -48,8 +48,8 @@
  *    IEEE      -10,+10     30000       1.8e-7       5.5e-8
  */
 
-#include <complex.h>
-#include "openlibm.h"
+#include <openlibm.h>
+#include <openlibm_complex.h>
 
 /* calculate cosh and sinh */
 

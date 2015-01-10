@@ -16,7 +16,7 @@
  * Method: shift and subtract
  */
 
-#include <math.h>
+#include <openlibm.h>
 
 #include "math_private.h"
 

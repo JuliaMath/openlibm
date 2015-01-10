@@ -22,9 +22,9 @@
  */
 
 #include <float.h>
+#include <openlibm.h>
 
 #include "invtrig.h"
-#include "openlibm.h"
 #include "math_private.h"
 
 static volatile long double

@@ -22,7 +22,8 @@
  * Method: shift and subtract
  */
 
-#include "openlibm.h"
+#include <openlibm.h>
+
 #include "math_private.h"
 
 static const float one = 1.0, Zero[] = {0.0, -0.0,};

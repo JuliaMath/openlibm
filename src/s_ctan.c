@@ -56,9 +56,9 @@
  * Also tested by ctan * ccot = 1 and catan(ctan(z))  =  z.
  */
 
-#include <complex.h>
 #include <float.h>
-#include "openlibm.h"
+#include <openlibm.h>
+#include <openlibm_complex.h>
 
 #define MACHEP 1.1e-16
 #define MAXNUM 1.0e308

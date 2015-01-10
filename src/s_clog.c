@@ -54,9 +54,9 @@
  * absolute error 1.0e-16.
  */
 
-#include <complex.h>
 #include <float.h>
-#include "openlibm.h"
+#include <openlibm.h>
+#include <openlibm_complex.h>
 
 double complex
 clog(double complex z)

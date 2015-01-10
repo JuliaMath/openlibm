@@ -49,9 +49,9 @@
  * Also tested by csin(casin(z)) = z.
  */
 
-#include <complex.h>
 #include <float.h>
-#include "openlibm.h"
+#include <openlibm.h>
+#include <openlibm_complex.h>
 
 double complex
 casin(double complex z)

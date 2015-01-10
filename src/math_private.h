@@ -17,10 +17,11 @@
 #ifndef _MATH_PRIVATE_H_
 #define	_MATH_PRIVATE_H_
 
+#include <openlibm_complex.h>
+
 #include "cdefs-compat.h"
 #include "types-compat.h"
 #include "fpmath.h"
-#include <complex.h>
 #include <stdint.h>
 #include "math_private_openbsd.h"
 

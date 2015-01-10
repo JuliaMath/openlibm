@@ -32,8 +32,8 @@
 
 #include "amd64/bsd_ieeefp.h"
 
-#include "openlibm.h"
-#include "openlibm.h"
+#include <openlibm.h>
+
 #include "math_private.h"
 
 #define	TBLBITS	7

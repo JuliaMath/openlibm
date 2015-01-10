@@ -54,7 +54,7 @@
  *    IEEE      -1, 8       100000      1.9e-34     4.3e-35
  */
 
-#include <math.h>
+#include <openlibm.h>
 
 #include "math_private.h"
 

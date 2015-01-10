@@ -16,7 +16,8 @@
 #include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/e_powf.c,v 1.16 2011/10/21 06:26:07 das Exp $");
 
-#include "openlibm.h"
+#include <openlibm.h>
+
 #include "math_private.h"
 
 static const float

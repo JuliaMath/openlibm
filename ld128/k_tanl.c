@@ -18,7 +18,8 @@
  * ld128 version of k_tan.c.  See ../src/k_tan.c for most comments.
  */
 
-#include "openlibm.h"
+#include <openlibm.h>
+
 #include "math_private.h"
 
 /*

@@ -14,7 +14,7 @@
 #include <machine/ieee.h>
 
 #include <float.h>
-#include <math.h>
+#include <openlibm.h>
 #include <stdint.h>
 
 #include "math_private.h"

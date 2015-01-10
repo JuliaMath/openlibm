@@ -13,7 +13,8 @@
  * ====================================================
  */
 
-#include "openlibm.h"
+#include <openlibm.h>
+
 #include "math_private.h"
 
 static	const float	one	= 1.0, tiny=1.0e-30;

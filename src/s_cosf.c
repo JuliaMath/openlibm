@@ -18,8 +18,8 @@
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_cosf.c,v 1.18 2008/02/25 22:19:17 bde Exp $");
 
 #include <float.h>
+#include <openlibm.h>
 
-#include "openlibm.h"
 //#define	INLINE_KERNEL_COSDF
 //#define	INLINE_KERNEL_SINDF
 //#define INLINE_REM_PIO2F
