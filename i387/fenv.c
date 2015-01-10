@@ -182,7 +182,7 @@ feupdateenv(const fenv_t *envp)
 }
 
 int
-__feenableexcept(int mask)
+feenableexcept(int mask)
 {
 	uint32_t mxcsr, omask;
 	uint16_t control;
@@ -204,7 +204,7 @@ __feenableexcept(int mask)
 }
 
 int
-__fedisableexcept(int mask)
+fedisableexcept(int mask)
 {
 	uint32_t mxcsr, omask;
 	uint16_t control;
@@ -224,6 +224,3 @@ __fedisableexcept(int mask)
 	}
 	return (omask);
 }
-
-__weak_reference(__feenableexcept, feenableexcept);
-__weak_reference(__fedisableexcept, fedisableexcept);

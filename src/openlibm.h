@@ -170,7 +170,10 @@ extern const union __nan_un {
 #define	M_SQRT1_2	0.70710678118654752440	/* 1/sqrt(2) */
 
 #define	MAXFLOAT	((float)3.40282346638528860e+38)
+
+#ifndef OPENLIBM_ONLY_THREAD_SAFE
 extern int signgam;
+#endif
 #endif /* __BSD_VISIBLE || __XSI_VISIBLE */
 
 #if __BSD_VISIBLE
@@ -316,6 +319,11 @@ double	gamma_r(double, int *);
 double	lgamma_r(double, int *);
 
 /*
+ * Single sine/cosine function.
+ */
+void	sincos(double, double *, double *);
+
+/*
  * IEEE Test Vector
  */
 double	significand(double);
@@ -412,6 +420,11 @@ float	gammaf_r(float, int *);
 float	lgammaf_r(float, int *);
 
 /*
+ * Single sine/cosine function.
+ */
+void	sincosf(float, float *, float *);
+
+/*
  * float version of IEEE Test Vector
  */
 float	significandf(float);
@@ -485,6 +498,11 @@ long double	truncl(long double);
 /* Reentrant version of lgammal. */
 #if __BSD_VISIBLE
 long double	lgammal_r(long double, int *);
+
+/*
+ * Single sine/cosine function.
+ */
+void	sincosl(long double, long double *, long double *);
 #endif	/* __BSD_VISIBLE */
 
 #if defined(__cplusplus)
