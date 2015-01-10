@@ -58,7 +58,7 @@ C4  = -2.75573143513906633035e-07, /* 0xBE927E4F, 0x809C52AD */
 C5  =  2.08757232129817482790e-09, /* 0x3E21EE9E, 0xBDB4B1C4 */
 C6  = -1.13596475577881948265e-11; /* 0xBDA8FAE9, 0xBE8838D4 */
 
-DLLEXPORT void
+static void
 __kernel_sincos( double x, double y, int iy, double * k_s, double * k_c )
 {
     /* Inline calculation of sin/cos, as we can save
