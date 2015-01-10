@@ -62,4 +62,4 @@ __isinfl(long double e)
 }
 #endif
 
-__weak_reference(__isinff, isinff);
+__strong_reference(__isinff, isinff);

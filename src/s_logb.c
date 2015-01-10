@@ -45,5 +45,5 @@ logb(double x)
 }
 
 #if (LDBL_MANT_DIG == 53)
-__weak_reference(logb, logbl);
+__strong_reference(logb, logbl);
 #endif

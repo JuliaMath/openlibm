@@ -75,5 +75,5 @@ __ieee754_remainder(double x, double p)
 }
 
 #if LDBL_MANT_DIG == 53
-__weak_reference(remainder, remainderl);
+__strong_reference(remainder, remainderl);
 #endif

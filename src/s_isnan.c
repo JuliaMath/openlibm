@@ -63,4 +63,4 @@ __isnanl(long double e)
 }
 #endif
 
-__weak_reference(__isnanf, isnanf);
+__strong_reference(__isnanf, isnanf);

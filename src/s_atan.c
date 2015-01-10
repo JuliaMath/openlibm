@@ -120,5 +120,5 @@ atan(double x)
 }
 
 #if LDBL_MANT_DIG == 53
-__weak_reference(atan, atanl);
+__strong_reference(atan, atanl);
 #endif

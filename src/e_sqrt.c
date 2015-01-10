@@ -189,7 +189,7 @@ __ieee754_sqrt(double x)
 }
 
 #if (LDBL_MANT_DIG == 53)
-__weak_reference(sqrt, sqrtl);
+__strong_reference(sqrt, sqrtl);
 #endif
 
 /*
