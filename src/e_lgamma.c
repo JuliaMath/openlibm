@@ -25,10 +25,12 @@
 
 #include "math_private.h"
 
-extern int signgam;
-
 DLLEXPORT double
 __ieee754_lgamma(double x)
 {
+#ifdef OPENLIBM_ONLY_THREAD_SAFE
+	int signgam;
+#endif
+
 	return __ieee754_lgamma_r(x,&signgam);
 }

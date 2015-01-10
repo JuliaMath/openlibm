@@ -26,10 +26,12 @@
 
 #include "math_private.h"
 
-extern int signgam;
-
 DLLEXPORT float
 __ieee754_gammaf(float x)
 {
+#ifdef OPENLIBM_ONLY_THREAD_SAFE
+	int signgam;
+#endif
+
 	return __ieee754_gammaf_r(x,&signgam);
 }

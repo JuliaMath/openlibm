@@ -170,7 +170,10 @@ extern const union __nan_un {
 #define	M_SQRT1_2	0.70710678118654752440	/* 1/sqrt(2) */
 
 #define	MAXFLOAT	((float)3.40282346638528860e+38)
+
+#ifndef OPENLIBM_ONLY_THREAD_SAFE
 extern int signgam;
+#endif
 #endif /* __BSD_VISIBLE || __XSI_VISIBLE */
 
 #if __BSD_VISIBLE
