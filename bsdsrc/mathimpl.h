@@ -36,7 +36,7 @@
 #include "cdefs-compat.h"
 #include <openlibm.h>
 
-#include "../src/math_private.h"
+#include "math_private.h"
 
 /*
  * TRUNC() is a macro that sets the trailing 27 bits in the mantissa of an
