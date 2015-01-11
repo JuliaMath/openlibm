@@ -25,9 +25,10 @@
  *
  */
 
-#include <openlibm.h>
-#include "math_private.h"
+#include <openlibm_math.h>
+
 #include "fpmath.h"
+#include "math_private.h"
 
 /* Provided by libc */
 #if 1

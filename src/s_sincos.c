@@ -35,7 +35,7 @@
  */
 
 #include <float.h>
-#include <openlibm.h>
+#include <openlibm_math.h>
 
 //#define INLINE_REM_PIO2
 #include "math_private.h"

@@ -52,8 +52,8 @@
  *
  */
 
-#include <openlibm.h>
 #include <openlibm_complex.h>
+#include <openlibm_math.h>
 
 static void
 cchshl(long double x, long double *c, long double *s)

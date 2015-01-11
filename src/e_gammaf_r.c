@@ -23,7 +23,7 @@
  * Method: See __ieee754_lgammaf_r
  */
 
-#include <openlibm.h>
+#include <openlibm_math.h>
 
 #include "math_private.h"
 

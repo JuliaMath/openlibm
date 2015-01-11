@@ -17,7 +17,7 @@
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_rintf.c,v 1.12 2008/02/22 02:30:35 das Exp $");
 
 #include <float.h>
-#include <openlibm.h>
+#include <openlibm_math.h>
 #include <stdint.h>
 
 #include "math_private.h"

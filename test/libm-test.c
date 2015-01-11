@@ -122,8 +122,6 @@
 #include <fenv.h>
 #else
 #include <openlibm.h>
-#include <openlibm_complex.h>
-#include <openlibm_fenv.h>
 #endif
 
 #if 0 /* XXX scp XXX */

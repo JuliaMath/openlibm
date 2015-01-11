@@ -26,9 +26,10 @@
  * $FreeBSD: src/lib/msun/src/s_isfinite.c,v 1.1 2004/07/09 03:32:39 das Exp $
  */
 
-#include <openlibm.h>
-#include "math_private.h"
+#include <openlibm_math.h>
+
 #include "fpmath.h"
+#include "math_private.h"
 
 DLLEXPORT int
 __isfinite(double d)

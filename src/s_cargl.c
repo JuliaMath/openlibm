@@ -27,8 +27,8 @@
 #include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_cargl.c,v 1.1 2008/07/31 22:41:26 das Exp $");
 
-#include <openlibm.h>
 #include <openlibm_complex.h>
+#include <openlibm_math.h>
 
 #include "math_private.h"
 

@@ -19,7 +19,7 @@
 //__FBSDID("$FreeBSD: src/lib/msun/src/k_cosf.c,v 1.18 2009/06/03 08:16:34 ed Exp $");
 #endif
 
-#include <openlibm.h>
+#include <openlibm_math.h>
 
 #include "math_private.h"
 

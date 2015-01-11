@@ -16,7 +16,7 @@
 #include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/e_remainderf.c,v 1.8 2008/02/12 17:11:36 bde Exp $");
 
-#include <openlibm.h>
+#include <openlibm_math.h>
 
 #include "math_private.h"
 

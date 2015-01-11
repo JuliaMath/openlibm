@@ -53,8 +53,8 @@
  *    IEEE      -10,+10     30000       3.3e-7       5.1e-8
  */
 
-#include <openlibm.h>
 #include <openlibm_complex.h>
+#include <openlibm_math.h>
 
 #define MACHEPF 3.0e-8
 #define MAXNUMF 1.0e38f

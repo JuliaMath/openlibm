@@ -27,7 +27,8 @@
 #include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_roundl.c,v 1.2 2005/12/02 13:45:06 bde Exp $");
 
-#include <openlibm.h>
+#include <openlibm_math.h>
+
 #include "math_private.h"
 
 DLLEXPORT long double

@@ -12,9 +12,10 @@
 
 #include <float.h>
 #include <limits.h>
-#include <openlibm.h>
-#include "math_private.h"
+#include <openlibm_math.h>
+
 #include "fpmath.h"
+#include "math_private.h"
 
 DLLEXPORT long double
 logbl(long double x)

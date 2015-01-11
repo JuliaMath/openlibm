@@ -16,8 +16,8 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-#include <openlibm.h>
 #include <openlibm_complex.h>
+#include <openlibm_math.h>
 
 long double
 cabsl(long double complex z)

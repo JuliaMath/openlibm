@@ -26,7 +26,7 @@
 
 #include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_fdim.c,v 1.1 2004/06/30 07:04:01 das Exp $");
-#include <openlibm.h>
+#include <openlibm_math.h>
 #include "math_private.h"
 
 #define	DECL(type, fn)			\

@@ -26,7 +26,7 @@
  * $FreeBSD: src/lib/msun/ld80/s_nanl.c,v 1.2 2007/12/18 23:46:31 das Exp $
  */
 
-#include <openlibm.h>
+#include <openlibm_math.h>
 
 #include "math_private.h"
 

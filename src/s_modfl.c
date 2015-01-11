@@ -37,10 +37,10 @@
  */
 
 #include <float.h>
-#include <openlibm.h>
-#include "math_private.h"
+#include <openlibm_math.h>
 
 #include "fpmath.h"
+#include "math_private.h"
 
 #if LDBL_MANL_SIZE > 32
 #define	MASK	((u_int64_t)-1)

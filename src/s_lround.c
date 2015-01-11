@@ -25,12 +25,11 @@
  */
 
 #include "cdefs-compat.h"
-//VBS begin
-//#include <sys/limits.h>
+
 #include <limits.h>
-//VBS end
-#include <openlibm.h>
 #include <openlibm_fenv.h>
+#include <openlibm_math.h>
+
 #include "math_private.h"
 
 #ifndef type

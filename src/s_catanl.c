@@ -64,8 +64,8 @@
  */
 
 #include <float.h>
-#include <openlibm.h>
 #include <openlibm_complex.h>
+#include <openlibm_math.h>
 
 static const long double PIL = 3.141592653589793238462643383279502884197169L;
 static const long double DP1 = 3.14159265358979323829596852490908531763125L;

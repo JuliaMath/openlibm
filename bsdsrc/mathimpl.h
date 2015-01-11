@@ -34,8 +34,6 @@
 #define	_MATHIMPL_H_
 
 #include "cdefs-compat.h"
-#include <openlibm.h>
-
 #include "math_private.h"
 
 /*

@@ -22,7 +22,7 @@
  *	Inexact flag raised if x not equal to truncf(x).
  */
 
-#include <openlibm.h>
+#include <openlibm_math.h>
 
 #include "math_private.h"
 
