@@ -117,9 +117,14 @@
 
 #include "libm-test-ulps.h"
 #include <float.h>
+#ifdef SYS_MATH_H
+#include <math.h>
+#include <fenv.h>
+#else
 #include <openlibm.h>
 #include <openlibm_complex.h>
 #include <openlibm_fenv.h>
+#endif
 
 #if 0 /* XXX scp XXX */
 #define FE_INEXACT FE_INEXACT
@@ -141,6 +146,16 @@
 
 // Some native libm implementations don't have sincos defined, so we have to do it ourselves
 void FUNC(sincos) (FLOAT x, FLOAT * s, FLOAT * c);
+
+#ifdef __APPLE__
+#ifdef SYS_MATH_H
+void sincos(FLOAT x, FLOAT * s, FLOAT * c)
+{
+    *s = sin(x);
+    *c = cos(x);
+}
+#endif
+#endif
 
 /* Possible exceptions */
 #define NO_EXCEPTION			0x0
