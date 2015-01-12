@@ -63,8 +63,8 @@
  */
 
 #include <float.h>
-#include <openlibm.h>
 #include <openlibm_complex.h>
+#include <openlibm_math.h>
 
 #define MAXNUM 1.0e308
 

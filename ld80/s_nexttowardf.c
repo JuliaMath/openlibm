@@ -10,8 +10,8 @@
  * ====================================================
  */
 
-#include <openlibm.h>
 #include <float.h>
+#include <openlibm_math.h>
 
 #include "math_private.h"
 

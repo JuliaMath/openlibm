@@ -5,7 +5,7 @@
  * Placed into the Public Domain, 1994.
  */
 
-#include <openlibm.h>
+#include <openlibm_math.h>
 #include "math_private.h"
 
 DLLEXPORT double

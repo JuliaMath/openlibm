@@ -18,7 +18,7 @@
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_cbrtl.c,v 1.1 2011/03/12 19:37:35 kargl Exp $");
 
 #include <float.h>
-#include <openlibm.h>
+#include <openlibm_math.h>
 // VBS
 //#include <ieeefp.h>
 

@@ -17,7 +17,7 @@
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_expm1f.c,v 1.12 2011/10/21 06:26:38 das Exp $");
 
 #include <float.h>
-#include <openlibm.h>
+#include <openlibm_math.h>
 
 #include "math_private.h"
 

@@ -32,7 +32,7 @@
 
 #include "amd64/bsd_ieeefp.h"
 
-#include <openlibm.h>
+#include <openlibm_math.h>
 
 #include "math_private.h"
 

@@ -28,7 +28,7 @@
 
 #include <float.h>
 
-#include <openlibm.h>
+#include <openlibm_math.h>
 
 #define	BIAS		(LDBL_MAX_EXP - 1)
 #define	MANH_SIZE	LDBL_MANH_SIZE

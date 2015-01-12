@@ -27,8 +27,8 @@
 #include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_cexpf.c,v 1.3 2011/10/21 06:27:56 das Exp $");
 
-#include <openlibm.h>
 #include <openlibm_complex.h>
+#include <openlibm_math.h>
 
 #include "math_private.h"
 

@@ -47,8 +47,8 @@
  *    IEEE      -10,+10     30000      1.8e-14      2.2e-15
  */
 
-#include <openlibm.h>
 #include <openlibm_complex.h>
+#include <openlibm_math.h>
 
 static const long double PIO2L = 1.570796326794896619231321691639751442098585L;
 

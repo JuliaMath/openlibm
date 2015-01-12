@@ -50,8 +50,8 @@
  */
 
 #include <float.h>
-#include <openlibm.h>
 #include <openlibm_complex.h>
+#include <openlibm_math.h>
 
 #if	LDBL_MANT_DIG == 64
 static const long double MACHEPL= 5.42101086242752217003726400434970855712890625E-20L;

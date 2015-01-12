@@ -28,7 +28,8 @@
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_scalbln.c,v 1.2 2005/03/07 04:57:50 das Exp $");
 
 #include <limits.h>
-#include <openlibm.h>
+#include <openlibm_math.h>
+
 #include "math_private.h"
 
 DLLEXPORT double

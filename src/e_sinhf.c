@@ -16,7 +16,7 @@
 #include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/e_sinhf.c,v 1.10 2011/10/21 06:28:47 das Exp $");
 
-#include <openlibm.h>
+#include <openlibm_math.h>
 
 #include "math_private.h"
 

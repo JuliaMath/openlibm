@@ -24,7 +24,7 @@
  * in not-quite-routine extra precision.
  */
 
-#include <openlibm.h>
+#include <openlibm_math.h>
 
 #include "math_private.h"
 #include "k_log.h"

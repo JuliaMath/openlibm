@@ -27,8 +27,9 @@
 #include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_nearbyint.c,v 1.2 2008/01/14 02:12:06 das Exp $");
 
-#include <openlibm.h>
 #include <openlibm_fenv.h>
+#include <openlibm_math.h>
+
 #include "math_private.h"
 
 /*

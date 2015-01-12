@@ -21,7 +21,7 @@
  * Method: call __ieee754_gamma_r
  */
 
-#include <openlibm.h>
+#include <openlibm_math.h>
 
 #include "math_private.h"
 

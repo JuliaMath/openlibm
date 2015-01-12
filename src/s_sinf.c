@@ -18,7 +18,7 @@
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_sinf.c,v 1.17 2008/02/25 22:19:17 bde Exp $");
 
 #include <float.h>
-#include <openlibm.h>
+#include <openlibm_math.h>
 
 //#define	INLINE_KERNEL_COSDF
 //#define	INLINE_KERNEL_SINDF

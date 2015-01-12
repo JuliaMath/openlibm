@@ -22,7 +22,7 @@
  * Method: See __ieee754_lgamma_r
  */
 
-#include <openlibm.h>
+#include <openlibm_math.h>
 
 #include "math_private.h"
 

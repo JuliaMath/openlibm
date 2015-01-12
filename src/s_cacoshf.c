@@ -42,8 +42,8 @@
  *
  */
 
-#include <openlibm.h>
 #include <openlibm_complex.h>
+#include <openlibm_math.h>
 
 float complex
 cacoshf(float complex z)

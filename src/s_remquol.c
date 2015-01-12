@@ -14,7 +14,7 @@
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_remquol.c,v 1.2 2008/07/31 20:09:47 das Exp $");
 
 #include <float.h>
-#include <openlibm.h>
+#include <openlibm_math.h>
 #include <stdint.h>
 
 #include "fpmath.h"

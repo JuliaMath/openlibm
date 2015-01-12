@@ -43,8 +43,8 @@
  *
  */
 
-#include <openlibm.h>
 #include <openlibm_complex.h>
+#include <openlibm_math.h>
 
 long double complex
 casinhl(long double complex z)

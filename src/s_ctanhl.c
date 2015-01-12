@@ -43,8 +43,8 @@
  *
  */
 
-#include <openlibm.h>
 #include <openlibm_complex.h>
+#include <openlibm_math.h>
 
 long double complex
 ctanhl(long double complex z)

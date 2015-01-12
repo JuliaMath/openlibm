@@ -20,6 +20,11 @@ USEGCC = 0
 USECLANG = 1
 endif
 
+ifeq ($(OS), FreeBSD)
+USEGCC = 0
+USECLANG = 1
+endif
+
 AR = ar
 
 ifeq ($(USECLANG),1)

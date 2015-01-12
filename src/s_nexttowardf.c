@@ -13,7 +13,7 @@
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_nexttowardf.c,v 1.3 2011/02/10 07:38:38 das Exp $");
 
 #include <float.h>
-#include <openlibm.h>
+#include <openlibm_math.h>
 
 #include "fpmath.h"
 #include "math_private.h"
