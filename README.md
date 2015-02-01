@@ -20,7 +20,8 @@ includes experimental support for ARM.
 
 ## Build instructions
 
-1. `make` or `make USEGCC=1` to build with GCC. This is the default on
+1. Use `make` to build OpenLibm.
+2. Use `make USEGCC=1` to build with GCC. This is the default on
    Linux and Windows.
-2. `make USECLANG=1` to build with clang. This is the default on OS X
+3. Use `make USECLANG=1` to build with clang. This is the default on OS X
    and FreeBSD.
