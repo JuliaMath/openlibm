@@ -1,4 +1,4 @@
-## OpenLibm
+# OpenLibm
 
 [![Build Status](https://travis-ci.org/JuliaLang/openlibm.svg?branch=master)](https://travis-ci.org/JuliaLang/openlibm)
 
@@ -12,27 +12,15 @@ The project was born out of a need to have a good `libm` for the
 consistently across compilers and operating systems, and in 32-bit and
 64-bit environments.
 
-### History
+## Platform support
 
-The OpenLibm code derives from the [FreeBSD
-msun](http://svnweb.freebsd.org/base/head/lib/msun/) and [OpenBSD
-libm](http://cvsweb.openbsd.org/cgi-bin/cvsweb/src/lib/libm/src/)
-implementations, which in turn derives from [FDLIBM
-5.3](http://www.netlib.org/fdlibm/). As a result, it includes a number
-of fixes and updates to FDLIBM that have accumulated over the years in
-`msun`, and optimized versions of many functions.
+OpenLibm builds on Linux, Mac OS X, Windows, and FreeBSD. It builds
+with both GCC and clang. Although largely tested on x86, it also
+includes experimental support for ARM.
 
-### Platform support
-
-OpenLibm builds on Linux, Mac OS X, and Windows, and with little
-effort, should build on FreeBSD as well. It builds with both GCC and
-clang. Although largely tested on x86, it also includes experimental
-support for ARM. The original `msun` also includes support for mips,
-sparc64, powerpc, ia64, and alpha. These are present in the OpenLibm
-source tree, but no attempt has been made to build any of these.
-
-### Build instructions
+## Build instructions
 
 1. `make` or `make USEGCC=1` to build with GCC. This is the default on
    Linux and Windows.
-2. `make USECLANG=1` to build with clang. This is the default on OS X.
+2. `make USECLANG=1` to build with clang. This is the default on OS X
+   and FreeBSD.
