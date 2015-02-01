@@ -2,7 +2,6 @@ language: c
 script: ./.travis.sh
 os:
     - linux
-    - osx
 env:
     - TARGET=host
     - TARGET=arm32
