@@ -3808,66 +3808,6 @@ round_test (void)
 
 
 static void
-scalb_test (void)
-{
-
-  init_max_error ();
-
-  check_float ("scalb (2.0, 0.5) == NaN plus invalid exception",  FUNC(scalb) (2.0, 0.5), nan_value, 0, 0, INVALID_EXCEPTION);
-  check_float ("scalb (3.0, -2.5) == NaN plus invalid exception",  FUNC(scalb) (3.0, -2.5), nan_value, 0, 0, INVALID_EXCEPTION);
-
-  check_float ("scalb (0, NaN) == NaN",  FUNC(scalb) (0, nan_value), nan_value, 0, 0, 0);
-  check_float ("scalb (1, NaN) == NaN",  FUNC(scalb) (1, nan_value), nan_value, 0, 0, 0);
-
-  check_float ("scalb (1, 0) == 1",  FUNC(scalb) (1, 0), 1, 0, 0, 0);
-  check_float ("scalb (-1, 0) == -1",  FUNC(scalb) (-1, 0), -1, 0, 0, 0);
-
-  check_float ("scalb (0, inf) == NaN plus invalid exception",  FUNC(scalb) (0, plus_infty), nan_value, 0, 0, INVALID_EXCEPTION);
-  check_float ("scalb (-0, inf) == NaN plus invalid exception",  FUNC(scalb) (minus_zero, plus_infty), nan_value, 0, 0, INVALID_EXCEPTION);
-
-  check_float ("scalb (0, 2) == 0",  FUNC(scalb) (0, 2), 0, 0, 0, 0);
-  check_float ("scalb (-0, -4) == -0",  FUNC(scalb) (minus_zero, -4), minus_zero, 0, 0, 0);
-  check_float ("scalb (0, 0) == 0",  FUNC(scalb) (0, 0), 0, 0, 0, 0);
-  check_float ("scalb (-0, 0) == -0",  FUNC(scalb) (minus_zero, 0), minus_zero, 0, 0, 0);
-  check_float ("scalb (0, -1) == 0",  FUNC(scalb) (0, -1), 0, 0, 0, 0);
-  check_float ("scalb (-0, -10) == -0",  FUNC(scalb) (minus_zero, -10), minus_zero, 0, 0, 0);
-  check_float ("scalb (0, -inf) == 0",  FUNC(scalb) (0, minus_infty), 0, 0, 0, 0);
-  check_float ("scalb (-0, -inf) == -0",  FUNC(scalb) (minus_zero, minus_infty), minus_zero, 0, 0, 0);
-
-  check_float ("scalb (inf, -1) == inf",  FUNC(scalb) (plus_infty, -1), plus_infty, 0, 0, 0);
-  check_float ("scalb (-inf, -10) == -inf",  FUNC(scalb) (minus_infty, -10), minus_infty, 0, 0, 0);
-  check_float ("scalb (inf, 0) == inf",  FUNC(scalb) (plus_infty, 0), plus_infty, 0, 0, 0);
-  check_float ("scalb (-inf, 0) == -inf",  FUNC(scalb) (minus_infty, 0), minus_infty, 0, 0, 0);
-  check_float ("scalb (inf, 2) == inf",  FUNC(scalb) (plus_infty, 2), plus_infty, 0, 0, 0);
-  check_float ("scalb (-inf, 100) == -inf",  FUNC(scalb) (minus_infty, 100), minus_infty, 0, 0, 0);
-
-  check_float ("scalb (0.1, -inf) == 0.0",  FUNC(scalb) (0.1L, minus_infty), 0.0, 0, 0, 0);
-  check_float ("scalb (-0.1, -inf) == -0",  FUNC(scalb) (-0.1L, minus_infty), minus_zero, 0, 0, 0);
-
-  check_float ("scalb (1, inf) == inf",  FUNC(scalb) (1, plus_infty), plus_infty, 0, 0, 0);
-  check_float ("scalb (-1, inf) == -inf",  FUNC(scalb) (-1, plus_infty), minus_infty, 0, 0, 0);
-  check_float ("scalb (inf, inf) == inf",  FUNC(scalb) (plus_infty, plus_infty), plus_infty, 0, 0, 0);
-  check_float ("scalb (-inf, inf) == -inf",  FUNC(scalb) (minus_infty, plus_infty), minus_infty, 0, 0, 0);
-
-  check_float ("scalb (inf, -inf) == NaN plus invalid exception",  FUNC(scalb) (plus_infty, minus_infty), nan_value, 0, 0, INVALID_EXCEPTION);
-  check_float ("scalb (-inf, -inf) == NaN plus invalid exception",  FUNC(scalb) (minus_infty, minus_infty), nan_value, 0, 0, INVALID_EXCEPTION);
-
-  check_float ("scalb (NaN, 1) == NaN",  FUNC(scalb) (nan_value, 1), nan_value, 0, 0, 0);
-  check_float ("scalb (1, NaN) == NaN",  FUNC(scalb) (1, nan_value), nan_value, 0, 0, 0);
-  check_float ("scalb (NaN, 0) == NaN",  FUNC(scalb) (nan_value, 0), nan_value, 0, 0, 0);
-  check_float ("scalb (0, NaN) == NaN",  FUNC(scalb) (0, nan_value), nan_value, 0, 0, 0);
-  check_float ("scalb (NaN, inf) == NaN",  FUNC(scalb) (nan_value, plus_infty), nan_value, 0, 0, 0);
-  check_float ("scalb (inf, NaN) == NaN",  FUNC(scalb) (plus_infty, nan_value), nan_value, 0, 0, 0);
-  check_float ("scalb (NaN, NaN) == NaN",  FUNC(scalb) (nan_value, nan_value), nan_value, 0, 0, 0);
-
-  check_float ("scalb (0.8, 4) == 12.8",  FUNC(scalb) (0.8L, 4), 12.8L, 0, 0, 0);
-  check_float ("scalb (-0.854375, 5) == -27.34",  FUNC(scalb) (-0.854375L, 5), -27.34L, 0, 0, 0);
-
-  print_max_error ("scalb", 0, 0);
-}
-
-
-static void
 scalbn_test (void)
 {
 
@@ -4518,7 +4458,6 @@ main (int argc, char **argv)
   logb_test ();
   modf_test ();
   ilogb_test ();
-  scalb_test ();
   scalbn_test ();
   scalbln_test ();
 

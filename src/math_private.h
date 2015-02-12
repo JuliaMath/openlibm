@@ -291,7 +291,6 @@ irint(double x)
 #define	__ieee754_jn	jn
 #define	__ieee754_yn	yn
 #define	__ieee754_remainder remainder
-#define	__ieee754_scalb	scalb
 #define	__ieee754_sqrtf	sqrtf
 #define	__ieee754_acosf	acosf
 #define	__ieee754_acoshf acoshf
@@ -316,7 +315,6 @@ irint(double x)
 #define	__ieee754_jnf	jnf
 #define	__ieee754_ynf	ynf
 #define	__ieee754_remainderf remainderf
-#define	__ieee754_scalbf scalbf
 
 /* fdlibm kernel function */
 int	__kernel_rem_pio2(double*,double*,int,int,int);

@@ -280,10 +280,6 @@ double	jn(int, double);
 double	y0(double);
 double	y1(double);
 double	yn(int, double);
-
-#if __XSI_VISIBLE <= 600 || __BSD_VISIBLE
-double	scalb(double, double);
-#endif
 #endif /* __BSD_VISIBLE || __XSI_VISIBLE */
 
 #if __BSD_VISIBLE || __ISO_C_VISIBLE >= 1999
@@ -392,7 +388,6 @@ float	dremf(float, float);
 float	j0f(float);
 float	j1f(float);
 float	jnf(int, float);
-float	scalbf(float, float);
 float	y0f(float);
 float	y1f(float);
 float	ynf(int, float);
