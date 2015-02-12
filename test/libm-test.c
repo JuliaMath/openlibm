@@ -712,7 +712,6 @@ check_longlong (const char *test_name, long long int computed,
 
   test_exceptions (test_name, exceptions);
   noTests++;
-#define llabs(x) (x < 0 ? -x : x)
   if (llabs (diff) <= max_ulp)
     ok = 1;
 
@@ -2531,15 +2530,15 @@ fabs_test (void)
 {
   init_max_error ();
 
-  check_float ("fabs (0) == 0",  FUNC(fabs) (0), 0, 0, 0, 0);
+  check_float ("fabs (0) == 0",  FUNC(fabs) ((FLOAT)0.0), 0, 0, 0, 0);
   check_float ("fabs (-0) == 0",  FUNC(fabs) (minus_zero), 0, 0, 0, 0);
 
   check_float ("fabs (inf) == inf",  FUNC(fabs) (plus_infty), plus_infty, 0, 0, 0);
   check_float ("fabs (-inf) == inf",  FUNC(fabs) (minus_infty), plus_infty, 0, 0, 0);
   check_float ("fabs (NaN) == NaN",  FUNC(fabs) (nan_value), nan_value, 0, 0, 0);
 
-  check_float ("fabs (38.0) == 38.0",  FUNC(fabs) (38.0), 38.0, 0, 0, 0);
-  check_float ("fabs (-e) == e",  FUNC(fabs) (-M_El), M_El, 0, 0, 0);
+  check_float ("fabs (38.0) == 38.0",  FUNC(fabs) ((FLOAT)38.0), 38.0, 0, 0, 0);
+  check_float ("fabs (-e) == e",  FUNC(fabs) ((FLOAT)-M_El), M_El, 0, 0, 0);
 
   print_max_error ("fabs", 0, 0);
 }
