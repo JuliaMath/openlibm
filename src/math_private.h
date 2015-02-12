@@ -308,12 +308,6 @@ irint(double x)
 #define	__ieee754_log2f log2f
 #define	__ieee754_sinhf	sinhf
 #define	__ieee754_hypotf hypotf
-#define	__ieee754_j0f	j0f
-#define	__ieee754_j1f	j1f
-#define	__ieee754_y0f	y0f
-#define	__ieee754_y1f	y1f
-#define	__ieee754_jnf	jnf
-#define	__ieee754_ynf	ynf
 #define	__ieee754_remainderf remainderf
 
 /* fdlibm kernel function */

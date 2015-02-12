@@ -2918,6 +2918,7 @@ isnormal_test (void)
   print_max_error ("isnormal", 0, 0);
 }
 
+#ifdef TEST_DOUBLE
 static void
 j0_test (void)
 {
@@ -3055,6 +3056,7 @@ jn_test (void)
 
   print_max_error ("jn", DELTAjn, 0);
 }
+#endif
 
 
 static void
@@ -4121,6 +4123,7 @@ trunc_test (void)
   print_max_error ("trunc", 0, 0);
 }
 
+#ifdef TEST_DOUBLE
 static void
 y0_test (void)
 {
@@ -4256,6 +4259,7 @@ yn_test (void)
   print_max_error ("yn", DELTAyn, 0);
 
 }
+#endif
 
 
 
@@ -4534,6 +4538,7 @@ main (int argc, char **argv)
   ctanh_test ();
 #endif
 
+#ifdef TEST_DOUBLE
   /* Bessel functions:  */
   j0_test ();
   j1_test ();
@@ -4541,6 +4546,7 @@ main (int argc, char **argv)
   y0_test ();
   y1_test ();
   yn_test ();
+#endif
 
   if (output_ulps)
     fclose (ulps_file);
