@@ -303,7 +303,6 @@ double	trunc(double);
  * BSD math library entry points
  */
 #if __BSD_VISIBLE
-int	finite(double) __pure2;
 int	isnanf(float) __pure2;
 
 /*
@@ -390,7 +389,6 @@ float	fminf(float, float) __pure2;
  */
 #if __BSD_VISIBLE
 float	dremf(float, float);
-int	finitef(float) __pure2;
 float	j0f(float);
 float	j1f(float);
 float	jnf(int, float);

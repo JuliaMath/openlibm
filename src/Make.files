@@ -15,7 +15,6 @@ $(CUR_SRCS) = common.c \
 	s_copysign.c s_copysignf.c s_cos.c s_cosf.c \
 	s_csqrt.c s_csqrtf.c s_erf.c s_erff.c \
 	s_exp2.c s_exp2f.c s_expm1.c s_expm1f.c s_fabs.c s_fabsf.c s_fdim.c \
-	s_finite.c s_finitef.c \
 	s_floor.c s_floorf.c s_fma.c s_fmaf.c \
 	s_fmax.c s_fmaxf.c s_fmin.c \
 	s_fminf.c s_fpclassify.c \
