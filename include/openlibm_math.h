@@ -194,6 +194,9 @@ extern int signgam;
 #if defined(__cplusplus)
 extern "C" {
 #endif
+/* Symbol present when OpenLibm is used. */
+int isopenlibm(void);
+
 /*
  * ANSI/POSIX
  */
