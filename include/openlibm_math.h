@@ -303,7 +303,6 @@ double	trunc(double);
  * BSD math library entry points
  */
 #if __BSD_VISIBLE
-double	drem(double, double);
 int	finite(double) __pure2;
 int	isnanf(float) __pure2;
 

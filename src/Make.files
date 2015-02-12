@@ -31,7 +31,7 @@ $(CUR_SRCS) = common.c \
 	s_signgam.c s_sin.c s_sincos.c \
 	s_sinf.c s_sincosf.c s_tan.c s_tanf.c s_tanh.c s_tanhf.c s_tgammaf.c \
 	s_trunc.c s_truncf.c s_cpow.c  s_cpowf.c \
-	w_cabs.c w_cabsf.c w_drem.c w_dremf.c
+	w_cabs.c w_cabsf.c
 
 ifneq ($(OS), WINNT)
 $(CUR_SRCS) += s_nan.c
