@@ -712,7 +712,6 @@ check_longlong (const char *test_name, long long int computed,
 
   test_exceptions (test_name, exceptions);
   noTests++;
-#define llabs(x) (x < 0 ? -x : x)
   if (llabs (diff) <= max_ulp)
     ok = 1;
 
@@ -2531,15 +2530,15 @@ fabs_test (void)
 {
   init_max_error ();
 
-  check_float ("fabs (0) == 0",  FUNC(fabs) (0), 0, 0, 0, 0);
+  check_float ("fabs (0) == 0",  FUNC(fabs) ((FLOAT)0.0), 0, 0, 0, 0);
   check_float ("fabs (-0) == 0",  FUNC(fabs) (minus_zero), 0, 0, 0, 0);
 
   check_float ("fabs (inf) == inf",  FUNC(fabs) (plus_infty), plus_infty, 0, 0, 0);
   check_float ("fabs (-inf) == inf",  FUNC(fabs) (minus_infty), plus_infty, 0, 0, 0);
   check_float ("fabs (NaN) == NaN",  FUNC(fabs) (nan_value), nan_value, 0, 0, 0);
 
-  check_float ("fabs (38.0) == 38.0",  FUNC(fabs) (38.0), 38.0, 0, 0, 0);
-  check_float ("fabs (-e) == e",  FUNC(fabs) (-M_El), M_El, 0, 0, 0);
+  check_float ("fabs (38.0) == 38.0",  FUNC(fabs) ((FLOAT)38.0), 38.0, 0, 0, 0);
+  check_float ("fabs (-e) == e",  FUNC(fabs) ((FLOAT)-M_El), M_El, 0, 0, 0);
 
   print_max_error ("fabs", 0, 0);
 }
@@ -2918,6 +2917,7 @@ isnormal_test (void)
   print_max_error ("isnormal", 0, 0);
 }
 
+#ifdef TEST_DOUBLE
 static void
 j0_test (void)
 {
@@ -3055,6 +3055,7 @@ jn_test (void)
 
   print_max_error ("jn", DELTAjn, 0);
 }
+#endif
 
 
 static void
@@ -3808,66 +3809,6 @@ round_test (void)
 
 
 static void
-scalb_test (void)
-{
-
-  init_max_error ();
-
-  check_float ("scalb (2.0, 0.5) == NaN plus invalid exception",  FUNC(scalb) (2.0, 0.5), nan_value, 0, 0, INVALID_EXCEPTION);
-  check_float ("scalb (3.0, -2.5) == NaN plus invalid exception",  FUNC(scalb) (3.0, -2.5), nan_value, 0, 0, INVALID_EXCEPTION);
-
-  check_float ("scalb (0, NaN) == NaN",  FUNC(scalb) (0, nan_value), nan_value, 0, 0, 0);
-  check_float ("scalb (1, NaN) == NaN",  FUNC(scalb) (1, nan_value), nan_value, 0, 0, 0);
-
-  check_float ("scalb (1, 0) == 1",  FUNC(scalb) (1, 0), 1, 0, 0, 0);
-  check_float ("scalb (-1, 0) == -1",  FUNC(scalb) (-1, 0), -1, 0, 0, 0);
-
-  check_float ("scalb (0, inf) == NaN plus invalid exception",  FUNC(scalb) (0, plus_infty), nan_value, 0, 0, INVALID_EXCEPTION);
-  check_float ("scalb (-0, inf) == NaN plus invalid exception",  FUNC(scalb) (minus_zero, plus_infty), nan_value, 0, 0, INVALID_EXCEPTION);
-
-  check_float ("scalb (0, 2) == 0",  FUNC(scalb) (0, 2), 0, 0, 0, 0);
-  check_float ("scalb (-0, -4) == -0",  FUNC(scalb) (minus_zero, -4), minus_zero, 0, 0, 0);
-  check_float ("scalb (0, 0) == 0",  FUNC(scalb) (0, 0), 0, 0, 0, 0);
-  check_float ("scalb (-0, 0) == -0",  FUNC(scalb) (minus_zero, 0), minus_zero, 0, 0, 0);
-  check_float ("scalb (0, -1) == 0",  FUNC(scalb) (0, -1), 0, 0, 0, 0);
-  check_float ("scalb (-0, -10) == -0",  FUNC(scalb) (minus_zero, -10), minus_zero, 0, 0, 0);
-  check_float ("scalb (0, -inf) == 0",  FUNC(scalb) (0, minus_infty), 0, 0, 0, 0);
-  check_float ("scalb (-0, -inf) == -0",  FUNC(scalb) (minus_zero, minus_infty), minus_zero, 0, 0, 0);
-
-  check_float ("scalb (inf, -1) == inf",  FUNC(scalb) (plus_infty, -1), plus_infty, 0, 0, 0);
-  check_float ("scalb (-inf, -10) == -inf",  FUNC(scalb) (minus_infty, -10), minus_infty, 0, 0, 0);
-  check_float ("scalb (inf, 0) == inf",  FUNC(scalb) (plus_infty, 0), plus_infty, 0, 0, 0);
-  check_float ("scalb (-inf, 0) == -inf",  FUNC(scalb) (minus_infty, 0), minus_infty, 0, 0, 0);
-  check_float ("scalb (inf, 2) == inf",  FUNC(scalb) (plus_infty, 2), plus_infty, 0, 0, 0);
-  check_float ("scalb (-inf, 100) == -inf",  FUNC(scalb) (minus_infty, 100), minus_infty, 0, 0, 0);
-
-  check_float ("scalb (0.1, -inf) == 0.0",  FUNC(scalb) (0.1L, minus_infty), 0.0, 0, 0, 0);
-  check_float ("scalb (-0.1, -inf) == -0",  FUNC(scalb) (-0.1L, minus_infty), minus_zero, 0, 0, 0);
-
-  check_float ("scalb (1, inf) == inf",  FUNC(scalb) (1, plus_infty), plus_infty, 0, 0, 0);
-  check_float ("scalb (-1, inf) == -inf",  FUNC(scalb) (-1, plus_infty), minus_infty, 0, 0, 0);
-  check_float ("scalb (inf, inf) == inf",  FUNC(scalb) (plus_infty, plus_infty), plus_infty, 0, 0, 0);
-  check_float ("scalb (-inf, inf) == -inf",  FUNC(scalb) (minus_infty, plus_infty), minus_infty, 0, 0, 0);
-
-  check_float ("scalb (inf, -inf) == NaN plus invalid exception",  FUNC(scalb) (plus_infty, minus_infty), nan_value, 0, 0, INVALID_EXCEPTION);
-  check_float ("scalb (-inf, -inf) == NaN plus invalid exception",  FUNC(scalb) (minus_infty, minus_infty), nan_value, 0, 0, INVALID_EXCEPTION);
-
-  check_float ("scalb (NaN, 1) == NaN",  FUNC(scalb) (nan_value, 1), nan_value, 0, 0, 0);
-  check_float ("scalb (1, NaN) == NaN",  FUNC(scalb) (1, nan_value), nan_value, 0, 0, 0);
-  check_float ("scalb (NaN, 0) == NaN",  FUNC(scalb) (nan_value, 0), nan_value, 0, 0, 0);
-  check_float ("scalb (0, NaN) == NaN",  FUNC(scalb) (0, nan_value), nan_value, 0, 0, 0);
-  check_float ("scalb (NaN, inf) == NaN",  FUNC(scalb) (nan_value, plus_infty), nan_value, 0, 0, 0);
-  check_float ("scalb (inf, NaN) == NaN",  FUNC(scalb) (plus_infty, nan_value), nan_value, 0, 0, 0);
-  check_float ("scalb (NaN, NaN) == NaN",  FUNC(scalb) (nan_value, nan_value), nan_value, 0, 0, 0);
-
-  check_float ("scalb (0.8, 4) == 12.8",  FUNC(scalb) (0.8L, 4), 12.8L, 0, 0, 0);
-  check_float ("scalb (-0.854375, 5) == -27.34",  FUNC(scalb) (-0.854375L, 5), -27.34L, 0, 0, 0);
-
-  print_max_error ("scalb", 0, 0);
-}
-
-
-static void
 scalbn_test (void)
 {
 
@@ -4181,6 +4122,7 @@ trunc_test (void)
   print_max_error ("trunc", 0, 0);
 }
 
+#ifdef TEST_DOUBLE
 static void
 y0_test (void)
 {
@@ -4316,6 +4258,7 @@ yn_test (void)
   print_max_error ("yn", DELTAyn, 0);
 
 }
+#endif
 
 
 
@@ -4518,7 +4461,6 @@ main (int argc, char **argv)
   logb_test ();
   modf_test ();
   ilogb_test ();
-  scalb_test ();
   scalbn_test ();
   scalbln_test ();
 
@@ -4595,6 +4537,7 @@ main (int argc, char **argv)
   ctanh_test ();
 #endif
 
+#ifdef TEST_DOUBLE
   /* Bessel functions:  */
   j0_test ();
   j1_test ();
@@ -4602,6 +4545,7 @@ main (int argc, char **argv)
   y0_test ();
   y1_test ();
   yn_test ();
+#endif
 
   if (output_ulps)
     fclose (ulps_file);

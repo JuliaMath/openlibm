@@ -194,6 +194,9 @@ extern int signgam;
 #if defined(__cplusplus)
 extern "C" {
 #endif
+/* Symbol present when OpenLibm is used. */
+int isopenlibm(void);
+
 /*
  * ANSI/POSIX
  */
@@ -280,14 +283,6 @@ double	jn(int, double);
 double	y0(double);
 double	y1(double);
 double	yn(int, double);
-
-#if __XSI_VISIBLE <= 500 || __BSD_VISIBLE
-double	gamma(double);
-#endif
-
-#if __XSI_VISIBLE <= 600 || __BSD_VISIBLE
-double	scalb(double, double);
-#endif
 #endif /* __BSD_VISIBLE || __XSI_VISIBLE */
 
 #if __BSD_VISIBLE || __ISO_C_VISIBLE >= 1999
@@ -307,26 +302,18 @@ double	trunc(double);
  * BSD math library entry points
  */
 #if __BSD_VISIBLE
-double	drem(double, double);
-int	finite(double) __pure2;
 int	isnanf(float) __pure2;
 
 /*
- * Reentrant version of gamma & lgamma; passes signgam back by reference
- * as the second argument; user must allocate space for signgam.
+ * Reentrant version of lgamma; passes signgam back by reference as the
+ * second argument; user must allocate space for signgam.
  */
-double	gamma_r(double, int *);
 double	lgamma_r(double, int *);
 
 /*
  * Single sine/cosine function.
  */
 void	sincos(double, double *, double *);
-
-/*
- * IEEE Test Vector
- */
-double	significand(double);
 #endif /* __BSD_VISIBLE */
 
 /* float versions of ANSI/POSIX functions */
@@ -400,34 +387,16 @@ float	fminf(float, float) __pure2;
  * float versions of BSD math library entry points
  */
 #if __BSD_VISIBLE
-float	dremf(float, float);
-int	finitef(float) __pure2;
-float	gammaf(float);
-float	j0f(float);
-float	j1f(float);
-float	jnf(int, float);
-float	scalbf(float, float);
-float	y0f(float);
-float	y1f(float);
-float	ynf(int, float);
-
 /*
- * Float versions of reentrant version of gamma & lgamma; passes
- * signgam back by reference as the second argument; user must
- * allocate space for signgam.
+ * Float versions of reentrant version of lgamma; passes signgam back by
+ * reference as the second argument; user must allocate space for signgam.
  */
-float	gammaf_r(float, int *);
 float	lgammaf_r(float, int *);
 
 /*
  * Single sine/cosine function.
  */
 void	sincosf(float, float *, float *);
-
-/*
- * float version of IEEE Test Vector
- */
-float	significandf(float);
 #endif	/* __BSD_VISIBLE */
 
 /*
