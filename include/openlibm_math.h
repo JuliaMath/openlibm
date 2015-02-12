@@ -281,10 +281,6 @@ double	y0(double);
 double	y1(double);
 double	yn(int, double);
 
-#if __XSI_VISIBLE <= 500 || __BSD_VISIBLE
-double	gamma(double);
-#endif
-
 #if __XSI_VISIBLE <= 600 || __BSD_VISIBLE
 double	scalb(double, double);
 #endif
@@ -312,10 +308,9 @@ int	finite(double) __pure2;
 int	isnanf(float) __pure2;
 
 /*
- * Reentrant version of gamma & lgamma; passes signgam back by reference
- * as the second argument; user must allocate space for signgam.
+ * Reentrant version of lgamma; passes signgam back by reference as the
+ * second argument; user must allocate space for signgam.
  */
-double	gamma_r(double, int *);
 double	lgamma_r(double, int *);
 
 /*
@@ -402,7 +397,6 @@ float	fminf(float, float) __pure2;
 #if __BSD_VISIBLE
 float	dremf(float, float);
 int	finitef(float) __pure2;
-float	gammaf(float);
 float	j0f(float);
 float	j1f(float);
 float	jnf(int, float);
@@ -412,11 +406,9 @@ float	y1f(float);
 float	ynf(int, float);
 
 /*
- * Float versions of reentrant version of gamma & lgamma; passes
- * signgam back by reference as the second argument; user must
- * allocate space for signgam.
+ * Float versions of reentrant version of lgamma; passes signgam back by
+ * reference as the second argument; user must allocate space for signgam.
  */
-float	gammaf_r(float, int *);
 float	lgammaf_r(float, int *);
 
 /*

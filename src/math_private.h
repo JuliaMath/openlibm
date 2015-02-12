@@ -280,9 +280,7 @@ irint(double x)
 #define	__ieee754_fmod	fmod
 #define	__ieee754_pow	pow
 #define	__ieee754_lgamma lgamma
-#define	__ieee754_gamma	gamma
 #define	__ieee754_lgamma_r lgamma_r
-#define	__ieee754_gamma_r gamma_r
 #define	__ieee754_log10	log10
 #define	__ieee754_sinh	sinh
 #define	__ieee754_hypot	hypot
@@ -306,9 +304,7 @@ irint(double x)
 #define	__ieee754_fmodf	fmodf
 #define	__ieee754_powf	powf
 #define	__ieee754_lgammaf lgammaf
-#define	__ieee754_gammaf gammaf
 #define	__ieee754_lgammaf_r lgammaf_r
-#define	__ieee754_gammaf_r gammaf_r
 #define	__ieee754_log10f log10f
 #define	__ieee754_log2f log2f
 #define	__ieee754_sinhf	sinhf
