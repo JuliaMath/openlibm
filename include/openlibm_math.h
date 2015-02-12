@@ -317,11 +317,6 @@ double	lgamma_r(double, int *);
  * Single sine/cosine function.
  */
 void	sincos(double, double *, double *);
-
-/*
- * IEEE Test Vector
- */
-double	significand(double);
 #endif /* __BSD_VISIBLE */
 
 /* float versions of ANSI/POSIX functions */
@@ -415,11 +410,6 @@ float	lgammaf_r(float, int *);
  * Single sine/cosine function.
  */
 void	sincosf(float, float *, float *);
-
-/*
- * float version of IEEE Test Vector
- */
-float	significandf(float);
 #endif	/* __BSD_VISIBLE */
 
 /*
