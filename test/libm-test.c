@@ -343,30 +343,6 @@ print_complex_function_ulps (const char *function_name, FLOAT real_ulp,
 #endif
 
 
-
-/* Test if Floating-Point stack hasn't changed */
-static void
-fpstack_test (const char *test_name)
-{
-#ifdef i386
-  static int old_stack;
-  int sw;
-
-  asm ("fnstsw" : "=a" (sw));
-  sw >>= 11;
-  sw &= 7;
-
-  if (sw != old_stack)
-    {
-      printf ("FP-Stack wrong after test %s (%d, should be %d)\n",
-	      test_name, sw, old_stack);
-      ++noErrors;
-      old_stack = sw;
-    }
-#endif
-}
-
-
 static void
 print_max_error (const char *func_name, FLOAT allowed, int xfail)
 {
@@ -564,8 +540,6 @@ check_float_internal (const char *test_name, FLOAT computed, FLOAT expected,
 	}
     }
   update_stats (ok, xfail);
-
-  fpstack_test (test_name);
 }
 
 
@@ -638,7 +612,6 @@ check_int (const char *test_name, int computed, int expected, int max_ulp,
     }
 
   update_stats (ok, xfail);
-  fpstack_test (test_name);
 }
 
 
@@ -669,7 +642,6 @@ check_long (const char *test_name, long int computed, long int expected,
     }
 
   update_stats (ok, xfail);
-  fpstack_test (test_name);
 }
 
 
@@ -696,7 +668,6 @@ check_bool (const char *test_name, int computed, int expected,
     }
 
   update_stats (ok, xfail);
-  fpstack_test (test_name);
 }
 
 
@@ -729,7 +700,6 @@ check_longlong (const char *test_name, long long int computed,
     }
 
   update_stats (ok, xfail);
-  fpstack_test (test_name);
 }
 
 
@@ -4265,7 +4235,6 @@ yn_test (void)
 static void
 initialize (void)
 {
-  fpstack_test ("start *init*");
   plus_zero = 0.0;
   nan_value = plus_zero / plus_zero;	/* Suppress GCC warning */
 
@@ -4283,9 +4252,6 @@ initialize (void)
 
   /* Clear all exceptions.  From now on we must not get random exceptions.  */
   feclearexcept (FE_ALL_EXCEPT);
-
-  /* Test to make sure we start correctly.  */
-  fpstack_test ("end *init*");
 }
 
 #if 0 /* XXX scp XXX */
