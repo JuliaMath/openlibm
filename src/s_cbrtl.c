@@ -24,7 +24,7 @@
 
 #include "fpmath.h"
 #include "math_private.h"
-#if defined(_WIN32) && defined(__i386__)
+#if defined(__i386__)
 #include "i387/bsd_ieeefp.h"
 #endif
 
