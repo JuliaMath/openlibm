@@ -25,3 +25,5 @@ includes experimental support for ARM.
    Linux and Windows.
 3. Use `make USECLANG=1` to build with clang. This is the default on OS X
    and FreeBSD.
+4. Use `make ARCH=i386` to build for i386. Other supported architectures are
+   i486, i586, i686, x86_64, and various arm architectures.
