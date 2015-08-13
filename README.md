@@ -14,7 +14,7 @@ consistently across compilers and operating systems, and in 32-bit and
 
 ## Platform support
 
-OpenLibm builds on Linux, Mac OS X, Windows, and FreeBSD. It builds
+OpenLibm builds on Linux, Mac OS X, Windows, FreeBSD, and OpenBSD. It builds
 with both GCC and clang. Although largely tested on x86, it also
 includes experimental support for ARM.
 
@@ -27,3 +27,7 @@ includes experimental support for ARM.
    and FreeBSD.
 4. Use `make ARCH=i386` to build for i386. Other supported architectures are
    i486, i586, i686, x86_64, and various arm architectures.
+5. On OpenBSD, you need to install GNU Make (port name: `gmake`) and a recent
+   version of `gcc` (tested: 4.9.2), as the default version provided by OpenBSD
+   is too old (4.2.1). If you use OpenBSD's port system for this (port name:
+   `gcc`), run `make CC=egcc` to force Make to use the newer `gcc`.
