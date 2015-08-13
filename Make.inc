@@ -103,6 +103,12 @@ SONAME_FLAG = -soname
 CFLAGS_add+=-fPIC
 endif
 
+ifeq ($(OS), OpenBSD)
+SHLIB_EXT = so
+SONAME_FLAG = -soname
+CFLAGS_add+=-fPIC
+endif
+
 ifeq ($(OS), Darwin)
 SHLIB_EXT = dylib
 SONAME_FLAG = -install_name
