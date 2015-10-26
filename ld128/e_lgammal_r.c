@@ -763,7 +763,7 @@ lgammal_r(long double x, int *signgamp)
 
   *signgamp = 1;
 
-  if (! finite (x))
+  if (!isfinite (x))
     return x * x;
 
   if (x == 0.0L)
