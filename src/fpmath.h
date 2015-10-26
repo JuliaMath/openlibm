@@ -29,8 +29,9 @@
 #ifndef _FPMATH_H_
 #define _FPMATH_H_
 
-// Currently assumes Intel platform
-#if defined (__i386__) || defined(__x86_64__)
+#if defined(__aarch64__)
+#include "aarch64_fpmath.h"
+#elif defined(__i386__) || defined(__x86_64__)
 #ifdef __LP64__
 #include "amd64_fpmath.h"
 #else 
