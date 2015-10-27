@@ -47,7 +47,7 @@
 #define _PDP_ENDIAN       __ORDER_PDP_ENDIAN__
 #define _BYTE_ORDER       __BYTE_ORDER__
 
-#elif defined(__linux)
+#elif defined(__GLIBC__)
 
 #include <features.h>
 #include <endian.h>

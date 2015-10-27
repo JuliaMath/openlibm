@@ -5,7 +5,7 @@
 #include <limits.h>
 #include <stdint.h>
 
-#ifdef __linux__
+#ifdef __GLIBC__
 /* Not sure what to do about __pure2 on linux */
 #define __pure2 
 #endif
