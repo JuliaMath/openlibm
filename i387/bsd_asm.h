@@ -72,7 +72,7 @@
 /* XXX should use .p2align 4,0x90 for -m486. */
 #define _START_ENTRY .p2align 2,0x90
 
-#if defined(__linux__) || defined(__FreeBSD__) || defined(__ELF__)
+#if defined(__ELF__)
 #define CNAME(csym)		csym
 #define HIDENAME(asmsym)	.asmsym
 #define _ENTRY(x) .text; _START_ENTRY; \

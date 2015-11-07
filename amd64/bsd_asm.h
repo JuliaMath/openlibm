@@ -62,7 +62,7 @@
 
 #define _START_ENTRY	.p2align 4,0x90
 
-#if defined(__linux__) || defined(__FreeBSD__) || defined(__ELF__)
+#if defined(__ELF__)
 #define _ENTRY(x)	.text; _START_ENTRY; \
 			.globl CNAME(x); .type CNAME(x),@function; CNAME(x):
 #define	END(x)		.size x, . - x
