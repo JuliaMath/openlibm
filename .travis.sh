@@ -21,5 +21,4 @@ arm32)
 	;;
 esac
 
-$LOADER ./test/test-double
-$LOADER ./test/test-float
+$LOADER make check

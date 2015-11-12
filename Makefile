@@ -24,10 +24,17 @@ OBJS =  $(patsubst %.f,%.f.o,\
 	$(patsubst %.S,%.S.o,\
 	$(patsubst %.c,%.c.o,$(filter-out $(addprefix src/,$(DUPLICATE_SRCS)),$(SRCS)))))
 
+.PHONY: all check test clean distclean install
+
 all: libopenlibm.a libopenlibm.$(SHLIB_EXT) 
-	$(MAKE) -C test
+
+check test: test/test-double test/test-float
+	test/test-double
+	test/test-float
+
 libopenlibm.a: $(OBJS)  
 	$(AR) -rcs libopenlibm.a $(OBJS)
+
 libopenlibm.$(SHLIB_EXT): $(OBJS)
 ifeq ($(OS),WINNT)
 	$(CC) -shared $(OBJS) $(LDFLAGS) $(LDFLAGS_add) -Wl,$(SONAME_FLAG),libopenlibm.$(SHLIB_EXT) -o libopenlibm.$(SHLIB_EXT)
@@ -36,6 +43,12 @@ else
 	@-ln -sf libopenlibm.$(SHLIB_EXT).$(SOMAJOR).$(SOMINOR) libopenlibm.$(SHLIB_EXT).$(SOMAJOR)
 	@-ln -sf libopenlibm.$(SHLIB_EXT).$(SOMAJOR).$(SOMINOR) libopenlibm.$(SHLIB_EXT)
 endif
+
+test/test-double: libopenlibm.$(SHLIB_EXT)
+	$(MAKE) -C test test-double
+
+test/test-float: libopenlibm.$(SHLIB_EXT)
+	$(MAKE) -C test test-float
 
 clean:
 	@for dir in $(SUBDIRS) .; do \
