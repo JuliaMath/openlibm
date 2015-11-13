@@ -22,3 +22,5 @@ arm32)
 esac
 
 $LOADER make check
+
+make clean && git status --ignored --porcelain && test -z "$(git status --ignored --porcelain)"
