@@ -40,8 +40,8 @@ ifeq ($(OS),WINNT)
 	$(CC) -shared $(OBJS) $(LDFLAGS) $(LDFLAGS_add) -Wl,$(SONAME_FLAG),libopenlibm.$(SHLIB_EXT) -o libopenlibm.$(SHLIB_EXT)
 else
 	$(CC) -shared $(OBJS) $(LDFLAGS) $(LDFLAGS_add) -Wl,$(SONAME_FLAG),libopenlibm.$(SHLIB_EXT).$(SOMAJOR) -o libopenlibm.$(SHLIB_EXT).$(SOMAJOR).$(SOMINOR)
-	@-ln -sf libopenlibm.$(SHLIB_EXT).$(SOMAJOR).$(SOMINOR) libopenlibm.$(SHLIB_EXT).$(SOMAJOR)
-	@-ln -sf libopenlibm.$(SHLIB_EXT).$(SOMAJOR).$(SOMINOR) libopenlibm.$(SHLIB_EXT)
+	ln -sf libopenlibm.$(SHLIB_EXT).$(SOMAJOR).$(SOMINOR) libopenlibm.$(SHLIB_EXT).$(SOMAJOR)
+	ln -sf libopenlibm.$(SHLIB_EXT).$(SOMAJOR).$(SOMINOR) libopenlibm.$(SHLIB_EXT)
 endif
 
 test/test-double: libopenlibm.$(SHLIB_EXT)
