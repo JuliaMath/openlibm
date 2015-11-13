@@ -11,7 +11,7 @@
  */
 
 #include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_logb.c,v 1.12 2008/02/08 01:22:13 bde Exp $");
+__FBSDID("$FreeBSD$");
 
 /*
  * double logb(x)
@@ -20,14 +20,14 @@
  */
 
 #include <float.h>
-#include <openlibm_math.h>
 
+#include <openlibm_math.h>
 #include "math_private.h"
 
 static const double
 two54 = 1.80143985094819840000e+16;	/* 43500000 00000000 */
 
-DLLEXPORT double
+double
 logb(double x)
 {
 	int32_t lx,ix;

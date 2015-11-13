@@ -11,19 +11,18 @@
 
 /*
  * from: @(#)fdlibm.h 5.1 93/09/24
- * $FreeBSD: src/lib/msun/src/math_private.h,v 1.34 2011/10/21 06:27:56 das Exp $
+ * $FreeBSD$
  */
 
 #ifndef _MATH_PRIVATE_H_
 #define	_MATH_PRIVATE_H_
-
-#include <openlibm_complex.h>
 
 #include "cdefs-compat.h"
 #include "types-compat.h"
 #include "fpmath.h"
 #include <stdint.h>
 #include "math_private_openbsd.h"
+#include <openlibm_complex.h>
 
 /*
  * The original fdlibm code used statements like:
@@ -42,6 +41,16 @@
  * A union which permits us to convert between a double and two 32 bit
  * ints.
  */
+
+#ifdef __arm__
+#if defined(__VFP_FP__) || defined(__ARM_EABI__)
+#define	_IEEE_WORD_ORDER	_BYTE_ORDER
+#else
+#define	_IEEE_WORD_ORDER	_BIG_ENDIAN
+#endif
+#else /* __arm__ */
+#define	_IEEE_WORD_ORDER	_BYTE_ORDER
+#endif
 
 #if _IEEE_WORD_ORDER == _BIG_ENDIAN
 
@@ -183,6 +192,33 @@ do {								\
   (d) = sf_u.value;						\
 } while (0)
 
+/*
+ * Get expsign and mantissa as 16 bit and 64 bit ints from an 80 bit long
+ * double.
+ */
+
+#define	EXTRACT_LDBL80_WORDS(ix0,ix1,d)				\
+do {								\
+  union IEEEl2bits ew_u;					\
+  ew_u.e = (d);							\
+  (ix0) = ew_u.xbits.expsign;					\
+  (ix1) = ew_u.xbits.man;					\
+} while (0)
+
+/*
+ * Get expsign and mantissa as one 16 bit and two 64 bit ints from a 128 bit
+ * long double.
+ */
+
+#define	EXTRACT_LDBL128_WORDS(ix0,ix1,ix2,d)			\
+do {								\
+  union IEEEl2bits ew_u;					\
+  ew_u.e = (d);							\
+  (ix0) = ew_u.xbits.expsign;					\
+  (ix1) = ew_u.xbits.manh;					\
+  (ix2) = ew_u.xbits.manl;					\
+} while (0)
+
 /* Get expsign as a 16 bit int from a long double.  */
 
 #define	GET_LDBL_EXPSIGN(i,d)					\
@@ -190,6 +226,33 @@ do {								\
   union IEEEl2bits ge_u;					\
   ge_u.e = (d);							\
   (i) = ge_u.xbits.expsign;					\
+} while (0)
+
+/*
+ * Set an 80 bit long double from a 16 bit int expsign and a 64 bit int
+ * mantissa.
+ */
+
+#define	INSERT_LDBL80_WORDS(d,ix0,ix1)				\
+do {								\
+  union IEEEl2bits iw_u;					\
+  iw_u.xbits.expsign = (ix0);					\
+  iw_u.xbits.man = (ix1);					\
+  (d) = iw_u.e;							\
+} while (0)
+
+/*
+ * Set a 128 bit long double from a 16 bit int expsign and two 64 bit ints
+ * comprising the mantissa.
+ */
+
+#define	INSERT_LDBL128_WORDS(d,ix0,ix1,ix2)			\
+do {								\
+  union IEEEl2bits iw_u;					\
+  iw_u.xbits.expsign = (ix0);					\
+  iw_u.xbits.manh = (ix1);					\
+  iw_u.xbits.manl = (ix2);					\
+  (d) = iw_u.e;							\
 } while (0)
 
 /* Set expsign of a long double from a 16 bit int.  */
@@ -202,20 +265,28 @@ do {								\
   (d) = se_u.e;							\
 } while (0)
 
+#ifdef __i386__
+/* Long double constants are broken on i386. */
+#define	LD80C(m, ex, v) {						\
+	.xbits.man = __CONCAT(m, ULL),					\
+	.xbits.expsign = (0x3fff + (ex)) | ((v) < 0 ? 0x8000 : 0),	\
+}
+#else
+/* The above works on non-i386 too, but we use this to check v. */
+#define	LD80C(m, ex, v)	{ .e = (v), }
+#endif
 
-//VBS
-#define	STRICT_ASSIGN(type, lval, rval)	((lval) = (rval))
-
-/* VBS
 #ifdef FLT_EVAL_METHOD
-// Attempt to get strict C99 semantics for assignment with non-C99 compilers.
+/*
+ * Attempt to get strict C99 semantics for assignment with non-C99 compilers.
+ */
 #if FLT_EVAL_METHOD == 0 || __GNUC__ == 0
 #define	STRICT_ASSIGN(type, lval, rval)	((lval) = (rval))
 #else
 #define	STRICT_ASSIGN(type, lval, rval) do {	\
 	volatile type __lval;			\
 						\
-	if (sizeof(type) >= sizeof(double))	\
+	if (sizeof(type) >= sizeof(long double))	\
 		(lval) = (rval);		\
 	else {					\
 		__lval = (rval);		\
@@ -223,17 +294,217 @@ do {								\
 	}					\
 } while (0)
 #endif
+#endif /* FLT_EVAL_METHOD */
+
+/* Support switching the mode to FP_PE if necessary. */
+#if defined(__i386__) && !defined(NO_FPSETPREC)
+#define	ENTERI()				\
+	long double __retval;			\
+	fp_prec_t __oprec;			\
+						\
+	if ((__oprec = fpgetprec()) != FP_PE)	\
+		fpsetprec(FP_PE)
+#define	RETURNI(x) do {				\
+	__retval = (x);				\
+	if (__oprec != FP_PE)			\
+		fpsetprec(__oprec);		\
+	RETURNF(__retval);			\
+} while (0)
+#else
+#define	ENTERI(x)
+#define	RETURNI(x)	RETURNF(x)
 #endif
-*/
+
+/* Default return statement if hack*_t() is not used. */
+#define      RETURNF(v)      return (v)
+
+/*
+ * 2sum gives the same result as 2sumF without requiring |a| >= |b| or
+ * a == 0, but is slower.
+ */
+#define	_2sum(a, b) do {	\
+	__typeof(a) __s, __w;	\
+				\
+	__w = (a) + (b);	\
+	__s = __w - (a);	\
+	(b) = ((a) - (__w - __s)) + ((b) - __s); \
+	(a) = __w;		\
+} while (0)
+
+/*
+ * 2sumF algorithm.
+ *
+ * "Normalize" the terms in the infinite-precision expression a + b for
+ * the sum of 2 floating point values so that b is as small as possible
+ * relative to 'a'.  (The resulting 'a' is the value of the expression in
+ * the same precision as 'a' and the resulting b is the rounding error.)
+ * |a| must be >= |b| or 0, b's type must be no larger than 'a's type, and
+ * exponent overflow or underflow must not occur.  This uses a Theorem of
+ * Dekker (1971).  See Knuth (1981) 4.2.2 Theorem C.  The name "TwoSum"
+ * is apparently due to Skewchuk (1997).
+ *
+ * For this to always work, assignment of a + b to 'a' must not retain any
+ * extra precision in a + b.  This is required by C standards but broken
+ * in many compilers.  The brokenness cannot be worked around using
+ * STRICT_ASSIGN() like we do elsewhere, since the efficiency of this
+ * algorithm would be destroyed by non-null strict assignments.  (The
+ * compilers are correct to be broken -- the efficiency of all floating
+ * point code calculations would be destroyed similarly if they forced the
+ * conversions.)
+ *
+ * Fortunately, a case that works well can usually be arranged by building
+ * any extra precision into the type of 'a' -- 'a' should have type float_t,
+ * double_t or long double.  b's type should be no larger than 'a's type.
+ * Callers should use these types with scopes as large as possible, to
+ * reduce their own extra-precision and efficiciency problems.  In
+ * particular, they shouldn't convert back and forth just to call here.
+ */
+#ifdef DEBUG
+#define	_2sumF(a, b) do {				\
+	__typeof(a) __w;				\
+	volatile __typeof(a) __ia, __ib, __r, __vw;	\
+							\
+	__ia = (a);					\
+	__ib = (b);					\
+	assert(__ia == 0 || fabsl(__ia) >= fabsl(__ib));	\
+							\
+	__w = (a) + (b);				\
+	(b) = ((a) - __w) + (b);			\
+	(a) = __w;					\
+							\
+	/* The next 2 assertions are weak if (a) is already long double. */ \
+	assert((long double)__ia + __ib == (long double)(a) + (b));	\
+	__vw = __ia + __ib;				\
+	__r = __ia - __vw;				\
+	__r += __ib;					\
+	assert(__vw == (a) && __r == (b));		\
+} while (0)
+#else /* !DEBUG */
+#define	_2sumF(a, b) do {	\
+	__typeof(a) __w;	\
+				\
+	__w = (a) + (b);	\
+	(b) = ((a) - __w) + (b); \
+	(a) = __w;		\
+} while (0)
+#endif /* DEBUG */
+
+/*
+ * Set x += c, where x is represented in extra precision as a + b.
+ * x must be sufficiently normalized and sufficiently larger than c,
+ * and the result is then sufficiently normalized.
+ *
+ * The details of ordering are that |a| must be >= |c| (so that (a, c)
+ * can be normalized without extra work to swap 'a' with c).  The details of
+ * the normalization are that b must be small relative to the normalized 'a'.
+ * Normalization of (a, c) makes the normalized c tiny relative to the
+ * normalized a, so b remains small relative to 'a' in the result.  However,
+ * b need not ever be tiny relative to 'a'.  For example, b might be about
+ * 2**20 times smaller than 'a' to give about 20 extra bits of precision.
+ * That is usually enough, and adding c (which by normalization is about
+ * 2**53 times smaller than a) cannot change b significantly.  However,
+ * cancellation of 'a' with c in normalization of (a, c) may reduce 'a'
+ * significantly relative to b.  The caller must ensure that significant
+ * cancellation doesn't occur, either by having c of the same sign as 'a',
+ * or by having |c| a few percent smaller than |a|.  Pre-normalization of
+ * (a, b) may help.
+ *
+ * This is is a variant of an algorithm of Kahan (see Knuth (1981) 4.2.2
+ * exercise 19).  We gain considerable efficiency by requiring the terms to
+ * be sufficiently normalized and sufficiently increasing.
+ */
+#define	_3sumF(a, b, c) do {	\
+	__typeof(a) __tmp;	\
+				\
+	__tmp = (c);		\
+	_2sumF(__tmp, (a));	\
+	(b) += (a);		\
+	(a) = __tmp;		\
+} while (0)
 
 /*
  * Common routine to process the arguments to nan(), nanf(), and nanl().
  */
-void _scan_nan(u_int32_t *__words, int __num_words, const char *__s);
+void _scan_nan(uint32_t *__words, int __num_words, const char *__s);
 
-#ifdef __GNUCLIKE_ASM
+#if defined(_COMPLEX_H) || defined(OPENLIBM_COMPLEX_H) || defined(OPENLIBM_USE_HOST_COMPLEX_H)
 
-/* Asm versions of some functions. */
+/*
+ * C99 specifies that complex numbers have the same representation as
+ * an array of two elements, where the first element is the real part
+ * and the second element is the imaginary part.
+ */
+typedef union {
+	float complex f;
+	float a[2];
+} float_complex;
+typedef union {
+	double complex f;
+	double a[2];
+} double_complex;
+typedef union {
+	long double complex f;
+	long double a[2];
+} long_double_complex;
+#define	REALPART(z)	((z).a[0])
+#define	IMAGPART(z)	((z).a[1])
+
+/*
+ * Inline functions that can be used to construct complex values.
+ *
+ * The C99 standard intends x+I*y to be used for this, but x+I*y is
+ * currently unusable in general since gcc introduces many overflow,
+ * underflow, sign and efficiency bugs by rewriting I*y as
+ * (0.0+I)*(y+0.0*I) and laboriously computing the full complex product.
+ * In particular, I*Inf is corrupted to NaN+I*Inf, and I*-0 is corrupted
+ * to -0.0+I*0.0.
+ *
+ * The C11 standard introduced the macros CMPLX(), CMPLXF() and CMPLXL()
+ * to construct complex values.  Compilers that conform to the C99
+ * standard require the following functions to avoid the above issues.
+ */
+/*
+#ifndef CMPLXF
+static __inline float complex
+CMPLXF(float x, float y)
+{
+	float_complex z;
+
+	REALPART(z) = x;
+	IMAGPART(z) = y;
+	return (z.f);
+}
+#endif
+
+#ifndef CMPLX
+static __inline double complex
+CMPLX(double x, double y)
+{
+	double_complex z;
+
+	REALPART(z) = x;
+	IMAGPART(z) = y;
+	return (z.f);
+}
+#endif
+
+#ifndef CMPLXL
+static __inline long double complex
+CMPLXL(long double x, long double y)
+{
+	long_double_complex z;
+
+	REALPART(z) = x;
+	IMAGPART(z) = y;
+	return (z.f);
+}
+#endif
+*/
+#endif /* _COMPLEX_H */
+
+#ifdef __GNUCLIKE___ASM__
+
+/* __Asm__ versions of some functions. */
 
 #ifdef __amd64__
 static __inline int
@@ -259,7 +530,153 @@ irint(double x)
 #define	HAVE_EFFICIENT_IRINT
 #endif
 
-#endif /* __GNUCLIKE_ASM */
+#if defined(__amd64__) || defined(__i386__)
+static __inline int
+irintl(long double x)
+{
+	int n;
+
+	__asm__("fistl %0" : "=m" (n) : "t" (x));
+	return (n);
+}
+#define	HAVE_EFFICIENT_IRINTL
+#endif
+
+#endif /* __GNUCLIKE___ASM__ */
+
+#ifdef DEBUG
+#if defined(__amd64__) || defined(__i386__)
+#define	breakpoint()	__asm__("int $3")
+#else
+#include <signal.h>
+
+#define	breakpoint()	raise(SIGTRAP)
+#endif
+#endif
+
+/* Write a pari script to test things externally. */
+#ifdef DOPRINT
+#include <stdio.h>
+
+#ifndef DOPRINT_SWIZZLE
+#define	DOPRINT_SWIZZLE		0
+#endif
+
+#ifdef DOPRINT_LD80
+
+#define	DOPRINT_START(xp) do {						\
+	uint64_t __lx;							\
+	uint16_t __hx;							\
+									\
+	/* Hack to give more-problematic args. */			\
+	EXTRACT_LDBL80_WORDS(__hx, __lx, *xp);				\
+	__lx ^= DOPRINT_SWIZZLE;					\
+	INSERT_LDBL80_WORDS(*xp, __hx, __lx);				\
+	printf("x = %.21Lg; ", (long double)*xp);			\
+} while (0)
+#define	DOPRINT_END1(v)							\
+	printf("y = %.21Lg; z = 0; show(x, y, z);\n", (long double)(v))
+#define	DOPRINT_END2(hi, lo)						\
+	printf("y = %.21Lg; z = %.21Lg; show(x, y, z);\n",		\
+	    (long double)(hi), (long double)(lo))
+
+#elif defined(DOPRINT_D64)
+
+#define	DOPRINT_START(xp) do {						\
+	uint32_t __hx, __lx;						\
+									\
+	EXTRACT_WORDS(__hx, __lx, *xp);					\
+	__lx ^= DOPRINT_SWIZZLE;					\
+	INSERT_WORDS(*xp, __hx, __lx);					\
+	printf("x = %.21Lg; ", (long double)*xp);			\
+} while (0)
+#define	DOPRINT_END1(v)							\
+	printf("y = %.21Lg; z = 0; show(x, y, z);\n", (long double)(v))
+#define	DOPRINT_END2(hi, lo)						\
+	printf("y = %.21Lg; z = %.21Lg; show(x, y, z);\n",		\
+	    (long double)(hi), (long double)(lo))
+
+#elif defined(DOPRINT_F32)
+
+#define	DOPRINT_START(xp) do {						\
+	uint32_t __hx;							\
+									\
+	GET_FLOAT_WORD(__hx, *xp);					\
+	__hx ^= DOPRINT_SWIZZLE;					\
+	SET_FLOAT_WORD(*xp, __hx);					\
+	printf("x = %.21Lg; ", (long double)*xp);			\
+} while (0)
+#define	DOPRINT_END1(v)							\
+	printf("y = %.21Lg; z = 0; show(x, y, z);\n", (long double)(v))
+#define	DOPRINT_END2(hi, lo)						\
+	printf("y = %.21Lg; z = %.21Lg; show(x, y, z);\n",		\
+	    (long double)(hi), (long double)(lo))
+
+#else /* !DOPRINT_LD80 && !DOPRINT_D64 (LD128 only) */
+
+#ifndef DOPRINT_SWIZZLE_HIGH
+#define	DOPRINT_SWIZZLE_HIGH	0
+#endif
+
+#define	DOPRINT_START(xp) do {						\
+	uint64_t __lx, __llx;						\
+	uint16_t __hx;							\
+									\
+	EXTRACT_LDBL128_WORDS(__hx, __lx, __llx, *xp);			\
+	__llx ^= DOPRINT_SWIZZLE;					\
+	__lx ^= DOPRINT_SWIZZLE_HIGH;					\
+	INSERT_LDBL128_WORDS(*xp, __hx, __lx, __llx);			\
+	printf("x = %.36Lg; ", (long double)*xp);					\
+} while (0)
+#define	DOPRINT_END1(v)							\
+	printf("y = %.36Lg; z = 0; show(x, y, z);\n", (long double)(v))
+#define	DOPRINT_END2(hi, lo)						\
+	printf("y = %.36Lg; z = %.36Lg; show(x, y, z);\n",		\
+	    (long double)(hi), (long double)(lo))
+
+#endif /* DOPRINT_LD80 */
+
+#else /* !DOPRINT */
+#define	DOPRINT_START(xp)
+#define	DOPRINT_END1(v)
+#define	DOPRINT_END2(hi, lo)
+#endif /* DOPRINT */
+
+#define	RETURNP(x) do {			\
+	DOPRINT_END1(x);		\
+	RETURNF(x);			\
+} while (0)
+#define	RETURNPI(x) do {		\
+	DOPRINT_END1(x);		\
+	RETURNI(x);			\
+} while (0)
+#define	RETURN2P(x, y) do {		\
+	DOPRINT_END2((x), (y));		\
+	RETURNF((x) + (y));		\
+} while (0)
+#define	RETURN2PI(x, y) do {		\
+	DOPRINT_END2((x), (y));		\
+	RETURNI((x) + (y));		\
+} while (0)
+#ifdef STRUCT_RETURN
+#define	RETURNSP(rp) do {		\
+	if (!(rp)->lo_set)		\
+		RETURNP((rp)->hi);	\
+	RETURN2P((rp)->hi, (rp)->lo);	\
+} while (0)
+#define	RETURNSPI(rp) do {		\
+	if (!(rp)->lo_set)		\
+		RETURNPI((rp)->hi);	\
+	RETURN2PI((rp)->hi, (rp)->lo);	\
+} while (0)
+#endif
+#define	SUM2P(x, y) ({			\
+	const __typeof (x) __x = (x);	\
+	const __typeof (y) __y = (y);	\
+					\
+	DOPRINT_END2(__x, __y);		\
+	__x + __y;			\
+})
 
 /*
  * ieee style elementary functions
@@ -280,7 +697,9 @@ irint(double x)
 #define	__ieee754_fmod	fmod
 #define	__ieee754_pow	pow
 #define	__ieee754_lgamma lgamma
+#define	__ieee754_gamma	gamma
 #define	__ieee754_lgamma_r lgamma_r
+#define	__ieee754_gamma_r gamma_r
 #define	__ieee754_log10	log10
 #define	__ieee754_sinh	sinh
 #define	__ieee754_hypot	hypot
@@ -291,6 +710,7 @@ irint(double x)
 #define	__ieee754_jn	jn
 #define	__ieee754_yn	yn
 #define	__ieee754_remainder remainder
+#define	__ieee754_scalb	scalb
 #define	__ieee754_sqrtf	sqrtf
 #define	__ieee754_acosf	acosf
 #define	__ieee754_acoshf acoshf
@@ -303,7 +723,9 @@ irint(double x)
 #define	__ieee754_fmodf	fmodf
 #define	__ieee754_powf	powf
 #define	__ieee754_lgammaf lgammaf
+#define	__ieee754_gammaf gammaf
 #define	__ieee754_lgammaf_r lgammaf_r
+#define	__ieee754_gammaf_r gammaf_r
 #define	__ieee754_log10f log10f
 #define	__ieee754_log2f log2f
 #define	__ieee754_sinhf	sinhf
@@ -315,40 +737,40 @@ irint(double x)
 #define	__ieee754_jnf	jnf
 #define	__ieee754_ynf	ynf
 #define	__ieee754_remainderf remainderf
+#define	__ieee754_scalbf scalbf
 
 /* fdlibm kernel function */
 int	__kernel_rem_pio2(double*,double*,int,int,int);
 
 /* double precision kernel functions */
-#ifdef INLINE_REM_PIO2
-__inline
-#endif
+#ifndef INLINE_REM_PIO2
 int	__ieee754_rem_pio2(double,double*);
+#endif
 double	__kernel_sin(double,double,int);
 double	__kernel_cos(double,double);
 double	__kernel_tan(double,double,int);
 double	__ldexp_exp(double,int);
+#ifdef _COMPLEX_H
 double complex __ldexp_cexp(double complex,int);
+#endif
 
 /* float precision kernel functions */
-#ifdef INLINE_REM_PIO2F
-__inline
-#endif
+#ifndef INLINE_REM_PIO2F
 int	__ieee754_rem_pio2f(float,double*);
-#ifdef INLINE_KERNEL_SINDF
-__inline
 #endif
+#ifndef INLINE_KERNEL_SINDF
 float	__kernel_sindf(double);
-#ifdef INLINE_KERNEL_COSDF
-__inline
 #endif
+#ifndef INLINE_KERNEL_COSDF
 float	__kernel_cosdf(double);
-#ifdef INLINE_KERNEL_TANDF
-__inline
 #endif
+#ifndef INLINE_KERNEL_TANDF
 float	__kernel_tandf(double,int);
+#endif
 float	__ldexp_expf(float,int);
+#ifdef _COMPLEX_H
 float complex __ldexp_cexpf(float complex,int);
+#endif
 
 /* long double precision kernel functions */
 long double __kernel_sinl(long double, long double, int);
@@ -364,5 +786,6 @@ long double __kernel_tanl(long double, long double, int);
 #else
 #define DLLEXPORT __attribute__ ((visibility("default")))
 #endif
+
 
 #endif /* !_MATH_PRIVATE_H_ */

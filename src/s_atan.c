@@ -11,7 +11,7 @@
  */
 
 #include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_atan.c,v 1.13 2011/02/10 07:37:50 das Exp $");
+__FBSDID("$FreeBSD$");
 
 /* atan(x)
  * Method
@@ -34,8 +34,8 @@
  */
 
 #include <float.h>
-#include <openlibm_math.h>
 
+#include <openlibm_math.h>
 #include "math_private.h"
 
 static const double atanhi[] = {
@@ -70,7 +70,7 @@ static const double aT[] = {
 one   = 1.0,
 huge   = 1.0e300;
 
-DLLEXPORT double
+double
 atan(double x)
 {
 	double w,s1,s2,z;
@@ -79,7 +79,7 @@ atan(double x)
 	GET_HIGH_WORD(hx,x);
 	ix = hx&0x7fffffff;
 	if(ix>=0x44100000) {	/* if |x| >= 2^66 */
-	    u_int32_t low;
+	    uint32_t low;
 	    GET_LOW_WORD(low,x);
 	    if(ix>0x7ff00000||
 		(ix==0x7ff00000&&(low!=0)))

@@ -23,15 +23,14 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  *
- * $FreeBSD: src/lib/msun/src/s_signbit.c,v 1.1 2004/07/19 08:16:10 das Exp $
+ * $FreeBSD$
  */
 
 #include <openlibm_math.h>
 
 #include "fpmath.h"
-#include "math_private.h"
 
-DLLEXPORT int
+int
 __signbit(double d)
 {
 	union IEEEd2bits u;
@@ -40,7 +39,7 @@ __signbit(double d)
 	return (u.bits.sign);
 }
 
-DLLEXPORT int
+int
 __signbitf(float f)
 {
 	union IEEEf2bits u;
@@ -49,8 +48,7 @@ __signbitf(float f)
 	return (u.bits.sign);
 }
 
-#ifdef LONG_DOUBLE
-DLLEXPORT int
+int
 __signbitl(long double e)
 {
 	union IEEEl2bits u;
@@ -58,4 +56,3 @@ __signbitl(long double e)
 	u.e = e;
 	return (u.bits.sign);
 }
-#endif

@@ -11,11 +11,11 @@
  */
 
 #include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_remquo.c,v 1.2 2008/03/30 20:47:26 das Exp $");
+__FBSDID("$FreeBSD$");
 
 #include <float.h>
-#include <openlibm_math.h>
 
+#include <openlibm_math.h>
 #include "math_private.h"
 
 static const double Zero[] = {0.0, -0.0,};
@@ -28,11 +28,11 @@ static const double Zero[] = {0.0, -0.0,};
  * method.  In practice, this is far more bits than are needed to use
  * remquo in reduction algorithms.
  */
-DLLEXPORT double
+double
 remquo(double x, double y, int *quo)
 {
 	int32_t n,hx,hy,hz,ix,iy,sx,i;
-	u_int32_t lx,ly,lz,q,sxy;
+	uint32_t lx,ly,lz,q,sxy;
 
 	EXTRACT_WORDS(hx,lx,x);
 	EXTRACT_WORDS(hy,ly,y);
@@ -51,8 +51,8 @@ remquo(double x, double y, int *quo)
 		goto fixup;	/* |x|<|y| return x or x-y */
 	    }
 	    if(lx==ly) {
-		*quo = 1;
-		return Zero[(u_int32_t)sx>>31];	/* |x|=|y| return x*0*/
+		*quo = (sxy ? -1 : 1);
+		return Zero[(uint32_t)sx>>31];	/* |x|=|y| return x*0*/
 	    }
 	}
 
@@ -114,8 +114,9 @@ remquo(double x, double y, int *quo)
 
     /* convert back to floating value and restore the sign */
 	if((hx|lx)==0) {			/* return sign(x)*0 */
+	    q &= 0x7fffffff;
 	    *quo = (sxy ? -q : q);
-	    return Zero[(u_int32_t)sx>>31];
+	    return Zero[(uint32_t)sx>>31];
 	}
 	while(hx<0x00100000) {		/* normalize x */
 	    hx = hx+hx+(lx>>31); lx = lx+lx;
@@ -126,12 +127,12 @@ remquo(double x, double y, int *quo)
 	} else {		/* subnormal output */
 	    n = -1022 - iy;
 	    if(n<=20) {
-		lx = (lx>>n)|((u_int32_t)hx<<(32-n));
+		lx = (lx>>n)|((uint32_t)hx<<(32-n));
 		hx >>= n;
 	    } else if (n<=31) {
-		lx = (hx<<(32-n))|(lx>>n); hx = sx;
+		lx = (hx<<(32-n))|(lx>>n); hx = 0;
 	    } else {
-		lx = hx>>(n-32); hx = sx;
+		lx = hx>>(n-32); hx = 0;
 	    }
 	}
 fixup:

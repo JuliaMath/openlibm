@@ -1,6 +1,8 @@
 #ifndef _CDEFS_COMPAT_H_
 #define	_CDEFS_COMPAT_H_
 
+#define __FBSDID(s)
+
 #ifdef __MINIOS__
 /* No stdio.h on Mini-OS. */
 #include <sys/cdefs.h>

@@ -13,7 +13,7 @@
  */
 
 #include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/e_acosh.c,v 1.9 2008/02/22 02:30:34 das Exp $");
+__FBSDID("$FreeBSD$");
 
 /* __ieee754_acosh(x)
  * Method :
@@ -29,20 +29,21 @@
  *	acosh(NaN) is NaN without signal.
  */
 
-#include <openlibm_math.h>
+#include <float.h>
 
+#include <openlibm_math.h>
 #include "math_private.h"
 
 static const double
 one	= 1.0,
 ln2	= 6.93147180559945286227e-01;  /* 0x3FE62E42, 0xFEFA39EF */
 
-DLLEXPORT double
+double
 __ieee754_acosh(double x)
 {
 	double t;
 	int32_t hx;
-	u_int32_t lx;
+	uint32_t lx;
 	EXTRACT_WORDS(hx,lx,x);
 	if(hx<0x3ff00000) {		/* x < 1 */
 	    return (x-x)/(x-x);
@@ -61,3 +62,7 @@ __ieee754_acosh(double x)
 	    return log1p(t+sqrt(2.0*t+t*t));
 	}
 }
+
+#if LDBL_MANT_DIG == 53
+__weak_reference(acosh, acoshl);
+#endif

@@ -25,11 +25,11 @@
  */
 
 #include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_fmaf.c,v 1.3 2011/10/15 04:16:58 das Exp $");
+__FBSDID("$FreeBSD$");
 
-#include <openlibm_fenv.h>
+#include <fenv.h>
+
 #include <openlibm_math.h>
-
 #include "math_private.h"
 
 /*
@@ -39,11 +39,11 @@
  * direct double-precision arithmetic suffices, except where double
  * rounding occurs.
  */
-DLLEXPORT float
+float
 fmaf(float x, float y, float z)
 {
 	double xy, result;
-	u_int32_t hr, lr;
+	uint32_t hr, lr;
 
 	xy = (double)x * y;
 	result = xy + z;

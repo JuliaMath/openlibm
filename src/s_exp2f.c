@@ -25,25 +25,26 @@
  */
 
 #include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_exp2f.c,v 1.9 2008/02/22 02:27:34 das Exp $");
+__FBSDID("$FreeBSD$");
 
 #include <float.h>
-#include <openlibm_math.h>
 
+#include <openlibm_math.h>
 #include "math_private.h"
 
 #define	TBLBITS	4
 #define	TBLSIZE	(1 << TBLBITS)
 
 static const float
-    huge    = 0x1p100f,
     redux   = 0x1.8p23f / TBLSIZE,
     P1	    = 0x1.62e430p-1f,
     P2	    = 0x1.ebfbe0p-3f,
     P3	    = 0x1.c6b348p-5f,
     P4	    = 0x1.3b2c9cp-7f;
 
-static volatile float twom100 = 0x1p-100f;
+static volatile float
+    huge    = 0x1p100f,
+    twom100 = 0x1p-100f;
 
 static const double exp2ft[TBLSIZE] = {
 	0x1.6a09e667f3bcdp-1,
@@ -90,12 +91,12 @@ static const double exp2ft[TBLSIZE] = {
  *	Tang, P.  Table-driven Implementation of the Exponential Function
  *	in IEEE Floating-Point Arithmetic.  TOMS 15(2), 144-157 (1989).
  */
-DLLEXPORT float
+float
 exp2f(float x)
 {
 	double tv, twopk, u, z;
 	float t;
-	u_int32_t hx, ix, i0;
+	uint32_t hx, ix, i0;
 	int32_t k;
 
 	/* Filter out exceptional cases. */

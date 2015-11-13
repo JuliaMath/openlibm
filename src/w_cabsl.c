@@ -8,14 +8,12 @@
  */
 
 #include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/w_cabsl.c,v 1.1 2008/03/30 20:02:03 das Exp $");
+__FBSDID("$FreeBSD$");
 
 #include <openlibm_complex.h>
 #include <openlibm_math.h>
 
-#include "math_private.h"
-
-DLLEXPORT long double
+long double
 cabsl(long double complex z)
 {
 	return hypotl(creall(z), cimagl(z));

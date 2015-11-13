@@ -45,20 +45,6 @@ ifeq ($(ARCH),mingw32)
 $(error "the mingw32 compiler you are using fails the openblas testsuite. please see the Julia README.windows.md document for a replacement")
 endif
 
-CFLAGS_add += -std=c99 -Wall -I$(OPENLIBM_HOME) -I$(OPENLIBM_HOME)/include -I$(OPENLIBM_HOME)/ld80 -I$(OPENLIBM_HOME)/$(ARCH) -I$(OPENLIBM_HOME)/src -DASSEMBLER -D__BSD_VISIBLE -Wno-implicit-function-declaration
-
-# The optimization flag may be overriden with the environment variable CFLAGS.
-CFLAGS ?= -O2
-
-default: all
-
-%.c.o: %.c
-	$(CC) $(CPPFLAGS) $(CFLAGS) $(CFLAGS_add) -c $< -o $@
-
-%.S.o: %.S
-	$(CC) $(CPPFLAGS) $(SFLAGS) $(SFLAGS_add) $(filter -m% -B% -I% -D%,$(CFLAGS_add)) -c $< -o $@
-
-# OS-specific stuff
 REAL_ARCH := $(ARCH)
 ifeq ($(findstring arm,$(ARCH)),arm)
 override ARCH := arm
@@ -75,11 +61,29 @@ endif
 ifeq ($(ARCH),i686)
 override ARCH := i387
 endif
-
 ifeq ($(ARCH),x86_64)
 override ARCH := amd64
 endif
 
+CFLAGS_add += -std=c99 -Wall -I$(OPENLIBM_HOME) -I$(OPENLIBM_HOME)/include -I$(OPENLIBM_HOME)/ld80 -I$(OPENLIBM_HOME)/$(ARCH) -I$(OPENLIBM_HOME)/src -DASSEMBLER -D__BSD_VISIBLE -Wno-implicit-function-declaration
+
+# The optimization flag may be overriden with the environment variable CFLAGS.
+CFLAGS ?= -O2
+
+# Use -O0 on arm until test segfaults are resolved that happen at higher opt levels.
+ifeq ($(ARCH),arm)
+override CFLAGS=-O1 -g
+endif
+
+default: all
+
+%.c.o: %.c
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(CFLAGS_add) -c $< -o $@
+
+%.S.o: %.S
+	$(CC) $(CPPFLAGS) $(SFLAGS) $(SFLAGS_add) $(filter -m% -B% -I% -D%,$(CFLAGS_add)) -c $< -o $@
+
+# OS-specific stuff
 ifneq (,$(findstring MINGW,$(OS)))
 override OS=WINNT
 endif

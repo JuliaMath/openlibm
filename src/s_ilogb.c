@@ -11,7 +11,7 @@
  */
 
 #include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_ilogb.c,v 1.10 2008/02/22 02:30:35 das Exp $");
+__FBSDID("$FreeBSD$");
 
 /* ilogb(double x)
  * return the binary exponent of non-zero x
@@ -21,12 +21,11 @@
  */
 
 #include <limits.h>
-#include <openlibm_math.h>
 
+#include <openlibm_math.h>
 #include "math_private.h"
 
-DLLEXPORT int
-ilogb(double x)
+	int ilogb(double x)
 {
 	int32_t hx,lx,ix;
 

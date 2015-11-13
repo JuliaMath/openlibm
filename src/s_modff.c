@@ -14,19 +14,18 @@
  */
 
 #include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_modff.c,v 1.9 2008/02/22 02:30:35 das Exp $");
+__FBSDID("$FreeBSD$");
 
 #include <openlibm_math.h>
-
 #include "math_private.h"
 
 static const float one = 1.0;
 
-DLLEXPORT float
+float
 modff(float x, float *iptr)
 {
 	int32_t i0,j0;
-	u_int32_t i;
+	uint32_t i;
 	GET_FLOAT_WORD(i0,x);
 	j0 = ((i0>>23)&0xff)-0x7f;	/* exponent of x */
 	if(j0<23) {			/* integer part in x */
@@ -36,7 +35,7 @@ modff(float x, float *iptr)
 	    } else {
 		i = (0x007fffff)>>j0;
 		if((i0&i)==0) {			/* x is integral */
-		    u_int32_t ix;
+		    uint32_t ix;
 		    *iptr = x;
 		    GET_FLOAT_WORD(ix,x);
 		    SET_FLOAT_WORD(x,ix&0x80000000);	/* return +-0 */
@@ -47,7 +46,7 @@ modff(float x, float *iptr)
 		}
 	    }
 	} else {			/* no fraction part */
-	    u_int32_t ix;
+	    uint32_t ix;
 	    *iptr = x*one;
 	    if (x != x)			/* NaN */
 		return x;

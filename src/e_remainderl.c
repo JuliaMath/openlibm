@@ -25,12 +25,11 @@
  */
 
 #include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/e_remainderl.c,v 1.1 2008/03/30 20:47:42 das Exp $");
+__FBSDID("$FreeBSD$");
 
 #include <openlibm_math.h>
-#include "math_private.h"
 
-DLLEXPORT long double
+long double
 remainderl(long double x, long double y)
 {
 	int quo;

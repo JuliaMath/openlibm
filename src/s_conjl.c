@@ -23,14 +23,14 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  *
- * $FreeBSD: src/lib/msun/src/s_conjl.c,v 1.2 2008/08/07 14:39:56 das Exp $
+ * $FreeBSD$
  */
 
 #include <openlibm_complex.h>
 
 #include "math_private.h"
 
-DLLEXPORT long double complex
+long double complex
 conjl(long double complex z)
 {
 

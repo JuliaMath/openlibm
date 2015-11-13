@@ -13,7 +13,7 @@
  */
 
 #include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/e_asinl.c,v 1.2 2008/08/03 17:49:05 das Exp $");
+__FBSDID("$FreeBSD$");
 
 /*
  * See comments in e_asin.c.
@@ -21,16 +21,16 @@
  */
 
 #include <float.h>
-#include <openlibm_math.h>
 
 #include "invtrig.h"
+#include <openlibm_math.h>
 #include "math_private.h"
 
 static const long double
 one =  1.00000000000000000000e+00,
 huge = 1.000e+300;
 
-DLLEXPORT long double
+long double
 asinl(long double x)
 {
 	union IEEEl2bits u;
