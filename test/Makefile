@@ -2,7 +2,10 @@ OPENLIBM_HOME=$(abspath ..)
 include ../Make.inc
 
 # Set rpath of tests to builddir for loading shared library
-OPENLIBM_LIB = -L.. -lopenlibm -Wl,-rpath=$(OPENLIBM_HOME)
+OPENLIBM_LIB = -L.. -lopenlibm
+ifeq ($(OS),Linux)
+OPENLIBM_LIB += -Wl,-rpath=$(OPENLIBM_HOME)
+endif
 
 all: test-double test-float # test-double-system test-float-system
 
