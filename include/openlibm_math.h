@@ -387,6 +387,14 @@ float	fminf(float, float) __pure2;
  * float versions of BSD math library entry points
  */
 #if __BSD_VISIBLE
+float	dremf(float, float);
+float	j0f(float);
+float	j1f(float);
+float	jnf(int, float);
+float	y0f(float);
+float	y1f(float);
+float	ynf(int, float);
+
 /*
  * Float versions of reentrant version of lgamma; passes signgam back by
  * reference as the second argument; user must allocate space for signgam.
