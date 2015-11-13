@@ -14,15 +14,14 @@
  */
 
 #include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/e_coshf.c,v 1.9 2011/10/21 06:28:47 das Exp $");
+__FBSDID("$FreeBSD$");
 
 #include <openlibm_math.h>
-
 #include "math_private.h"
 
 static const float one = 1.0, half=0.5, huge = 1.0e30;
 
-DLLEXPORT float
+float
 __ieee754_coshf(float x)
 {
 	float t,w;

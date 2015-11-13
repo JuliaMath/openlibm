@@ -1,5 +1,5 @@
 #include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_lrintl.c,v 1.1 2008/01/14 02:12:06 das Exp $");
+__FBSDID("$FreeBSD$");
 
 #define type		long double
 #define	roundit		rintl

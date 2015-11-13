@@ -14,7 +14,7 @@
  */
 
 #include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/e_fmodf.c,v 1.7 2008/02/22 02:30:34 das Exp $");
+__FBSDID("$FreeBSD$");
 
 /*
  * __ieee754_fmodf(x,y)
@@ -23,12 +23,11 @@
  */
 
 #include <openlibm_math.h>
-
 #include "math_private.h"
 
 static const float one = 1.0, Zero[] = {0.0, -0.0,};
 
-DLLEXPORT float
+float
 __ieee754_fmodf(float x, float y)
 {
 	int32_t n,hx,hy,hz,ix,iy,sx,i;
@@ -45,7 +44,7 @@ __ieee754_fmodf(float x, float y)
 	    return (x*y)/(x*y);
 	if(hx<hy) return x;			/* |x|<|y| return x */
 	if(hx==hy)
-	    return Zero[(u_int32_t)sx>>31];	/* |x|=|y| return x*0*/
+	    return Zero[(uint32_t)sx>>31];	/* |x|=|y| return x*0*/
 
     /* determine ix = ilogb(x) */
 	if(hx<0x00800000) {	/* subnormal x */
@@ -78,7 +77,7 @@ __ieee754_fmodf(float x, float y)
 	    if(hz<0){hx = hx+hx;}
 	    else {
 	    	if(hz==0) 		/* return sign(x)*0 */
-		    return Zero[(u_int32_t)sx>>31];
+		    return Zero[(uint32_t)sx>>31];
 	    	hx = hz+hz;
 	    }
 	}
@@ -87,7 +86,7 @@ __ieee754_fmodf(float x, float y)
 
     /* convert back to floating value and restore the sign */
 	if(hx==0) 			/* return sign(x)*0 */
-	    return Zero[(u_int32_t)sx>>31];
+	    return Zero[(uint32_t)sx>>31];
 	while(hx<0x00800000) {		/* normalize x */
 	    hx = hx+hx;
 	    iy -= 1;

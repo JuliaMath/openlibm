@@ -14,10 +14,9 @@
  */
 
 #include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_asinhf.c,v 1.9 2008/02/22 02:30:35 das Exp $");
+__FBSDID("$FreeBSD$");
 
 #include <openlibm_math.h>
-
 #include "math_private.h"
 
 static const float
@@ -25,7 +24,7 @@ one =  1.0000000000e+00, /* 0x3F800000 */
 ln2 =  6.9314718246e-01, /* 0x3f317218 */
 huge=  1.0000000000e+30;
 
-DLLEXPORT float
+float
 asinhf(float x)
 {
 	float t,w;

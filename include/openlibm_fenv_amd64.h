@@ -35,7 +35,9 @@
 #include "math_private.h"
 
 #ifndef	__fenv_static
-#define	__fenv_static	static
+//VBS
+//#define	__fenv_static	static
+#define	__fenv_static
 #endif
 
 typedef struct {
@@ -204,7 +206,7 @@ DLLEXPORT int feenableexcept(int __mask);
 DLLEXPORT int fedisableexcept(int __mask);
 
 /* We currently provide no external definition of fegetexcept(). */
-static inline DLLEXPORT int
+DLLEXPORT int
 fegetexcept(void)
 {
 	uint16_t __control;

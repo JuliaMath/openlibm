@@ -13,7 +13,7 @@
  */
 
 #include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/e_atan2.c,v 1.14 2008/08/02 19:17:00 das Exp $");
+__FBSDID("$FreeBSD$");
 
 /* __ieee754_atan2(y,x)
  * Method :
@@ -43,8 +43,8 @@
  */
 
 #include <float.h>
-#include <openlibm_math.h>
 
+#include <openlibm_math.h>
 #include "math_private.h"
 
 static volatile double
@@ -57,12 +57,12 @@ pi      = 3.1415926535897931160E+00; /* 0x400921FB, 0x54442D18 */
 static volatile double
 pi_lo   = 1.2246467991473531772E-16; /* 0x3CA1A626, 0x33145C07 */
 
-DLLEXPORT double
+double
 __ieee754_atan2(double y, double x)
 {
 	double z;
 	int32_t k,m,hx,hy,ix,iy;
-	u_int32_t lx,ly;
+	uint32_t lx,ly;
 
 	EXTRACT_WORDS(hx,lx,x);
 	ix = hx&0x7fffffff;
@@ -71,7 +71,7 @@ __ieee754_atan2(double y, double x)
 	if(((ix|((lx|-lx)>>31))>0x7ff00000)||
 	   ((iy|((ly|-ly)>>31))>0x7ff00000))	/* x or y is NaN */
 	   return x+y;
-	if(((hx-0x3ff00000)|lx)==0) return atan(y);   /* x=1.0 */
+	if((hx-0x3ff00000|lx)==0) return atan(y);   /* x=1.0 */
 	m = ((hy>>31)&1)|((hx>>30)&2);	/* 2*sign(x)+sign(y) */
 
     /* when y = 0 */

@@ -12,7 +12,7 @@
  */
 
 #include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/e_remainder.c,v 1.12 2008/03/30 20:47:42 das Exp $");
+__FBSDID("$FreeBSD$");
 
 /* __ieee754_remainder(x,p)
  * Return :                  
@@ -24,18 +24,18 @@
  */
 
 #include <float.h>
-#include <openlibm_math.h>
 
+#include <openlibm_math.h>
 #include "math_private.h"
 
 static const double zero = 0.0;
 
 
-DLLEXPORT double
+double
 __ieee754_remainder(double x, double p)
 {
 	int32_t hx,hp;
-	u_int32_t sx,lx,lp;
+	uint32_t sx,lx,lp;
 	double p_half;
 
 	EXTRACT_WORDS(hx,lx,x);

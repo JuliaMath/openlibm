@@ -12,7 +12,7 @@
  */
 
 #include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/e_sqrt.c,v 1.11 2008/03/02 01:47:58 das Exp $");
+__FBSDID("$FreeBSD$");
 
 /* __ieee754_sqrt(x)
  * Return correctly rounded sqrt.
@@ -85,19 +85,19 @@
  */
 
 #include <float.h>
-#include <openlibm_math.h>
 
+#include <openlibm_math.h>
 #include "math_private.h"
 
 static	const double	one	= 1.0, tiny=1.0e-300;
 
-DLLEXPORT double
+double
 __ieee754_sqrt(double x)
 {
 	double z;
 	int32_t sign = (int)0x80000000;
 	int32_t ix0,s0,q,m,t,i;
-	u_int32_t r,t1,s1,ix1,q1;
+	uint32_t r,t1,s1,ix1,q1;
 
 	EXTRACT_WORDS(ix0,ix1,x);
 
@@ -172,9 +172,9 @@ __ieee754_sqrt(double x)
 	    z = one-tiny; /* trigger inexact flag */
 	    if (z>=one) {
 	        z = one+tiny;
-	        if (q1==(u_int32_t)0xffffffff) { q1=0; q += 1;}
+	        if (q1==(uint32_t)0xffffffff) { q1=0; q += 1;}
 		else if (z>one) {
-		    if (q1==(u_int32_t)0xfffffffe) q+=1;
+		    if (q1==(uint32_t)0xfffffffe) q+=1;
 		    q1+=2; 
 		} else
 	            q1 += (q1&1);
