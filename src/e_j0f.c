@@ -13,13 +13,18 @@
  * ====================================================
  */
 
-#include <assert.h>
 #include "cdefs-compat.h"
+
+/*
+ * See e_j0.c for complete comments.
+ */
 
 #include <openlibm_math.h>
 #include "math_private.h"
 
-static float pzerof(float), qzerof(float);
+static __inline float pzerof(float), qzerof(float);
+
+static const volatile float vone = 1,  vzero = 0;
 
 static const float
 huge 	= 1e30,
@@ -107,10 +112,9 @@ __ieee754_y0f(float x)
 
 	GET_FLOAT_WORD(hx,x);
         ix = 0x7fffffff&hx;
-    /* Y0(NaN) is NaN, y0(-inf) is Nan, y0(inf) is 0  */
-	if(ix>=0x7f800000) return  one/(x+x*x);
-        if(ix==0) return -one/zero;
-        if(hx<0) return zero/zero;
+	if(ix>=0x7f800000) return  vone/(x+x*x);
+	if(ix==0) return -one/vzero;
+	if(hx<0) return vzero/vzero;
         if(ix >= 0x40000000) {  /* |x| >= 2.0 */
         /* y0(x) = sqrt(2/(pi*x))*(p0(x)*sin(x0)+q0(x)*cos(x0))
          * where x0 = x-pi/4
@@ -224,7 +228,8 @@ static const float pS2[5] = {
   1.4657617569e+01, /* 0x416a859a */
 };
 
-	static float pzerof(float x)
+static __inline float
+pzerof(float x)
 {
 	const float *p,*q;
 	float z,r,s;
@@ -319,7 +324,8 @@ static const float qS2[6] = {
  -5.3109550476e+00, /* 0xc0a9f358 */
 };
 
-	static float qzerof(float x)
+static __inline float
+qzerof(float x)
 {
 	const float *p,*q;
 	float s,r,z;

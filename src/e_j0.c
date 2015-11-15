@@ -6,15 +6,12 @@
  *
  * Developed at SunSoft, a Sun Microsystems, Inc. business.
  * Permission to use, copy, modify, and distribute this
- * software is freely granted, provided that this notice 
+ * software is freely granted, provided that this notice
  * is preserved.
  * ====================================================
  */
 
-#include <assert.h>
-
 #include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/e_j0.c,v 1.9 2008/02/22 02:30:35 das Exp $");
 
 /* __ieee754_j0(x), __ieee754_y0(x)
  * Bessel function of the first and second kinds of order zero.
@@ -35,20 +32,20 @@
  * 	   (To avoid cancellation, use
  *		sin(x) +- cos(x) = -cos(2x)/(sin(x) -+ cos(x))
  * 	    to compute the worse one.)
- *	   
+ *
  *	3 Special cases
  *		j0(nan)= nan
  *		j0(0) = 1
  *		j0(inf) = 0
- *		
+ *
  * Method -- y0(x):
  *	1. For x<2.
- *	   Since 
+ *	   Since
  *		y0(x) = 2/pi*(j0(x)*(ln(x/2)+Euler) + x^2/4 - ...)
  *	   therefore y0(x)-2/pi*j0(x)*ln(x) is an even function.
  *	   We use the following function to approximate y0,
  *		y0(x) = U(z)/V(z) + (2/pi)*(j0(x)*ln(x)), z= x^2
- *	   where 
+ *	   where
  *		U(z) = u00 + u01*z + ... + u06*z^6
  *		V(z) = 1  + v01*z + ... + v04*z^4
  *	   with absolute approximation error bounded by 2**-72.
@@ -62,10 +59,11 @@
  */
 
 #include <openlibm_math.h>
-
 #include "math_private.h"
 
-static double pzero(double), qzero(double);
+static __inline double pzero(double), qzero(double);
+
+static const volatile double vone = 1, vzero = 0;
 
 static const double
 huge 	= 1e300,
@@ -118,7 +116,7 @@ __ieee754_j0(double x)
 	if(ix<0x3f200000) {	/* |x| < 2**-13 */
 	    if(huge+x>one) {	/* raise inexact if x != 0 */
 	        if(ix<0x3e400000) return one;	/* |x|<2**-27 */
-	        else 	      return one - 0.25*x*x;
+	        else 	      return one - x*x/4;
 	    }
 	}
 	z = x*x;
@@ -153,10 +151,16 @@ __ieee754_y0(double x)
 
 	EXTRACT_WORDS(hx,lx,x);
         ix = 0x7fffffff&hx;
-    /* Y0(NaN) is NaN, y0(-inf) is Nan, y0(inf) is 0  */
-	if(ix>=0x7ff00000) return  one/(x+x*x); 
-        if((ix|lx)==0) return -one/zero;
-        if(hx<0) return zero/zero;
+	/*
+	 * y0(NaN) = NaN.
+	 * y0(Inf) = 0.
+	 * y0(-Inf) = NaN and raise invalid exception.
+	 */
+	if(ix>=0x7ff00000) return vone/(x+x*x);
+	/* y0(+-0) = -inf and raise divide-by-zero exception. */
+	if((ix|lx)==0) return -one/vzero;
+	/* y0(x<0) = NaN and raise invalid exception. */
+	if(hx<0) return vzero/vzero;
         if(ix >= 0x40000000) {  /* |x| >= 2.0 */
         /* y0(x) = sqrt(2/(pi*x))*(p0(x)*sin(x0)+q0(x)*cos(x0))
          * where x0 = x-pi/4
@@ -271,25 +275,24 @@ static const double pS2[5] = {
   1.46576176948256193810e+01, /* 0x402D50B3, 0x44391809 */
 };
 
-	/* Note: This function is only called for ix>=0x40000000 (see above) */
-	static double pzero(double x)
+static __inline double
+pzero(double x)
 {
 	const double *p,*q;
 	double z,r,s;
 	int32_t ix;
 	GET_HIGH_WORD(ix,x);
 	ix &= 0x7fffffff;
-        assert(ix>=0x40000000 && ix<=0x48000000);
 	if(ix>=0x40200000)     {p = pR8; q= pS8;}
 	else if(ix>=0x40122E8B){p = pR5; q= pS5;}
 	else if(ix>=0x4006DB6D){p = pR3; q= pS3;}
-	else                   {p = pR2; q= pS2;}
+	else                   {p = pR2; q= pS2;}	/* ix>=0x40000000 */
 	z = one/(x*x);
 	r = p[0]+z*(p[1]+z*(p[2]+z*(p[3]+z*(p[4]+z*p[5]))));
 	s = one+z*(q[0]+z*(q[1]+z*(q[2]+z*(q[3]+z*q[4]))));
 	return one+ r/s;
 }
-		
+
 
 /* For x >= 8, the asymptotic expansions of qzero is
  *	-1/8 s + 75/1024 s^3 - ..., where s = 1/x.
@@ -368,19 +371,18 @@ static const double qS2[6] = {
  -5.31095493882666946917e+00, /* 0xC0153E6A, 0xF8B32931 */
 };
 
-	/* Note: This function is only called for ix>=0x40000000 (see above) */
-	static double qzero(double x)
+static __inline double
+qzero(double x)
 {
 	const double *p,*q;
 	double s,r,z;
 	int32_t ix;
 	GET_HIGH_WORD(ix,x);
 	ix &= 0x7fffffff;
-        assert(ix>=0x40000000 && ix<=0x48000000);
 	if(ix>=0x40200000)     {p = qR8; q= qS8;}
 	else if(ix>=0x40122E8B){p = qR5; q= qS5;}
 	else if(ix>=0x4006DB6D){p = qR3; q= qS3;}
-	else                   {p = qR2; q= qS2;}
+	else                   {p = qR2; q= qS2;}	/* ix>=0x40000000 */
 	z = one/(x*x);
 	r = p[0]+z*(p[1]+z*(p[2]+z*(p[3]+z*(p[4]+z*p[5]))));
 	s = one+z*(q[0]+z*(q[1]+z*(q[2]+z*(q[3]+z*(q[4]+z*q[5])))));
