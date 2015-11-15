@@ -6,13 +6,12 @@
  *
  * Developed at SunSoft, a Sun Microsystems, Inc. business.
  * Permission to use, copy, modify, and distribute this
- * software is freely granted, provided that this notice 
+ * software is freely granted, provided that this notice
  * is preserved.
  * ====================================================
  */
 
 #include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/e_log10.c,v 1.15 2011/10/15 05:23:28 das Exp $");
 
 /*
  * Return the base 10 logarithm of x.  See e_log.c and k_log.h for most
@@ -22,8 +21,9 @@
  * in not-quite-routine extra precision.
  */
 
-#include <openlibm_math.h>
+#include <float.h>
 
+#include <openlibm_math.h>
 #include "math_private.h"
 #include "k_log.h"
 
@@ -35,6 +35,7 @@ log10_2hi  =  3.01029995663611771306e-01, /* 0x3FD34413, 0x509F6000 */
 log10_2lo  =  3.69423907715893078616e-13; /* 0x3D59FEF3, 0x11F12B36 */
 
 static const double zero   =  0.0;
+static volatile double vzero = 0.0;
 
 DLLEXPORT double
 __ieee754_log10(double x)
@@ -48,7 +49,7 @@ __ieee754_log10(double x)
 	k=0;
 	if (hx < 0x00100000) {			/* x < 2**-1022  */
 	    if (((hx&0x7fffffff)|lx)==0)
-		return -two54/zero;		/* log(+-0)=-inf */
+		return -two54/vzero;		/* log(+-0)=-inf */
 	    if (hx<0) return (x-x)/zero;	/* log(-#) = NaN */
 	    k -= 54; x *= two54; /* subnormal number, scale up x */
 	    GET_HIGH_WORD(hx,x);
@@ -86,3 +87,7 @@ __ieee754_log10(double x)
 
 	return val_lo + val_hi;
 }
+
+#if (LDBL_MANT_DIG == 53)
+__weak_reference(log10, log10l);
+#endif

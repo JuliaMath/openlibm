@@ -6,13 +6,12 @@
  *
  * Developed at SunSoft, a Sun Microsystems, Inc. business.
  * Permission to use, copy, modify, and distribute this
- * software is freely granted, provided that this notice 
+ * software is freely granted, provided that this notice
  * is preserved.
  * ====================================================
  */
 
 #include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/e_log2.c,v 1.4 2011/10/15 05:23:28 das Exp $");
 
 /*
  * Return the base 2 logarithm of x.  See e_log.c and k_log.h for most
@@ -24,8 +23,9 @@
  * in not-quite-routine extra precision.
  */
 
-#include <openlibm_math.h>
+#include <float.h>
 
+#include <openlibm_math.h>
 #include "math_private.h"
 #include "k_log.h"
 
@@ -35,6 +35,7 @@ ivln2hi    =  1.44269504072144627571e+00, /* 0x3ff71547, 0x65200000 */
 ivln2lo    =  1.67517131648865118353e-10; /* 0x3de705fc, 0x2eefa200 */
 
 static const double zero   =  0.0;
+static volatile double vzero = 0.0;
 
 DLLEXPORT double
 __ieee754_log2(double x)
@@ -48,7 +49,7 @@ __ieee754_log2(double x)
 	k=0;
 	if (hx < 0x00100000) {			/* x < 2**-1022  */
 	    if (((hx&0x7fffffff)|lx)==0)
-		return -two54/zero;		/* log(+-0)=-inf */
+		return -two54/vzero;		/* log(+-0)=-inf */
 	    if (hx<0) return (x-x)/zero;	/* log(-#) = NaN */
 	    k -= 54; x *= two54; /* subnormal number, scale up x */
 	    GET_HIGH_WORD(hx,x);
@@ -109,3 +110,7 @@ __ieee754_log2(double x)
 
 	return val_lo + val_hi;
 }
+
+#if (LDBL_MANT_DIG == 53)
+__weak_reference(log2, log2l);
+#endif
