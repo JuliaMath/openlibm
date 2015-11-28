@@ -40,8 +40,8 @@ ifeq ($(OS),WINNT)
 	$(CC) -shared $(OBJS) $(LDFLAGS) $(LDFLAGS_add) -Wl,$(SONAME_FLAG),libopenlibm.$(SHLIB_EXT) -o libopenlibm.$(SHLIB_EXT)
 else
 	$(CC) -shared $(OBJS) $(LDFLAGS) $(LDFLAGS_add) -Wl,$(SONAME_FLAG),libopenlibm.$(SHLIB_EXT).$(SOMAJOR) -o libopenlibm.$(SHLIB_EXT).$(SOMAJOR).$(SOMINOR)
-	@-ln -sf libopenlibm.$(SHLIB_EXT).$(SOMAJOR).$(SOMINOR) libopenlibm.$(SHLIB_EXT).$(SOMAJOR)
-	@-ln -sf libopenlibm.$(SHLIB_EXT).$(SOMAJOR).$(SOMINOR) libopenlibm.$(SHLIB_EXT)
+	ln -sf libopenlibm.$(SHLIB_EXT).$(SOMAJOR).$(SOMINOR) libopenlibm.$(SHLIB_EXT).$(SOMAJOR)
+	ln -sf libopenlibm.$(SHLIB_EXT).$(SOMAJOR).$(SOMINOR) libopenlibm.$(SHLIB_EXT)
 endif
 
 test/test-double: libopenlibm.$(SHLIB_EXT)
@@ -51,14 +51,9 @@ test/test-float: libopenlibm.$(SHLIB_EXT)
 	$(MAKE) -C test test-float
 
 clean:
-	@for dir in $(SUBDIRS) .; do \
-		rm -fr $$dir/*.o $$dir/*.a $$dir/*.$(SHLIB_EXT)*; \
-	done
-	@rm -f test/test-double test/test-float
-
-distclean:
-	-rm -f $(OBJS) *.a *.$(SHLIB_EXT) libopenlibm.*
-	-$(MAKE) -C test clean
+	rm -f amd64/*.o arm/*.o bsdsrc/*.o i387/*.o ld128/*.o ld80/*.o src/*.o
+	rm -f libopenlibm.a libopenlibm.$(SHLIB_EXT)*
+	$(MAKE) -C test clean
 
 openlibm.pc: openlibm.pc.in Make.inc Makefile
 	echo "prefix=${prefix}" > openlibm.pc
