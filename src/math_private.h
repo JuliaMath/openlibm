@@ -24,7 +24,7 @@
 #include "fpmath.h"
 #include <stdint.h>
 #include "math_private_openbsd.h"
-
+#include <openlibm_complex.h>
 
 /*
  * The original fdlibm code used statements like:
@@ -429,7 +429,7 @@ do {								\
  */
 void _scan_nan(uint32_t *__words, int __num_words, const char *__s);
 
-#if defined(_COMPLEX_H) || defined(OPENLIBM_COMPLEX_H)
+#if defined(_COMPLEX_H) || defined(OPENLIBM_COMPLEX_H) || defined(OPENLIBM_USE_HOST_COMPLEX_H)
 
 /*
  * C99 specifies that complex numbers have the same representation as
