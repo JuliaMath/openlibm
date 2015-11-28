@@ -10,7 +10,7 @@
  * ====================================================
  */
 
-#include <sys/cdefs.h>
+#include <cdefs-compat.h>
 __FBSDID("$FreeBSD$");
 
 /*
