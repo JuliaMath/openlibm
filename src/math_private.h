@@ -465,7 +465,7 @@ typedef union {
  * to construct complex values.  Compilers that conform to the C99
  * standard require the following functions to avoid the above issues.
  */
-
+/*
 #ifndef CMPLXF
 static __inline float complex
 CMPLXF(float x, float y)
@@ -501,7 +501,7 @@ CMPLXL(long double x, long double y)
 	return (z.f);
 }
 #endif
-
+*/
 #endif /* _COMPLEX_H */
 
 #ifdef __GNUCLIKE___ASM__
