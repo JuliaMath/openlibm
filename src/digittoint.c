@@ -1,5 +1,5 @@
 /*-
- * Copyright (c) 2013 Andrew Turner <andrew@FreeBSD.ORG>
+ * Copyright (c) 2007 David Schultz
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -11,10 +11,10 @@
  *    notice, this list of conditions and the following disclaimer in the
  *    documentation and/or other materials provided with the distribution.
  *
- * THIS SOFTWARE IS PROVIDED BY THE AUTHOR AND CONTRIBUTORS ``AS IS'' AND
+ * THIS SOFTWARE IS PROVIDED BY AUTHOR AND CONTRIBUTORS ``AS IS'' AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED.  IN NO EVENT SHALL THE AUTHOR OR CONTRIBUTORS BE LIABLE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL AUTHOR OR CONTRIBUTORS BE LIABLE
  * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
  * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
  * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
@@ -26,11 +26,21 @@
  * $FreeBSD$
  */
 
-#define	FENV_MANGLE(x)	__vfp_ ##x
-#include <openlibm_fenv_mangle_arm.h>
-#define	__ARM_PCS_VFP
-#ifndef DLLEXORT
-#define DLLEXPORT __attribute__ ((visibility("default")))
-#endif
-#include "fenv.c"
+#include <sys/cdefs.h>
 
+/* digittoint is in the FreeBSD C library, but implemented in terms of locale stuff. */
+int digittoint(char ch) {
+  int d = ch - '0';
+  if ((unsigned) d < 10) {
+    return d;
+  }
+  d = ch - 'a';
+  if ((unsigned) d < 6) {
+    return d + 10;
+  }
+  d = ch - 'A';
+  if ((unsigned) d < 6) {
+    return d + 10;
+  }
+  return -1;
+}

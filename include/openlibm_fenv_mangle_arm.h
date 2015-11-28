@@ -36,6 +36,7 @@
 #error FENV_MANGLE is undefined
 #endif
 
+/*
 #define	feclearexcept	FENV_MANGLE(feclearexcept)
 #define	fegetexceptflag	FENV_MANGLE(fegetexceptflag)
 #define	fesetexceptflag	FENV_MANGLE(fesetexceptflag)
@@ -50,4 +51,4 @@
 #define	feenableexcept	FENV_MANGLE(feenableexcept)
 #define	fedisableexcept	FENV_MANGLE(fedisableexcept)
 #define	fegetexcept	FENV_MANGLE(fegetexcept)
-
+*/

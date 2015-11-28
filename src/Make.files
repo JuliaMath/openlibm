@@ -54,6 +54,8 @@ $(CUR_SRCS) +=	e_acosl.c e_asinl.c e_atan2l.c e_fmodl.c \
 	s_cimagl.c s_conjl.c s_creall.c s_cacoshl.c s_catanhl.c s_casinhl.c \
 	s_catanl.c s_csinl.c s_cacosl.c s_cexpl.c s_csinhl.c s_ccoshl.c \
 	s_clogl.c s_ctanhl.c s_ccosl.c s_cbrtl.c
+else
+$(CUR_SRCS) += digittoint.c
 endif
 
 # C99 complex functions

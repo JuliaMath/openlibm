@@ -74,20 +74,20 @@ const fenv_t __fe_dfl_env = 0;
 #error "This file must be compiled with C99 'inline' semantics"
 #endif
 
-extern inline int feclearexcept(int __excepts);
-extern inline int fegetexceptflag(fexcept_t *__flagp, int __excepts);
-extern inline int fesetexceptflag(const fexcept_t *__flagp, int __excepts);
-extern inline int feraiseexcept(int __excepts);
-extern inline int fetestexcept(int __excepts);
-extern inline int fegetround(void);
-extern inline int fesetround(int __round);
-extern inline int fegetenv(fenv_t *__envp);
-extern inline int feholdexcept(fenv_t *__envp);
-extern inline int fesetenv(const fenv_t *__envp);
-extern inline int feupdateenv(const fenv_t *__envp);
-extern inline int feenableexcept(int __mask);
-extern inline int fedisableexcept(int __mask);
-extern inline int fegetexcept(void);
+extern inline DLLEXPORT int feclearexcept(int __excepts);
+extern inline DLLEXPORT int fegetexceptflag(fexcept_t *__flagp, int __excepts);
+extern inline DLLEXPORT int fesetexceptflag(const fexcept_t *__flagp, int __excepts);
+extern inline DLLEXPORT int feraiseexcept(int __excepts);
+extern inline DLLEXPORT int fetestexcept(int __excepts);
+extern inline DLLEXPORT int fegetround(void);
+extern inline DLLEXPORT int fesetround(int __round);
+extern inline DLLEXPORT int fegetenv(fenv_t *__envp);
+extern inline DLLEXPORT int feholdexcept(fenv_t *__envp);
+extern inline DLLEXPORT int fesetenv(const fenv_t *__envp);
+extern inline DLLEXPORT int feupdateenv(const fenv_t *__envp);
+extern inline DLLEXPORT int feenableexcept(int __mask);
+extern inline DLLEXPORT int fedisableexcept(int __mask);
+extern inline DLLEXPORT int fegetexcept(void);
 
 #else /* !FENV_MANGLE && SOFTFP_ABI */
 /* Set by libc when the VFP unit is enabled */
@@ -157,6 +157,7 @@ __softfp_round_from_vfp(int round)
 	}
 }
 
+DLLEXPORT 
 int feclearexcept(int __excepts)
 {
 
@@ -167,6 +168,7 @@ int feclearexcept(int __excepts)
 	return (0);
 }
 
+DLLEXPORT 
 int fegetexceptflag(fexcept_t *__flagp, int __excepts)
 {
 	fexcept_t __vfp_flagp;
@@ -181,6 +183,7 @@ int fegetexceptflag(fexcept_t *__flagp, int __excepts)
 	return (0);
 }
 
+DLLEXPORT 
 int fesetexceptflag(const fexcept_t *__flagp, int __excepts)
 {
 
@@ -191,6 +194,7 @@ int fesetexceptflag(const fexcept_t *__flagp, int __excepts)
 	return (0);
 }
 
+DLLEXPORT 
 int feraiseexcept(int __excepts)
 {
 
@@ -201,6 +205,7 @@ int feraiseexcept(int __excepts)
 	return (0);
 }
 
+DLLEXPORT 
 int fetestexcept(int __excepts)
 {
 	int __got_excepts;
@@ -213,6 +218,7 @@ int fetestexcept(int __excepts)
 	return (__got_excepts);
 }
 
+DLLEXPORT 
 int fegetround(void)
 {
 
@@ -221,6 +227,7 @@ int fegetround(void)
 	return __softfp_fegetround();
 }
 
+DLLEXPORT 
 int fesetround(int __round)
 {
 
@@ -231,6 +238,7 @@ int fesetround(int __round)
 	return (0);
 }
 
+DLLEXPORT 
 int fegetenv(fenv_t *__envp)
 {
 	fenv_t __vfp_envp;
@@ -244,6 +252,7 @@ int fegetenv(fenv_t *__envp)
 	return (0);
 }
 
+DLLEXPORT 
 int feholdexcept(fenv_t *__envp)
 {
 	fenv_t __vfp_envp;
@@ -257,6 +266,7 @@ int feholdexcept(fenv_t *__envp)
 	return (0);
 }
 
+DLLEXPORT 
 int fesetenv(const fenv_t *__envp)
 {
 
@@ -267,6 +277,7 @@ int fesetenv(const fenv_t *__envp)
 	return (0);
 }
 
+DLLEXPORT 
 int feupdateenv(const fenv_t *__envp)
 {
 
@@ -277,6 +288,7 @@ int feupdateenv(const fenv_t *__envp)
 	return (0);
 }
 
+DLLEXPORT 
 int feenableexcept(int __mask)
 {
 	int __unmasked;
@@ -289,6 +301,7 @@ int feenableexcept(int __mask)
 	return (__unmasked);
 }
 
+DLLEXPORT 
 int fedisableexcept(int __mask)
 {
 	int __unmasked;
@@ -301,6 +314,7 @@ int fedisableexcept(int __mask)
 	return (__unmasked);
 }
 
+DLLEXPORT 
 int fegetexcept(void)
 {
 	int __unmasked;
