@@ -23,14 +23,12 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  *
- * $FreeBSD: src/lib/msun/src/s_crealf.c,v 1.1 2004/05/30 09:21:56 stefanf Exp $
+ * $FreeBSD$
  */
 
 #include <openlibm_complex.h>
 
-#include "math_private.h"
-
-DLLEXPORT float
+float
 crealf(float complex z)
 {
 	return z;

@@ -6,12 +6,13 @@
  *
  * Developed at SunSoft, a Sun Microsystems, Inc. business.
  * Permission to use, copy, modify, and distribute this
- * software is freely granted, provided that this notice
+ * software is freely granted, provided that this notice 
  * is preserved.
  * ====================================================
  */
 
 #include "cdefs-compat.h"
+__FBSDID("$FreeBSD$");
 
 /*
  * Return the base 2 logarithm of x.  See e_log.c and k_log.h for most
@@ -37,12 +38,12 @@ ivln2lo    =  1.67517131648865118353e-10; /* 0x3de705fc, 0x2eefa200 */
 static const double zero   =  0.0;
 static volatile double vzero = 0.0;
 
-DLLEXPORT double
+double
 __ieee754_log2(double x)
 {
 	double f,hfsq,hi,lo,r,val_hi,val_lo,w,y;
 	int32_t i,k,hx;
-	u_int32_t lx;
+	uint32_t lx;
 
 	EXTRACT_WORDS(hx,lx,x);
 

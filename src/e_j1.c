@@ -6,12 +6,13 @@
  *
  * Developed at SunSoft, a Sun Microsystems, Inc. business.
  * Permission to use, copy, modify, and distribute this
- * software is freely granted, provided that this notice
+ * software is freely granted, provided that this notice 
  * is preserved.
  * ====================================================
  */
 
 #include "cdefs-compat.h"
+__FBSDID("$FreeBSD$");
 
 /* __ieee754_j1(x), __ieee754_y1(x)
  * Bessel function of the first and second kinds of order zero.
@@ -33,16 +34,16 @@
  * 	   (To avoid cancellation, use
  *		sin(x) +- cos(x) = -cos(2x)/(sin(x) -+ cos(x))
  * 	    to compute the worse one.)
- *
+ *	   
  *	3 Special cases
  *		j1(nan)= nan
  *		j1(0) = 0
  *		j1(inf) = 0
- *
+ *		
  * Method -- y1(x):
- *	1. screen out x<=0 cases: y1(0)=-inf, y1(x<0)=NaN
+ *	1. screen out x<=0 cases: y1(0)=-inf, y1(x<0)=NaN 
  *	2. For x<2.
- *	   Since
+ *	   Since 
  *		y1(x) = 2/pi*(j1(x)*(ln(x/2)+Euler)-1/x-x/2+5/64*x^3-...)
  *	   therefore y1(x)-2/pi*j1(x)*ln(x)-1/x is an odd function.
  *	   We use the following function to approximate y1,
@@ -83,7 +84,7 @@ s05  =  1.23542274426137913908e-11; /* 0x3DAB2ACF, 0xCFB97ED8 */
 
 static const double zero    = 0.0;
 
-DLLEXPORT double
+double
 __ieee754_j1(double x)
 {
 	double z, s,c,ss,cc,r,u,v,y;
@@ -140,7 +141,7 @@ static const double V0[5] = {
   1.66559246207992079114e-11, /* 0x3DB25039, 0xDACA772A */
 };
 
-DLLEXPORT double
+double
 __ieee754_y1(double x)
 {
 	double z, s,c,ss,cc,u,v;
@@ -153,7 +154,7 @@ __ieee754_y1(double x)
 	 * y1(Inf) = 0.
 	 * y1(-Inf) = NaN and raise invalid exception.
 	 */
-	if(ix>=0x7ff00000) return  vone/(x+x*x);
+	if(ix>=0x7ff00000) return  vone/(x+x*x); 
 	/* y1(+-0) = -inf and raise divide-by-zero exception. */
         if((ix|lx)==0) return -one/vzero;
 	/* y1(x<0) = NaN and raise invalid exception. */
@@ -185,10 +186,10 @@ __ieee754_y1(double x)
                     z = invsqrtpi*(u*ss+v*cc)/sqrt(x);
                 }
                 return z;
-        }
+        } 
         if(ix<=0x3c900000) {    /* x < 2**-54 */
             return(-tpi/x);
-        }
+        } 
         z = x*x;
         u = U0[0]+z*(U0[1]+z*(U0[2]+z*(U0[3]+z*U0[4])));
         v = one+z*(V0[0]+z*(V0[1]+z*(V0[2]+z*(V0[3]+z*V0[4]))));
@@ -286,7 +287,7 @@ pone(double x)
         s = one+z*(q[0]+z*(q[1]+z*(q[2]+z*(q[3]+z*q[4]))));
         return one+ r/s;
 }
-
+		
 
 /* For x >= 8, the asymptotic expansions of qone is
  *	3/8 s - 105/1024 s^3 - ..., where s = 1/x.

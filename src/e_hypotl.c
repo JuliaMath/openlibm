@@ -11,14 +11,14 @@
  */
 
 #include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/e_hypotl.c,v 1.3 2011/10/16 05:36:39 das Exp $");
+__FBSDID("$FreeBSD$");
 
 /* long double version of hypot().  See e_hypot.c for most comments. */
 
 #include <float.h>
-#include <openlibm_math.h>
 
 #include "fpmath.h"
+#include <openlibm_math.h>
 #include "math_private.h"
 
 #define	GET_LDBL_MAN(h, l, v) do {	\
@@ -40,12 +40,12 @@
 #define	MAX_EXP		LDBL_MAX_EXP
 
 #if LDBL_MANL_SIZE > 32
-typedef	u_int64_t man_t;
+typedef	uint64_t man_t;
 #else
-typedef	u_int32_t man_t;
+typedef	uint32_t man_t;
 #endif
 
-DLLEXPORT long double
+long double
 hypotl(long double x, long double y)
 {
 	long double a=x,b=y,t1,t2,y1,y2,w;
@@ -115,7 +115,7 @@ hypotl(long double x, long double y)
 	    w  = sqrtl(t1*y1-(w*(-w)-(t1*y2+t2*b)));
 	}
 	if(k!=0) {
-	    u_int32_t high;
+	    uint32_t high;
 	    t1 = 1.0;
 	    GET_HIGH_WORD(high,t1);
 	    SET_HIGH_WORD(t1,high+DESW(k));

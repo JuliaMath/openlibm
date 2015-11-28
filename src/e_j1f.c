@@ -14,6 +14,7 @@
  */
 
 #include "cdefs-compat.h"
+__FBSDID("$FreeBSD$");
 
 /*
  * See e_j1.c for complete comments.
@@ -44,7 +45,7 @@ s05  =  1.2354227016e-11; /* 0x2d59567e */
 
 static const float zero    = 0.0;
 
-DLLEXPORT float
+float
 __ieee754_j1f(float x)
 {
 	float z, s,c,ss,cc,r,u,v,y;
@@ -101,7 +102,7 @@ static const float V0[5] = {
   1.6655924903e-11, /* 0x2d9281cf */
 };
 
-DLLEXPORT float
+float
 __ieee754_y1f(float x)
 {
 	float z, s,c,ss,cc,u,v;

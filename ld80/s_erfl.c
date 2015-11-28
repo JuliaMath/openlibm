@@ -1,3 +1,4 @@
+/* @(#)s_erf.c 5.1 93/09/24 */
 /*
  * ====================================================
  * Copyright (C) 1993 by Sun Microsystems, Inc. All rights reserved.
@@ -9,422 +10,328 @@
  * ====================================================
  */
 
+#include <sys/cdefs.h>
+__FBSDID("$FreeBSD$");
+
 /*
- * Copyright (c) 2008 Stephen L. Moshier <steve@moshier.net>
+ * See s_erf.c for complete comments.
  *
- * Permission to use, copy, modify, and distribute this software for any
- * purpose with or without fee is hereby granted, provided that the above
- * copyright notice and this permission notice appear in all copies.
- *
- * THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
- * WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
- * MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
- * ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
- * WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
- * ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
- * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+ * Converted to long double by Steven G. Kargl.
  */
+#include <float.h>
+#ifdef __i386__
+#include <ieeefp.h>
+#endif
 
-/* double erf(double x)
- * double erfc(double x)
- *			     x
- *		      2      |\
- *     erf(x)  =  ---------  | exp(-t*t)dt
- *		   sqrt(pi) \|
- *			     0
- *
- *     erfc(x) =  1-erf(x)
- *  Note that
- *		erf(-x) = -erf(x)
- *		erfc(-x) = 2 - erfc(x)
- *
- * Method:
- *	1. For |x| in [0, 0.84375]
- *	    erf(x)  = x + x*R(x^2)
- *          erfc(x) = 1 - erf(x)           if x in [-.84375,0.25]
- *                  = 0.5 + ((0.5-x)-x*R)  if x in [0.25,0.84375]
- *	   Remark. The formula is derived by noting
- *          erf(x) = (2/sqrt(pi))*(x - x^3/3 + x^5/10 - x^7/42 + ....)
- *	   and that
- *          2/sqrt(pi) = 1.128379167095512573896158903121545171688
- *	   is close to one. The interval is chosen because the fix
- *	   point of erf(x) is near 0.6174 (i.e., erf(x)=x when x is
- *	   near 0.6174), and by some experiment, 0.84375 is chosen to
- *	   guarantee the error is less than one ulp for erf.
- *
- *      2. For |x| in [0.84375,1.25], let s = |x| - 1, and
- *         c = 0.84506291151 rounded to single (24 bits)
- *	erf(x)  = sign(x) * (c  + P1(s)/Q1(s))
- *	erfc(x) = (1-c)  - P1(s)/Q1(s) if x > 0
- *			  1+(c+P1(s)/Q1(s))    if x < 0
- *	   Remark: here we use the taylor series expansion at x=1.
- *		erf(1+s) = erf(1) + s*Poly(s)
- *			 = 0.845.. + P1(s)/Q1(s)
- *	   Note that |P1/Q1|< 0.078 for x in [0.84375,1.25]
- *
- *      3. For x in [1.25,1/0.35(~2.857143)],
- *	erfc(x) = (1/x)*exp(-x*x-0.5625+R1(z)/S1(z))
- *              z=1/x^2
- *	erf(x)  = 1 - erfc(x)
- *
- *      4. For x in [1/0.35,107]
- *	erfc(x) = (1/x)*exp(-x*x-0.5625+R2/S2) if x > 0
- *			= 2.0 - (1/x)*exp(-x*x-0.5625+R2(z)/S2(z))
- *                             if -6.666<x<0
- *			= 2.0 - tiny		(if x <= -6.666)
- *              z=1/x^2
- *	erf(x)  = sign(x)*(1.0 - erfc(x)) if x < 6.666, else
- *	erf(x)  = sign(x)*(1.0 - tiny)
- *      Note1:
- *	   To compute exp(-x*x-0.5625+R/S), let s be a single
- *	   precision number and s := x; then
- *		-x*x = -s*s + (s-x)*(s+x)
- *	        exp(-x*x-0.5626+R/S) =
- *			exp(-s*s-0.5625)*exp((s-x)*(s+x)+R/S);
- *      Note2:
- *	   Here 4 and 5 make use of the asymptotic series
- *			  exp(-x*x)
- *		erfc(x) ~ ---------- * ( 1 + Poly(1/x^2) )
- *			  x*sqrt(pi)
- *
- *      5. For inf > x >= 107
- *	erf(x)  = sign(x) *(1 - tiny)  (raise inexact)
- *	erfc(x) = tiny*tiny (raise underflow) if x > 0
- *			= 2 - tiny if x<0
- *
- *      7. Special case:
- *	erf(0)  = 0, erf(inf)  = 1, erf(-inf) = -1,
- *	erfc(0) = 1, erfc(inf) = 0, erfc(-inf) = 2,
- *		erfc/erf(NaN) is NaN
- */
-
-
-#include <openlibm_math.h>
-
+#include "fpmath.h"
+#include "math.h"
 #include "math_private.h"
 
-static const long double
-tiny = 1e-4931L,
-  half = 0.5L,
-  one = 1.0L,
-  two = 2.0L,
-	/* c = (float)0.84506291151 */
-  erx = 0.845062911510467529296875L,
+/* XXX Prevent compilers from erroneously constant folding: */
+static const volatile long double tiny = 0x1p-10000L;
+
+static const double
+half= 0.5,
+one = 1,
+two = 2;
 /*
- * Coefficients for approximation to  erf on [0,0.84375]
+ * In the domain [0, 2**-34], only the first term in the power series
+ * expansion of erf(x) is used.  The magnitude of the first neglected
+ * terms is less than 2**-102.
  */
-  /* 2/sqrt(pi) - 1 */
-  efx = 1.2837916709551257389615890312154517168810E-1L,
-  /* 8 * (2/sqrt(pi) - 1) */
-  efx8 = 1.0270333367641005911692712249723613735048E0L,
-
-  pp[6] = {
-    1.122751350964552113068262337278335028553E6L,
-    -2.808533301997696164408397079650699163276E6L,
-    -3.314325479115357458197119660818768924100E5L,
-    -6.848684465326256109712135497895525446398E4L,
-    -2.657817695110739185591505062971929859314E3L,
-    -1.655310302737837556654146291646499062882E2L,
-  },
-
-  qq[6] = {
-    8.745588372054466262548908189000448124232E6L,
-    3.746038264792471129367533128637019611485E6L,
-    7.066358783162407559861156173539693900031E5L,
-    7.448928604824620999413120955705448117056E4L,
-    4.511583986730994111992253980546131408924E3L,
-    1.368902937933296323345610240009071254014E2L,
-    /* 1.000000000000000000000000000000000000000E0 */
-  },
-
+static const union IEEEl2bits
+efxu  = LD80C(0x8375d410a6db446c, -3,  1.28379167095512573902e-1L),
+efx8u = LD80C(0x8375d410a6db446c,  0,  1.02703333676410059122e+0L),
 /*
- * Coefficients for approximation to  erf  in [0.84375,1.25]
+ * Domain [0, 0.84375], range ~[-1.423e-22, 1.423e-22]:
+ * |(erf(x) - x)/x - pp(x)/qq(x)| < 2**-72.573
  */
-/* erf(x+1) = 0.845062911510467529296875 + pa(x)/qa(x)
-   -0.15625 <= x <= +.25
-   Peak relative error 8.5e-22  */
-
-  pa[8] = {
-    -1.076952146179812072156734957705102256059E0L,
-     1.884814957770385593365179835059971587220E2L,
-    -5.339153975012804282890066622962070115606E1L,
-     4.435910679869176625928504532109635632618E1L,
-     1.683219516032328828278557309642929135179E1L,
-    -2.360236618396952560064259585299045804293E0L,
-     1.852230047861891953244413872297940938041E0L,
-     9.394994446747752308256773044667843200719E-2L,
-  },
-
-  qa[7] =  {
-    4.559263722294508998149925774781887811255E2L,
-    3.289248982200800575749795055149780689738E2L,
-    2.846070965875643009598627918383314457912E2L,
-    1.398715859064535039433275722017479994465E2L,
-    6.060190733759793706299079050985358190726E1L,
-    2.078695677795422351040502569964299664233E1L,
-    4.641271134150895940966798357442234498546E0L,
-    /* 1.000000000000000000000000000000000000000E0 */
-  },
-
+pp0u  = LD80C(0x8375d410a6db446c, -3,   1.28379167095512573902e-1L),
+pp1u  = LD80C(0xa46c7d09ec3d0cec, -2,  -3.21140201054840180596e-1L),
+pp2u  = LD80C(0x9b31e66325576f86, -5,  -3.78893851760347812082e-2L),
+pp3u  = LD80C(0x804ac72c9a0b97dd, -7,  -7.83032847030604679616e-3L),
+pp4u  = LD80C(0x9f42bcbc3d5a601d, -12, -3.03765663857082048459e-4L),
+pp5u  = LD80C(0x9ec4ad6193470693, -16, -1.89266527398167917502e-5L),
+qq1u  = LD80C(0xdb4b8eb713188d6b, -2,   4.28310832832310510579e-1L),
+qq2u  = LD80C(0xa5750835b2459bd1, -4,   8.07896272074540216658e-2L),
+qq3u  = LD80C(0x8b85d6bd6a90b51c, -7,   8.51579638189385354266e-3L),
+qq4u  = LD80C(0x87332f82cff4ff96, -11,  5.15746855583604912827e-4L),
+qq5u  = LD80C(0x83466cb6bf9dca00, -16,  1.56492109706256700009e-5L),
+qq6u  = LD80C(0xf5bf98c2f996bf63, -24,  1.14435527803073879724e-7L);
+#define	efx	(efxu.e)
+#define	efx8	(efx8u.e)
+#define	pp0	(pp0u.e)
+#define	pp1	(pp1u.e)
+#define	pp2	(pp2u.e)
+#define	pp3	(pp3u.e)
+#define	pp4	(pp4u.e)
+#define	pp5	(pp5u.e)
+#define	qq1	(qq1u.e)
+#define	qq2	(qq2u.e)
+#define	qq3	(qq3u.e)
+#define	qq4	(qq4u.e)
+#define	qq5	(qq5u.e)
+#define	qq6	(qq6u.e)
+static const union IEEEl2bits
+erxu  = LD80C(0xd7bb3d0000000000, -1,  8.42700779438018798828e-1L),
 /*
- * Coefficients for approximation to  erfc in [1.25,1/0.35]
+ * Domain [0.84375, 1.25], range ~[-8.132e-22, 8.113e-22]:
+ * |(erf(x) - erx) - pa(x)/qa(x)| < 2**-71.762
  */
-/* erfc(1/x) = x exp (-1/x^2 - 0.5625 + ra(x^2)/sa(x^2))
-   1/2.85711669921875 < 1/x < 1/1.25
-   Peak relative error 3.1e-21  */
-
-    ra[] = {
-      1.363566591833846324191000679620738857234E-1L,
-      1.018203167219873573808450274314658434507E1L,
-      1.862359362334248675526472871224778045594E2L,
-      1.411622588180721285284945138667933330348E3L,
-      5.088538459741511988784440103218342840478E3L,
-      8.928251553922176506858267311750789273656E3L,
-      7.264436000148052545243018622742770549982E3L,
-      2.387492459664548651671894725748959751119E3L,
-      2.220916652813908085449221282808458466556E2L,
-    },
-
-    sa[] = {
-      -1.382234625202480685182526402169222331847E1L,
-      -3.315638835627950255832519203687435946482E2L,
-      -2.949124863912936259747237164260785326692E3L,
-      -1.246622099070875940506391433635999693661E4L,
-      -2.673079795851665428695842853070996219632E4L,
-      -2.880269786660559337358397106518918220991E4L,
-      -1.450600228493968044773354186390390823713E4L,
-      -2.874539731125893533960680525192064277816E3L,
-      -1.402241261419067750237395034116942296027E2L,
-      /* 1.000000000000000000000000000000000000000E0 */
-    },
+pa0u  = LD80C(0xe8211158da02c692, -27,  1.35116960705131296711e-8L),
+pa1u  = LD80C(0xd488f89f36988618, -2,   4.15107507167065612570e-1L),
+pa2u  = LD80C(0xece74f8c63fa3942, -4,  -1.15675565215949226989e-1L),
+pa3u  = LD80C(0xc8d31e020727c006, -4,   9.80589241379624665791e-2L),
+pa4u  = LD80C(0x985d5d5fafb0551f, -5,   3.71984145558422368847e-2L),
+pa5u  = LD80C(0xa5b6c4854d2f5452, -8,  -5.05718799340957673661e-3L),
+pa6u  = LD80C(0x85c8d58fe3993a47, -8,   4.08277919612202243721e-3L),
+pa7u  = LD80C(0xddbfbc23677b35cf, -13,  2.11476292145347530794e-4L),
+qa1u  = LD80C(0xb8a977896f5eff3f, -1,   7.21335860303380361298e-1L),
+qa2u  = LD80C(0x9fcd662c3d4eac86, -1,   6.24227891731886593333e-1L),
+qa3u  = LD80C(0x9d0b618eac67ba07, -2,   3.06727455774491855801e-1L),
+qa4u  = LD80C(0x881a4293f6d6c92d, -3,   1.32912674218195890535e-1L),
+qa5u  = LD80C(0xbab144f07dea45bf, -5,   4.55792134233613027584e-2L),
+qa6u  = LD80C(0xa6c34ba438bdc900, -7,   1.01783980070527682680e-2L),
+qa7u  = LD80C(0x8fa866dc20717a91, -9,   2.19204436518951438183e-3L);
+#define erx	(erxu.e)
+#define pa0	(pa0u.e)
+#define pa1	(pa1u.e)
+#define pa2	(pa2u.e)
+#define pa3	(pa3u.e)
+#define pa4	(pa4u.e)
+#define pa5	(pa5u.e)
+#define pa6	(pa6u.e)
+#define pa7	(pa7u.e)
+#define qa1	(qa1u.e)
+#define qa2	(qa2u.e)
+#define qa3	(qa3u.e)
+#define qa4	(qa4u.e)
+#define qa5	(qa5u.e)
+#define qa6	(qa6u.e)
+#define qa7	(qa7u.e)
+static const union IEEEl2bits
 /*
- * Coefficients for approximation to  erfc in [1/.35,107]
+ * Domain [1.25,2.85715], range ~[-2.334e-22,2.334e-22]:
+ * |log(x*erfc(x)) + x**2 + 0.5625 - ra(x)/sa(x)| < 2**-71.860
  */
-/* erfc(1/x) = x exp (-1/x^2 - 0.5625 + rb(x^2)/sb(x^2))
-   1/6.6666259765625 < 1/x < 1/2.85711669921875
-   Peak relative error 4.2e-22  */
-    rb[] = {
-      -4.869587348270494309550558460786501252369E-5L,
-      -4.030199390527997378549161722412466959403E-3L,
-      -9.434425866377037610206443566288917589122E-2L,
-      -9.319032754357658601200655161585539404155E-1L,
-      -4.273788174307459947350256581445442062291E0L,
-      -8.842289940696150508373541814064198259278E0L,
-      -7.069215249419887403187988144752613025255E0L,
-      -1.401228723639514787920274427443330704764E0L,
-    },
-
-    sb[] = {
-      4.936254964107175160157544545879293019085E-3L,
-      1.583457624037795744377163924895349412015E-1L,
-      1.850647991850328356622940552450636420484E0L,
-      9.927611557279019463768050710008450625415E0L,
-      2.531667257649436709617165336779212114570E1L,
-      2.869752886406743386458304052862814690045E1L,
-      1.182059497870819562441683560749192539345E1L,
-      /* 1.000000000000000000000000000000000000000E0 */
-    },
-/* erfc(1/x) = x exp (-1/x^2 - 0.5625 + rc(x^2)/sc(x^2))
-   1/107 <= 1/x <= 1/6.6666259765625
-   Peak relative error 1.1e-21  */
-    rc[] = {
-      -8.299617545269701963973537248996670806850E-5L,
-      -6.243845685115818513578933902532056244108E-3L,
-      -1.141667210620380223113693474478394397230E-1L,
-      -7.521343797212024245375240432734425789409E-1L,
-      -1.765321928311155824664963633786967602934E0L,
-      -1.029403473103215800456761180695263439188E0L,
-    },
-
-    sc[] = {
-      8.413244363014929493035952542677768808601E-3L,
-      2.065114333816877479753334599639158060979E-1L,
-      1.639064941530797583766364412782135680148E0L,
-      4.936788463787115555582319302981666347450E0L,
-      5.005177727208955487404729933261347679090E0L,
-      /* 1.000000000000000000000000000000000000000E0 */
-    };
+ra0u  = LD80C(0xa1a091e0fb4f335a, -7, -9.86494298915814308249e-3L),
+ra1u  = LD80C(0xc2b0d045ae37df6b, -1, -7.60510460864878271275e-1L),
+ra2u  = LD80C(0xf2cec3ee7da636c5, 3,  -1.51754798236892278250e+1L),
+ra3u  = LD80C(0x813cc205395adc7d, 7,  -1.29237335516455333420e+2L),
+ra4u  = LD80C(0x8737c8b7b4062c2f, 9,  -5.40871625829510494776e+2L),
+ra5u  = LD80C(0x8ffe5383c08d4943, 10, -1.15194769466026108551e+3L),
+ra6u  = LD80C(0x983573e64d5015a9, 10, -1.21767039790249025544e+3L),
+ra7u  = LD80C(0x92a794e763a6d4db, 9,  -5.86618463370624636688e+2L),
+ra8u  = LD80C(0xd5ad1fae77c3d9a3, 6,  -1.06838132335777049840e+2L),
+ra9u  = LD80C(0x934c1a247807bb9c, 2,  -4.60303980944467334806e+0L),
+sa1u  = LD80C(0xd342f90012bb1189, 4,   2.64077014928547064865e+1L),
+sa2u  = LD80C(0x839be13d9d5da883, 8,   2.63217811300123973067e+2L),
+sa3u  = LD80C(0x9f8cba6d1ae1b24b, 10,  1.27639775710344617587e+3L),
+sa4u  = LD80C(0xcaa83f403713e33e, 11,  3.24251544209971162003e+3L),
+sa5u  = LD80C(0x8796aff2f3c47968, 12,  4.33883591261332837874e+3L),
+sa6u  = LD80C(0xb6ef97f9c753157b, 11,  2.92697460344182158454e+3L),
+sa7u  = LD80C(0xe02aee5f83773d1c, 9,   8.96670799139389559818e+2L),
+sa8u  = LD80C(0xc82b83855b88e07e, 6,   1.00084987800048510018e+2L),
+sa9u  = LD80C(0x92f030aefadf28ad, 1,   2.29591004455459083843e+0L);
+#define ra0	(ra0u.e)
+#define ra1	(ra1u.e)
+#define ra2	(ra2u.e)
+#define ra3	(ra3u.e)
+#define ra4	(ra4u.e)
+#define ra5	(ra5u.e)
+#define ra6	(ra6u.e)
+#define ra7	(ra7u.e)
+#define ra8	(ra8u.e)
+#define ra9	(ra9u.e)
+#define sa1	(sa1u.e)
+#define sa2	(sa2u.e)
+#define sa3	(sa3u.e)
+#define sa4	(sa4u.e)
+#define sa5	(sa5u.e)
+#define sa6	(sa6u.e)
+#define sa7	(sa7u.e)
+#define sa8	(sa8u.e)
+#define sa9	(sa9u.e)
+/*
+ * Domain [2.85715,7], range ~[-8.323e-22,8.390e-22]:
+ * |log(x*erfc(x)) + x**2 + 0.5625 - rb(x)/sb(x)| < 2**-70.326
+ */
+static const union IEEEl2bits
+rb0u = LD80C(0xa1a091cf43abcd26, -7, -9.86494292470284646962e-3L),
+rb1u = LD80C(0xd19d2df1cbb8da0a, -1, -8.18804618389296662837e-1L),
+rb2u = LD80C(0x9a4dd1383e5daf5b, 4,  -1.92879967111618594779e+1L),
+rb3u = LD80C(0xbff0ae9fc0751de6, 7,  -1.91940164551245394969e+2L),
+rb4u = LD80C(0xdde08465310b472b, 9,  -8.87508080766577324539e+2L),
+rb5u = LD80C(0xe796e1d38c8c70a9, 10, -1.85271506669474503781e+3L),
+rb6u = LD80C(0xbaf655a76e0ab3b5, 10, -1.49569795581333675349e+3L),
+rb7u = LD80C(0x95d21e3e75503c21, 8,  -2.99641547972948019157e+2L),
+sb1u = LD80C(0x814487ed823c8cbd, 5,   3.23169247732868256569e+1L),
+sb2u = LD80C(0xbe4bfbb1301304be, 8,   3.80593618534539961773e+2L),
+sb3u = LD80C(0x809c4ade46b927c7, 11,  2.05776827838541292848e+3L),
+sb4u = LD80C(0xa55284359f3395a8, 12,  5.29031455540062116327e+3L),
+sb5u = LD80C(0xbcfa72da9b820874, 12,  6.04730608102312640462e+3L),
+sb6u = LD80C(0x9d09a35988934631, 11,  2.51260238030767176221e+3L),
+sb7u = LD80C(0xd675bbe542c159fa, 7,   2.14459898308561015684e+2L);
+#define rb0	(rb0u.e)
+#define rb1	(rb1u.e)
+#define rb2	(rb2u.e)
+#define rb3	(rb3u.e)
+#define rb4	(rb4u.e)
+#define rb5	(rb5u.e)
+#define rb6	(rb6u.e)
+#define rb7	(rb7u.e)
+#define sb1	(sb1u.e)
+#define sb2	(sb2u.e)
+#define sb3	(sb3u.e)
+#define sb4	(sb4u.e)
+#define sb5	(sb5u.e)
+#define sb6	(sb6u.e)
+#define sb7	(sb7u.e)
+/*
+ * Domain [7,108], range ~[-4.422e-22,4.422e-22]:
+ * |log(x*erfc(x)) + x**2 + 0.5625 - rc(x)/sc(x)| < 2**-70.938
+ */
+static const union IEEEl2bits
+/* err = -4.422092275318925082e-22 -70.937689 */
+rc0u = LD80C(0xa1a091cf437a17ad, -7, -9.86494292470008707260e-3L),
+rc1u = LD80C(0xbe79c5a978122b00, -1, -7.44045595049165939261e-1L),
+rc2u = LD80C(0xdb26f9bbe31a2794, 3,  -1.36970155085888424425e+1L),
+rc3u = LD80C(0xb5f69a38f5747ac8, 6,  -9.09816453742625888546e+1L),
+rc4u = LD80C(0xd79676d970d0a21a, 7,  -2.15587750997584074147e+2L),
+rc5u = LD80C(0xfe528153c45ec97c, 6,  -1.27161142938347796666e+2L),
+sc1u = LD80C(0xc5e8cd46d5604a96, 4,   2.47386727842204312937e+1L),
+sc2u = LD80C(0xc5f0f5a5484520eb, 7,   1.97941248254913378865e+2L),
+sc3u = LD80C(0x964e3c7b34db9170, 9,   6.01222441484087787522e+2L),
+sc4u = LD80C(0x99be1b89faa0596a, 9,   6.14970430845978077827e+2L),
+sc5u = LD80C(0xf80dfcbf37ffc5ea, 6,   1.24027318931184605891e+2L);
+#define rc0	(rc0u.e)
+#define rc1	(rc1u.e)
+#define rc2	(rc2u.e)
+#define rc3	(rc3u.e)
+#define rc4	(rc4u.e)
+#define rc5	(rc5u.e)
+#define sc1	(sc1u.e)
+#define sc2	(sc2u.e)
+#define sc3	(sc3u.e)
+#define sc4	(sc4u.e)
+#define sc5	(sc5u.e)
 
 long double
 erfl(long double x)
 {
-  long double R, S, P, Q, s, y, z, r;
-  int32_t ix, i;
-  u_int32_t se, i0, i1;
+	long double ax,R,S,P,Q,s,y,z,r;
+	uint64_t lx;
+	int32_t i;
+	uint16_t hx;
 
-  GET_LDOUBLE_WORDS (se, i0, i1, x);
-  ix = se & 0x7fff;
+	EXTRACT_LDBL80_WORDS(hx, lx, x);
 
-  if (ix >= 0x7fff)
-    {				/* erf(nan)=nan */
-      i = ((se & 0xffff) >> 15) << 1;
-      return (long double) (1 - i) + one / x;	/* erf(+-inf)=+-1 */
-    }
-
-  ix = (ix << 16) | (i0 >> 16);
-  if (ix < 0x3ffed800) /* |x|<0.84375 */
-    {
-      if (ix < 0x3fde8000) /* |x|<2**-33 */
-	{
-	  if (ix < 0x00080000)
-	    return 0.125 * (8.0 * x + efx8 * x);	/*avoid underflow */
-	  return x + efx * x;
+	if((hx & 0x7fff) == 0x7fff) {	/* erfl(nan)=nan */
+		i = (hx>>15)<<1;
+		return (1-i)+one/x;	/* erfl(+-inf)=+-1 */
 	}
-      z = x * x;
-      r = pp[0] + z * (pp[1]
-	+ z * (pp[2] + z * (pp[3] + z * (pp[4] + z * pp[5]))));
-      s = qq[0] + z * (qq[1]
-	+ z * (qq[2] + z * (qq[3] + z * (qq[4] + z * (qq[5] + z)))));
-      y = r / s;
-      return x + x * y;
-    }
-  if (ix < 0x3fffa000) /* 1.25 */
-    {				/* 0.84375 <= |x| < 1.25 */
-      s = fabsl (x) - one;
-      P = pa[0] + s * (pa[1] + s * (pa[2]
-	+ s * (pa[3] + s * (pa[4] + s * (pa[5] + s * (pa[6] + s * pa[7]))))));
-      Q = qa[0] + s * (qa[1] + s * (qa[2]
-	+ s * (qa[3] + s * (qa[4] + s * (qa[5] + s * (qa[6] + s))))));
-      if ((se & 0x8000) == 0)
-	return erx + P / Q;
-      else
-	return -erx - P / Q;
-    }
-  if (ix >= 0x4001d555) /* 6.6666259765625 */
-    {				/* inf>|x|>=6.666 */
-      if ((se & 0x8000) == 0)
-	return one - tiny;
-      else
-	return tiny - one;
-    }
-  x = fabsl (x);
-  s = one / (x * x);
-  if (ix < 0x4000b6db) /* 2.85711669921875 */
-    {
-      R = ra[0] + s * (ra[1] + s * (ra[2] + s * (ra[3] + s * (ra[4] +
-	s * (ra[5] + s * (ra[6] + s * (ra[7] + s * ra[8])))))));
-      S = sa[0] + s * (sa[1] + s * (sa[2] + s * (sa[3] + s * (sa[4] +
-	s * (sa[5] + s * (sa[6] + s * (sa[7] + s * (sa[8] + s))))))));
-    }
-  else
-    {				/* |x| >= 1/0.35 */
-      R = rb[0] + s * (rb[1] + s * (rb[2] + s * (rb[3] + s * (rb[4] +
-	s * (rb[5] + s * (rb[6] + s * rb[7]))))));
-      S = sb[0] + s * (sb[1] + s * (sb[2] + s * (sb[3] + s * (sb[4] +
-	s * (sb[5] + s * (sb[6] + s))))));
-    }
-  z = x;
-  GET_LDOUBLE_WORDS (i, i0, i1, z);
-  i1 = 0;
-  SET_LDOUBLE_WORDS (z, i, i0, i1);
-  r =
-    expl (-z * z - 0.5625) * expl ((z - x) * (z + x) + R / S);
-  if ((se & 0x8000) == 0)
-    return one - r / x;
-  else
-    return r / x - one;
+
+	ENTERI();
+
+	ax = fabsl(x);
+	if(ax < 0.84375) {
+	    if(ax < 0x1p-34L) {
+	        if(ax < 0x1p-16373L)	
+		    RETURNI((8*x+efx8*x)/8);	/* avoid spurious underflow */
+		RETURNI(x + efx*x);
+	    }
+	    z = x*x;
+	    r = pp0+z*(pp1+z*(pp2+z*(pp3+z*(pp4+z*pp5))));
+	    s = one+z*(qq1+z*(qq2+z*(qq3+z*(qq4+z*(qq5+z*qq6)))));
+	    y = r/s;
+	    RETURNI(x + x*y);
+	}
+	if(ax < 1.25) {
+	    s = ax-one;
+	    P = pa0+s*(pa1+s*(pa2+s*(pa3+s*(pa4+s*(pa5+s*(pa6+s*pa7))))));
+	    Q = one+s*(qa1+s*(qa2+s*(qa3+s*(qa4+s*(qa5+s*(qa6+s*qa7))))));
+	    if(x>=0) RETURNI(erx + P/Q); else RETURNI(-erx - P/Q);
+	}
+	if(ax >= 7) {			/* inf>|x|>= 7 */
+	    if(x>=0) RETURNI(one-tiny); else RETURNI(tiny-one);
+	}
+	s = one/(ax*ax);
+	if(ax < 2.85715) {	/* |x| < 2.85715 */
+	    R=ra0+s*(ra1+s*(ra2+s*(ra3+s*(ra4+s*(ra5+s*(ra6+s*(ra7+
+		s*(ra8+s*ra9))))))));
+	    S=one+s*(sa1+s*(sa2+s*(sa3+s*(sa4+s*(sa5+s*(sa6+s*(sa7+
+		s*(sa8+s*sa9))))))));
+	} else {	/* |x| >= 2.85715 */
+	    R=rb0+s*(rb1+s*(rb2+s*(rb3+s*(rb4+s*(rb5+s*(rb6+s*rb7))))));
+	    S=one+s*(sb1+s*(sb2+s*(sb3+s*(sb4+s*(sb5+s*(sb6+s*sb7))))));
+	}
+	z=(float)ax;
+	r=expl(-z*z-0.5625)*expl((z-ax)*(z+ax)+R/S);
+	if(x>=0) RETURNI(one-r/ax); else RETURNI(r/ax-one);
 }
 
 long double
 erfcl(long double x)
 {
-  int32_t hx, ix;
-  long double R, S, P, Q, s, y, z, r;
-  u_int32_t se, i0, i1;
+	long double ax,R,S,P,Q,s,y,z,r;
+	uint64_t lx;
+	uint16_t hx;
 
-  GET_LDOUBLE_WORDS (se, i0, i1, x);
-  ix = se & 0x7fff;
-  if (ix >= 0x7fff)
-    {				/* erfc(nan)=nan */
-      /* erfc(+-inf)=0,2 */
-      return (long double) (((se & 0xffff) >> 15) << 1) + one / x;
-    }
+	EXTRACT_LDBL80_WORDS(hx, lx, x);
 
-  ix = (ix << 16) | (i0 >> 16);
-  if (ix < 0x3ffed800) /* |x|<0.84375 */
-    {
-      if (ix < 0x3fbe0000) /* |x|<2**-65 */
-	return one - x;
-      z = x * x;
-      r = pp[0] + z * (pp[1]
-	+ z * (pp[2] + z * (pp[3] + z * (pp[4] + z * pp[5]))));
-      s = qq[0] + z * (qq[1]
-	+ z * (qq[2] + z * (qq[3] + z * (qq[4] + z * (qq[5] + z)))));
-      y = r / s;
-      if (ix < 0x3ffd8000) /* x<1/4 */
-	{
-	  return one - (x + x * y);
+	if((hx & 0x7fff) == 0x7fff) {	/* erfcl(nan)=nan */
+					/* erfcl(+-inf)=0,2 */
+	    return ((hx>>15)<<1)+one/x;
 	}
-      else
-	{
-	  r = x * y;
-	  r += (x - half);
-	  return half - r;
-	}
-    }
-  if (ix < 0x3fffa000) /* 1.25 */
-    {				/* 0.84375 <= |x| < 1.25 */
-      s = fabsl (x) - one;
-      P = pa[0] + s * (pa[1] + s * (pa[2]
-	+ s * (pa[3] + s * (pa[4] + s * (pa[5] + s * (pa[6] + s * pa[7]))))));
-      Q = qa[0] + s * (qa[1] + s * (qa[2]
-	+ s * (qa[3] + s * (qa[4] + s * (qa[5] + s * (qa[6] + s))))));
-      if ((se & 0x8000) == 0)
-	{
-	  z = one - erx;
-	  return z - P / Q;
-	}
-      else
-	{
-	  z = erx + P / Q;
-	  return one + z;
-	}
-    }
-  if (ix < 0x4005d600) /* 107 */
-    {				/* |x|<107 */
-      x = fabsl (x);
-      s = one / (x * x);
-      if (ix < 0x4000b6db) /* 2.85711669921875 */
-	{			/* |x| < 1/.35 ~ 2.857143 */
-	  R = ra[0] + s * (ra[1] + s * (ra[2] + s * (ra[3] + s * (ra[4] +
-	    s * (ra[5] + s * (ra[6] + s * (ra[7] + s * ra[8])))))));
-	  S = sa[0] + s * (sa[1] + s * (sa[2] + s * (sa[3] + s * (sa[4] +
-	    s * (sa[5] + s * (sa[6] + s * (sa[7] + s * (sa[8] + s))))))));
-	}
-      else if (ix < 0x4001d555) /* 6.6666259765625 */
-	{			/* 6.666 > |x| >= 1/.35 ~ 2.857143 */
-	  R = rb[0] + s * (rb[1] + s * (rb[2] + s * (rb[3] + s * (rb[4] +
-	    s * (rb[5] + s * (rb[6] + s * rb[7]))))));
-	  S = sb[0] + s * (sb[1] + s * (sb[2] + s * (sb[3] + s * (sb[4] +
-	    s * (sb[5] + s * (sb[6] + s))))));
-	}
-      else
-	{			/* |x| >= 6.666 */
-	  if (se & 0x8000)
-	    return two - tiny;	/* x < -6.666 */
 
-	  R = rc[0] + s * (rc[1] + s * (rc[2] + s * (rc[3] +
-						    s * (rc[4] + s * rc[5]))));
-	  S = sc[0] + s * (sc[1] + s * (sc[2] + s * (sc[3] +
-						    s * (sc[4] + s))));
+	ENTERI();
+
+	ax = fabsl(x);
+	if(ax < 0.84375L) {
+	    if(ax < 0x1p-34L)
+		RETURNI(one-x);
+	    z = x*x;
+	    r = pp0+z*(pp1+z*(pp2+z*(pp3+z*(pp4+z*pp5))));
+	    s = one+z*(qq1+z*(qq2+z*(qq3+z*(qq4+z*(qq5+z*qq6)))));
+	    y = r/s;
+	    if(ax < 0.25L) {  	/* x<1/4 */
+		RETURNI(one-(x+x*y));
+	    } else {
+		r = x*y;
+		r += (x-half);
+	       RETURNI(half - r);
+	    }
 	}
-      z = x;
-      GET_LDOUBLE_WORDS (hx, i0, i1, z);
-      i1 = 0;
-      i0 &= 0xffffff00;
-      SET_LDOUBLE_WORDS (z, hx, i0, i1);
-      r = expl (-z * z - 0.5625) *
-	expl ((z - x) * (z + x) + R / S);
-      if ((se & 0x8000) == 0)
-	return r / x;
-      else
-	return two - r / x;
-    }
-  else
-    {
-      if ((se & 0x8000) == 0)
-	return tiny * tiny;
-      else
-	return two - tiny;
-    }
+	if(ax < 1.25L) {
+	    s = ax-one;
+	    P = pa0+s*(pa1+s*(pa2+s*(pa3+s*(pa4+s*(pa5+s*(pa6+s*pa7))))));
+	    Q = one+s*(qa1+s*(qa2+s*(qa3+s*(qa4+s*(qa5+s*(qa6+s*qa7))))));
+	    if(x>=0) {
+	        z  = one-erx; RETURNI(z - P/Q);
+	    } else {
+		z = (erx+P/Q); RETURNI(one+z);
+	    }
+	}
+
+	if(ax < 108) {			/* |x| < 108 */
+ 	    s = one/(ax*ax);
+	    if(ax < 2.85715) {		/* |x| < 2.85715 */
+		R=ra0+s*(ra1+s*(ra2+s*(ra3+s*(ra4+s*(ra5+s*(ra6+s*(ra7+
+		    s*(ra8+s*ra9))))))));
+		S=one+s*(sa1+s*(sa2+s*(sa3+s*(sa4+s*(sa5+s*(sa6+s*(sa7+
+		    s*(sa8+s*sa9))))))));
+	    } else if(ax < 7) {		/* | |x| < 7 */
+		R=rb0+s*(rb1+s*(rb2+s*(rb3+s*(rb4+s*(rb5+s*(rb6+s*rb7))))));
+		S=one+s*(sb1+s*(sb2+s*(sb3+s*(sb4+s*(sb5+s*(sb6+s*sb7))))));
+	    } else {
+		if(x < -7) RETURNI(two-tiny);/* x < -7 */
+		R=rc0+s*(rc1+s*(rc2+s*(rc3+s*(rc4+s*rc5))));
+		S=one+s*(sc1+s*(sc2+s*(sc3+s*(sc4+s*sc5))));
+	    }
+	    z = (float)ax;
+	    r = expl(-z*z-0.5625)*expl((z-ax)*(z+ax)+R/S);
+	    if(x>0) RETURNI(r/ax); else RETURNI(two-r/ax);
+	} else {
+	    if(x>0) RETURNI(tiny*tiny); else RETURNI(two-tiny);
+	}
 }

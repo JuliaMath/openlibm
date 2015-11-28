@@ -12,7 +12,7 @@
  */
 
 #include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/k_cos.c,v 1.12 2008/02/19 12:54:14 bde Exp $");
+__FBSDID("$FreeBSD$");
 
 /*
  * __kernel_cos( x,  y )
@@ -54,7 +54,6 @@
  */
 
 #include <openlibm_math.h>
-
 #include "math_private.h"
 
 static const double
@@ -66,7 +65,7 @@ C4  = -2.75573143513906633035e-07, /* 0xBE927E4F, 0x809C52AD */
 C5  =  2.08757232129817482790e-09, /* 0x3E21EE9E, 0xBDB4B1C4 */
 C6  = -1.13596475577881948265e-11; /* 0xBDA8FAE9, 0xBE8838D4 */
 
-DLLEXPORT double
+double
 __kernel_cos(double x, double y)
 {
 	double hz,z,r,w;

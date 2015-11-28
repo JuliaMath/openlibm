@@ -6,12 +6,13 @@
  *
  * Developed at SunSoft, a Sun Microsystems, Inc. business.
  * Permission to use, copy, modify, and distribute this
- * software is freely granted, provided that this notice
+ * software is freely granted, provided that this notice 
  * is preserved.
  * ====================================================
  */
 
 #include "cdefs-compat.h"
+__FBSDID("$FreeBSD$");
 
 /* __ieee754_j0(x), __ieee754_y0(x)
  * Bessel function of the first and second kinds of order zero.
@@ -32,20 +33,20 @@
  * 	   (To avoid cancellation, use
  *		sin(x) +- cos(x) = -cos(2x)/(sin(x) -+ cos(x))
  * 	    to compute the worse one.)
- *
+ *	   
  *	3 Special cases
  *		j0(nan)= nan
  *		j0(0) = 1
  *		j0(inf) = 0
- *
+ *		
  * Method -- y0(x):
  *	1. For x<2.
- *	   Since
+ *	   Since 
  *		y0(x) = 2/pi*(j0(x)*(ln(x/2)+Euler) + x^2/4 - ...)
  *	   therefore y0(x)-2/pi*j0(x)*ln(x) is an even function.
  *	   We use the following function to approximate y0,
  *		y0(x) = U(z)/V(z) + (2/pi)*(j0(x)*ln(x)), z= x^2
- *	   where
+ *	   where 
  *		U(z) = u00 + u01*z + ... + u06*z^6
  *		V(z) = 1  + v01*z + ... + v04*z^4
  *	   with absolute approximation error bounded by 2**-72.
@@ -82,7 +83,7 @@ S04  =  1.16614003333790000205e-09; /* 0x3E1408BC, 0xF4745D8F */
 
 static const double zero = 0.0;
 
-DLLEXPORT double
+double
 __ieee754_j0(double x)
 {
 	double z, s,c,ss,cc,r,u,v;
@@ -143,7 +144,7 @@ v02  =  7.60068627350353253702e-05, /* 0x3F13ECBB, 0xF578C6C1 */
 v03  =  2.59150851840457805467e-07, /* 0x3E91642D, 0x7FF202FD */
 v04  =  4.41110311332675467403e-10; /* 0x3DFE5018, 0x3BD6D9EF */
 
-DLLEXPORT double
+double
 __ieee754_y0(double x)
 {
 	double z, s,c,ss,cc,u,v;
@@ -156,7 +157,7 @@ __ieee754_y0(double x)
 	 * y0(Inf) = 0.
 	 * y0(-Inf) = NaN and raise invalid exception.
 	 */
-	if(ix>=0x7ff00000) return vone/(x+x*x);
+	if(ix>=0x7ff00000) return vone/(x+x*x); 
 	/* y0(+-0) = -inf and raise divide-by-zero exception. */
 	if((ix|lx)==0) return -one/vzero;
 	/* y0(x<0) = NaN and raise invalid exception. */
@@ -292,7 +293,7 @@ pzero(double x)
 	s = one+z*(q[0]+z*(q[1]+z*(q[2]+z*(q[3]+z*q[4]))));
 	return one+ r/s;
 }
-
+		
 
 /* For x >= 8, the asymptotic expansions of qzero is
  *	-1/8 s + 75/1024 s^3 - ..., where s = 1/x.

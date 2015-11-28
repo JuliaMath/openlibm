@@ -5,12 +5,13 @@
  * Copyright (C) 2004 by Sun Microsystems, Inc. All rights reserved.
  *
  * Permission to use, copy, modify, and distribute this
- * software is freely granted, provided that this notice
+ * software is freely granted, provided that this notice 
  * is preserved.
  * ====================================================
  */
 
 #include "cdefs-compat.h"
+__FBSDID("$FreeBSD$");
 
 /* __ieee754_exp(x)
  * Returns the exponential of x.
@@ -20,36 +21,36 @@
  *      Reduce x to an r so that |r| <= 0.5*ln2 ~ 0.34658.
  *	Given x, find r and integer k such that
  *
- *               x = k*ln2 + r,  |r| <= 0.5*ln2.
+ *               x = k*ln2 + r,  |r| <= 0.5*ln2.  
  *
- *      Here r will be represented as r = hi-lo for better
+ *      Here r will be represented as r = hi-lo for better 
  *	accuracy.
  *
  *   2. Approximation of exp(r) by a special rational function on
  *	the interval [0,0.34658]:
  *	Write
  *	    R(r**2) = r*(exp(r)+1)/(exp(r)-1) = 2 + r*r/6 - r**4/360 + ...
- *      We use a special Remes algorithm on [0,0.34658] to generate
- * 	a polynomial of degree 5 to approximate R. The maximum error
+ *      We use a special Remes algorithm on [0,0.34658] to generate 
+ * 	a polynomial of degree 5 to approximate R. The maximum error 
  *	of this polynomial approximation is bounded by 2**-59. In
  *	other words,
  *	    R(z) ~ 2.0 + P1*z + P2*z**2 + P3*z**3 + P4*z**4 + P5*z**5
  *  	(where z=r*r, and the values of P1 to P5 are listed below)
  *	and
  *	    |                  5          |     -59
- *	    | 2.0+P1*z+...+P5*z   -  R(z) | <= 2
+ *	    | 2.0+P1*z+...+P5*z   -  R(z) | <= 2 
  *	    |                             |
  *	The computation of exp(r) thus becomes
  *                             2*r
  *		exp(r) = 1 + -------
  *		              R - r
- *                                 r*R1(r)
+ *                                 r*R1(r)	
  *		       = 1 + r + ----------- (for better accuracy)
  *		                  2 - R1(r)
  *	where
  *			         2       4             10
  *		R1(r) = r - (P1*r  + P2*r  + ... + P5*r   ).
- *
+ *	
  *   3. Scale back to obtain exp(x):
  *	From step 1, we have
  *	   exp(x) = 2^k * exp(r)
@@ -64,13 +65,13 @@
  *	1 ulp (unit in the last place).
  *
  * Misc. info.
- *	For IEEE double
+ *	For IEEE double 
  *	    if x >  7.09782712893383973096e+02 then exp(x) overflow
  *	    if x < -7.45133219101941108420e+02 then exp(x) underflow
  *
  * Constants:
- * The hexadecimal values are the intended ones for the following
- * constants. The decimal values may be used, provided that the
+ * The hexadecimal values are the intended ones for the following 
+ * constants. The decimal values may be used, provided that the 
  * compiler will convert from decimal to binary accurately enough
  * to produce the hexadecimal values shown.
  */
@@ -100,12 +101,12 @@ static volatile double
 huge	= 1.0e+300,
 twom1000= 9.33263618503218878990e-302;     /* 2**-1000=0x01700000,0*/
 
-DLLEXPORT double
+double
 __ieee754_exp(double x)	/* default IEEE double exp */
 {
 	double y,hi=0.0,lo=0.0,c,t,twopk;
 	int32_t k=0,xsb;
-	u_int32_t hx;
+	uint32_t hx;
 
 	GET_HIGH_WORD(hx,x);
 	xsb = (hx>>31)&1;		/* sign bit of x */
@@ -114,7 +115,7 @@ __ieee754_exp(double x)	/* default IEEE double exp */
     /* filter out non-finite argument */
 	if(hx >= 0x40862E42) {			/* if |x|>=709.78... */
             if(hx>=0x7ff00000) {
-	        u_int32_t lx;
+	        uint32_t lx;
 		GET_LOW_WORD(lx,x);
 		if(((hx&0xfffff)|lx)!=0)
 		     return x+x; 		/* NaN */
@@ -125,7 +126,7 @@ __ieee754_exp(double x)	/* default IEEE double exp */
 	}
 
     /* argument reduction */
-	if(hx > 0x3fd62e42) {		/* if  |x| > 0.5 ln2 */
+	if(hx > 0x3fd62e42) {		/* if  |x| > 0.5 ln2 */ 
 	    if(hx < 0x3FF0A2B2) {	/* and |x| < 1.5 ln2 */
 		hi = x-ln2HI[xsb]; lo=ln2LO[xsb]; k = 1-xsb-xsb;
 	    } else {
@@ -135,7 +136,7 @@ __ieee754_exp(double x)	/* default IEEE double exp */
 		lo = t*ln2LO[0];
 	    }
 	    STRICT_ASSIGN(double, x, hi - lo);
-	}
+	} 
 	else if(hx < 0x3e300000)  {	/* when |x|<2**-28 */
 	    if(huge+x>one) return one+x;/* trigger inexact */
 	}
@@ -148,7 +149,7 @@ __ieee754_exp(double x)	/* default IEEE double exp */
 	else
 	    INSERT_WORDS(twopk,0x3ff00000+((k+1000)<<20), 0);
 	c  = x - t*(P1+t*(P2+t*(P3+t*(P4+t*P5))));
-	if(k==0) 	return one-((x*c)/(c-2.0)-x);
+	if(k==0) 	return one-((x*c)/(c-2.0)-x); 
 	else 		y = one-((lo-(x*c)/(2.0-c))-hi);
 	if(k >= -1021) {
 	    if (k==1024) return y*2.0*0x1p1023;

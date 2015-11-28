@@ -10,6 +10,10 @@
  * ====================================================
  */
 
+#ifndef lint
+static char rcsid[] = "$FreeBSD$";
+#endif
+
 /*
  * scalbn (double x, int n)
  * scalbn(x,n) returns x* 2**n  computed by  exponent
@@ -18,10 +22,9 @@
  */
 
 #include "cdefs-compat.h"
-
 #include <float.h>
-#include <openlibm_math.h>
 
+#include <openlibm_math.h>
 #include "math_private.h"
 
 static const double
@@ -30,7 +33,7 @@ twom54  =  5.55111512312578270212e-17, /* 0x3C900000, 0x00000000 */
 huge   = 1.0e+300,
 tiny   = 1.0e-300;
 
-DLLEXPORT double
+double
 scalbn (double x, int n)
 {
 	int32_t k,hx,lx;
@@ -48,12 +51,11 @@ scalbn (double x, int n)
         if (k >  0x7fe) return huge*copysign(huge,x); /* overflow  */
         if (k > 0) 				/* normal result */
 	    {SET_HIGH_WORD(x,(hx&0x800fffff)|(k<<20)); return x;}
-        if (k <= -54) {
+        if (k <= -54)
             if (n > 50000) 	/* in case integer overflow in n+k */
 		return huge*copysign(huge,x);	/*overflow*/
 	    else return tiny*copysign(tiny,x); 	/*underflow*/
-        } 
-	k += 54;				/* subnormal result */
+        k += 54;				/* subnormal result */
 	SET_HIGH_WORD(x,(hx&0x800fffff)|(k<<20));
         return x*twom54;
 }
@@ -62,5 +64,3 @@ scalbn (double x, int n)
 __weak_reference(scalbn, ldexpl);
 __weak_reference(scalbn, scalbnl);
 #endif
-
-__strong_reference(scalbn, ldexp);

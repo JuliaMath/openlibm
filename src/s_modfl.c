@@ -33,19 +33,20 @@
  * is preserved.
  * ====================================================
  *
- * $FreeBSD: src/lib/msun/src/s_modfl.c,v 1.1 2007/01/07 07:54:21 das Exp $
+ * $FreeBSD$
  */
 
 #include <float.h>
 #include <openlibm_math.h>
+#include <sys/types.h>
 
 #include "fpmath.h"
-#include "math_private.h"
+#include "types-compat.h"
 
 #if LDBL_MANL_SIZE > 32
-#define	MASK	((u_int64_t)-1)
+#define	MASK	((uint64_t)-1)
 #else
-#define	MASK	((u_int32_t)-1)
+#define	MASK	((uint32_t)-1)
 #endif
 /* Return the last n bits of a word, representing the fractional part. */
 #define	GETFRAC(bits, n)	((bits) & ~(MASK << (n)))
@@ -54,7 +55,7 @@
 
 static const long double zero[] = { 0.0L, -0.0L };
 
-DLLEXPORT long double
+long double
 modfl(long double x, long double *iptr)
 {
 	union IEEEl2bits ux;

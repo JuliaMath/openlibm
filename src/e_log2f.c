@@ -10,6 +10,7 @@
  */
 
 #include "cdefs-compat.h"
+__FBSDID("$FreeBSD$");
 
 /*
  * Float version of e_log2.c.  See the latter for most comments.
@@ -19,9 +20,6 @@
 #include "math_private.h"
 #include "k_logf.h"
 
-// VBS
-#define float_t float
-
 static const float
 two25      =  3.3554432000e+07, /* 0x4c000000 */
 ivln2hi    =  1.4428710938e+00, /* 0x3fb8b000 */
@@ -30,7 +28,7 @@ ivln2lo    = -1.7605285393e-04; /* 0xb9389ad4 */
 static const float zero   =  0.0;
 static volatile float vzero = 0.0;
 
-DLLEXPORT float
+float
 __ieee754_log2f(float x)
 {
 	float f,hfsq,hi,lo,r,y;

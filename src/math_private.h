@@ -17,14 +17,14 @@
 #ifndef _MATH_PRIVATE_H_
 #define	_MATH_PRIVATE_H_
 
-
-#include <openlibm_complex.h>
+#include <sys/types.h>
 
 #include "cdefs-compat.h"
 #include "types-compat.h"
 #include "fpmath.h"
 #include <stdint.h>
 #include "math_private_openbsd.h"
+
 
 /*
  * The original fdlibm code used statements like:
@@ -43,6 +43,16 @@
  * A union which permits us to convert between a double and two 32 bit
  * ints.
  */
+
+#ifdef __arm__
+#if defined(__VFP_FP__) || defined(__ARM_EABI__)
+#define	_IEEE_WORD_ORDER	_BYTE_ORDER
+#else
+#define	_IEEE_WORD_ORDER	_BIG_ENDIAN
+#endif
+#else /* __arm__ */
+#define	_IEEE_WORD_ORDER	_BYTE_ORDER
+#endif
 
 #if _IEEE_WORD_ORDER == _BIG_ENDIAN
 
@@ -419,7 +429,7 @@ do {								\
  */
 void _scan_nan(uint32_t *__words, int __num_words, const char *__s);
 
-#ifdef _COMPLEX_H
+#if defined(_COMPLEX_H) || defined(OPENLIBM_COMPLEX_H)
 
 /*
  * C99 specifies that complex numbers have the same representation as
@@ -778,5 +788,6 @@ long double __kernel_tanl(long double, long double, int);
 #else
 #define DLLEXPORT __attribute__ ((visibility("default")))
 #endif
+
 
 #endif /* !_MATH_PRIVATE_H_ */

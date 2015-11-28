@@ -14,6 +14,7 @@
  */
 
 #include "cdefs-compat.h"
+__FBSDID("$FreeBSD$");
 
 #include <openlibm_math.h>
 #include "math_private.h"
@@ -31,7 +32,7 @@ Lg4 =      0xf89e26.0p-26;	/* 0.24279078841 */
 static const float zero   =  0.0;
 static volatile float vzero = 0.0;
 
-DLLEXPORT float
+float
 __ieee754_logf(float x)
 {
 	float hfsq,f,s,z,R,w,t1,t2,dk;

@@ -25,14 +25,13 @@
  */
 
 #include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_fmal.c,v 1.7 2011/10/21 06:30:43 das Exp $");
+__FBSDID("$FreeBSD$");
 
+#include <fenv.h>
 #include <float.h>
-#include <openlibm_fenv.h>
 #include <openlibm_math.h>
 
 #include "fpmath.h"
-#include "math_private.h"
 
 /*
  * A struct dd represents a floating-point number with twice the precision
@@ -163,7 +162,7 @@ dd_mul(long double a, long double b)
  *	Dekker, T.  A Floating-Point Technique for Extending the
  *	Available Precision.  Numer. Math. 18, 224-242 (1971).
  */
-DLLEXPORT long double
+long double
 fmal(long double x, long double y, long double z)
 {
 	long double xs, ys, zs, adj;
@@ -205,17 +204,17 @@ fmal(long double x, long double y, long double z)
 		case FE_TONEAREST:
 			return (z);
 		case FE_TOWARDZERO:
-			if ((x > 0.0) ^ (y < 0.0) ^ (z < 0.0))
+			if (x > 0.0 ^ y < 0.0 ^ z < 0.0)
 				return (z);
 			else
 				return (nextafterl(z, 0));
 		case FE_DOWNWARD:
-			if ((x > 0.0) ^ (y < 0.0))
+			if (x > 0.0 ^ y < 0.0)
 				return (z);
 			else
 				return (nextafterl(z, -INFINITY));
 		default:	/* FE_UPWARD */
-			if ((x > 0.0) ^ (y < 0.0))
+			if (x > 0.0 ^ y < 0.0)
 				return (nextafterl(z, INFINITY));
 			else
 				return (z);
@@ -227,6 +226,8 @@ fmal(long double x, long double y, long double z)
 		zs = copysignl(LDBL_MIN, zs);
 
 	fesetround(FE_TONEAREST);
+	/* work around clang bug 8100 */
+	volatile long double vxs = xs;
 
 	/*
 	 * Basic approach for round-to-nearest:
@@ -236,7 +237,7 @@ fmal(long double x, long double y, long double z)
 	 *     adj = xy.lo + r.lo		(inexact; low bit is sticky)
 	 *     result = r.hi + adj		(correctly rounded)
 	 */
-	xy = dd_mul(xs, ys);
+	xy = dd_mul(vxs, ys);
 	r = dd_add(xy.hi, zs);
 
 	spread = ex + ey;
@@ -257,7 +258,9 @@ fmal(long double x, long double y, long double z)
 		 * rounding modes.
 		 */
 		fesetround(oround);
-		adj = r.lo + xy.lo;
+		/* work around clang bug 8100 */
+		volatile long double vrlo = r.lo;
+		adj = vrlo + xy.lo;
 		return (ldexpl(r.hi + adj, spread));
 	}
 

@@ -25,14 +25,12 @@
  */
 
 #include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_carg.c,v 1.1 2007/12/12 23:43:51 das Exp $");
+__FBSDID("$FreeBSD$");
 
 #include <openlibm_complex.h>
 #include <openlibm_math.h>
 
-#include "math_private.h"
-
-DLLEXPORT double
+double
 carg(double complex z)
 {
 

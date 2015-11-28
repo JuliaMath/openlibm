@@ -12,7 +12,7 @@
  */
 
 #include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/e_acos.c,v 1.13 2008/07/31 22:41:26 das Exp $");
+__FBSDID("$FreeBSD$");
 
 /* __ieee754_acos(x)
  * Method :                  
@@ -39,8 +39,8 @@
  */
 
 #include <float.h>
-#include <openlibm_math.h>
 
+#include <openlibm_math.h>
 #include "math_private.h"
 
 static const double
@@ -61,7 +61,7 @@ qS2 =  2.02094576023350569471e+00, /* 0x40002AE5, 0x9C598AC8 */
 qS3 = -6.88283971605453293030e-01, /* 0xBFE6066C, 0x1B8D0159 */
 qS4 =  7.70381505559019352791e-02; /* 0x3FB3B8C5, 0xB12E9282 */
 
-DLLEXPORT double
+double
 __ieee754_acos(double x)
 {
 	double z,p,q,r,w,s,c,df;
@@ -69,7 +69,7 @@ __ieee754_acos(double x)
 	GET_HIGH_WORD(hx,x);
 	ix = hx&0x7fffffff;
 	if(ix>=0x3ff00000) {	/* |x| >= 1 */
-	    u_int32_t lx;
+	    uint32_t lx;
 	    GET_LOW_WORD(lx,x);
 	    if(((ix-0x3ff00000)|lx)==0) {	/* |x|==1 */
 		if(hx>0) return 0.0;		/* acos(1) = 0  */

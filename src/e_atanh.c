@@ -13,7 +13,7 @@
  */
 
 #include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/e_atanh.c,v 1.8 2008/02/22 02:30:34 das Exp $");
+__FBSDID("$FreeBSD$");
 
 /* __ieee754_atanh(x)
  * Method :
@@ -33,19 +33,20 @@
  *
  */
 
-#include <openlibm_math.h>
+#include <float.h>
 
+#include <openlibm_math.h>
 #include "math_private.h"
 
 static const double one = 1.0, huge = 1e300;
 static const double zero = 0.0;
 
-DLLEXPORT double
+double
 __ieee754_atanh(double x)
 {
 	double t;
 	int32_t hx,ix;
-	u_int32_t lx;
+	uint32_t lx;
 	EXTRACT_WORDS(hx,lx,x);
 	ix = hx&0x7fffffff;
 	if ((ix|((lx|(-lx))>>31))>0x3ff00000) /* |x|>1 */
@@ -61,3 +62,7 @@ __ieee754_atanh(double x)
 	    t = 0.5*log1p((x+x)/(one-x));
 	if(hx>=0) return t; else return -t;
 }
+
+#if LDBL_MANT_DIG == 53
+__weak_reference(atanh, atanhl);
+#endif

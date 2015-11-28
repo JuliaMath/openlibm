@@ -10,6 +10,7 @@
  */
 
 #include "cdefs-compat.h"
+__FBSDID("$FreeBSD$");
 
 /*
  * Float version of e_log10.c.  See the latter for most comments.
@@ -18,9 +19,6 @@
 #include <openlibm_math.h>
 #include "math_private.h"
 #include "k_logf.h"
-
-// VBS
-#define float_t float
 
 static const float
 two25      =  3.3554432000e+07, /* 0x4c000000 */
@@ -32,7 +30,7 @@ log10_2lo  =  7.9034151668e-07; /* 0x355427db */
 static const float zero   =  0.0;
 static volatile float vzero = 0.0;
 
-DLLEXPORT float
+float
 __ieee754_log10f(float x)
 {
 	float f,hfsq,hi,lo,r,y;

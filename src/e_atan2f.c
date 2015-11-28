@@ -14,10 +14,9 @@
  */
 
 #include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/e_atan2f.c,v 1.12 2008/08/03 17:39:54 das Exp $");
+__FBSDID("$FreeBSD$");
 
 #include <openlibm_math.h>
-
 #include "math_private.h"
 
 static volatile float
@@ -30,7 +29,7 @@ pi      = 3.1415927410e+00; /* 0x40490fdb */
 static volatile float
 pi_lo   = -8.7422776573e-08; /* 0xb3bbbd2e */
 
-DLLEXPORT float
+float
 __ieee754_atan2f(float y, float x)
 {
 	float z;

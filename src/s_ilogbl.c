@@ -11,16 +11,15 @@
  */
 
 #include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_ilogbl.c,v 1.2 2008/02/22 02:30:35 das Exp $");
+__FBSDID("$FreeBSD$");
 
 #include <float.h>
 #include <limits.h>
 #include <openlibm_math.h>
 
 #include "fpmath.h"
-#include "math_private.h"
 
-DLLEXPORT int
+int
 ilogbl(long double x)
 {
 	union IEEEl2bits u;

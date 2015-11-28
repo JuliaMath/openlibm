@@ -16,11 +16,10 @@
 
 #ifndef INLINE_KERNEL_SINDF
 #include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/k_sinf.c,v 1.16 2009/06/03 08:16:34 ed Exp $");
+__FBSDID("$FreeBSD$");
 #endif
 
 #include <openlibm_math.h>
-
 #include "math_private.h"
 
 /* |sin(x)/x - s(x)| < 2**-37.5 (~[-4.89e-12, 4.824e-12]). */
@@ -30,11 +29,10 @@ S2 =  0x111110896efbb2.0p-59,	/*  0.0083333293858894631756 */
 S3 = -0x1a00f9e2cae774.0p-65,	/* -0.000198393348360966317347 */
 S4 =  0x16cd878c3b46a7.0p-71;	/*  0.0000027183114939898219064 */
 
-#ifndef INLINE_KERNEL_SINDF
-extern
+#ifdef INLINE_KERNEL_SINDF
+static __inline
 #endif
-//__inline float
-DLLEXPORT float 
+float
 __kernel_sindf(double x)
 {
 	double r, s, w, z;

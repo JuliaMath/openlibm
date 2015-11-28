@@ -6,12 +6,13 @@
  *
  * Developed at SunSoft, a Sun Microsystems, Inc. business.
  * Permission to use, copy, modify, and distribute this
- * software is freely granted, provided that this notice
+ * software is freely granted, provided that this notice 
  * is preserved.
  * ====================================================
  */
 
 #include "cdefs-compat.h"
+__FBSDID("$FreeBSD$");
 
 /*
  * Return the base 10 logarithm of x.  See e_log.c and k_log.h for most
@@ -37,12 +38,12 @@ log10_2lo  =  3.69423907715893078616e-13; /* 0x3D59FEF3, 0x11F12B36 */
 static const double zero   =  0.0;
 static volatile double vzero = 0.0;
 
-DLLEXPORT double
+double
 __ieee754_log10(double x)
 {
 	double f,hfsq,hi,lo,r,val_hi,val_lo,w,y,y2;
 	int32_t i,k,hx;
-	u_int32_t lx;
+	uint32_t lx;
 
 	EXTRACT_WORDS(hx,lx,x);
 
