@@ -29,16 +29,6 @@
 #ifndef _FPMATH_H_
 #define _FPMATH_H_
 
-#if defined(__aarch64__)
-#include "aarch64_fpmath.h"
-#elif defined(__i386__) || defined(__x86_64__)
-#ifdef __LP64__
-#include "amd64_fpmath.h"
-#else 
-#include "i386_fpmath.h"
-#endif
-#endif
-
 #if defined(__BYTE_ORDER__) && defined(__ORDER_LITTLE_ENDIAN__)
 
 /* Definitions provided directly by GCC and Clang. */
@@ -125,5 +115,17 @@ union IEEEd2bits {
 #endif
 	} bits;
 };
+
+#if defined(__aarch64__)
+#include "aarch64_fpmath.h"
+#elif defined(__arm__)
+#include "arm_fpmath.h"
+#elif defined(__i386__) || defined(__x86_64__)
+#ifdef __LP64__
+#include "amd64_fpmath.h"
+#else 
+#include "i386_fpmath.h"
+#endif
+#endif
 
 #endif
