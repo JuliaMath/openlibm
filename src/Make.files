@@ -30,7 +30,7 @@ $(CUR_SRCS) = common.c \
 	s_signgam.c s_sin.c s_sincos.c \
 	s_sinf.c s_sincosf.c s_tan.c s_tanf.c s_tanh.c s_tanhf.c s_tgammaf.c \
 	s_trunc.c s_truncf.c s_cpow.c  s_cpowf.c \
-	w_cabs.c w_cabsf.c
+	w_cabs.c w_cabsf.c digittoint.c
 
 ifneq ($(OS), WINNT)
 $(CUR_SRCS) += s_nan.c
@@ -54,8 +54,6 @@ $(CUR_SRCS) +=	e_acosl.c e_asinl.c e_atan2l.c e_fmodl.c \
 	s_cimagl.c s_conjl.c s_creall.c s_cacoshl.c s_catanhl.c s_casinhl.c \
 	s_catanl.c s_csinl.c s_cacosl.c s_cexpl.c s_csinhl.c s_ccoshl.c \
 	s_clogl.c s_ctanhl.c s_ccosl.c s_cbrtl.c
-else
-$(CUR_SRCS) += digittoint.c
 endif
 
 # C99 complex functions
