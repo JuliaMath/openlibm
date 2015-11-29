@@ -27,7 +27,9 @@
  * $FreeBSD$
  */
 
+//VBS
 #define	__fenv_static
+
 #include <openlibm_fenv.h>
 
 #include <openlibm_acle_compat_arm.h>

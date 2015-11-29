@@ -28,5 +28,8 @@
 
 #define	FENV_MANGLE(x)	__softfp_ ##x
 #include <openlibm_fenv_mangle_arm.h>
+#ifndef DLLEXORT
+#define DLLEXPORT __attribute__ ((visibility("default")))
+#endif
 #include "fenv.c"
 

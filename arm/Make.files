@@ -1,1 +1,3 @@
-$(CUR_SRCS) = fenv-vfp.c 
+#$(CUR_SRCS) = fenv-softfp.c
+$(CUR_SRCS) = fenv-vfp.c
+

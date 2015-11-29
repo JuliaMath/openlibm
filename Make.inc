@@ -72,7 +72,7 @@ CFLAGS ?= -O2
 
 # Use -O0 on arm until test segfaults are resolved that happen at higher opt levels.
 ifeq ($(ARCH),arm)
-override CFLAGS=-O0
+override CFLAGS=-O1 -g
 endif
 
 default: all
