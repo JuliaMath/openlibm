@@ -15,18 +15,18 @@
  */
 
 #include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_cosf.c,v 1.18 2008/02/25 22:19:17 bde Exp $");
+__FBSDID("$FreeBSD$");
 
 #include <float.h>
-#include <openlibm_math.h>
 
-//#define	INLINE_KERNEL_COSDF
-//#define	INLINE_KERNEL_SINDF
-//#define INLINE_REM_PIO2F
+#include <openlibm_math.h>
+#define	INLINE_KERNEL_COSDF
+#define	INLINE_KERNEL_SINDF
+#define INLINE_REM_PIO2F
 #include "math_private.h"
-//#include "e_rem_pio2f.c"
-//#include "k_cosf.c"
-//#include "k_sinf.c"
+#include "e_rem_pio2f.c"
+#include "k_cosf.c"
+#include "k_sinf.c"
 
 /* Small multiples of pi/2 rounded to double precision. */
 static const double
@@ -35,7 +35,7 @@ c2pio2 = 2*M_PI_2,			/* 0x400921FB, 0x54442D18 */
 c3pio2 = 3*M_PI_2,			/* 0x4012D97C, 0x7F3321D2 */
 c4pio2 = 4*M_PI_2;			/* 0x401921FB, 0x54442D18 */
 
-DLLEXPORT float
+float
 cosf(float x)
 {
 	double y;
@@ -50,22 +50,24 @@ cosf(float x)
 	    return __kernel_cosdf(x);
 	}
 	if(ix<=0x407b53d1) {		/* |x| ~<= 5*pi/4 */
-	    if(ix<=0x4016cbe3) {	/* |x|  ~> 3*pi/4 */
+	    if(ix>0x4016cbe3)		/* |x|  ~> 3*pi/4 */
+		return -__kernel_cosdf(x + (hx > 0 ? -c2pio2 : c2pio2));
+	    else {
 		if(hx>0)
 		    return __kernel_sindf(c1pio2 - x);
 		else
 		    return __kernel_sindf(x + c1pio2);
-	    } else
-	    	return -__kernel_cosdf(x + (hx > 0 ? -c2pio2 : c2pio2));
+	    }
 	}
 	if(ix<=0x40e231d5) {		/* |x| ~<= 9*pi/4 */
-	    if(ix<=0x40afeddf) {	/* |x|  ~> 7*pi/4 */
+	    if(ix>0x40afeddf)		/* |x|  ~> 7*pi/4 */
+		return __kernel_cosdf(x + (hx > 0 ? -c4pio2 : c4pio2));
+	    else {
 		if(hx>0)
 		    return __kernel_sindf(x - c3pio2);
 		else
 		    return __kernel_sindf(-c3pio2 - x);
-	    } else
-	    	return __kernel_cosdf(x + (hx > 0 ? -c4pio2 : c4pio2));
+	    }
 	}
 
     /* cos(Inf or NaN) is NaN */

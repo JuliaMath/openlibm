@@ -14,10 +14,9 @@
  */
 
 #include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/e_powf.c,v 1.16 2011/10/21 06:26:07 das Exp $");
+__FBSDID("$FreeBSD$");
 
 #include <openlibm_math.h>
-
 #include "math_private.h"
 
 static const float
@@ -53,7 +52,7 @@ ivln2    =  1.4426950216e+00, /* 0x3fb8aa3b =1/ln2 */
 ivln2_h  =  1.4426879883e+00, /* 0x3fb8aa00 =16b 1/ln2*/
 ivln2_l  =  7.0526075433e-06; /* 0x36eca570 =1/ln2 tail*/
 
-DLLEXPORT float
+float
 __ieee754_powf(float x, float y)
 {
 	float z,ax,z_h,z_l,p_h,p_l;
@@ -103,15 +102,10 @@ __ieee754_powf(float x, float y)
 	if(iy==0x3f800000) {	/* y is  +-1 */
 	    if(hy<0) return one/x; else return x;
 	}
-        if(hy==0x40000000) return x*x;   /* y is  2 */
-        if(hy==0x40400000) return x*x*x; /* y is  3 */
-        if(hy==0x40800000) {             /* y is  4 */
-            u = x*x;
-            return u*u;
-        }
-        if(hy==0x3f000000) {             /* y is  0.5 */
+	if(hy==0x40000000) return x*x; /* y is  2 */
+	if(hy==0x3f000000) {	/* y is  0.5 */
 	    if(hx>=0)	/* x >= +0 */
-                return __ieee754_sqrtf(x);
+	    return __ieee754_sqrtf(x);
 	}
 
 	ax   = fabsf(x);
@@ -128,7 +122,7 @@ __ieee754_powf(float x, float y)
 	    return z;
 	}
 
-	n = ((u_int32_t)hx>>31)-1;
+	n = ((uint32_t)hx>>31)-1;
 
     /* (x<0)**(non-int) is NaN */
 	if((n|yisint)==0) return (x-x)/(x-x);

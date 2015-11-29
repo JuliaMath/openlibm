@@ -12,7 +12,7 @@
 
 /* INDENT OFF */
 #include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/k_tan.c,v 1.13 2008/02/22 02:30:35 das Exp $");
+__FBSDID("$FreeBSD$");
 
 /* __kernel_tan( x, y, k )
  * kernel tan function on ~[-pi/4, pi/4] (except on -0), pi/4 ~ 0.7854
@@ -50,9 +50,7 @@
  */
 
 #include <openlibm_math.h>
-
 #include "math_private.h"
-
 static const double xxx[] = {
 		 3.33333333333334091986e-01,	/* 3FD55555, 55555563 */
 		 1.33333333333201242699e-01,	/* 3FC11111, 1110FE7A */
@@ -77,7 +75,7 @@ static const double xxx[] = {
 #define	T	xxx
 /* INDENT ON */
 
-DLLEXPORT double
+double
 __kernel_tan(double x, double y, int iy) {
 	double z, r, v, w, s;
 	int32_t ix, hx;

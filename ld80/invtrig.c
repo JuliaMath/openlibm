@@ -24,10 +24,10 @@
  * SUCH DAMAGE.
  */
 
-#include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/ld80/invtrig.c,v 1.1 2008/07/31 22:41:26 das Exp $");
+#include <cdefs-compat.h>
+__FBSDID("$FreeBSD$");
 
-#include "ld80/invtrig.h"
+#include "invtrig.h"
 
 /*
  * asinl() and acosl()

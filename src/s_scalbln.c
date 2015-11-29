@@ -25,54 +25,30 @@
  */
 
 #include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_scalbln.c,v 1.2 2005/03/07 04:57:50 das Exp $");
+__FBSDID("$FreeBSD$");
 
-#include <limits.h>
 #include <openlibm_math.h>
 
-#include "math_private.h"
+#define	NMAX	65536
+#define	NMIN	-65536
 
-DLLEXPORT double
-scalbln (double x, long n)
+double
+scalbln(double x, long n)
 {
-	int in;
 
-	in = (int)n;
-	if (in != n) {
-		if (n > 0)
-			in = INT_MAX;
-		else
-			in = INT_MIN;
-	}
-	return (scalbn(x, in));
+	return (scalbn(x, (n > NMAX) ? NMAX : (n < NMIN) ? NMIN : (int)n));
 }
 
-DLLEXPORT float
-scalblnf (float x, long n)
+float
+scalblnf(float x, long n)
 {
-	int in;
 
-	in = (int)n;
-	if (in != n) {
-		if (n > 0)
-			in = INT_MAX;
-		else
-			in = INT_MIN;
-	}
-	return (scalbnf(x, in));
+	return (scalbnf(x, (n > NMAX) ? NMAX : (n < NMIN) ? NMIN : (int)n));
 }
 
-DLLEXPORT long double
-scalblnl (long double x, long n)
+long double
+scalblnl(long double x, long n)
 {
-	int in;
 
-	in = (int)n;
-	if (in != n) {
-		if (n > 0)
-			in = INT_MAX;
-		else
-			in = INT_MIN;
-	}
-	return (scalbnl(x, (int)n));
+	return (scalbnl(x, (n > NMAX) ? NMAX : (n < NMIN) ? NMIN : (int)n));
 }

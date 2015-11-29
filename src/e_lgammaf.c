@@ -14,7 +14,7 @@
  */
 
 #include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/e_lgammaf.c,v 1.8 2008/02/22 02:30:35 das Exp $");
+__FBSDID("$FreeBSD$");
 
 /* __ieee754_lgammaf(x)
  * Return the logarithm of the Gamma function of x.
@@ -23,15 +23,12 @@
  */
 
 #include <openlibm_math.h>
-
 #include "math_private.h"
 
-DLLEXPORT float
+extern int signgam;
+
+float
 __ieee754_lgammaf(float x)
 {
-#ifdef OPENLIBM_ONLY_THREAD_SAFE
-	int signgam;
-#endif
-
 	return __ieee754_lgammaf_r(x,&signgam);
 }

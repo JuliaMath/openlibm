@@ -14,17 +14,16 @@
  */
 
 #include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/e_acoshf.c,v 1.8 2008/02/22 02:30:34 das Exp $");
+__FBSDID("$FreeBSD$");
 
 #include <openlibm_math.h>
-
 #include "math_private.h"
 
 static const float
 one	= 1.0,
 ln2	= 6.9314718246e-01;  /* 0x3f317218 */
 
-DLLEXPORT float
+float
 __ieee754_acoshf(float x)
 {
 	float t;

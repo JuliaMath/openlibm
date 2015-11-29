@@ -12,7 +12,7 @@
  */
 
 #include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/e_jn.c,v 1.11 2010/11/13 10:54:10 uqs Exp $");
+__FBSDID("$FreeBSD$");
 
 /*
  * __ieee754_jn(n, x), __ieee754_yn(n, x)
@@ -41,8 +41,9 @@
  */
 
 #include <openlibm_math.h>
-
 #include "math_private.h"
+
+static const volatile double vone = 1, vzero = 0;
 
 static const double
 invsqrtpi=  5.64189583547756279280e-01, /* 0x3FE20DD7, 0x50429B6D */
@@ -51,7 +52,7 @@ one   =  1.00000000000000000000e+00; /* 0x3FF00000, 0x00000000 */
 
 static const double zero  =  0.00000000000000000000e+00;
 
-DLLEXPORT double
+double
 __ieee754_jn(int n, double x)
 {
 	int32_t i,hx,ix,lx, sgn;
@@ -64,7 +65,7 @@ __ieee754_jn(int n, double x)
 	EXTRACT_WORDS(hx,lx,x);
 	ix = 0x7fffffff&hx;
     /* if J(n,NaN) is NaN */
-	if((ix|((u_int32_t)(lx|-lx))>>31)>0x7ff00000) return x+x;
+	if((ix|((uint32_t)(lx|-lx))>>31)>0x7ff00000) return x+x;
 	if(n<0){		
 		n = -n;
 		x = -x;
@@ -212,7 +213,7 @@ __ieee754_jn(int n, double x)
 	if(sgn==1) return -b; else return b;
 }
 
-DLLEXPORT double
+double
 __ieee754_yn(int n, double x)
 {
 	int32_t i,hx,ix,lx;
@@ -221,10 +222,12 @@ __ieee754_yn(int n, double x)
 
 	EXTRACT_WORDS(hx,lx,x);
 	ix = 0x7fffffff&hx;
-    /* if Y(n,NaN) is NaN */
-	if((ix|((u_int32_t)(lx|-lx))>>31)>0x7ff00000) return x+x;
-	if((ix|lx)==0) return -one/zero;
-	if(hx<0) return zero/zero;
+	/* yn(n,NaN) = NaN */
+	if((ix|((uint32_t)(lx|-lx))>>31)>0x7ff00000) return x+x;
+	/* yn(n,+-0) = -inf and raise divide-by-zero exception. */
+	if((ix|lx)==0) return -one/vzero;
+	/* yn(n,x<0) = NaN and raise invalid exception. */
+	if(hx<0) return vzero/vzero;
 	sign = 1;
 	if(n<0){
 		n = -n;
@@ -255,7 +258,7 @@ __ieee754_yn(int n, double x)
 		}
 		b = invsqrtpi*temp/sqrt(x);
 	} else {
-	    u_int32_t high;
+	    uint32_t high;
 	    a = __ieee754_y0(x);
 	    b = __ieee754_y1(x);
 	/* quit if b is -inf */

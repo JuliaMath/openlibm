@@ -25,10 +25,10 @@
  */
 
 #include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_csqrt.c,v 1.4 2008/08/08 00:15:16 das Exp $");
+__FBSDID("$FreeBSD$");
 
-#include <float.h>
 #include <openlibm_complex.h>
+#include <float.h>
 #include <openlibm_math.h>
 
 #include "math_private.h"
@@ -40,14 +40,12 @@
  * gcc generates is acceptable, since the special cases have already been
  * handled.
  */
-#ifndef __GNUC__
 #pragma	STDC CX_LIMITED_RANGE	ON
-#endif
 
 /* We risk spurious overflow for components >= DBL_MAX / (1 + sqrt(2)). */
 #define	THRESH	0x1.a827999fcef32p+1022
 
-DLLEXPORT double complex
+double complex
 csqrt(double complex z)
 {
 	double complex result;

@@ -10,7 +10,7 @@
  */
 
 #include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/e_pow.c,v 1.14 2011/10/21 06:26:07 das Exp $");
+__FBSDID("$FreeBSD$");
 
 /* __ieee754_pow(x,y) return x**y
  *
@@ -19,20 +19,20 @@
  *	1. Compute and return log2(x) in two pieces:
  *		log2(x) = w1 + w2,
  *	   where w1 has 53-24 = 29 bit trailing zeros.
- *	2. Perform y*log2(x) = n+y' by simulating muti-precision 
+ *	2. Perform y*log2(x) = n+y' by simulating multi-precision 
  *	   arithmetic, where |y'|<=0.5.
  *	3. Return x**y = 2**n*exp(y'*log2)
  *
  * Special cases:
  *	1.  (anything) ** 0  is 1
  *	2.  (anything) ** 1  is itself
- *	3.  (anything) ** NAN is NAN
+ *	3.  (anything) ** NAN is NAN except 1 ** NAN = 1
  *	4.  NAN ** (anything except 0) is NAN
  *	5.  +-(|x| > 1) **  +INF is +INF
  *	6.  +-(|x| > 1) **  -INF is +0
  *	7.  +-(|x| < 1) **  +INF is +0
  *	8.  +-(|x| < 1) **  -INF is +INF
- *	9.  +-1         ** +-INF is NAN
+ *	9.  +-1         ** +-INF is 1
  *	10. +0 ** (+anything except 0, NAN)               is +0
  *	11. -0 ** (+anything except 0, NAN, odd integer)  is +0
  *	12. +0 ** (-anything except 0, NAN)               is +INF
@@ -58,7 +58,6 @@
  */
 
 #include <openlibm_math.h>
-
 #include "math_private.h"
 
 static const double
@@ -94,14 +93,14 @@ ivln2    =  1.44269504088896338700e+00, /* 0x3FF71547, 0x652B82FE =1/ln2 */
 ivln2_h  =  1.44269502162933349609e+00, /* 0x3FF71547, 0x60000000 =24b 1/ln2*/
 ivln2_l  =  1.92596299112661746887e-08; /* 0x3E54AE0B, 0xF85DDF44 =1/ln2 tail*/
 
-DLLEXPORT double
+double
 __ieee754_pow(double x, double y)
 {
 	double z,ax,z_h,z_l,p_h,p_l;
 	double y1,t1,t2,r,s,t,u,v,w;
 	int32_t i,j,k,yisint,n;
 	int32_t hx,hy,ix,iy;
-	u_int32_t lx,ly;
+	uint32_t lx,ly;
 
 	EXTRACT_WORDS(hx,lx,x);
 	EXTRACT_WORDS(hy,ly,y);
@@ -142,7 +141,7 @@ __ieee754_pow(double x, double y)
 	if(ly==0) { 	
 	    if (iy==0x7ff00000) {	/* y is +-inf */
 	        if(((ix-0x3ff00000)|lx)==0)
-		    return  one;	/* (-1)**+-inf is NaN */
+		    return  one;	/* (-1)**+-inf is 1 */
 	        else if (ix >= 0x3ff00000)/* (|x|>1)**+-inf = inf,0 */
 		    return (hy>=0)? y: zero;
 	        else			/* (|x|<1)**-,+inf = inf,0 */
@@ -151,15 +150,10 @@ __ieee754_pow(double x, double y)
 	    if(iy==0x3ff00000) {	/* y is  +-1 */
 		if(hy<0) return one/x; else return x;
 	    }
-            if(hy==0x40000000) return x*x;   /* y is  2 */
-            if(hy==0x40080000) return x*x*x; /* y is  3 */
-            if(hy==0x40100000) {             /* y is  4 */
-                u = x*x;
-                return u*u;
-            }
-	    if(hy==0x3fe00000) {             /* y is  0.5 */
+	    if(hy==0x40000000) return x*x; /* y is  2 */
+	    if(hy==0x3fe00000) {	/* y is  0.5 */
 		if(hx>=0)	/* x >= +0 */
-                    return sqrt(x);
+		return sqrt(x);	
 	    }
 	}
 
@@ -183,7 +177,7 @@ __ieee754_pow(double x, double y)
 	n = (hx>>31)+1;
        but ANSI C says a right shift of a signed negative quantity is
        implementation defined.  */
-	n = ((u_int32_t)hx>>31)-1;
+	n = ((uint32_t)hx>>31)-1;
 
     /* (x<0)**(non-int) is NaN */
 	if((n|yisint)==0) return (x-x)/(x-x);
