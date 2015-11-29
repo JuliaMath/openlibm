@@ -11,7 +11,7 @@
  */
 
 #include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_copysign.c,v 1.10 2008/02/22 02:30:35 das Exp $");
+__FBSDID("$FreeBSD$");
 
 /*
  * copysign(double x, double y)
@@ -20,13 +20,12 @@
  */
 
 #include <openlibm_math.h>
-
 #include "math_private.h"
 
-DLLEXPORT double
+double
 copysign(double x, double y)
 {
-	u_int32_t hx,hy;
+	uint32_t hx,hy;
 	GET_HIGH_WORD(hx,x);
 	GET_HIGH_WORD(hy,y);
 	SET_HIGH_WORD(x,(hx&0x7fffffff)|(hy&0x80000000));

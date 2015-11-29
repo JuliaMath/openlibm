@@ -23,14 +23,15 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  *
- * $FreeBSD: src/lib/msun/ld80/s_nanl.c,v 1.2 2007/12/18 23:46:31 das Exp $
+ * $FreeBSD$
  */
 
-#include <openlibm_math.h>
+#include <math.h>
 
-#include "math_private.h"
+#include "fpmath.h"
+#include "../src/math_private.h"
 
-DLLEXPORT long double
+long double
 nanl(const char *s)
 {
 	union {

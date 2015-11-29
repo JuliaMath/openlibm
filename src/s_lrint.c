@@ -25,14 +25,11 @@
  */
 
 #include "cdefs-compat.h"
-
-#include <openlibm_fenv.h>
+#include <fenv.h>
 #include <openlibm_math.h>
 
-#include "math_private.h"
-
 #ifndef type
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_lrint.c,v 1.1 2005/01/11 23:12:55 das Exp $");
+__FBSDID("$FreeBSD$");
 #define type		double
 #define	roundit		rint
 #define dtype		long
@@ -46,7 +43,7 @@
  * significant bits than 'type'.  Hence, we bend over backwards for the
  * sake of correctness; an MD implementation could be more efficient.
  */
-DLLEXPORT dtype
+dtype
 fn(type x)
 {
 	fenv_t env;

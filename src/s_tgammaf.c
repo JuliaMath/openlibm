@@ -25,11 +25,9 @@
  */
 
 #include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_tgammaf.c,v 1.1 2008/02/18 17:27:10 das Exp $");
+__FBSDID("$FreeBSD$");
 
 #include <openlibm_math.h>
-
-#include "math_private.h"
 
 /*
  * We simply call tgamma() rather than bloating the math library with
@@ -37,7 +35,7 @@
  * essentially useless, since the function is superexponential and
  * floats have very limited range.
  */
-DLLEXPORT float
+float
 tgammaf(float x)
 {
 

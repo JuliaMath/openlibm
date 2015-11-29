@@ -25,14 +25,13 @@
  */
 
 #include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_fminf.c,v 1.1 2004/06/30 07:04:01 das Exp $");
+__FBSDID("$FreeBSD$");
 
 #include <openlibm_math.h>
 
 #include "fpmath.h"
-#include "math_private.h"
 
-DLLEXPORT float
+float
 fminf(float x, float y)
 {
 	union IEEEf2bits u[2];

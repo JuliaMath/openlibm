@@ -14,15 +14,14 @@
  */
 
 #include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_ilogbf.c,v 1.8 2008/02/22 02:30:35 das Exp $");
+__FBSDID("$FreeBSD$");
 
 #include <limits.h>
-#include <openlibm_math.h>
 
+#include <openlibm_math.h>
 #include "math_private.h"
 
-DLLEXPORT int
-ilogbf(float x)
+	int ilogbf(float x)
 {
 	int32_t hx,ix;
 

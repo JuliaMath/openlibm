@@ -14,10 +14,9 @@
  */
 
 #include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/e_asinf.c,v 1.13 2008/08/08 00:21:27 das Exp $");
+__FBSDID("$FreeBSD$");
 
 #include <openlibm_math.h>
-
 #include "math_private.h"
 
 static const float
@@ -32,7 +31,7 @@ qS1 = -7.0662963390e-01;
 static const double
 pio2 =  1.570796326794896558e+00;
 
-DLLEXPORT float
+float
 __ieee754_asinf(float x)
 {
 	double s;

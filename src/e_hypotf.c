@@ -14,13 +14,12 @@
  */
 
 #include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/e_hypotf.c,v 1.14 2011/10/15 07:00:28 das Exp $");
+__FBSDID("$FreeBSD$");
 
 #include <openlibm_math.h>
-
 #include "math_private.h"
 
-DLLEXPORT float
+float
 __ieee754_hypotf(float x, float y)
 {
 	float a,b,t1,t2,y1,y2,w;

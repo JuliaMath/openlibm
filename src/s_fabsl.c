@@ -1,5 +1,5 @@
 /*-
- * Copyright (c) 2003 Dag-Erling Coïdan Smørgrav
+ * Copyright (c) 2003 Dag-Erling SmÃ¸rgrav
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -25,14 +25,14 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * $FreeBSD: src/lib/msun/src/s_fabsl.c,v 1.2 2003/10/25 19:53:28 des Exp $
+ * $FreeBSD$
  */
 
 #include <openlibm_math.h>
-#include "math_private.h"
+
 #include "fpmath.h"
 
-DLLEXPORT long double
+long double
 fabsl(long double x)
 {
 	union IEEEl2bits u;

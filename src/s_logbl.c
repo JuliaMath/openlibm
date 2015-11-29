@@ -10,14 +10,17 @@
  * ====================================================
  */
 
+#ifndef lint
+static char rcsid[] = "$FreeBSD$";
+#endif
+
 #include <float.h>
 #include <limits.h>
 #include <openlibm_math.h>
 
 #include "fpmath.h"
-#include "math_private.h"
 
-DLLEXPORT long double
+long double
 logbl(long double x)
 {
 	union IEEEl2bits u;

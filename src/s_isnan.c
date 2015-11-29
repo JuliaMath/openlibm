@@ -23,27 +23,28 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  *
- * $FreeBSD: src/lib/msun/src/s_isnan.c,v 1.9 2010/06/12 17:32:05 das Exp $
+ * $FreeBSD$
  */
 
 #include <openlibm_math.h>
 
-#include "fpmath.h"
 #include "math_private.h"
+#include "fpmath.h"
 
-/* Provided by libc */
-#if 1
-DLLEXPORT int
-(isnan) (double d)
+/* Provided by libc.so */
+#ifndef PIC
+#undef isnan
+int
+isnan(double d)
 {
 	union IEEEd2bits u;
 
 	u.d = d;
 	return (u.bits.exp == 2047 && (u.bits.manl != 0 || u.bits.manh != 0));
 }
-#endif
+#endif /* !PIC */
 
-DLLEXPORT int
+int
 __isnanf(float f)
 {
 	union IEEEf2bits u;
@@ -52,8 +53,7 @@ __isnanf(float f)
 	return (u.bits.exp == 255 && u.bits.man != 0);
 }
 
-#ifdef LONG_DOUBLE
-DLLEXPORT int
+int
 __isnanl(long double e)
 {
 	union IEEEl2bits u;
@@ -62,6 +62,5 @@ __isnanl(long double e)
 	mask_nbit_l(u);
 	return (u.bits.exp == 32767 && (u.bits.manl != 0 || u.bits.manh != 0));
 }
-#endif
 
 __weak_reference(__isnanf, isnanf);

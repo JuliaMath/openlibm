@@ -12,7 +12,7 @@
  */
 
 #include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_floorl.c,v 1.8 2008/02/14 15:10:34 bde Exp $");
+__FBSDID("$FreeBSD$");
 
 /*
  * floorl(x)
@@ -28,7 +28,6 @@
 #include <stdint.h>
 
 #include "fpmath.h"
-#include "math_private.h"
 
 #ifdef LDBL_IMPLICIT_NBIT
 #define	MANH_SIZE	(LDBL_MANH_SIZE + 1)
@@ -52,7 +51,7 @@
 
 static const long double huge = 1.0e300;
 
-DLLEXPORT long double
+long double
 floorl(long double x)
 {
 	union IEEEl2bits u = { .e = x };

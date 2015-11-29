@@ -14,7 +14,7 @@
  */
 
 #include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/e_atan2l.c,v 1.3 2008/08/02 19:17:00 das Exp $");
+__FBSDID("$FreeBSD$");
 
 /*
  * See comments in e_atan2.c.
@@ -22,9 +22,9 @@
  */
 
 #include <float.h>
-#include <openlibm_math.h>
 
 #include "invtrig.h"
+#include <openlibm_math.h>
 #include "math_private.h"
 
 static volatile long double
@@ -43,7 +43,7 @@ static const long double
 pi =  3.14159265358979323846264338327950280e+00L;
 #endif
 
-DLLEXPORT long double
+long double
 atan2l(long double y, long double x)
 {
 	union IEEEl2bits ux, uy;

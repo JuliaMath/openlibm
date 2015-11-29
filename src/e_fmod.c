@@ -12,7 +12,7 @@
  */
 
 #include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/e_fmod.c,v 1.10 2008/02/22 02:30:34 das Exp $");
+__FBSDID("$FreeBSD$");
 
 /* 
  * __ieee754_fmod(x,y)
@@ -21,16 +21,15 @@
  */
 
 #include <openlibm_math.h>
-
 #include "math_private.h"
 
 static const double one = 1.0, Zero[] = {0.0, -0.0,};
 
-DLLEXPORT double
+double
 __ieee754_fmod(double x, double y)
 {
 	int32_t n,hx,hy,hz,ix,iy,sx,i;
-	u_int32_t lx,ly,lz;
+	uint32_t lx,ly,lz;
 
 	EXTRACT_WORDS(hx,lx,x);
 	EXTRACT_WORDS(hy,ly,y);
@@ -45,7 +44,7 @@ __ieee754_fmod(double x, double y)
 	if(hx<=hy) {
 	    if((hx<hy)||(lx<ly)) return x;	/* |x|<|y| return x */
 	    if(lx==ly) 
-		return Zero[(u_int32_t)sx>>31];	/* |x|=|y| return x*0*/
+		return Zero[(uint32_t)sx>>31];	/* |x|=|y| return x*0*/
 	}
 
     /* determine ix = ilogb(x) */
@@ -99,7 +98,7 @@ __ieee754_fmod(double x, double y)
 	    if(hz<0){hx = hx+hx+(lx>>31); lx = lx+lx;}
 	    else {
 	    	if((hz|lz)==0) 		/* return sign(x)*0 */
-		    return Zero[(u_int32_t)sx>>31];
+		    return Zero[(uint32_t)sx>>31];
 	    	hx = hz+hz+(lz>>31); lx = lz+lz;
 	    }
 	}
@@ -108,7 +107,7 @@ __ieee754_fmod(double x, double y)
 
     /* convert back to floating value and restore the sign */
 	if((hx|lx)==0) 			/* return sign(x)*0 */
-	    return Zero[(u_int32_t)sx>>31];
+	    return Zero[(uint32_t)sx>>31];
 	while(hx<0x00100000) {		/* normalize x */
 	    hx = hx+hx+(lx>>31); lx = lx+lx;
 	    iy -= 1;
@@ -119,7 +118,7 @@ __ieee754_fmod(double x, double y)
 	} else {		/* subnormal output */
 	    n = -1022 - iy;
 	    if(n<=20) {
-		lx = (lx>>n)|((u_int32_t)hx<<(32-n));
+		lx = (lx>>n)|((uint32_t)hx<<(32-n));
 		hx >>= n;
 	    } else if (n<=31) {
 		lx = (hx<<(32-n))|(lx>>n); hx = sx;
