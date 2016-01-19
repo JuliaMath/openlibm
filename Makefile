@@ -62,9 +62,9 @@ openlibm.pc: openlibm.pc.in Make.inc Makefile
 
 install: all openlibm.pc
 	mkdir -p $(DESTDIR)$(shlibdir)
-	mkdir -p $(DESTDIR)$(libdir)/pkgconfig
+	mkdir -p $(DESTDIR)$(pkgconfigdir)
 	mkdir -p $(DESTDIR)$(includedir)/openlibm
 	cp -f -a libopenlibm.$(SHLIB_EXT)* $(DESTDIR)$(shlibdir)/
 	cp -f -a libopenlibm.a $(DESTDIR)$(libdir)/
 	cp -f -a include/openlibm*.h $(DESTDIR)$(includedir)/
-	cp -f -a openlibm.pc $(DESTDIR)$(libdir)/pkgconfig/
+	cp -f -a openlibm.pc $(DESTDIR)$(pkgconfigdir)/
