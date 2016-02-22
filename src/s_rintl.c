@@ -28,6 +28,7 @@
 //__FBSDID("$FreeBSD: src/lib/msun/src/s_rintl.c,v 1.5 2008/02/22 11:59:05 bde Exp $");
 
 #include <float.h>
+#include <openlibm_fenv.h>
 #include <openlibm_math.h>
 
 #include "fpmath.h"
@@ -92,3 +93,24 @@ rintl(long double x)
 
 	return (x);
 }
+
+/*
+ * We save and restore the floating-point environment to avoid raising
+ * an inexact exception.  We can get away with using fesetenv()
+ * instead of feclearexcept()/feupdateenv() to restore the environment
+ * because the only exception defined for rint() is overflow, and
+ * rounding can't overflow as long as emax >= p.
+ */
+#define	DECL(type, fn, rint)	\
+DLLEXPORT type				\
+fn(type x)			\
+{				\
+	type ret;		\
+	fenv_t env;		\
+				\
+	fegetenv(&env);		\
+	ret = rint(x);		\
+	fesetenv(&env);		\
+	return (ret);		\
+}
+DECL(long double, nearbyintl, rintl)

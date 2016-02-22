@@ -48,7 +48,12 @@ endif
 CFLAGS_add += -std=c99 -Wall -I$(OPENLIBM_HOME) -I$(OPENLIBM_HOME)/include -I$(OPENLIBM_HOME)/ld80 -I$(OPENLIBM_HOME)/$(ARCH) -I$(OPENLIBM_HOME)/src -DASSEMBLER -D__BSD_VISIBLE -Wno-implicit-function-declaration
 
 # The optimization flag may be overriden with the environment variable CFLAGS.
+ifeq ($(ARCH),powerpc)
+# tests hang at higher optimization levels
+CFLAGS ?= -O0
+else
 CFLAGS ?= -O2
+endif
 
 default: all
 

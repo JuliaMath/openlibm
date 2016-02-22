@@ -3,7 +3,9 @@ include ./Make.inc
 
 SUBDIRS = src $(ARCH) bsdsrc
 ifneq ($(ARCH), arm)
+ifneq ($(ARCH), powerpc)
 SUBDIRS += ld80
+endif
 endif
 
 define INC_template
@@ -26,7 +28,7 @@ OBJS =  $(patsubst %.f,%.f.o,\
 
 .PHONY: all check test clean distclean install
 
-all: libopenlibm.a libopenlibm.$(SHLIB_EXT) 
+all: libopenlibm.a libopenlibm.$(SHLIB_EXT)
 
 check test: test/test-double test/test-float
 	test/test-double
