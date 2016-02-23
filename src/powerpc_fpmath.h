@@ -1,5 +1,5 @@
 /*-
- * Copyright (c) 2004 David Schultz <das@FreeBSD.ORG>
+ * Copyright (c) 2003 David Schultz <das@FreeBSD.ORG>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -22,35 +22,28 @@
  * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
+ *
+ * $FreeBSD$
  */
 
-#include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_nearbyint.c,v 1.2 2008/01/14 02:12:06 das Exp $");
+union IEEEl2bits {
+	long double	e;
+	struct {
+		unsigned int		sign	:1;
+		unsigned int		exp	:11;
+		unsigned int		manh	:20;
+		unsigned int		manl	:32;
+	} bits;
+};
 
-#include <openlibm_fenv.h>
-#include <openlibm_math.h>
+#define	mask_nbit_l(u)	((void)0)
+#define	LDBL_IMPLICIT_NBIT
+#define	LDBL_NBIT	0
 
-#include "math_private.h"
+#define	LDBL_MANH_SIZE	20
+#define	LDBL_MANL_SIZE	32
 
-/*
- * We save and restore the floating-point environment to avoid raising
- * an inexact exception.  We can get away with using fesetenv()
- * instead of feclearexcept()/feupdateenv() to restore the environment
- * because the only exception defined for rint() is overflow, and
- * rounding can't overflow as long as emax >= p.
- */
-#define	DECL(type, fn, rint)	\
-DLLEXPORT type				\
-fn(type x)			\
-{				\
-	type ret;		\
-	fenv_t env;		\
-				\
-	fegetenv(&env);		\
-	ret = rint(x);		\
-	fesetenv(&env);		\
-	return (ret);		\
-}
-
-DECL(double, nearbyint, rint)
-DECL(float, nearbyintf, rintf)
+#define	LDBL_TO_ARRAY32(u, a) do {			\
+	(a)[0] = (uint32_t)(u).bits.manl;		\
+	(a)[1] = (uint32_t)(u).bits.manh;		\
+} while(0)

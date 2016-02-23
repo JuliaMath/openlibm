@@ -37,6 +37,8 @@
 #else 
 #include "i386_fpmath.h"
 #endif
+#elif defined(__powerpc__)
+#include "powerpc_fpmath.h"
 #endif
 
 #if defined(__BYTE_ORDER__) && defined(__ORDER_LITTLE_ENDIAN__)

@@ -8,6 +8,8 @@
 #include <openlibm_fenv_amd64.h>
 #elif defined(__i386__)
 #include <openlibm_fenv_i387.h>
+#elif defined(__powerpc__)
+#include <openlibm_fenv_powerpc.h>
 #else
 #error "Unsupported platform"
 #endif

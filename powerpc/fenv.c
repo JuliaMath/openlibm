@@ -22,35 +22,27 @@
  * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
+ *
+ * $FreeBSD$
  */
 
-#include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_nearbyint.c,v 1.2 2008/01/14 02:12:06 das Exp $");
-
+#define	__fenv_static
 #include <openlibm_fenv.h>
-#include <openlibm_math.h>
 
-#include "math_private.h"
+#ifdef __GNUC_GNU_INLINE__
+#error "This file must be compiled with C99 'inline' semantics"
+#endif
 
-/*
- * We save and restore the floating-point environment to avoid raising
- * an inexact exception.  We can get away with using fesetenv()
- * instead of feclearexcept()/feupdateenv() to restore the environment
- * because the only exception defined for rint() is overflow, and
- * rounding can't overflow as long as emax >= p.
- */
-#define	DECL(type, fn, rint)	\
-DLLEXPORT type				\
-fn(type x)			\
-{				\
-	type ret;		\
-	fenv_t env;		\
-				\
-	fegetenv(&env);		\
-	ret = rint(x);		\
-	fesetenv(&env);		\
-	return (ret);		\
-}
+const fenv_t __fe_dfl_env = 0x00000000;
 
-DECL(double, nearbyint, rint)
-DECL(float, nearbyintf, rintf)
+extern inline int feclearexcept(int __excepts);
+extern inline int fegetexceptflag(fexcept_t *__flagp, int __excepts);
+extern inline int fesetexceptflag(const fexcept_t *__flagp, int __excepts);
+extern inline int feraiseexcept(int __excepts);
+extern inline int fetestexcept(int __excepts);
+extern inline int fegetround(void);
+extern inline int fesetround(int __round);
+extern inline int fegetenv(fenv_t *__envp);
+extern inline int feholdexcept(fenv_t *__envp);
+extern inline int fesetenv(const fenv_t *__envp);
+extern inline int feupdateenv(const fenv_t *__envp);
