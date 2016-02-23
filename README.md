@@ -14,9 +14,9 @@ consistently across compilers and operating systems, and in 32-bit and
 
 ## Platform support
 
-OpenLibm builds on Linux, Mac OS X, Windows, FreeBSD, and OpenBSD. It builds
-with both GCC and clang. Although largely tested on x86, it also
-includes experimental support for ARM.
+OpenLibm builds on Linux, Mac OS X, Windows, FreeBSD, and OpenBSD. It
+builds with both GCC and clang. Although largely tested and widely
+used on x86 architectures, openlibm also supports ARM and powerPC.
 
 ## Build instructions
 
