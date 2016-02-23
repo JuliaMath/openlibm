@@ -12,6 +12,12 @@ bindir = $(prefix)/bin
 libdir = $(prefix)/lib
 includedir = $(prefix)/include
 
+ifeq ($(OS), FreeBSD)
+  pkgconfigdir = $(prefix)/libdata/pkgconfig
+else
+  pkgconfigdir = $(libdir)/pkgconfig
+endif
+
 USEGCC = 1
 USECLANG = 0
 
@@ -98,7 +104,7 @@ ifeq ($(OS), WINNT)
   SONAME_FLAG = -soname
   override CFLAGS_add += -nodefaultlibs
   shlibdir = $(bindir)
- else
+else
   ifeq ($(OS), Darwin)
     SHLIB_EXT = dylib
     SONAME_FLAG = -install_name
