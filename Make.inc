@@ -49,6 +49,13 @@ CFLAGS_add += -std=c99 -Wall -I$(OPENLIBM_HOME) -I$(OPENLIBM_HOME)/include -I$(O
 
 default: all
 
+# *int / *intf need to be built with -O0
+src/%int.c.o: src/%int.c
+	$(CC) $(CPPFLAGS) -O0 $(CFLAGS_add) -c $< -o $@
+
+src/%intf.c.o: src/%intf.c
+	$(CC) $(CPPFLAGS) -O0 $(CFLAGS_add) -c $< -o $@
+
 %.c.o: %.c
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(CFLAGS_add) -c $< -o $@
 
@@ -78,14 +85,7 @@ override ARCH := amd64
 endif
 
 # The optimization flag may be overriden with the environment variable CFLAGS.
-ifeq ($(ARCH),powerpc)
-# tests hang at higher optimization levels
-CFLAGS ?= -O0
-else if ($(ARCH),arm)
-CFLAGS ?= -O0
-else
 CFLAGS ?= -O2
-endif
 
 ifneq (,$(findstring MINGW,$(OS)))
 override OS=WINNT
