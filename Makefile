@@ -68,5 +68,6 @@ install: all openlibm.pc
 	mkdir -p $(DESTDIR)$(includedir)/openlibm
 	cp -f -a libopenlibm.$(SHLIB_EXT)* $(DESTDIR)$(shlibdir)/
 	cp -f -a libopenlibm.a $(DESTDIR)$(libdir)/
-	cp -f -a include/*.h $(DESTDIR)$(includedir)/
+	cp -f -a include/*.h $(DESTDIR)$(includedir)/openlibm
+	cp -f -a src/*.h $(DESTDIR)$(includedir)/openlibm
 	cp -f -a openlibm.pc $(DESTDIR)$(pkgconfigdir)/
