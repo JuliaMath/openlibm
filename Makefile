@@ -34,7 +34,7 @@ check test: test/test-double test/test-float
 	test/test-double
 	test/test-float
 
-libopenlibm.a: $(OBJS)  
+libopenlibm.a: $(OBJS)
 	$(AR) -rcs libopenlibm.a $(OBJS)
 
 libopenlibm.$(SHLIB_EXT): $(OBJS)
@@ -68,5 +68,5 @@ install: all openlibm.pc
 	mkdir -p $(DESTDIR)$(includedir)/openlibm
 	cp -f -a libopenlibm.$(SHLIB_EXT)* $(DESTDIR)$(shlibdir)/
 	cp -f -a libopenlibm.a $(DESTDIR)$(libdir)/
-	cp -f -a include/openlibm*.h $(DESTDIR)$(includedir)/
+	cp -f -a include/*.h $(DESTDIR)$(includedir)/
 	cp -f -a openlibm.pc $(DESTDIR)$(pkgconfigdir)/
