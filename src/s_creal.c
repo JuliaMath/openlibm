@@ -23,14 +23,12 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  *
- * $FreeBSD: src/lib/msun/src/s_creal.c,v 1.1 2004/05/30 09:21:56 stefanf Exp $
+ * $FreeBSD$
  */
 
-#include <openlibm_complex.h>
+#include <complex.h>
 
-#include "math_private.h"
-
-DLLEXPORT double
+double
 creal(double complex z)
 {
 	return z;

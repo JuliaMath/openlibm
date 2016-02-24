@@ -34,7 +34,7 @@
 #elif defined(__i386__) || defined(__x86_64__)
 #ifdef __LP64__
 #include "amd64_fpmath.h"
-#else 
+#else
 #include "i386_fpmath.h"
 #endif
 #elif defined(__powerpc__)
@@ -127,5 +127,17 @@ union IEEEd2bits {
 #endif
 	} bits;
 };
+
+#if defined(__aarch64__)
+#include "aarch64_fpmath.h"
+#elif defined(__arm__)
+#include "arm_fpmath.h"
+#elif defined(__i386__) || defined(__x86_64__)
+#ifdef __LP64__
+#include "amd64_fpmath.h"
+#else
+#include "i386_fpmath.h"
+#endif
+#endif
 
 #endif

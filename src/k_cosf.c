@@ -15,12 +15,11 @@
  */
 
 #ifndef INLINE_KERNEL_COSDF
-#include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/k_cosf.c,v 1.18 2009/06/03 08:16:34 ed Exp $");
+#include <sys/cdefs.h>
+__FBSDID("$FreeBSD$");
 #endif
 
-#include <openlibm_math.h>
-
+#include "math.h"
 #include "math_private.h"
 
 /* |cos(x) - c(x)| < 2**-34.1 (~[-5.37e-11, 5.295e-11]). */
@@ -31,11 +30,10 @@ C1  =  0x155553e1053a42.0p-57,	/*  0.0416666233237390631894 */
 C2  = -0x16c087e80f1e27.0p-62,	/* -0.00138867637746099294692 */
 C3  =  0x199342e0ee5069.0p-68;	/*  0.0000243904487962774090654 */
 
-#ifndef INLINE_KERNEL_COSDF
-extern
+#ifdef INLINE_KERNEL_COSDF
+static __inline
 #endif
-//__inline float
-DLLEXPORT float
+float
 __kernel_cosdf(double x)
 {
 	double r, w, z;

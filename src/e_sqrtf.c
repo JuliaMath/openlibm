@@ -13,13 +13,16 @@
  * ====================================================
  */
 
-#include <openlibm_math.h>
+#ifndef lint
+static char rcsid[] = "$FreeBSD$";
+#endif
 
+#include "math.h"
 #include "math_private.h"
 
 static	const float	one	= 1.0, tiny=1.0e-30;
 
-DLLEXPORT float
+float
 __ieee754_sqrtf(float x)
 {
 	float z;

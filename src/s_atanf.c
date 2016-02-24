@@ -13,11 +13,10 @@
  * ====================================================
  */
 
-#include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_atanf.c,v 1.10 2008/08/01 01:24:25 das Exp $");
+#include <sys/cdefs.h>
+__FBSDID("$FreeBSD$");
 
-#include <openlibm_math.h>
-
+#include "math.h"
 #include "math_private.h"
 
 static const float atanhi[] = {
@@ -46,7 +45,7 @@ static const float
 one   = 1.0,
 huge   = 1.0e30;
 
-DLLEXPORT float
+float
 atanf(float x)
 {
 	float w,s1,s2,z;

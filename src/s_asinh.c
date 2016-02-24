@@ -10,8 +10,8 @@
  * ====================================================
  */
 
-#include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_asinh.c,v 1.9 2008/02/22 02:30:35 das Exp $");
+#include <sys/cdefs.h>
+__FBSDID("$FreeBSD$");
 
 /* asinh(x)
  * Method :
@@ -24,8 +24,9 @@
  *		 := sign(x)*log1p(|x| + x^2/(1 + sqrt(1+x^2)))
  */
 
-#include <openlibm_math.h>
+#include <float.h>
 
+#include "math.h"
 #include "math_private.h"
 
 static const double
@@ -33,7 +34,7 @@ one =  1.00000000000000000000e+00, /* 0x3FF00000, 0x00000000 */
 ln2 =  6.93147180559945286227e-01, /* 0x3FE62E42, 0xFEFA39EF */
 huge=  1.00000000000000000000e+300;
 
-DLLEXPORT double
+double
 asinh(double x)
 {
 	double t,w;
@@ -55,3 +56,7 @@ asinh(double x)
 	}
 	if(hx>0) return w; else return -w;
 }
+
+#if LDBL_MANT_DIG == 53
+__weak_reference(asinh, asinhl);
+#endif

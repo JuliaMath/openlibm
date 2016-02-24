@@ -12,8 +12,8 @@
  * ====================================================
  */
 
-#include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/e_acosl.c,v 1.2 2008/08/02 03:56:22 das Exp $");
+#include <sys/cdefs.h>
+__FBSDID("$FreeBSD$");
 
 /*
  * See comments in e_acos.c.
@@ -21,9 +21,9 @@
  */
 
 #include <float.h>
-#include <openlibm_math.h>
 
 #include "invtrig.h"
+#include "math.h"
 #include "math_private.h"
 
 static const long double
@@ -40,7 +40,7 @@ static const long double
 pi =  3.14159265358979323846264338327950280e+00L;
 #endif
 
-DLLEXPORT long double
+long double
 acosl(long double x)
 {
 	union IEEEl2bits u;

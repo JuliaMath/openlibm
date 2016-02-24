@@ -23,15 +23,14 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  *
- * $FreeBSD: src/lib/msun/src/s_isfinite.c,v 1.1 2004/07/09 03:32:39 das Exp $
+ * $FreeBSD$
  */
 
-#include <openlibm_math.h>
+#include <math.h>
 
 #include "fpmath.h"
-#include "math_private.h"
 
-DLLEXPORT int
+int
 __isfinite(double d)
 {
 	union IEEEd2bits u;
@@ -40,7 +39,7 @@ __isfinite(double d)
 	return (u.bits.exp != 2047);
 }
 
-DLLEXPORT int
+int
 __isfinitef(float f)
 {
 	union IEEEf2bits u;
@@ -49,8 +48,7 @@ __isfinitef(float f)
 	return (u.bits.exp != 255);
 }
 
-#ifdef LONG_DOUBLE
-DLLEXPORT int
+int
 __isfinitel(long double e)
 {
 	union IEEEl2bits u;
@@ -58,4 +56,3 @@ __isfinitel(long double e)
 	u.e = e;
 	return (u.bits.exp != 32767);
 }
-#endif

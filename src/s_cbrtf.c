@@ -14,11 +14,10 @@
  * ====================================================
  */
 
-#include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_cbrtf.c,v 1.18 2008/02/22 02:30:35 das Exp $");
+#include <sys/cdefs.h>
+__FBSDID("$FreeBSD$");
 
-#include <openlibm_math.h>
-
+#include "math.h"
 #include "math_private.h"
 
 /* cbrtf(x)
@@ -28,7 +27,7 @@ static const unsigned
 	B1 = 709958130, /* B1 = (127-127.0/3-0.03306235651)*2**23 */
 	B2 = 642849266; /* B2 = (127-127.0/3-24/3-0.03306235651)*2**23 */
 
-DLLEXPORT float
+float
 cbrtf(float x)
 {
 	double r,T;

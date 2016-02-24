@@ -30,7 +30,7 @@ $(CUR_SRCS) = common.c \
 	s_signgam.c s_sin.c s_sincos.c \
 	s_sinf.c s_sincosf.c s_tan.c s_tanf.c s_tanh.c s_tanhf.c s_tgammaf.c \
 	s_trunc.c s_truncf.c s_cpow.c  s_cpowf.c \
-	w_cabs.c w_cabsf.c
+	w_cabs.c w_cabsf.c digittoint.c
 
 ifneq ($(OS), WINNT)
 $(CUR_SRCS) += s_nan.c
@@ -39,7 +39,7 @@ endif
 ifneq ($(ARCH), arm)
 ifneq ($(ARCH), powerpc)
 # C99 long double functions
-$(CUR_SRCS) +=	s_copysignl.c s_fabsl.c s_llrintl.c s_lrintl.c s_modfl.c
+$(CUR_SRCS) +=	s_copysignl.c s_fabsl.c s_llrintl.c s_lrintl.c s_modfl.c s_roundl.c
 
 # If long double != double use these; otherwise, we alias the double versions.
 $(CUR_SRCS) +=	e_acosl.c e_asinl.c e_atan2l.c e_fmodl.c \

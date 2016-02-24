@@ -11,8 +11,8 @@
  * From: @(#)s_floor.c 5.1 93/09/24
  */
 
-#include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_truncl.c,v 1.9 2008/02/14 15:10:34 bde Exp $");
+#include <sys/cdefs.h>
+__FBSDID("$FreeBSD$");
 
 /*
  * truncl(x)
@@ -24,11 +24,10 @@
  */
 
 #include <float.h>
-#include <openlibm_math.h>
+#include <math.h>
 #include <stdint.h>
 
 #include "fpmath.h"
-#include "math_private.h"
 
 #ifdef LDBL_IMPLICIT_NBIT
 #define	MANH_SIZE	(LDBL_MANH_SIZE + 1)
@@ -39,7 +38,7 @@
 static const long double huge = 1.0e300;
 static const float zero[] = { 0.0, -0.0 };
 
-DLLEXPORT long double
+long double
 truncl(long double x)
 {
 	union IEEEl2bits u = { .e = x };

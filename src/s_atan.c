@@ -10,8 +10,8 @@
  * ====================================================
  */
 
-#include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_atan.c,v 1.13 2011/02/10 07:37:50 das Exp $");
+#include <sys/cdefs.h>
+__FBSDID("$FreeBSD$");
 
 /* atan(x)
  * Method
@@ -34,8 +34,8 @@
  */
 
 #include <float.h>
-#include <openlibm_math.h>
 
+#include "math.h"
 #include "math_private.h"
 
 static const double atanhi[] = {
@@ -70,7 +70,7 @@ static const double aT[] = {
 one   = 1.0,
 huge   = 1.0e300;
 
-DLLEXPORT double
+double
 atan(double x)
 {
 	double w,s1,s2,z;
