@@ -13,18 +13,17 @@
  * ====================================================
  */
 
-#include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/e_atanhf.c,v 1.7 2008/02/22 02:30:34 das Exp $");
+#include <sys/cdefs.h>
+__FBSDID("$FreeBSD$");
 
-#include <openlibm_math.h>
-
+#include "math.h"
 #include "math_private.h"
 
 static const float one = 1.0, huge = 1e30;
 
 static const float zero = 0.0;
 
-DLLEXPORT float
+float
 __ieee754_atanhf(float x)
 {
 	float t;

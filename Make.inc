@@ -91,13 +91,9 @@ endif
 ifeq ($(ARCH),i686)
 override ARCH := i387
 endif
-
 ifeq ($(ARCH),x86_64)
 override ARCH := amd64
 endif
-
-# The optimization flag may be overriden with the environment variable CFLAGS.
-CFLAGS ?= -O2
 
 ifneq (,$(findstring MINGW,$(OS)))
 override OS=WINNT

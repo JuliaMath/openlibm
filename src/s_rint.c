@@ -10,8 +10,8 @@
  * ====================================================
  */
 
-#include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_rint.c,v 1.16 2008/02/22 02:30:35 das Exp $");
+#include <sys/cdefs.h>
+__FBSDID("$FreeBSD$");
 
 /*
  * rint(x)
@@ -24,8 +24,8 @@
  */
 
 #include <float.h>
-#include <openlibm_math.h>
 
+#include "math.h"
 #include "math_private.h"
 
 static const double
@@ -34,7 +34,7 @@ TWO52[2]={
  -4.50359962737049600000e+15, /* 0xC3300000, 0x00000000 */
 };
 
-DLLEXPORT double
+double
 rint(double x)
 {
 	int32_t i0,j0,sx;

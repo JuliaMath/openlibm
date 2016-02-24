@@ -24,18 +24,14 @@
  * SUCH DAMAGE.
  */
 
-#include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_rintl.c,v 1.5 2008/02/22 11:59:05 bde Exp $");
+#include <sys/cdefs.h>
+__FBSDID("$FreeBSD$");
 
 #include <float.h>
 #include <openlibm_fenv.h>
 #include <openlibm_math.h>
 
 #include "fpmath.h"
-
-//VBS
-#include "math_private.h"
-
 
 #if LDBL_MAX_EXP != 0x4000
 /* We also require the usual bias, min exp and expsign packing. */
@@ -56,11 +52,11 @@ shift[2] = {
 };
 static const float zero[2] = { 0.0, -0.0 };
 
-DLLEXPORT long double
+long double
 rintl(long double x)
 {
 	union IEEEl2bits u;
-	u_int32_t expsign;
+	uint32_t expsign;
 	int ex, sign;
 
 	u.e = x;

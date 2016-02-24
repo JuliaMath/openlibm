@@ -24,13 +24,11 @@
  * SUCH DAMAGE.
  */
 
-#include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_nearbyint.c,v 1.2 2008/01/14 02:12:06 das Exp $");
+#include <sys/cdefs.h>
+__FBSDID("$FreeBSD$");
 
-#include <openlibm_fenv.h>
-#include <openlibm_math.h>
-
-#include "math_private.h"
+#include <fenv.h>
+#include <math.h>
 
 /*
  * We save and restore the floating-point environment to avoid raising
@@ -38,12 +36,16 @@
  * instead of feclearexcept()/feupdateenv() to restore the environment
  * because the only exception defined for rint() is overflow, and
  * rounding can't overflow as long as emax >= p.
+ *
+ * The volatile keyword is needed below because clang incorrectly assumes
+ * that rint won't raise any floating-point exceptions. Declaring ret volatile
+ * is sufficient to trick the compiler into doing the right thing.
  */
 #define	DECL(type, fn, rint)	\
-DLLEXPORT type				\
+type				\
 fn(type x)			\
 {				\
-	type ret;		\
+	volatile type ret;	\
 	fenv_t env;		\
 				\
 	fegetenv(&env);		\

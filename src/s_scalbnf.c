@@ -13,11 +13,13 @@
  * ====================================================
  */
 
+#ifndef lint
+static char rcsid[] = "$FreeBSD$";
+#endif
 
-#include "cdefs-compat.h"
+#include <sys/cdefs.h>
 
-#include <openlibm_math.h>
-
+#include "math.h"
 #include "math_private.h"
 
 static const float
@@ -26,7 +28,7 @@ twom25  =  2.9802322388e-08,	/* 0x33000000 */
 huge   = 1.0e+30,
 tiny   = 1.0e-30;
 
-DLLEXPORT float
+float
 scalbnf (float x, int n)
 {
 	int32_t k,ix;
@@ -44,12 +46,11 @@ scalbnf (float x, int n)
         if (k >  0xfe) return huge*copysignf(huge,x); /* overflow  */
         if (k > 0) 				/* normal result */
 	    {SET_FLOAT_WORD(x,(ix&0x807fffff)|(k<<23)); return x;}
-        if (k <= -25) {
+        if (k <= -25)
             if (n > 50000) 	/* in case integer overflow in n+k */
 		return huge*copysignf(huge,x);	/*overflow*/
 	    else return tiny*copysignf(tiny,x);	/*underflow*/
-        }
-	k += 25;				/* subnormal result */
+        k += 25;				/* subnormal result */
 	SET_FLOAT_WORD(x,(ix&0x807fffff)|(k<<23));
         return x*twom25;
 }

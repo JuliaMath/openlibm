@@ -10,8 +10,8 @@
  * ====================================================
  */
 
-#include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_tan.c,v 1.13 2011/02/10 07:37:50 das Exp $");
+#include <sys/cdefs.h>
+__FBSDID("$FreeBSD$");
 
 /* tan(x)
  * Return tangent function of x.
@@ -44,13 +44,13 @@
  */
 
 #include <float.h>
-#include <openlibm_math.h>
 
-//#define INLINE_REM_PIO2
+#include "math.h"
+#define INLINE_REM_PIO2
 #include "math_private.h"
-//#include "e_rem_pio2.c"
+#include "e_rem_pio2.c"
 
-DLLEXPORT double
+double
 tan(double x)
 {
 	double y[2],z=0.0;

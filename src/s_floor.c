@@ -10,8 +10,8 @@
  * ====================================================
  */
 
-#include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_floor.c,v 1.11 2008/02/15 07:01:40 bde Exp $");
+#include <sys/cdefs.h>
+__FBSDID("$FreeBSD$");
 
 /*
  * floor(x)
@@ -23,13 +23,13 @@
  */
 
 #include <float.h>
-#include <openlibm_math.h>
 
+#include "math.h"
 #include "math_private.h"
 
 static const double huge = 1.0e300;
 
-DLLEXPORT double
+double
 floor(double x)
 {
 	int32_t i0,i1,j0;

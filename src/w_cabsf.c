@@ -5,12 +5,16 @@
  * Placed into the Public Domain, 1994.
  */
 
-#include <openlibm_complex.h>
-#include <openlibm_math.h>
+#ifndef lint
+static const char rcsid[] =
+  "$FreeBSD$";
+#endif /* not lint */
 
+#include <complex.h>
+#include <math.h>
 #include "math_private.h"
 
-DLLEXPORT float
+float
 cabsf(z)
 	float complex z;
 {

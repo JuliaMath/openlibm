@@ -13,17 +13,16 @@
  * ====================================================
  */
 
-#include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/e_remainderf.c,v 1.8 2008/02/12 17:11:36 bde Exp $");
+#include <sys/cdefs.h>
+__FBSDID("$FreeBSD$");
 
-#include <openlibm_math.h>
-
+#include "math.h"
 #include "math_private.h"
 
 static const float zero = 0.0;
 
 
-DLLEXPORT float
+float
 __ieee754_remainderf(float x, float p)
 {
 	int32_t hx,hp;

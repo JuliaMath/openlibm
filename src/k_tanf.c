@@ -14,12 +14,11 @@
  */
 
 #ifndef INLINE_KERNEL_TANDF
-#include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/k_tanf.c,v 1.23 2009/06/03 08:16:34 ed Exp $");
+#include <sys/cdefs.h>
+__FBSDID("$FreeBSD$");
 #endif
 
-#include <openlibm_math.h>
-
+#include "math.h"
 #include "math_private.h"
 
 /* |tan(x)/x - t(x)| < 2**-25.5 (~[-2e-08, 2e-08]). */
@@ -33,11 +32,10 @@ T[] =  {
   0x1362b9bf971bcd.0p-59,	/* 0.00946564784943673166728 */
 };
 
-#ifndef INLINE_KERNEL_TANDF
-extern
+#ifdef INLINE_KERNEL_TANDF
+static __inline
 #endif
-//__inline float
-DLLEXPORT float
+float
 __kernel_tandf(double x, int iy)
 {
 	double z,r,w,s,t,u;

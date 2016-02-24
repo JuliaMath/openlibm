@@ -11,8 +11,8 @@
  * ====================================================
  */
 
-#include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/e_cosh.c,v 1.10 2011/10/21 06:28:47 das Exp $");
+#include <sys/cdefs.h>
+__FBSDID("$FreeBSD$");
 
 /* __ieee754_cosh(x)
  * Method : 
@@ -35,13 +35,14 @@
  *	only cosh(0)=1 is exact for finite x.
  */
 
-#include <openlibm_math.h>
+#include <float.h>
 
+#include "math.h"
 #include "math_private.h"
 
 static const double one = 1.0, half=0.5, huge = 1.0e300;
 
-DLLEXPORT double
+double
 __ieee754_cosh(double x)
 {
 	double t,w;
@@ -78,3 +79,7 @@ __ieee754_cosh(double x)
     /* |x| > overflowthresold, cosh(x) overflow */
 	return huge*huge;
 }
+
+#if (LDBL_MANT_DIG == 53)
+__weak_reference(cosh, coshl);
+#endif

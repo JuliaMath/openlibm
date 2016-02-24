@@ -9,19 +9,18 @@
  * ====================================================
  */
 
-#include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_nexttowardf.c,v 1.3 2011/02/10 07:38:38 das Exp $");
+#include <sys/cdefs.h>
+__FBSDID("$FreeBSD$");
 
 #include <float.h>
-#include <openlibm_math.h>
 
 #include "fpmath.h"
+#include "math.h"
 #include "math_private.h"
 
 #define	LDBL_INFNAN_EXP	(LDBL_MAX_EXP * 2 - 1)
 
-#ifdef LONG_DOUBLE
-DLLEXPORT float
+float
 nexttowardf(float x, long double y)
 {
 	union IEEEl2bits uy;
@@ -42,7 +41,7 @@ nexttowardf(float x, long double y)
 	    t = x*x;
 	    if(t==x) return t; else return x;	/* raise underflow flag */
 	}
-	if((hx>=0) ^ (x < y))			/* x -= ulp */
+	if(hx>=0 ^ x < y)			/* x -= ulp */
 	    hx -= 1;
 	else					/* x += ulp */
 	    hx += 1;
@@ -58,4 +57,3 @@ nexttowardf(float x, long double y)
 	SET_FLOAT_WORD(x,hx);
 	return x;
 }
-#endif

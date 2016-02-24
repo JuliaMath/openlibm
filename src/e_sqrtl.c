@@ -24,15 +24,14 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/e_sqrtl.c,v 1.1 2008/03/02 01:47:58 das Exp $");
+#include <sys/cdefs.h>
+__FBSDID("$FreeBSD$");
 
+#include <fenv.h>
 #include <float.h>
-#include <openlibm_fenv.h>
-#include <openlibm_math.h>
 
 #include "fpmath.h"
-#include "math_private.h"
+#include "math.h"
 
 /* Return (x + ulp) for normal positive x. Assumes no overflow. */
 static inline long double
@@ -66,16 +65,14 @@ dec(long double x)
 	return (u.e);
 }
 
-#ifndef __GNUC__
 #pragma STDC FENV_ACCESS ON
-#endif
 
 /*
  * This is slow, but simple and portable. You should use hardware sqrt
  * if possible.
  */
 
-DLLEXPORT long double
+long double
 sqrtl(long double x)
 {
 	union IEEEl2bits u;

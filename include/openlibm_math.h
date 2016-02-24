@@ -11,27 +11,15 @@
 
 /*
  * from: @(#)fdlibm.h 5.1 93/09/24
- * $FreeBSD: src/lib/msun/src/openlibm.h,v 1.82 2011/11/12 19:55:48 theraven Exp $
+ * $FreeBSD$
  */
 
-#ifdef OPENLIBM_USE_HOST_MATH_H
-#include <math.h>
-#else /* !OPENLIBM_USE_HOST_MATH_H */
+#ifndef _MATH_H_
+#define	_MATH_H_
 
-#ifndef OPENLIBM_MATH_H
-#define	OPENLIBM_MATH_H
-
-#if (defined(_WIN32) || defined (_MSC_VER)) && !defined(__WIN32__)
-    #define __WIN32__
-#endif
-
-#ifndef __arm__
-#define LONG_DOUBLE
-#endif
-
-#ifndef __pure2
-#define __pure2
-#endif
+#include <sys/cdefs.h>
+#include <sys/_types.h>
+#include <machine/_limits.h>
 
 /*
  * ANSI/POSIX
@@ -47,6 +35,7 @@ extern const union __nan_un {
 } __nan;
 
 /* VBS
+
 #if __GNUC_PREREQ__(3, 3) || (defined(__INTEL_COMPILER) && __INTEL_COMPILER >= 800)
 #define	__MATH_BUILTIN_CONSTANTS
 #endif
@@ -54,15 +43,8 @@ extern const union __nan_un {
 #if __GNUC_PREREQ__(3, 0) && !defined(__INTEL_COMPILER)
 #define	__MATH_BUILTIN_RELOPS
 #endif
-*/
 
-//VBS begin
-#define __MATH_BUILTIN_CONSTANTS
-#define	__MATH_BUILTIN_RELOPS
-#ifndef __ISO_C_VISIBLE
-#define __ISO_C_VISIBLE 1999
-#endif
-//VBS end
+*/
 
 #ifdef __MATH_BUILTIN_CONSTANTS
 #define	HUGE_VAL	__builtin_huge_val()
@@ -71,8 +53,8 @@ extern const union __nan_un {
 #endif
 
 #if __ISO_C_VISIBLE >= 1999
-#define	FP_ILOGB0	(-INT_MAX)
-#define	FP_ILOGBNAN	INT_MAX
+#define	FP_ILOGB0	(-__INT_MAX)
+#define	FP_ILOGBNAN	__INT_MAX
 
 #ifdef __MATH_BUILTIN_CONSTANTS
 #define	HUGE_VALF	__builtin_huge_valf()
@@ -91,10 +73,6 @@ extern const union __nan_un {
 #define	math_errhandling	MATH_ERREXCEPT
 
 #define	FP_FAST_FMAF	1
-#ifdef __ia64__
-#define	FP_FAST_FMA	1
-#define	FP_FAST_FMAL	1
-#endif
 
 /* Symbolic constants to classify floating point numbers. */
 #define	FP_INFINITE	0x01
@@ -102,27 +80,43 @@ extern const union __nan_un {
 #define	FP_NORMAL	0x04
 #define	FP_SUBNORMAL	0x08
 #define	FP_ZERO		0x10
-#define	fpclassify(x) \
-    ((sizeof (x) == sizeof (float)) ? __fpclassifyf(x) \
-    : (sizeof (x) == sizeof (double)) ? __fpclassifyd(x) \
-    : __fpclassifyl(x))
 
-#define	isfinite(x)					\
-    ((sizeof (x) == sizeof (float)) ? __isfinitef(x)	\
-    : (sizeof (x) == sizeof (double)) ? __isfinite(x)	\
-    : __isfinitel(x))
-#define	isinf(x)					\
-    ((sizeof (x) == sizeof (float)) ? __isinff(x)	\
-    : (sizeof (x) == sizeof (double)) ? isinf(x)	\
-    : __isinfl(x))
-#define	isnan(x)					\
-    ((sizeof (x) == sizeof (float)) ? __isnanf(x)	\
-    : (sizeof (x) == sizeof (double)) ? isnan(x)	\
-    : __isnanl(x))
-#define	isnormal(x)					\
-    ((sizeof (x) == sizeof (float)) ? __isnormalf(x)	\
-    : (sizeof (x) == sizeof (double)) ? __isnormal(x)	\
-    : __isnormall(x))
+#if (__STDC_VERSION__ >= 201112L && defined(__clang__)) || \
+    __has_extension(c_generic_selections)
+#define	__fp_type_select(x, f, d, ld) _Generic((x),			\
+    float: f(x),							\
+    double: d(x),							\
+    long double: ld(x),							\
+    volatile float: f(x),						\
+    volatile double: d(x),						\
+    volatile long double: ld(x),					\
+    volatile const float: f(x),						\
+    volatile const double: d(x),					\
+    volatile const long double: ld(x),					\
+    const float: f(x),							\
+    const double: d(x),							\
+    const long double: ld(x))
+#elif __GNUC_PREREQ__(3, 1) && !defined(__cplusplus)
+#define	__fp_type_select(x, f, d, ld) __builtin_choose_expr(		\
+    __builtin_types_compatible_p(__typeof(x), long double), ld(x),	\
+    __builtin_choose_expr(						\
+    __builtin_types_compatible_p(__typeof(x), double), d(x),		\
+    __builtin_choose_expr(						\
+    __builtin_types_compatible_p(__typeof(x), float), f(x), (void)0)))
+#else
+#define	 __fp_type_select(x, f, d, ld)					\
+    ((sizeof(x) == sizeof(float)) ? f(x)				\
+    : (sizeof(x) == sizeof(double)) ? d(x)				\
+    : ld(x))
+#endif
+
+#define	fpclassify(x) \
+	__fp_type_select(x, __fpclassifyf, __fpclassifyd, __fpclassifyl)
+#define	isfinite(x) __fp_type_select(x, __isfinitef, __isfinite, __isfinitel)
+#define	isinf(x) __fp_type_select(x, __isinff, __isinf, __isinfl)
+#define	isnan(x) \
+	__fp_type_select(x, __inline_isnanf, __inline_isnan, __inline_isnanl)
+#define	isnormal(x) __fp_type_select(x, __isnormalf, __isnormal, __isnormall)
 
 #ifdef __MATH_BUILTIN_RELOPS
 #define	isgreater(x, y)		__builtin_isgreater((x), (y))
@@ -141,14 +135,10 @@ extern const union __nan_un {
 #define	isunordered(x, y)	(isnan(x) || isnan(y))
 #endif /* __MATH_BUILTIN_RELOPS */
 
-#define	signbit(x)					\
-    ((sizeof (x) == sizeof (float)) ? __signbitf(x)	\
-    : (sizeof (x) == sizeof (double)) ? __signbit(x)	\
-    : __signbitl(x))
+#define	signbit(x) __fp_type_select(x, __signbitf, __signbit, __signbitl)
 
-//VBS
-//typedef	__double_t	double_t;
-//typedef	__float_t	float_t;
+typedef	__double_t	double_t;
+typedef	__float_t	float_t;
 #endif /* __ISO_C_VISIBLE >= 1999 */
 
 /*
@@ -170,15 +160,12 @@ extern const union __nan_un {
 #define	M_SQRT1_2	0.70710678118654752440	/* 1/sqrt(2) */
 
 #define	MAXFLOAT	((float)3.40282346638528860e+38)
-
-#ifndef OPENLIBM_ONLY_THREAD_SAFE
 extern int signgam;
-#endif
 #endif /* __BSD_VISIBLE || __XSI_VISIBLE */
 
 #if __BSD_VISIBLE
 #if 0
-/* Old value from 4.4BSD-Lite openlibm.h; this is probably better. */
+/* Old value from 4.4BSD-Lite math.h; this is probably better. */
 #define	HUGE		HUGE_VAL
 #else
 #define	HUGE		MAXFLOAT
@@ -190,13 +177,7 @@ extern int signgam;
  * effect of raising floating-point exceptions, so they are not declared
  * as __pure2.  In C99, FENV_ACCESS affects the purity of these functions.
  */
-
-#if defined(__cplusplus)
-extern "C" {
-#endif
-/* Symbol present when OpenLibm is used. */
-int isopenlibm(void);
-
+__BEGIN_DECLS
 /*
  * ANSI/POSIX
  */
@@ -207,15 +188,50 @@ int	__isfinitef(float) __pure2;
 int	__isfinite(double) __pure2;
 int	__isfinitel(long double) __pure2;
 int	__isinff(float) __pure2;
+int	__isinf(double) __pure2;
 int	__isinfl(long double) __pure2;
-int	__isnanf(float) __pure2;
-int	__isnanl(long double) __pure2;
 int	__isnormalf(float) __pure2;
 int	__isnormal(double) __pure2;
 int	__isnormall(long double) __pure2;
 int	__signbit(double) __pure2;
 int	__signbitf(float) __pure2;
 int	__signbitl(long double) __pure2;
+
+static __inline int
+__inline_isnan(__const double __x)
+{
+
+	return (__x != __x);
+}
+
+static __inline int
+__inline_isnanf(__const float __x)
+{
+
+	return (__x != __x);
+}
+
+static __inline int
+__inline_isnanl(__const long double __x)
+{
+
+	return (__x != __x);
+}
+
+/*
+ * Version 2 of the Single UNIX Specification (UNIX98) defined isnan() and
+ * isinf() as functions taking double.  C99, and the subsequent POSIX revisions
+ * (SUSv3, POSIX.1-2001, define it as a macro that accepts any real floating
+ * point type.  If we are targeting SUSv2 and C99 or C11 (or C++11) then we
+ * expose the newer definition, assuming that the language spec takes
+ * precedence over the operating system interface spec.
+ */
+#if	__XSI_VISIBLE > 0 && __XSI_VISIBLE < 600 && __ISO_C_VISIBLE < 1999
+#undef isinf
+#undef isnan
+int	isinf(double);
+int	isnan(double);
+#endif
 
 double	acos(double);
 double	asin(double);
@@ -259,8 +275,6 @@ double	expm1(double);
 double	fma(double, double, double);
 double	hypot(double, double);
 int	ilogb(double) __pure2;
-int	(isinf)(double) __pure2;
-int	(isnan)(double) __pure2;
 double	lgamma(double);
 long long llrint(double);
 long long llround(double);
@@ -283,6 +297,14 @@ double	jn(int, double);
 double	y0(double);
 double	y1(double);
 double	yn(int, double);
+
+#if __XSI_VISIBLE <= 500 || __BSD_VISIBLE
+double	gamma(double);
+#endif
+
+#if __XSI_VISIBLE <= 600 || __BSD_VISIBLE
+double	scalb(double, double);
+#endif
 #endif /* __BSD_VISIBLE || __XSI_VISIBLE */
 
 #if __BSD_VISIBLE || __ISO_C_VISIBLE >= 1999
@@ -302,18 +324,21 @@ double	trunc(double);
  * BSD math library entry points
  */
 #if __BSD_VISIBLE
+double	drem(double, double);
+int	finite(double) __pure2;
 int	isnanf(float) __pure2;
 
 /*
- * Reentrant version of lgamma; passes signgam back by reference as the
- * second argument; user must allocate space for signgam.
+ * Reentrant version of gamma & lgamma; passes signgam back by reference
+ * as the second argument; user must allocate space for signgam.
  */
+double	gamma_r(double, int *);
 double	lgamma_r(double, int *);
 
 /*
- * Single sine/cosine function.
+ * IEEE Test Vector
  */
-void	sincos(double, double *, double *);
+double	significand(double);
 #endif /* __BSD_VISIBLE */
 
 /* float versions of ANSI/POSIX functions */
@@ -388,23 +413,28 @@ float	fminf(float, float) __pure2;
  */
 #if __BSD_VISIBLE
 float	dremf(float, float);
+int	finitef(float) __pure2;
+float	gammaf(float);
 float	j0f(float);
 float	j1f(float);
 float	jnf(int, float);
+float	scalbf(float, float);
 float	y0f(float);
 float	y1f(float);
 float	ynf(int, float);
 
 /*
- * Float versions of reentrant version of lgamma; passes signgam back by
- * reference as the second argument; user must allocate space for signgam.
+ * Float versions of reentrant version of gamma & lgamma; passes
+ * signgam back by reference as the second argument; user must
+ * allocate space for signgam.
  */
+float	gammaf_r(float, int *);
 float	lgammaf_r(float, int *);
 
 /*
- * Single sine/cosine function.
+ * float version of IEEE Test Vector
  */
-void	sincosf(float, float *, float *);
+float	significandf(float);
 #endif	/* __BSD_VISIBLE */
 
 /*
@@ -472,19 +502,10 @@ long double	tgammal(long double);
 long double	truncl(long double);
 #endif /* __ISO_C_VISIBLE >= 1999 */
 
-/* Reentrant version of lgammal. */
 #if __BSD_VISIBLE
 long double	lgammal_r(long double, int *);
-
-/*
- * Single sine/cosine function.
- */
-void	sincosl(long double, long double *, long double *);
-#endif	/* __BSD_VISIBLE */
-
-#if defined(__cplusplus)
-}
 #endif
-#endif /* !OPENLIBM_MATH_H */
 
-#endif /* OPENLIBM_USE_HOST_MATH_H */
+__END_DECLS
+
+#endif /* !_MATH_H_ */

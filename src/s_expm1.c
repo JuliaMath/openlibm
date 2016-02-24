@@ -10,8 +10,8 @@
  * ====================================================
  */
 
-#include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_expm1.c,v 1.12 2011/10/21 06:26:38 das Exp $");
+#include <sys/cdefs.h>
+__FBSDID("$FreeBSD$");
 
 /* expm1(x)
  * Returns exp(x)-1, the exponential of x minus 1.
@@ -109,13 +109,12 @@
  */
 
 #include <float.h>
-#include <openlibm_math.h>
 
+#include "math.h"
 #include "math_private.h"
 
 static const double
 one		= 1.0,
-huge		= 1.0e+300,
 tiny		= 1.0e-300,
 o_threshold	= 7.09782712893383973096e+02,/* 0x40862E42, 0xFEFA39EF */
 ln2_hi		= 6.93147180369123816490e-01,/* 0x3fe62e42, 0xfee00000 */
@@ -128,7 +127,9 @@ Q3  =  -7.93650757867487942473e-05, /* BF14CE19 9EAADBB7 */
 Q4  =   4.00821782732936239552e-06, /* 3ED0CFCA 86E65239 */
 Q5  =  -2.01099218183624371326e-07; /* BE8AFDB7 6E09C32D */
 
-DLLEXPORT double
+static volatile double huge = 1.0e+300;
+
+double
 expm1(double x)
 {
 	double y,hi,lo,c,t,e,hxs,hfx,r1,twopk;
@@ -215,3 +216,7 @@ expm1(double x)
 	}
 	return y;
 }
+
+#if (LDBL_MANT_DIG == 53)
+__weak_reference(expm1, expm1l);
+#endif

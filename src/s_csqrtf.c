@@ -24,11 +24,11 @@
  * SUCH DAMAGE.
  */
 
-#include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_csqrtf.c,v 1.3 2008/08/08 00:15:16 das Exp $");
+#include <sys/cdefs.h>
+__FBSDID("$FreeBSD$");
 
-#include <openlibm_complex.h>
-#include <openlibm_math.h>
+#include <complex.h>
+#include <math.h>
 
 #include "math_private.h"
 
@@ -39,11 +39,9 @@
  * gcc generates is acceptable, since the special cases have already been
  * handled.
  */
-#ifndef __GNUC__
 #pragma	STDC CX_LIMITED_RANGE	ON
-#endif
 
-DLLEXPORT float complex
+float complex
 csqrtf(float complex z)
 {
 	float a = crealf(z), b = cimagf(z);

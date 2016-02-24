@@ -10,8 +10,8 @@
  * ====================================================
  */
 
-#include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_nexttoward.c,v 1.3 2011/02/10 07:38:13 das Exp $");
+#include <sys/cdefs.h>
+__FBSDID("$FreeBSD$");
 
 /*
  * We assume that a long double has a 15-bit exponent.  On systems
@@ -20,16 +20,16 @@
  */
 
 #include <float.h>
-#include <openlibm_math.h>
 
 #include "fpmath.h"
+#include "math.h"
 #include "math_private.h"
 
 #if LDBL_MAX_EXP != 0x4000
 #error "Unsupported long double format"
 #endif
 
-DLLEXPORT double
+double
 nexttoward(double x, long double y)
 {
 	union IEEEl2bits uy;
@@ -51,7 +51,7 @@ nexttoward(double x, long double y)
 	    t = x*x;
 	    if(t==x) return t; else return x;	/* raise underflow flag */
 	}
-	if((hx>0.0) ^ (x < y)) {			/* x -= ulp */
+	if(hx>0.0 ^ x < y) {			/* x -= ulp */
 	    if(lx==0) hx -= 1;
 	    lx -= 1;
 	} else {				/* x += ulp */

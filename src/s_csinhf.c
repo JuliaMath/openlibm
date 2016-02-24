@@ -25,20 +25,20 @@
  */
 
 /*
- * Hyperbolic sine of a complex argument z.  See s_csinh.c for details.
+ * Float version of csinh().  See s_csinh.c for details.
  */
 
-#include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_csinhf.c,v 1.2 2011/10/21 06:29:32 das Exp $");
+#include <sys/cdefs.h>
+__FBSDID("$FreeBSD$");
 
-#include <openlibm_complex.h>
-#include <openlibm_math.h>
+#include <complex.h>
+#include <math.h>
 
 #include "math_private.h"
 
 static const float huge = 0x1p127;
 
-DLLEXPORT float complex
+float complex
 csinhf(float complex z)
 {
 	float x, y, h;
@@ -56,13 +56,13 @@ csinhf(float complex z)
 	if (ix < 0x7f800000 && iy < 0x7f800000) {
 		if (iy == 0)
 			return (CMPLXF(sinhf(x), y));
-		if (ix < 0x41100000)	/* small x: normal case */
+		if (ix < 0x41100000)	/* |x| < 9: normal case */
 			return (CMPLXF(sinhf(x) * cosf(y), coshf(x) * sinf(y)));
 
 		/* |x| >= 9, so cosh(x) ~= exp(|x|) */
 		if (ix < 0x42b17218) {
 			/* x < 88.7: expf(|x|) won't overflow */
-			h = expf(fabsf(x)) * 0.5f;
+			h = expf(fabsf(x)) * 0.5F;
 			return (CMPLXF(copysignf(h, x) * cosf(y), h * sinf(y)));
 		} else if (ix < 0x4340b1e7) {
 			/* x < 192.7: scale to avoid overflow */
@@ -75,31 +75,28 @@ csinhf(float complex z)
 		}
 	}
 
-	if (ix == 0 && iy >= 0x7f800000)
-		return (CMPLXF(copysignf(0, x * (y - y)), y - y));
+	if (ix == 0)			/* && iy >= 0x7f800000 */
+		return (CMPLXF(x, y - y));
 
-	if (iy == 0 && ix >= 0x7f800000) {
-		if ((hx & 0x7fffff) == 0)
-			return (CMPLXF(x, y));
-		return (CMPLXF(x, copysignf(0, y)));
-	}
+	if (iy == 0)			/* && ix >= 0x7f800000 */
+		return (CMPLXF(x + x, y));
 
-	if (ix < 0x7f800000 && iy >= 0x7f800000)
-		return (CMPLXF(y - y, x * (y - y)));
+	if (ix < 0x7f800000)		/* && iy >= 0x7f800000 */
+		return (CMPLXF(y - y, y - y));
 
-	if (ix >= 0x7f800000 && (hx & 0x7fffff) == 0) {
+	if (ix == 0x7f800000) {
 		if (iy >= 0x7f800000)
-			return (CMPLXF(x * x, x * (y - y)));
+			return (CMPLXF(x, y - y));
 		return (CMPLXF(x * cosf(y), INFINITY * sinf(y)));
 	}
 
-	return (CMPLXF((x * x) * (y - y), (x + x) * (y - y)));
+	return (CMPLXF((x + x) * (y - y), (x * x) * (y - y)));
 }
 
-DLLEXPORT float complex
+float complex
 csinf(float complex z)
 {
 
-	z = csinhf(CMPLXF(-cimagf(z), crealf(z)));
-	return (CMPLXF(cimagf(z), -crealf(z)));
+	z = csinhf(CMPLXF(cimagf(z), crealf(z)));
+	return (CMPLXF(cimagf(z), crealf(z)));
 }
