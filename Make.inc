@@ -76,6 +76,9 @@ endif
 ifeq ($(findstring powerpc,$(ARCH)),powerpc)
 override ARCH := powerpc
 endif
+ifeq ($(findstring ppc,$(ARCH)),ppc)
+override ARCH := powerpc
+endif
 ifeq ($(ARCH),i386)
 override ARCH := i387
 endif
