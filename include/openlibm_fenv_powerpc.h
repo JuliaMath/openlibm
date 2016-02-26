@@ -97,8 +97,13 @@ extern const fenv_t	__fe_dfl_env;
 union __fpscr {
 	double __d;
 	struct {
+#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+		fenv_t __reg;
+		__uint32_t __junk;
+#else
 		__uint32_t __junk;
 		fenv_t __reg;
+#endif
 	} __bits;
 };
 
