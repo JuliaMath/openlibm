@@ -41,7 +41,7 @@ endif
 
 ifeq ($(USEGCC),1)
 CC = gcc
-CFLAGS_add += -fno-gnu89-inline
+CFLAGS_add += -fno-gnu89-inline -fno-builtin
 endif
 
 ARCH ?= $(shell $(CC) -dumpmachine | sed "s/\([^-]*\).*$$/\1/")
