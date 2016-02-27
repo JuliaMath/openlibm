@@ -34,6 +34,7 @@
 #include <openlibm_math.h>
 
 #include "math_private.h"
+#include "math_private_openbsd.h"
 
 static const long double one = 1.0, half=0.5, huge = 1.0e4900L;
 

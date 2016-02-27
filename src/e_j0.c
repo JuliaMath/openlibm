@@ -11,10 +11,8 @@
  * ====================================================
  */
 
-#include <assert.h>
-
-#include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/e_j0.c,v 1.9 2008/02/22 02:30:35 das Exp $");
+#include <sys/cdefs.h>
+//__FBSDID("$FreeBSD$");
 
 /* __ieee754_j0(x), __ieee754_y0(x)
  * Bessel function of the first and second kinds of order zero.
@@ -62,10 +60,11 @@
  */
 
 #include <openlibm_math.h>
-
 #include "math_private.h"
 
-static double pzero(double), qzero(double);
+static __inline double pzero(double), qzero(double);
+
+static const volatile double vone = 1, vzero = 0;
 
 static const double
 huge 	= 1e300,
@@ -84,7 +83,7 @@ S04  =  1.16614003333790000205e-09; /* 0x3E1408BC, 0xF4745D8F */
 
 static const double zero = 0.0;
 
-DLLEXPORT double
+double
 __ieee754_j0(double x)
 {
 	double z, s,c,ss,cc,r,u,v;
@@ -118,7 +117,7 @@ __ieee754_j0(double x)
 	if(ix<0x3f200000) {	/* |x| < 2**-13 */
 	    if(huge+x>one) {	/* raise inexact if x != 0 */
 	        if(ix<0x3e400000) return one;	/* |x|<2**-27 */
-	        else 	      return one - 0.25*x*x;
+	        else 	      return one - x*x/4;
 	    }
 	}
 	z = x*x;
@@ -145,7 +144,7 @@ v02  =  7.60068627350353253702e-05, /* 0x3F13ECBB, 0xF578C6C1 */
 v03  =  2.59150851840457805467e-07, /* 0x3E91642D, 0x7FF202FD */
 v04  =  4.41110311332675467403e-10; /* 0x3DFE5018, 0x3BD6D9EF */
 
-DLLEXPORT double
+double
 __ieee754_y0(double x)
 {
 	double z, s,c,ss,cc,u,v;
@@ -153,10 +152,16 @@ __ieee754_y0(double x)
 
 	EXTRACT_WORDS(hx,lx,x);
         ix = 0x7fffffff&hx;
-    /* Y0(NaN) is NaN, y0(-inf) is Nan, y0(inf) is 0  */
-	if(ix>=0x7ff00000) return  one/(x+x*x); 
-        if((ix|lx)==0) return -one/zero;
-        if(hx<0) return zero/zero;
+	/*
+	 * y0(NaN) = NaN.
+	 * y0(Inf) = 0.
+	 * y0(-Inf) = NaN and raise invalid exception.
+	 */
+	if(ix>=0x7ff00000) return vone/(x+x*x); 
+	/* y0(+-0) = -inf and raise divide-by-zero exception. */
+	if((ix|lx)==0) return -one/vzero;
+	/* y0(x<0) = NaN and raise invalid exception. */
+	if(hx<0) return vzero/vzero;
         if(ix >= 0x40000000) {  /* |x| >= 2.0 */
         /* y0(x) = sqrt(2/(pi*x))*(p0(x)*sin(x0)+q0(x)*cos(x0))
          * where x0 = x-pi/4
@@ -271,19 +276,18 @@ static const double pS2[5] = {
   1.46576176948256193810e+01, /* 0x402D50B3, 0x44391809 */
 };
 
-	/* Note: This function is only called for ix>=0x40000000 (see above) */
-	static double pzero(double x)
+static __inline double
+pzero(double x)
 {
 	const double *p,*q;
 	double z,r,s;
 	int32_t ix;
 	GET_HIGH_WORD(ix,x);
 	ix &= 0x7fffffff;
-        assert(ix>=0x40000000 && ix<=0x48000000);
 	if(ix>=0x40200000)     {p = pR8; q= pS8;}
 	else if(ix>=0x40122E8B){p = pR5; q= pS5;}
 	else if(ix>=0x4006DB6D){p = pR3; q= pS3;}
-	else                   {p = pR2; q= pS2;}
+	else                   {p = pR2; q= pS2;}	/* ix>=0x40000000 */
 	z = one/(x*x);
 	r = p[0]+z*(p[1]+z*(p[2]+z*(p[3]+z*(p[4]+z*p[5]))));
 	s = one+z*(q[0]+z*(q[1]+z*(q[2]+z*(q[3]+z*q[4]))));
@@ -368,19 +372,18 @@ static const double qS2[6] = {
  -5.31095493882666946917e+00, /* 0xC0153E6A, 0xF8B32931 */
 };
 
-	/* Note: This function is only called for ix>=0x40000000 (see above) */
-	static double qzero(double x)
+static __inline double
+qzero(double x)
 {
 	const double *p,*q;
 	double s,r,z;
 	int32_t ix;
 	GET_HIGH_WORD(ix,x);
 	ix &= 0x7fffffff;
-        assert(ix>=0x40000000 && ix<=0x48000000);
 	if(ix>=0x40200000)     {p = qR8; q= qS8;}
 	else if(ix>=0x40122E8B){p = qR5; q= qS5;}
 	else if(ix>=0x4006DB6D){p = qR3; q= qS3;}
-	else                   {p = qR2; q= qS2;}
+	else                   {p = qR2; q= qS2;}	/* ix>=0x40000000 */
 	z = one/(x*x);
 	r = p[0]+z*(p[1]+z*(p[2]+z*(p[3]+z*(p[4]+z*p[5]))));
 	s = one+z*(q[0]+z*(q[1]+z*(q[2]+z*(q[3]+z*(q[4]+z*q[5])))));

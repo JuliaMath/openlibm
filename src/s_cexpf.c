@@ -24,23 +24,23 @@
  * SUCH DAMAGE.
  */
 
-#include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_cexpf.c,v 1.3 2011/10/21 06:27:56 das Exp $");
+#include <sys/cdefs.h>
+//__FBSDID("$FreeBSD$");
 
 #include <openlibm_complex.h>
 #include <openlibm_math.h>
 
 #include "math_private.h"
 
-static const u_int32_t
+static const uint32_t
 exp_ovfl  = 0x42b17218,		/* MAX_EXP * ln2 ~= 88.722839355 */
 cexp_ovfl = 0x43400074;		/* (MAX_EXP - MIN_DENORM_EXP) * ln2 */
 
-DLLEXPORT float complex
+float complex
 cexpf(float complex z)
 {
 	float x, y, exp_x;
-	u_int32_t hx, hy;
+	uint32_t hx, hy;
 
 	x = crealf(z);
 	y = cimagf(z);

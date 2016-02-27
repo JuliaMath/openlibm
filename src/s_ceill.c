@@ -11,8 +11,8 @@
  * From: @(#)s_ceil.c 5.1 93/09/24
  */
 
-#include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_ceill.c,v 1.9 2008/02/14 15:10:33 bde Exp $");
+#include <sys/cdefs.h>
+//__FBSDID("$FreeBSD$");
 
 /*
  * ceill(x)
@@ -28,12 +28,11 @@
 #include <stdint.h>
 
 #include "fpmath.h"
-#include "math_private.h"
 
 #ifdef LDBL_IMPLICIT_NBIT
 #define	MANH_SIZE	(LDBL_MANH_SIZE + 1)
 #define	INC_MANH(u, c)	do {					\
-	u_int64_t o = u.bits.manh;				\
+	uint64_t o = u.bits.manh;				\
 	u.bits.manh += (c);					\
 	if (u.bits.manh < o)					\
 		u.bits.exp++;					\
@@ -41,7 +40,7 @@
 #else
 #define	MANH_SIZE	LDBL_MANH_SIZE
 #define	INC_MANH(u, c)	do {					\
-	u_int64_t o = u.bits.manh;				\
+	uint64_t o = u.bits.manh;				\
 	u.bits.manh += (c);					\
 	if (u.bits.manh < o) {					\
 		u.bits.exp++;					\
@@ -52,7 +51,7 @@
 
 static const long double huge = 1.0e300;
 
-DLLEXPORT long double
+long double
 ceill(long double x)
 {
 	union IEEEl2bits u = { .e = x };
@@ -65,7 +64,7 @@ ceill(long double x)
 				    (u.bits.manh | u.bits.manl) != 0)
 					u.e = u.bits.sign ? -0.0 : 1.0;
 		} else {
-			u_int64_t m = ((1llu << MANH_SIZE) - 1) >> (e + 1);
+			uint64_t m = ((1llu << MANH_SIZE) - 1) >> (e + 1);
 			if (((u.bits.manh & m) | u.bits.manl) == 0)
 				return (x);	/* x is integral */
 			if (!u.bits.sign) {
@@ -82,14 +81,14 @@ ceill(long double x)
 			}
 		}
 	} else if (e < LDBL_MANT_DIG - 1) {
-		u_int64_t m = (u_int64_t)-1 >> (64 - LDBL_MANT_DIG + e + 1);
+		uint64_t m = (uint64_t)-1 >> (64 - LDBL_MANT_DIG + e + 1);
 		if ((u.bits.manl & m) == 0)
 			return (x);	/* x is integral */
 		if (!u.bits.sign) {
 			if (e == MANH_SIZE - 1)
 				INC_MANH(u, 1);
 			else {
-				u_int64_t o = u.bits.manl;
+				uint64_t o = u.bits.manl;
 				u.bits.manl += 1llu << (LDBL_MANT_DIG - e - 1);
 				if (u.bits.manl < o)	/* got a carry */
 					INC_MANH(u, 1);

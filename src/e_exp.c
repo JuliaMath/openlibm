@@ -10,8 +10,8 @@
  * ====================================================
  */
 
-#include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/e_exp.c,v 1.14 2011/10/21 06:26:38 das Exp $");
+#include <sys/cdefs.h>
+//__FBSDID("$FreeBSD$");
 
 /* __ieee754_exp(x)
  * Returns the exponential of x.
@@ -77,14 +77,13 @@
  */
 
 #include <float.h>
-#include <openlibm_math.h>
 
+#include <openlibm_math.h>
 #include "math_private.h"
 
 static const double
 one	= 1.0,
 halF[2]	= {0.5,-0.5,},
-huge	= 1.0e+300,
 o_threshold=  7.09782712893383973096e+02,  /* 0x40862E42, 0xFEFA39EF */
 u_threshold= -7.45133219101941108420e+02,  /* 0xc0874910, 0xD52D3051 */
 ln2HI[2]   ={ 6.93147180369123816490e-01,  /* 0x3fe62e42, 0xfee00000 */
@@ -99,9 +98,10 @@ P4   = -1.65339022054652515390e-06, /* 0xBEBBBD41, 0xC5D26BF1 */
 P5   =  4.13813679705723846039e-08; /* 0x3E663769, 0x72BEA4D0 */
 
 static volatile double
+huge	= 1.0e+300,
 twom1000= 9.33263618503218878990e-302;     /* 2**-1000=0x01700000,0*/
 
-DLLEXPORT double
+double
 __ieee754_exp(double x)	/* default IEEE double exp */
 {
 	double y,hi=0.0,lo=0.0,c,t,twopk;
@@ -124,13 +124,6 @@ __ieee754_exp(double x)	/* default IEEE double exp */
 	    if(x > o_threshold) return huge*huge; /* overflow */
 	    if(x < u_threshold) return twom1000*twom1000; /* underflow */
 	}
-
-        /* this implementation gives 2.7182818284590455 for exp(1.0),
-           which is well within the allowable error. however,
-           2.718281828459045 is closer to the true value so we prefer that
-           answer, given that 1.0 is such an important argument value. */
-        if (x == 1.0)
-            return 2.718281828459045235360;
 
     /* argument reduction */
 	if(hx > 0x3fd62e42) {		/* if  |x| > 0.5 ln2 */ 
@@ -165,3 +158,7 @@ __ieee754_exp(double x)	/* default IEEE double exp */
 	    return y*twopk*twom1000;
 	}
 }
+
+#if (LDBL_MANT_DIG == 53)
+__weak_reference(exp, expl);
+#endif

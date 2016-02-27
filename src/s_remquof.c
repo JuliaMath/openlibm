@@ -10,11 +10,10 @@
  * ====================================================
  */
 
-#include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_remquof.c,v 1.1 2005/03/25 04:40:44 das Exp $");
+#include <sys/cdefs.h>
+//__FBSDID("$FreeBSD$");
 
 #include <openlibm_math.h>
-
 #include "math_private.h"
 
 static const float Zero[] = {0.0, -0.0,};
@@ -27,7 +26,7 @@ static const float Zero[] = {0.0, -0.0,};
  * method.  In practice, this is far more bits than are needed to use
  * remquo in reduction algorithms.
  */
-DLLEXPORT float
+float
 remquof(float x, float y, int *quo)
 {
 	int32_t n,hx,hy,hz,ix,iy,sx,i;
@@ -47,7 +46,7 @@ remquof(float x, float y, int *quo)
 	    q = 0;
 	    goto fixup;	/* |x|<|y| return x or x-y */
 	} else if(hx==hy) {
-	    *quo = 1;
+	    *quo = (sxy ? -1 : 1);
 	    return Zero[(u_int32_t)sx>>31];	/* |x|=|y| return x*0*/
 	}
 
@@ -89,6 +88,7 @@ remquof(float x, float y, int *quo)
 
     /* convert back to floating value and restore the sign */
 	if(hx==0) {				/* return sign(x)*0 */
+	    q &= 0x7fffffff;
 	    *quo = (sxy ? -q : q);
 	    return Zero[(u_int32_t)sx>>31];
 	}

@@ -11,15 +11,14 @@
  * ====================================================
  */
 
-#include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/ld80/k_tanl.c,v 1.3 2008/02/18 15:39:52 bde Exp $");
+#include <openlibm_compat.h>
+__FBSDID("$FreeBSD$");
 
 /*
  * ld80 version of k_tan.c.  See ../src/k_tan.c for most comments.
  */
 
 #include <openlibm_math.h>
-
 #include "math_private.h"
 
 /*
@@ -70,7 +69,7 @@ T29 =  0.0000078293456938132840,	/*  0x106b59141a6cb3.0p-69 */
 T31 = -0.0000032609076735050182,	/* -0x1b5abef3ba4b59.0p-71 */
 T33 =  0.0000023261313142559411;	/*  0x13835436c0c87f.0p-71 */
 
-DLLEXPORT long double
+long double
 __kernel_tanl(long double x, long double y, int iy) {
 	long double z, r, v, w, s;
 	long double osign;

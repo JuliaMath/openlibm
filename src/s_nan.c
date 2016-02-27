@@ -23,7 +23,7 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  *
- * $FreeBSD: src/lib/msun/src/s_nan.c,v 1.2 2007/12/18 23:46:32 das Exp $
+ * $FreeBSD$
  */
 
 //VBS
@@ -32,22 +32,9 @@
 #include <float.h>
 #include <openlibm_math.h>
 #include <stdint.h>
-#include <string.h> //for memset
+#include <strings.h>
 
 #include "math_private.h"
-
-#if !defined(__APPLE__) && !defined(__FreeBSD__)
-static __inline int digittoint(int c) {
-	if ('0' <= c && c <= '9')
-		return (c - '0');
-	else if ('A' <= c && c <= 'F')
-		return (c - 'A' + 10);
-	else if ('a' <= c && c <= 'f')
-		return (c - 'a' + 10);
-	return 0;
-}
-#endif
-
 
 /*
  * Scan a string of hexadecimal digits (the format nan(3) expects) and
@@ -61,13 +48,13 @@ static __inline int digittoint(int c) {
  * consider valid, so we might be violating the C standard. But it's
  * impossible to use nan(3) portably anyway, so this seems good enough.
  */
-DLLEXPORT void
-_scan_nan(u_int32_t *words, int num_words, const char *s)
+void
+_scan_nan(uint32_t *words, int num_words, const char *s)
 {
 	int si;		/* index into s */
 	int bitpos;	/* index into words (in bits) */
 
-	memset(words, 0, num_words * sizeof(u_int32_t));
+	bzero(words, num_words * sizeof(uint32_t));
 
 	/* Allow a leading '0x'. (It's expected, but redundant.) */
 	if (s[0] == '0' && (s[1] == 'x' || s[1] == 'X'))
@@ -89,12 +76,12 @@ _scan_nan(u_int32_t *words, int num_words, const char *s)
 	}
 }
 
-DLLEXPORT double
+double
 nan(const char *s)
 {
 	union {
 		double d;
-		u_int32_t bits[2];
+		uint32_t bits[2];
 	} u;
 
 	_scan_nan(u.bits, 2, s);
@@ -106,12 +93,12 @@ nan(const char *s)
 	return (u.d);
 }
 
-DLLEXPORT float
+float
 nanf(const char *s)
 {
 	union {
 		float f;
-		u_int32_t bits[1];
+		uint32_t bits[1];
 	} u;
 
 	_scan_nan(u.bits, 1, s);

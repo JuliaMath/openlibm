@@ -30,15 +30,17 @@
  * SUCH DAMAGE.
  *
  *	from: @(#)DEFS.h	5.1 (Berkeley) 4/23/90
- * $FreeBSD: src/sys/amd64/include/asm.h,v 1.18 2007/08/22 04:26:07 jkoshy Exp $
+ * $FreeBSD$
  */
 
 #ifndef _MACHINE_ASM_H_
 #define	_MACHINE_ASM_H_
 
+
 #ifdef __APPLE__
-#include "../i387/osx_asm.h"
+#include <mach/machine/asm.h>
 #define CNAME(x) EXT(x)
+
 #else
 #include "bsd_cdefs.h"
 
@@ -47,7 +49,6 @@
 #define	PIC_GOT(x)	x@GOTPCREL(%rip)
 #else
 #define	PIC_PLT(x)	x
-#define	PIC_GOT(x)	x
 #endif
 
 /*
@@ -60,25 +61,10 @@
 #define CNAME(csym)		csym
 #define HIDENAME(asmsym)	.asmsym
 
-#define _START_ENTRY	.p2align 4,0x90
+#define _START_ENTRY	.text; .p2align 4,0x90
 
-#if defined(__ELF__)
-#define _ENTRY(x)	.text; _START_ENTRY; \
+#define _ENTRY(x)	_START_ENTRY; \
 			.globl CNAME(x); .type CNAME(x),@function; CNAME(x):
-#define	END(x)		.size x, . - x
-
-#elif defined(_WIN32)
-#ifndef _MSC_VER
-#define END(x) .end
-#define _START_ENTRY_WIN .text; _START_ENTRY
-#else
-#define END(x) end
-#define _START_ENTRY_WIN .code; _START_ENTRY
-#endif
-#define _ENTRY(x)	_START_ENTRY_WIN; \
-            .globl CNAME(x); .section .drectve; .ascii " -export:" #x; \
-            .section .text; .def CNAME(x); .scl 2; .type 32; .endef; CNAME(x):
-#endif
 
 #ifdef PROF
 #define	ALTENTRY(x)	_ENTRY(x); \
@@ -96,6 +82,19 @@
 #define	ENTRY(x)	_ENTRY(x)
 #endif
 
+#define	END(x)		.size x, . - x
+
+#endif /* __APPLE */
+
+/*
+ * WEAK_REFERENCE(): create a weak reference alias from sym.
+ * The macro is not a general asm macro that takes arbitrary names,
+ * but one that takes only C names. It does the non-null name
+ * translation inside the macro.
+ */
+#define	WEAK_REFERENCE(sym, alias)					\
+	.weak CNAME(alias);						\
+	.equ CNAME(alias),CNAME(sym)
 
 #define RCSID(x)	.text; .asciz x
 
@@ -106,5 +105,4 @@
 #define __FBSDID(s)	/* nothing */
 #endif /* not lint and not STRIP_FBSDID */
 
-#endif
 #endif /* !_MACHINE_ASM_H_ */

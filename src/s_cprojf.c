@@ -24,15 +24,15 @@
  * SUCH DAMAGE.
  */
 
-#include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_cprojf.c,v 1.1 2008/08/07 15:07:48 das Exp $");
+#include <sys/cdefs.h>
+//__FBSDID("$FreeBSD$");
 
 #include <openlibm_complex.h>
 #include <openlibm_math.h>
 
 #include "math_private.h"
 
-DLLEXPORT float complex
+float complex
 cprojf(float complex z)
 {
 

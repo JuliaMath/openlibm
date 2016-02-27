@@ -24,14 +24,15 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_round.c,v 1.4 2005/12/02 13:45:06 bde Exp $");
+#include <sys/cdefs.h>
+//__FBSDID("$FreeBSD$");
+
+#include <float.h>
 
 #include <openlibm_math.h>
-
 #include "math_private.h"
 
-DLLEXPORT double
+double
 round(double x)
 {
 	double t;
@@ -53,3 +54,7 @@ round(double x)
 		return (-t);
 	}
 }
+
+#if (LDBL_MANT_DIG == 53)
+__weak_reference(round, roundl);
+#endif

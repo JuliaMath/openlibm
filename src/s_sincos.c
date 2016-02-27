@@ -9,7 +9,7 @@
  * is preserved.
  * ====================================================
  */
- #include "cdefs-compat.h"
+ #include "openlibm_compat.h"
 
 /* sincos(x, s, c)
  * Several applications need sine and cosine of the same

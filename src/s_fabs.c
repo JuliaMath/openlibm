@@ -10,15 +10,18 @@
  * ====================================================
  */
 
+#ifndef lint
+static char rcsid[] = "$FreeBSD$";
+#endif
+
 /*
  * fabs(x) returns the absolute value of x.
  */
 
 #include <openlibm_math.h>
-
 #include "math_private.h"
 
-DLLEXPORT double
+double
 fabs(double x)
 {
 	u_int32_t high;

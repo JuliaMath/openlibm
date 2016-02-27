@@ -13,12 +13,17 @@
  * ====================================================
  */
 
-#include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/e_jnf.c,v 1.11 2010/11/13 10:54:10 uqs Exp $");
+#include <sys/cdefs.h>
+//__FBSDID("$FreeBSD$");
+
+/*
+ * See e_jn.c for complete comments.
+ */
 
 #include <openlibm_math.h>
-
 #include "math_private.h"
+
+static const volatile float vone = 1, vzero = 0;
 
 static const float
 two   =  2.0000000000e+00, /* 0x40000000 */
@@ -26,7 +31,7 @@ one   =  1.0000000000e+00; /* 0x3F800000 */
 
 static const float zero  =  0.0000000000e+00;
 
-DLLEXPORT float
+float
 __ieee754_jnf(int n, float x)
 {
 	int32_t i,hx,ix, sgn;
@@ -164,7 +169,7 @@ __ieee754_jnf(int n, float x)
 	if(sgn==1) return -b; else return b;
 }
 
-DLLEXPORT float
+float
 __ieee754_ynf(int n, float x)
 {
 	int32_t i,hx,ix,ib;
@@ -173,10 +178,9 @@ __ieee754_ynf(int n, float x)
 
 	GET_FLOAT_WORD(hx,x);
 	ix = 0x7fffffff&hx;
-    /* if Y(n,NaN) is NaN */
 	if(ix>0x7f800000) return x+x;
-	if(ix==0) return -one/zero;
-	if(hx<0) return zero/zero;
+	if(ix==0) return -one/vzero;
+	if(hx<0) return vzero/vzero;
 	sign = 1;
 	if(n<0){
 		n = -n;

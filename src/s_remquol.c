@@ -10,28 +10,28 @@
  * ====================================================
  */
 
-#include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_remquol.c,v 1.2 2008/07/31 20:09:47 das Exp $");
+#include <sys/cdefs.h>
+//__FBSDID("$FreeBSD$");
 
 #include <float.h>
-#include <openlibm_math.h>
 #include <stdint.h>
 
 #include "fpmath.h"
+#include <openlibm_math.h>
 #include "math_private.h"
 
 #define	BIAS (LDBL_MAX_EXP - 1)
 
 #if LDBL_MANL_SIZE > 32
-typedef	u_int64_t manl_t;
+typedef	uint64_t manl_t;
 #else
-typedef	u_int32_t manl_t;
+typedef	uint32_t manl_t;
 #endif
 
 #if LDBL_MANH_SIZE > 32
-typedef	u_int64_t manh_t;
+typedef	uint64_t manh_t;
 #else
-typedef	u_int32_t manh_t;
+typedef	uint32_t manh_t;
 #endif
 
 /*
@@ -64,7 +64,7 @@ static const long double Zero[] = {0.0L, -0.0L};
  * - The high part of the mantissa fits in an int64_t with enough room
  *   for an explicit integer bit in front of the fractional bits.
  */
-DLLEXPORT long double
+long double
 remquol(long double x, long double y, int *quo)
 {
 	union IEEEl2bits ux, uy;
@@ -96,7 +96,7 @@ remquol(long double x, long double y, int *quo)
 		goto fixup;	/* |x|<|y| return x or x-y */
 	    }
 	    if(ux.bits.manh==uy.bits.manh && ux.bits.manl==uy.bits.manl) {
-		*quo = 1;
+		*quo = (sxy ? -1 : 1);
 		return Zero[sx];	/* |x|=|y| return x*0*/
 	    }
 	}
@@ -138,6 +138,7 @@ remquol(long double x, long double y, int *quo)
 
     /* convert back to floating value and restore the sign */
 	if((hx|lx)==0) {			/* return sign(x)*0 */
+	    q &= 0x7fffffff;
 	    *quo = (sxy ? -q : q);
 	    return Zero[sx];
 	}

@@ -24,15 +24,15 @@
  * SUCH DAMAGE.
  */
 
-#include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/k_expf.c,v 1.1 2011/10/21 06:27:56 das Exp $");
+#include <sys/cdefs.h>
+//__FBSDID("$FreeBSD$");
 
 #include <openlibm_complex.h>
-#include <openlibm_math.h>
 
+#include <openlibm_math.h>
 #include "math_private.h"
 
-static const u_int32_t k = 235;			/* constant for reduction */
+static const uint32_t k = 235;			/* constant for reduction */
 static const float kln2 =  162.88958740F;	/* k * ln2 */
 
 /*
@@ -44,8 +44,8 @@ static const float kln2 =  162.88958740F;	/* k * ln2 */
 static float
 __frexp_expf(float x, int *expt)
 {
-	double exp_x;
-	u_int32_t hx;
+	float exp_x;
+	uint32_t hx;
 
 	exp_x = expf(x - kln2);
 	GET_FLOAT_WORD(hx, exp_x);
@@ -54,7 +54,7 @@ __frexp_expf(float x, int *expt)
 	return (exp_x);
 }
 
-DLLEXPORT float
+float
 __ldexp_expf(float x, int expt)
 {
 	float exp_x, scale;
@@ -66,7 +66,7 @@ __ldexp_expf(float x, int expt)
 	return (exp_x * scale);
 }
 
-DLLEXPORT float complex
+float complex
 __ldexp_cexpf(float complex z, int expt)
 {
 	float x, y, exp_x, scale1, scale2;

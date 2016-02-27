@@ -14,19 +14,19 @@
  * ====================================================
  */
 
-#include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_sinf.c,v 1.17 2008/02/25 22:19:17 bde Exp $");
+#include <sys/cdefs.h>
+//__FBSDID("$FreeBSD$");
 
 #include <float.h>
-#include <openlibm_math.h>
 
-//#define	INLINE_KERNEL_COSDF
-//#define	INLINE_KERNEL_SINDF
-//#define INLINE_REM_PIO2F
+#include <openlibm_math.h>
+#define	INLINE_KERNEL_COSDF
+#define	INLINE_KERNEL_SINDF
+#define INLINE_REM_PIO2F
 #include "math_private.h"
-//#include "e_rem_pio2f.c"
-//#include "k_cosf.c"
-//#include "k_sinf.c"
+#include "e_rem_pio2f.c"
+#include "k_cosf.c"
+#include "k_sinf.c"
 
 /* Small multiples of pi/2 rounded to double precision. */
 static const double
@@ -35,7 +35,7 @@ s2pio2 = 2*M_PI_2,			/* 0x400921FB, 0x54442D18 */
 s3pio2 = 3*M_PI_2,			/* 0x4012D97C, 0x7F3321D2 */
 s4pio2 = 4*M_PI_2;			/* 0x401921FB, 0x54442D18 */
 
-DLLEXPORT float
+float
 sinf(float x)
 {
 	double y;
@@ -56,7 +56,7 @@ sinf(float x)
 		else
 		    return -__kernel_cosdf(x + s1pio2);
 	    } else
-			return __kernel_sindf((hx > 0 ? s2pio2 : -s2pio2) - x);
+		return __kernel_sindf((hx > 0 ? s2pio2 : -s2pio2) - x);
 	}
 	if(ix<=0x40e231d5) {		/* |x| ~<= 9*pi/4 */
 	    if(ix<=0x40afeddf) {	/* |x| ~<= 7*pi/4 */
@@ -65,7 +65,7 @@ sinf(float x)
 		else
 		    return __kernel_cosdf(x + s3pio2);
 	    } else
-			return __kernel_sindf(x + (hx > 0 ? -s4pio2 : s4pio2));
+		return __kernel_sindf(x + (hx > 0 ? -s4pio2 : s4pio2));
 	}
 
     /* sin(Inf or NaN) is NaN */
@@ -79,7 +79,7 @@ sinf(float x)
 		case 1: return  __kernel_cosdf(y);
 		case 2: return  __kernel_sindf(-y);
 		default:
-				return -__kernel_cosdf(y);
+			return -__kernel_cosdf(y);
 	    }
 	}
 }

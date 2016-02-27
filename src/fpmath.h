@@ -24,54 +24,51 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  *
- * $FreeBSD: src/lib/libc/include/fpmath.h,v 1.4 2008/12/23 22:20:59 marcel Exp $
+ * $FreeBSD$
  */
-#ifndef _FPMATH_H_
-#define _FPMATH_H_
 
-#if defined(__aarch64__)
-#include "aarch64_fpmath.h"
+#ifndef _FPMATH_H
+
+#define _FPMATH_H
+
+#if defined(__arm__)
+#include "arm/_fpmath.h"
+#elif defined(__aarch64__)
+#include "aarch64/_fpmath.h"
 #elif defined(__i386__) || defined(__x86_64__)
 #ifdef __LP64__
-#include "amd64_fpmath.h"
-#else 
-#include "i386_fpmath.h"
+#include "amd64/_fpmath.h"
+#else
+#include "i387/_fpmath.h"
 #endif
 #elif defined(__powerpc__)
-#include "powerpc_fpmath.h"
+#include "powerpc/_fpmath.h"
+#else
+#error "Unsupported platform"
 #endif
 
-#if defined(__BYTE_ORDER__) && defined(__ORDER_LITTLE_ENDIAN__)
-
-/* Definitions provided directly by GCC and Clang. */
-#define _LITTLE_ENDIAN    __ORDER_LITTLE_ENDIAN__
-#define _BIG_ENDIAN       __ORDER_BIG_ENDIAN__
-#define _PDP_ENDIAN       __ORDER_PDP_ENDIAN__
-#define _BYTE_ORDER       __BYTE_ORDER__
-
-#elif defined(__GLIBC__)
-
+#ifdef __linux
 #include <features.h>
 #include <endian.h>
 #define _LITTLE_ENDIAN  __LITTLE_ENDIAN
 #define _BIG_ENDIAN     __BIG_ENDIAN
 #define _PDP_ENDIAN     __PDP_ENDIAN
 #define _BYTE_ORDER     __BYTE_ORDER
+#endif
 
-#elif defined(__APPLE__)
-
+#ifdef __APPLE__
 #include <machine/endian.h>
 #define _LITTLE_ENDIAN  LITTLE_ENDIAN
 #define _BIG_ENDIAN     BIG_ENDIAN
 #define _PDP_ENDIAN     PDP_ENDIAN
 #define _BYTE_ORDER     BYTE_ORDER
+#endif
 
-#elif defined(__FreeBSD__)
-
+#ifdef __FreeBSD__
 #include <machine/endian.h>
+#endif
 
-#elif defined(_WIN32)
-
+#ifdef _WIN32
 #define _LITTLE_ENDIAN 1234
 #define _BIG_ENDIAN    4321
 #define _PDP_ENDIAN    3412
@@ -81,8 +78,10 @@
 #define BIG_ENDIAN     _BIG_ENDIAN
 #define PDP_ENDIAN     _PDP_ENDIAN
 #define BYTE_ORDER     _BYTE_ORDER
-
 #endif
+
+
+
 
 #ifndef _IEEE_WORD_ORDER
 #define	_IEEE_WORD_ORDER	_BYTE_ORDER
@@ -128,4 +127,4 @@ union IEEEd2bits {
 	} bits;
 };
 
-#endif
+#endif /* _FPMATH_H */

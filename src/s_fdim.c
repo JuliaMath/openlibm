@@ -24,13 +24,13 @@
  * SUCH DAMAGE.
  */
 
-#include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_fdim.c,v 1.1 2004/06/30 07:04:01 das Exp $");
+#include <sys/cdefs.h>
+//__FBSDID("$FreeBSD$");
+
 #include <openlibm_math.h>
-#include "math_private.h"
 
 #define	DECL(type, fn)			\
-DLLEXPORT type					\
+type					\
 fn(type x, type y)			\
 {					\
 					\

@@ -23,33 +23,45 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  *
- * $FreeBSD: src/lib/libc/amd64/_fpmath.h,v 1.7 2008/01/17 16:39:06 bde Exp $
+ * $FreeBSD$
  */
+
+#if defined(__VFP_FP__) || defined(__ARM_EABI__)
+#define	_IEEE_WORD_ORDER	_BYTE_ORDER
+#else
+#define	_IEEE_WORD_ORDER	_BIG_ENDIAN
+#endif
 
 union IEEEl2bits {
 	long double	e;
 	struct {
+#if _BYTE_ORDER == _LITTLE_ENDIAN
+#if _IEEE_WORD_ORDER == _LITTLE_ENDIAN
 		unsigned int	manl	:32;
-		unsigned int	manh	:32;
-		unsigned int	exp	:15;
+#endif
+		unsigned int	manh	:20;
+		unsigned int	exp	:11;
 		unsigned int	sign	:1;
-		unsigned int	junkl	:16;
-		unsigned int	junkh	:32;
+#if _IEEE_WORD_ORDER == _BIG_ENDIAN
+		unsigned int	manl	:32;
+#endif
+#else	/* _BYTE_ORDER == _LITTLE_ENDIAN */
+		unsigned int		sign	:1;
+		unsigned int		exp	:11;
+		unsigned int		manh	:20;
+		unsigned int		manl	:32;
+#endif
 	} bits;
-	struct {
-		unsigned long	man	:64;
-		unsigned int	expsign	:16;
-		unsigned long	junk	:48;
-	} xbits;
 };
 
-#define	LDBL_NBIT	0x80000000
-#define	mask_nbit_l(u)	((u).bits.manh &= ~LDBL_NBIT)
+#define	LDBL_NBIT	0
+#define	LDBL_IMPLICIT_NBIT
+#define	mask_nbit_l(u)	((void)0)
 
-#define	LDBL_MANH_SIZE	32
+#define	LDBL_MANH_SIZE	20
 #define	LDBL_MANL_SIZE	32
 
 #define	LDBL_TO_ARRAY32(u, a) do {			\
 	(a)[0] = (uint32_t)(u).bits.manl;		\
 	(a)[1] = (uint32_t)(u).bits.manh;		\
-} while (0)
+} while(0)

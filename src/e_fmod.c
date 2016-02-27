@@ -11,8 +11,8 @@
  * ====================================================
  */
 
-#include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/e_fmod.c,v 1.10 2008/02/22 02:30:34 das Exp $");
+#include <sys/cdefs.h>
+//__FBSDID("$FreeBSD$");
 
 /* 
  * __ieee754_fmod(x,y)
@@ -21,12 +21,11 @@
  */
 
 #include <openlibm_math.h>
-
 #include "math_private.h"
 
 static const double one = 1.0, Zero[] = {0.0, -0.0,};
 
-DLLEXPORT double
+double
 __ieee754_fmod(double x, double y)
 {
 	int32_t n,hx,hy,hz,ix,iy,sx,i;

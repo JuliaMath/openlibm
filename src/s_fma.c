@@ -24,11 +24,11 @@
  * SUCH DAMAGE.
  */
 
-#include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_fma.c,v 1.8 2011/10/21 06:30:43 das Exp $");
+#include <sys/cdefs.h>
+//__FBSDID("$FreeBSD$");
 
-#include <float.h>
 #include <openlibm_fenv.h>
+#include <float.h>
 #include <openlibm_math.h>
 
 #include "math_private.h"
@@ -75,7 +75,7 @@ static inline double
 add_adjusted(double a, double b)
 {
 	struct dd sum;
-	u_int64_t hibits, lobits;
+	uint64_t hibits, lobits;
 
 	sum = dd_add(a, b);
 	if (sum.lo != 0) {
@@ -99,7 +99,7 @@ static inline double
 add_and_denormalize(double a, double b, int scale)
 {
 	struct dd sum;
-	u_int64_t hibits, lobits;
+	uint64_t hibits, lobits;
 	int bits_lost;
 
 	sum = dd_add(a, b);
@@ -174,7 +174,7 @@ dd_mul(double a, double b)
  * Hardware instructions should be used on architectures that support it,
  * since this implementation will likely be several times slower.
  */
-DLLEXPORT double
+double
 fma(double x, double y, double z)
 {
 	double xs, ys, zs, adj;
@@ -216,17 +216,17 @@ fma(double x, double y, double z)
 		case FE_TONEAREST:
 			return (z);
 		case FE_TOWARDZERO:
-			if ((x > 0.0) ^ (y < 0.0) ^ (z < 0.0))
+			if (x > 0.0 ^ y < 0.0 ^ z < 0.0)
 				return (z);
 			else
 				return (nextafter(z, 0));
 		case FE_DOWNWARD:
-			if ((x > 0.0) ^ (y < 0.0))
+			if (x > 0.0 ^ y < 0.0)
 				return (z);
 			else
 				return (nextafter(z, -INFINITY));
 		default:	/* FE_UPWARD */
-			if ((x > 0.0) ^ (y < 0.0))
+			if (x > 0.0 ^ y < 0.0)
 				return (nextafter(z, INFINITY));
 			else
 				return (z);
@@ -238,6 +238,8 @@ fma(double x, double y, double z)
 		zs = copysign(DBL_MIN, zs);
 
 	fesetround(FE_TONEAREST);
+	/* work around clang bug 8100 */
+	volatile double vxs = xs;
 
 	/*
 	 * Basic approach for round-to-nearest:
@@ -247,7 +249,7 @@ fma(double x, double y, double z)
 	 *     adj = xy.lo + r.lo		(inexact; low bit is sticky)
 	 *     result = r.hi + adj		(correctly rounded)
 	 */
-	xy = dd_mul(xs, ys);
+	xy = dd_mul(vxs, ys);
 	r = dd_add(xy.hi, zs);
 
 	spread = ex + ey;
@@ -268,7 +270,9 @@ fma(double x, double y, double z)
 		 * rounding modes.
 		 */
 		fesetround(oround);
-		adj = r.lo + xy.lo;
+		/* work around clang bug 8100 */
+		volatile double vrlo = r.lo;
+		adj = vrlo + xy.lo;
 		return (ldexp(r.hi + adj, spread));
 	}
 

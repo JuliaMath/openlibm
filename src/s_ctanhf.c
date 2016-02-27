@@ -28,20 +28,20 @@
  * Hyperbolic tangent of a complex argument z.  See s_ctanh.c for details.
  */
 
-#include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_ctanhf.c,v 1.2 2011/10/21 06:30:16 das Exp $");
+#include <sys/cdefs.h>
+//__FBSDID("$FreeBSD$");
 
 #include <openlibm_complex.h>
 #include <openlibm_math.h>
 
 #include "math_private.h"
 
-DLLEXPORT float complex
+float complex
 ctanhf(float complex z)
 {
 	float x, y;
 	float t, beta, s, rho, denom;
-	u_int32_t hx, ix;
+	uint32_t hx, ix;
 
 	x = crealf(z);
 	y = cimagf(z);
@@ -51,7 +51,8 @@ ctanhf(float complex z)
 
 	if (ix >= 0x7f800000) {
 		if (ix & 0x7fffff)
-			return (CMPLXF(x, (y == 0 ? y : x * y)));
+			return (CMPLXF((x + 0) * (y + 0),
+			    y == 0 ? y : (x + 0) * (y + 0)));
 		SET_FLOAT_WORD(x, hx - 0x40000000);
 		return (CMPLXF(x,
 		    copysignf(0, isinf(y) ? y : sinf(y) * cosf(y))));
@@ -60,7 +61,7 @@ ctanhf(float complex z)
 	if (!isfinite(y))
 		return (CMPLXF(y - y, y - y));
 
-	if (ix >= 0x41300000) {	/* x >= 11 */
+	if (ix >= 0x41300000) {	/* |x| >= 11 */
 		float exp_mx = expf(-fabsf(x));
 		return (CMPLXF(copysignf(1, x),
 		    4 * sinf(y) * cosf(y) * exp_mx * exp_mx));
@@ -74,11 +75,11 @@ ctanhf(float complex z)
 	return (CMPLXF((beta * rho * s) / denom, t / denom));
 }
 
-DLLEXPORT float complex
+float complex
 ctanf(float complex z)
 {
 
-	z = ctanhf(CMPLXF(-cimagf(z), crealf(z)));
-	return (CMPLXF(cimagf(z), -crealf(z)));
+	z = ctanhf(CMPLXF(cimagf(z), crealf(z)));
+	return (CMPLXF(cimagf(z), crealf(z)));
 }
 

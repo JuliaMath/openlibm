@@ -11,8 +11,8 @@
  * ====================================================
  */
 
-#include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/k_sin.c,v 1.11 2008/02/19 12:54:14 bde Exp $");
+#include <sys/cdefs.h>
+//__FBSDID("$FreeBSD$");
 
 /* __kernel_sin( x, y, iy)
  * kernel sin function on ~[-pi/4, pi/4] (except on -0), pi/4 ~ 0.7854
@@ -45,7 +45,6 @@
  */
 
 #include <openlibm_math.h>
-
 #include "math_private.h"
 
 static const double
@@ -57,7 +56,7 @@ S4  =  2.75573137070700676789e-06, /* 0x3EC71DE3, 0x57B1FE7D */
 S5  = -2.50507602534068634195e-08, /* 0xBE5AE5E6, 0x8A2B9CEB */
 S6  =  1.58969099521155010221e-10; /* 0x3DE5D93A, 0x5ACFD57C */
 
-DLLEXPORT double
+double
 __kernel_sin(double x, double y, int iy)
 {
 	double z,r,v,w;

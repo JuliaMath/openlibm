@@ -13,8 +13,8 @@
  * ====================================================
  */
 
-#include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_copysignf.c,v 1.10 2008/02/22 02:30:35 das Exp $");
+#include <sys/cdefs.h>
+//__FBSDID("$FreeBSD$");
 
 /*
  * copysignf(float x, float y)
@@ -23,10 +23,9 @@
  */
 
 #include <openlibm_math.h>
-
 #include "math_private.h"
 
-DLLEXPORT float
+float
 copysignf(float x, float y)
 {
 	u_int32_t ix,iy;

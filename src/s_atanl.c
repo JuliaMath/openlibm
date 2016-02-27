@@ -11,8 +11,8 @@
  * ====================================================
  */
 
-#include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_atanl.c,v 1.1 2008/07/31 22:41:26 das Exp $");
+#include <sys/cdefs.h>
+//__FBSDID("$FreeBSD$");
 
 /*
  * See comments in s_atan.c.
@@ -20,16 +20,16 @@
  */
 
 #include <float.h>
-#include <openlibm_math.h>
 
 #include "invtrig.h"
+#include <openlibm_math.h>
 #include "math_private.h"
 
 static const long double
 one   = 1.0,
 huge   = 1.0e300;
 
-DLLEXPORT long double
+long double
 atanl(long double x)
 {
 	union IEEEl2bits u;

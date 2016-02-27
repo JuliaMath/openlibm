@@ -13,11 +13,10 @@
  * ====================================================
  */
 
-#include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/e_acosf.c,v 1.11 2008/08/03 17:39:54 das Exp $");
+#include <sys/cdefs.h>
+//__FBSDID("$FreeBSD$");
 
 #include <openlibm_math.h>
-
 #include "math_private.h"
 
 static const float
@@ -32,7 +31,7 @@ pS1 = -4.2743422091e-02,
 pS2 = -8.6563630030e-03,
 qS1 = -7.0662963390e-01;
 
-DLLEXPORT float
+float
 __ieee754_acosf(float x)
 {
 	float z,p,q,r,w,s,c,df;

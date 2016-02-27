@@ -13,12 +13,19 @@
  * ====================================================
  */
 
-#include <assert.h>
-#include "cdefs-compat.h"
+#include <sys/cdefs.h>
+//__FBSDID("$FreeBSD$");
+
+/*
+ * See e_j1.c for complete comments.
+ */
+
 #include <openlibm_math.h>
 #include "math_private.h"
 
-static float ponef(float), qonef(float);
+static __inline float ponef(float), qonef(float);
+
+static const volatile float vone = 1, vzero = 0;
 
 static const float
 huge    = 1e30,
@@ -38,7 +45,7 @@ s05  =  1.2354227016e-11; /* 0x2d59567e */
 
 static const float zero    = 0.0;
 
-DLLEXPORT float
+float
 __ieee754_j1f(float x)
 {
 	float z, s,c,ss,cc,r,u,v,y;
@@ -95,7 +102,7 @@ static const float V0[5] = {
   1.6655924903e-11, /* 0x2d9281cf */
 };
 
-DLLEXPORT float
+float
 __ieee754_y1f(float x)
 {
 	float z, s,c,ss,cc,u,v;
@@ -103,10 +110,9 @@ __ieee754_y1f(float x)
 
 	GET_FLOAT_WORD(hx,x);
         ix = 0x7fffffff&hx;
-    /* if Y1(NaN) is NaN, Y1(-inf) is NaN, Y1(inf) is 0 */
-	if(ix>=0x7f800000) return  one/(x+x*x);
-        if(ix==0) return -one/zero;
-        if(hx<0) return zero/zero;
+	if(ix>=0x7f800000) return  vone/(x+x*x);
+	if(ix==0) return -one/vzero;
+	if(hx<0) return vzero/vzero;
         if(ix >= 0x40000000) {  /* |x| >= 2.0 */
                 s = sinf(x);
                 c = cosf(x);
@@ -218,7 +224,8 @@ static const float ps2[5] = {
   8.3646392822e+00, /* 0x4105d590 */
 };
 
-	static float ponef(float x)
+static __inline float
+ponef(float x)
 {
 	const float *p,*q;
 	float z,r,s;
@@ -314,7 +321,8 @@ static const float qs2[6] = {
  -4.9594988823e+00, /* 0xc09eb437 */
 };
 
-	static float qonef(float x)
+static __inline float
+qonef(float x)
 {
 	const float *p,*q;
 	float  s,r,z;

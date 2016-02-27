@@ -10,8 +10,8 @@
  * ====================================================
  */
 
-#include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_nextafterl.c,v 1.2 2008/02/22 02:30:36 das Exp $");
+#include <sys/cdefs.h>
+//__FBSDID("$FreeBSD$");
 
 /* IEEE functions
  *	nextafter(x,y)
@@ -21,16 +21,16 @@
  */
 
 #include <float.h>
-#include <openlibm_math.h>
 
 #include "fpmath.h"
+#include <openlibm_math.h>
 #include "math_private.h"
 
 #if LDBL_MAX_EXP != 0x4000
 #error "Unsupported long double format"
 #endif
 
-DLLEXPORT long double
+long double
 nextafterl(long double x, long double y)
 {
 	volatile long double t;
@@ -52,7 +52,7 @@ nextafterl(long double x, long double y)
 	    t = ux.e*ux.e;
 	    if(t==ux.e) return t; else return ux.e; /* raise underflow flag */
 	}
-	if((x>0.0) ^ (x<y)) {			/* x -= ulp */
+	if(x>0.0 ^ x<y) {			/* x -= ulp */
 	    if(ux.bits.manl==0) {
 		if ((ux.bits.manh&~LDBL_NBIT)==0)
 		    ux.bits.exp -= 1;

@@ -1,5 +1,5 @@
 /*-
- * Copyright (c) 2002, 2003 David Schultz <das@FreeBSD.ORG>
+ * Copyright (c) 2013 Andrew Turner <andrew@FreeBSD.ORG>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -23,32 +23,13 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  *
- * $FreeBSD: src/lib/libc/i386/_fpmath.h,v 1.6 2008/01/17 16:39:06 bde Exp $
+ * $FreeBSD$
  */
 
-union IEEEl2bits {
-	long double	e;
-	struct {
-		unsigned int	manl	:32;
-		unsigned int	manh	:32;
-		unsigned int	exp	:15;
-		unsigned int	sign	:1;
-		unsigned int	junk	:16;
-	} bits;
-	struct {
-		unsigned long long man	:64;
-		unsigned int 	expsign	:16;
-		unsigned int	junk	:16;
-	} xbits;
-};
+#define	FENV_MANGLE(x)	__softfp_ ##x
+#include <openlibm_fenv_mangle_arm.h>
+#ifndef DLLEXORT
+#define DLLEXPORT __attribute__ ((visibility("default")))
+#endif
+#include "fenv.c"
 
-#define	LDBL_NBIT	0x80000000
-#define	mask_nbit_l(u)	((u).bits.manh &= ~LDBL_NBIT)
-
-#define	LDBL_MANH_SIZE	32
-#define	LDBL_MANL_SIZE	32
-
-#define	LDBL_TO_ARRAY32(u, a) do {			\
-	(a)[0] = (uint32_t)(u).bits.manl;		\
-	(a)[1] = (uint32_t)(u).bits.manh;		\
-} while (0)

@@ -13,8 +13,8 @@
  * Optimized by Bruce D. Evans.
  */
 
-#include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/e_rem_pio2.c,v 1.22 2011/06/19 17:07:58 kargl Exp $");
+#include <sys/cdefs.h>
+//__FBSDID("$FreeBSD$");
 
 /* __ieee754_rem_pio2(x,y)
  * 
@@ -23,8 +23,8 @@
  */
 
 #include <float.h>
-#include <openlibm_math.h>
 
+#include <openlibm_math.h>
 #include "math_private.h"
 
 /*
@@ -48,7 +48,10 @@ pio2_2t =  2.02226624879595063154e-21, /* 0x3BA3198A, 0x2E037073 */
 pio2_3  =  2.02226624871116645580e-21, /* 0x3BA3198A, 0x2E000000 */
 pio2_3t =  8.47842766036889956997e-32; /* 0x397B839A, 0x252049C1 */
 
-__inline int
+#ifdef INLINE_REM_PIO2
+static __inline __always_inline
+#endif
+int
 __ieee754_rem_pio2(double x, double *y)
 {
 	double z,w,t,r,fn;
