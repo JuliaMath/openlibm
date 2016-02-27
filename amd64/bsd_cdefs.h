@@ -33,8 +33,8 @@
  * $FreeBSD: src/sys/sys/cdefs.h,v 1.114 2011/02/18 21:44:53 nwhitehorn Exp $
  */
 
-#ifndef	_SYS_CDEFS_H_
-#define	_SYS_CDEFS_H_
+#ifndef	_BSD_CDEFS_H_
+#define	_BSD_CDEFS_H_
 
 #if defined(__cplusplus)
 #define	__BEGIN_DECLS	extern "C" {
@@ -574,4 +574,4 @@
 #endif
 #endif
 
-#endif /* !_SYS_CDEFS_H_ */
+#endif /* !_BSD_CDEFS_H_ */

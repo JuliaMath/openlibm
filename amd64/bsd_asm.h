@@ -33,8 +33,8 @@
  * $FreeBSD: src/sys/amd64/include/asm.h,v 1.18 2007/08/22 04:26:07 jkoshy Exp $
  */
 
-#ifndef _MACHINE_ASM_H_
-#define	_MACHINE_ASM_H_
+#ifndef _BSD_ASM_H_
+#define _BSD_ASM_H_
 
 #ifdef __APPLE__
 #include "../i387/osx_asm.h"
@@ -107,4 +107,4 @@
 #endif /* not lint and not STRIP_FBSDID */
 
 #endif
-#endif /* !_MACHINE_ASM_H_ */
+#endif /* !_BSD_ASM_H_ */

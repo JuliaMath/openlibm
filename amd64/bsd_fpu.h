@@ -38,8 +38,8 @@
  * W. Jolitz 1/90
  */
 
-#ifndef _X86_FPU_H_
-#define	_X86_FPU_H_
+#ifndef _BSD_FPU_H_
+#define	_BSD_FPU_H_
 
 #include "types-compat.h"
 
@@ -215,4 +215,4 @@ struct savefpu_ymm {
 #define	__INITIAL_MXCSR__	0x1F80
 #define	__INITIAL_MXCSR_MASK__	0xFFBF
 
-#endif /* !_X86_FPU_H_ */
+#endif /* !_BSD_FPU_H_ */

@@ -35,8 +35,8 @@
  *	IEEE floating point type and constant definitions.
  */
 
-#ifndef _MACHINE_IEEEFP_H_
-#define _MACHINE_IEEEFP_H_
+#ifndef _BSD_IEEEFP_H_
+#define _BSD_IEEEFP_H_
 
 /*
  * FP rounding modes
@@ -269,4 +269,4 @@ __END_DECLS
 #endif /* !__IEEEFP_NOINLINES__ && !__cplusplus && __GNUCLIKE_ASM
           && __CC_SUPPORTS___INLINE__ */
 
-#endif /* !_MACHINE_IEEEFP_H_ */
+#endif /* !_BSD_IEEEFP_H_ */
