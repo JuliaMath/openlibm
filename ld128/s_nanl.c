@@ -39,7 +39,7 @@ nanl(const char *s)
 		uint32_t bits[4];
 	} u;
 
-	_scan_nan(u.bits, 4, s);
+	__scan_nan(u.bits, 4, s);
 	u.ieee.bits.exp = 0x7fff;
 	u.ieee.bits.manh |= 1ULL << 47;	/* make it a quiet NaN */
 	return (u.ieee.e);

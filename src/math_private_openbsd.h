@@ -205,7 +205,7 @@ do {								\
 /*
  * Common routine to process the arguments to nan(), nanf(), and nanl().
  */
-void _scan_nan(uint32_t *__words, int __num_words, const char *__s);
+void __scan_nan(uint32_t *__words, int __num_words, const char *__s);
 
 /*
  * Functions internal to the math package, yet not static.

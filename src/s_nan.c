@@ -62,7 +62,7 @@ static __inline int digittoint(int c) {
  * impossible to use nan(3) portably anyway, so this seems good enough.
  */
 DLLEXPORT void
-_scan_nan(u_int32_t *words, int num_words, const char *s)
+__scan_nan(u_int32_t *words, int num_words, const char *s)
 {
 	int si;		/* index into s */
 	int bitpos;	/* index into words (in bits) */
@@ -97,7 +97,7 @@ nan(const char *s)
 		u_int32_t bits[2];
 	} u;
 
-	_scan_nan(u.bits, 2, s);
+	__scan_nan(u.bits, 2, s);
 #if _BYTE_ORDER == _LITTLE_ENDIAN
 	u.bits[1] |= 0x7ff80000;
 #else
@@ -114,7 +114,7 @@ nanf(const char *s)
 		u_int32_t bits[1];
 	} u;
 
-	_scan_nan(u.bits, 1, s);
+	__scan_nan(u.bits, 1, s);
 	u.bits[0] |= 0x7fc00000;
 	return (u.f);
 }
