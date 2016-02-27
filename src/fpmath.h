@@ -41,57 +41,42 @@
 #include "powerpc_fpmath.h"
 #endif
 
-#if defined(__BYTE_ORDER__) && defined(__ORDER_LITTLE_ENDIAN__)
-
 /* Definitions provided directly by GCC and Clang. */
-#define _LITTLE_ENDIAN    __ORDER_LITTLE_ENDIAN__
-#define _BIG_ENDIAN       __ORDER_BIG_ENDIAN__
-#define _PDP_ENDIAN       __ORDER_PDP_ENDIAN__
-#define _BYTE_ORDER       __BYTE_ORDER__
+#if !(defined(__BYTE_ORDER__) && defined(__ORDER_LITTLE_ENDIAN__) && defined(__ORDER_BIG_ENDIAN__))
 
-#elif defined(__GLIBC__)
+#if defined(__GLIBC__)
 
 #include <features.h>
 #include <endian.h>
-#define _LITTLE_ENDIAN  __LITTLE_ENDIAN
-#define _BIG_ENDIAN     __BIG_ENDIAN
-#define _PDP_ENDIAN     __PDP_ENDIAN
-#define _BYTE_ORDER     __BYTE_ORDER
+#define __ORDER_LITTLE_ENDIAN__  __LITTLE_ENDIAN
+#define __ORDER_BIG_ENDIAN__     __BIG_ENDIAN
+#define __BYTE_ORDER__           __BYTE_ORDER
 
 #elif defined(__APPLE__)
 
 #include <machine/endian.h>
-#define _LITTLE_ENDIAN  LITTLE_ENDIAN
-#define _BIG_ENDIAN     BIG_ENDIAN
-#define _PDP_ENDIAN     PDP_ENDIAN
-#define _BYTE_ORDER     BYTE_ORDER
-
-#elif defined(__FreeBSD__)
-
-#include <machine/endian.h>
+#define __ORDER_LITTLE_ENDIAN__  LITTLE_ENDIAN
+#define __ORDER_BIG_ENDIAN__     BIG_ENDIAN
+#define __BYTE_ORDER__           BYTE_ORDER
 
 #elif defined(_WIN32)
 
-#define _LITTLE_ENDIAN 1234
-#define _BIG_ENDIAN    4321
-#define _PDP_ENDIAN    3412
-#define _BYTE_ORDER       _LITTLE_ENDIAN
-#define _FLOAT_WORD_ORDER _LITTLE_ENDIAN
-#define LITTLE_ENDIAN  _LITTLE_ENDIAN
-#define BIG_ENDIAN     _BIG_ENDIAN
-#define PDP_ENDIAN     _PDP_ENDIAN
-#define BYTE_ORDER     _BYTE_ORDER
+#define __ORDER_LITTLE_ENDIAN__  1234
+#define __ORDER_BIG_ENDIAN__     4321
+#define __BYTE_ORDER__           __ORDER_LITTLE_ENDIAN__
 
 #endif
 
-#ifndef _IEEE_WORD_ORDER
-#define	_IEEE_WORD_ORDER	_BYTE_ORDER
+#endif /* __BYTE_ORDER__, __ORDER_LITTLE_ENDIAN__ and __ORDER_BIG_ENDIAN__ */
+
+#ifndef __FLOAT_WORD_ORDER__
+#define __FLOAT_WORD_ORDER__     __BYTE_ORDER__
 #endif
 
 union IEEEf2bits {
 	float	f;
 	struct {
-#if _BYTE_ORDER == _LITTLE_ENDIAN
+#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
 		unsigned int	man	:23;
 		unsigned int	exp	:8;
 		unsigned int	sign	:1;
@@ -109,14 +94,14 @@ union IEEEf2bits {
 union IEEEd2bits {
 	double	d;
 	struct {
-#if _BYTE_ORDER == _LITTLE_ENDIAN
-#if _IEEE_WORD_ORDER == _LITTLE_ENDIAN
+#if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#if __FLOAT_WORD_ORDER__ == __ORDER_LITTLE_ENDIAN__
 		unsigned int	manl	:32;
 #endif
 		unsigned int	manh	:20;
 		unsigned int	exp	:11;
 		unsigned int	sign	:1;
-#if _IEEE_WORD_ORDER == _BIG_ENDIAN
+#if __FLOAT_WORD_ORDER__ == __ORDER_BIG_ENDIAN__
 		unsigned int	manl	:32;
 #endif
 #else /* _BIG_ENDIAN */

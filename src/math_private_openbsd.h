@@ -17,7 +17,7 @@
 #ifndef _MATH_PRIVATE_OPENBSD_H_
 #define _MATH_PRIVATE_OPENBSD_H_
 
-#if _IEEE_WORD_ORDER == _BIG_ENDIAN
+#if __FLOAT_WORD_ORDER__ == __ORDER_BIG_ENDIAN__
 
 typedef union
 {
@@ -36,7 +36,7 @@ typedef union
 
 #endif
 
-#if _IEEE_WORD_ORDER == _LITTLE_ENDIAN
+#if __FLOAT_WORD_ORDER__ == __ORDER_LITTLE_ENDIAN__
 
 typedef union
 {
@@ -106,7 +106,7 @@ do {								\
 /* A union which permits us to convert between a long double and
    three 32 bit ints.  */
 
-#if _IEEE_WORD_ORDER == _BIG_ENDIAN
+#if __FLOAT_WORD_ORDER__ == __ORDER_BIG_ENDIAN__
 
 typedef union
 {
@@ -124,7 +124,7 @@ typedef union
 
 #endif
 
-#if _IEEE_WORD_ORDER == _LITTLE_ENDIAN
+#if __FLOAT_WORD_ORDER__ == __ORDER_LITTLE_ENDIAN__
 
 typedef union
 {
