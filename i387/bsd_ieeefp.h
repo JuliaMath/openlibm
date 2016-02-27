@@ -45,9 +45,13 @@
  * XXX: FP*FLD and FP*OFF are undocumented pollution.
  */
 
+/* VBS
+
 #ifndef _SYS_CDEFS_H_
 #error this file needs sys/cdefs.h as a prerequisite
 #endif
+
+*/
 
 /*
  * Rounding modes.
@@ -106,7 +110,8 @@ typedef enum {
  */
 #define FP_STKY_OFF	0	/* sticky flags offset */
 
-#ifdef __GNUCLIKE_ASM
+//VBS
+//#ifdef __GNUCLIKE_ASM
 
 #define	__fldcw(addr)	__asm __volatile("fldcw %0" : : "m" (*(addr)))
 #define	__fldenv(addr)	__asm __volatile("fldenv %0" : : "m" (*(addr)))
@@ -166,7 +171,8 @@ fpsetround(fp_rnd_t _m)
 	return (_p);
 }
 
-static __inline fp_prec_t
+//static __inline fp_prec_t
+DLLEXPORT fp_prec_t
 fpgetprec(void)
 {
 	unsigned short _cw;
@@ -175,7 +181,8 @@ fpgetprec(void)
 	return ((fp_prec_t)((_cw & FP_PRC_FLD) >> FP_PRC_OFF));
 }
 
-static __inline fp_prec_t
+//static __inline fp_prec_t
+DLLEXPORT fp_prec_t
 fpsetprec(fp_prec_t _m)
 {
 	fp_prec_t _p;
@@ -253,6 +260,6 @@ fpresetsticky(fp_except_t _m)
 	return (_p);
 }
 
-#endif /* __GNUCLIKE_ASM */
+//#endif /* __GNUCLIKE_ASM */
 
 #endif /* !_MACHINE_IEEEFP_H_ */
