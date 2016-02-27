@@ -38,7 +38,7 @@
 
 
 #ifdef __APPLE__
-#include "../i387/osx_asm.h"
+#include <mach/machine/asm.h>
 #define CNAME(x) EXT(x)
 
 #else
