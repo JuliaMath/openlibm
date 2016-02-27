@@ -16,7 +16,8 @@ consistently across compilers and operating systems, and in 32-bit and
 
 OpenLibm builds on Linux, Mac OS X, Windows, FreeBSD, and OpenBSD. It
 builds with both GCC and clang. Although largely tested and widely
-used on x86 architectures, openlibm also supports ARM and powerPC.
+used on x86 architectures, openlibm also supports ARM and
+powerPC.
 
 ## Build instructions
 
@@ -31,3 +32,7 @@ used on x86 architectures, openlibm also supports ARM and powerPC.
    version of `gcc` (tested: 4.9.2), as the default version provided by OpenBSD
    is too old (4.2.1). If you use OpenBSD's port system for this (port name:
    `gcc`), run `make CC=egcc` to force Make to use the newer `gcc`.
+
+## Acknowledgements
+
+PowerPC support for openlibm was graciously sponsored by IBM.
