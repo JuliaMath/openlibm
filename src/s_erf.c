@@ -11,7 +11,7 @@
  */
 
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD$");
+//__FBSDID("$FreeBSD$");
 
 /* double erf(double x)
  * double erfc(double x)
@@ -108,7 +108,7 @@ __FBSDID("$FreeBSD$");
  */
 
 
-#include "math.h"
+#include <openlibm_math.h>
 #include "math_private.h"
 
 /* XXX Prevent compilers from erroneously constant folding: */

@@ -14,9 +14,9 @@
  */
 
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD$");
+//__FBSDID("$FreeBSD$");
 
-#include "math.h"
+#include <openlibm_math.h>
 #include "math_private.h"
 
 static const float one = 1.0, half=0.5, huge = 1.0e30;

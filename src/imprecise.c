@@ -27,7 +27,7 @@
  */
 
 #include <float.h>
-#include <math.h>
+#include <openlibm_math.h>
 
 /*
  * If long double is not the same size as double, then these will lose

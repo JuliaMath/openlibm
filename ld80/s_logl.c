@@ -24,7 +24,7 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <cdefs-compat.h>
+#include <openlibm_compat.h>
 __FBSDID("$FreeBSD$");
 
 /**
@@ -76,7 +76,7 @@ __FBSDID("$FreeBSD$");
 
 #ifdef DEBUG
 #include <assert.h>
-#include <fenv.h>
+#include <openlibm_fenv.h>
 #endif
 
 #ifdef __i386__
@@ -84,7 +84,7 @@ __FBSDID("$FreeBSD$");
 #endif
 
 #include "fpmath.h"
-#include "math.h"
+#include <openlibm_math.h>
 #define	i386_SSE_GOOD
 #ifndef NO_STRUCT_RETURN
 #define	STRUCT_RETURN

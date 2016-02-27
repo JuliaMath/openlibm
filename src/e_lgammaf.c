@@ -14,7 +14,7 @@
  */
 
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD$");
+//__FBSDID("$FreeBSD$");
 
 /* __ieee754_lgammaf(x)
  * Return the logarithm of the Gamma function of x.
@@ -22,7 +22,7 @@ __FBSDID("$FreeBSD$");
  * Method: call __ieee754_lgammaf_r
  */
 
-#include "math.h"
+#include <openlibm_math.h>
 #include "math_private.h"
 
 extern int signgam;

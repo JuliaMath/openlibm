@@ -26,7 +26,7 @@
  * $FreeBSD$
  */
 
-#include <complex.h>
+#include <openlibm_complex.h>
 #include "math_private.h"
 
 float

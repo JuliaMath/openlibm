@@ -14,12 +14,14 @@
  * $FreeBSD$
  */
 
-#ifndef _MATH_H_
-#define	_MATH_H_
+#ifndef _OPENLIBM_MATH_H_
+#define	_OPENLIBM_MATH_H_
 
 #include <sys/cdefs.h>
-#include <sys/_types.h>
-#include <machine/_limits.h>
+//#include <sys/_types.h>
+//#include <machine/_limits.h>
+#include <limits.h>
+#include <openlibm_compat.h>
 
 /*
  * ANSI/POSIX
@@ -46,6 +48,13 @@ extern const union __nan_un {
 
 */
 
+//VBS begin
+#define __MATH_BUILTIN_CONSTANTS
+#define __MATH_BUILTIN_RELOPS
+#define __ISO_C_VISIBLE 1999
+//VBS end
+
+
 #ifdef __MATH_BUILTIN_CONSTANTS
 #define	HUGE_VAL	__builtin_huge_val()
 #else
@@ -53,8 +62,10 @@ extern const union __nan_un {
 #endif
 
 #if __ISO_C_VISIBLE >= 1999
-#define	FP_ILOGB0	(-__INT_MAX)
-#define	FP_ILOGBNAN	__INT_MAX
+//#define	FP_ILOGB0	(-__INT_MAX)
+//#define	FP_ILOGBNAN	__INT_MAX
+#define	FP_ILOGB0	(-INT_MAX)
+#define	FP_ILOGBNAN	INT_MAX
 
 #ifdef __MATH_BUILTIN_CONSTANTS
 #define	HUGE_VALF	__builtin_huge_valf()
@@ -81,8 +92,7 @@ extern const union __nan_un {
 #define	FP_SUBNORMAL	0x08
 #define	FP_ZERO		0x10
 
-#if (__STDC_VERSION__ >= 201112L && defined(__clang__)) || \
-    __has_extension(c_generic_selections)
+#if (__STDC_VERSION__ >= 201112L && defined(__clang__)) 
 #define	__fp_type_select(x, f, d, ld) _Generic((x),			\
     float: f(x),							\
     double: d(x),							\
@@ -96,6 +106,7 @@ extern const union __nan_un {
     const float: f(x),							\
     const double: d(x),							\
     const long double: ld(x))
+/*
 #elif __GNUC_PREREQ__(3, 1) && !defined(__cplusplus)
 #define	__fp_type_select(x, f, d, ld) __builtin_choose_expr(		\
     __builtin_types_compatible_p(__typeof(x), long double), ld(x),	\
@@ -103,6 +114,8 @@ extern const union __nan_un {
     __builtin_types_compatible_p(__typeof(x), double), d(x),		\
     __builtin_choose_expr(						\
     __builtin_types_compatible_p(__typeof(x), float), f(x), (void)0)))
+#else
+*/
 #else
 #define	 __fp_type_select(x, f, d, ld)					\
     ((sizeof(x) == sizeof(float)) ? f(x)				\
@@ -137,8 +150,9 @@ extern const union __nan_un {
 
 #define	signbit(x) __fp_type_select(x, __signbitf, __signbit, __signbitl)
 
-typedef	__double_t	double_t;
-typedef	__float_t	float_t;
+//VBS
+//typedef	__double_t	double_t;
+//typedef	__float_t	float_t;
 #endif /* __ISO_C_VISIBLE >= 1999 */
 
 /*
@@ -508,4 +522,4 @@ long double	lgammal_r(long double, int *);
 
 __END_DECLS
 
-#endif /* !_MATH_H_ */
+#endif /* !_OPENLIBM_MATH_H_ */

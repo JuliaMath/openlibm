@@ -11,7 +11,7 @@
  */
 
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD$");
+//__FBSDID("$FreeBSD$");
 
 /* expm1(x)
  * Returns exp(x)-1, the exponential of x minus 1.
@@ -110,7 +110,7 @@ __FBSDID("$FreeBSD$");
 
 #include <float.h>
 
-#include "math.h"
+#include <openlibm_math.h>
 #include "math_private.h"
 
 static const double

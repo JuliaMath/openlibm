@@ -26,10 +26,11 @@
  * $FreeBSD$
  */
 
-#include <sys/endian.h>
+//VBS
+//#include <sys/endian.h>
 #include <ctype.h>
 #include <float.h>
-#include <math.h>
+#include <openlibm_math.h>
 #include <stdint.h>
 #include <strings.h>
 

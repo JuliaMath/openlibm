@@ -18,9 +18,9 @@
 #define	_MATH_PRIVATE_H_
 
 #include <sys/types.h>
-#include <machine/endian.h>
-
+#include "fpmath.h"
 #include <openlibm_compat.h>
+#include <openlibm_complex.h>
 
 /*
  * The original fdlibm code used statements like:
@@ -50,6 +50,7 @@
 #define	IEEE_WORD_ORDER	BYTE_ORDER
 #endif
 
+/*
 #if IEEE_WORD_ORDER == BIG_ENDIAN
 
 typedef union
@@ -67,7 +68,7 @@ typedef union
 } ieee_double_shape_type;
 
 #endif
-
+*/
 #if IEEE_WORD_ORDER == LITTLE_ENDIAN
 
 typedef union
@@ -274,10 +275,12 @@ do {								\
 #define	LD80C(m, ex, v)	{ .e = (v), }
 #endif
 
+//VBS
+#define STRICT_ASSIGN(type, lval, rval) ((lval) = (rval))
+
+/* VBS
 #ifdef FLT_EVAL_METHOD
-/*
- * Attempt to get strict C99 semantics for assignment with non-C99 compilers.
- */
+// * Attempt to get strict C99 semantics for assignment with non-C99 compilers.
 #if FLT_EVAL_METHOD == 0 || __GNUC__ == 0
 #define	STRICT_ASSIGN(type, lval, rval)	((lval) = (rval))
 #else
@@ -292,7 +295,8 @@ do {								\
 	}					\
 } while (0)
 #endif
-#endif /* FLT_EVAL_METHOD */
+#endif // FLT_EVAL_METHOD
+*/
 
 /* Support switching the mode to FP_PE if necessary. */
 #if defined(__i386__) && !defined(NO_FPSETPREC)
@@ -425,7 +429,8 @@ do {								\
  */
 void _scan_nan(uint32_t *__words, int __num_words, const char *__s);
 
-#ifdef _COMPLEX_H
+//VBS
+//#ifdef _COMPLEX_H
 
 /*
  * C99 specifies that complex numbers have the same representation as
@@ -498,7 +503,7 @@ CMPLXL(long double x, long double y)
 }
 #endif
 
-#endif /* _COMPLEX_H */
+//#endif /* _COMPLEX_H */
 
 #ifdef __GNUCLIKE_ASM
 

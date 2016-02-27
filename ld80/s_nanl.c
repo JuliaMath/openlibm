@@ -26,7 +26,7 @@
  * $FreeBSD$
  */
 
-#include <math.h>
+#include <openlibm_math.h>
 
 #include "fpmath.h"
 #include "../src/math_private.h"

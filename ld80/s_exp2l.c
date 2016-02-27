@@ -24,18 +24,18 @@
  * SUCH DAMAGE.
  */
 
-#include <cdefs-compat.h>
+#include <openlibm_compat.h>
 __FBSDID("$FreeBSD$");
 
 #include <float.h>
 #include <stdint.h>
 
 #ifdef __i386__
-#include <ieeefp.h>
+#include <i387/bsd_ieeefp.h>
 #endif
 
 #include "fpmath.h"
-#include "math.h"
+#include <openlibm_math.h>
 #include "math_private.h"
 
 #define	TBLBITS	7

@@ -12,7 +12,7 @@
  */
 
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD$");
+//__FBSDID("$FreeBSD$");
 
 /* 
  * __ieee754_fmod(x,y)
@@ -20,7 +20,7 @@ __FBSDID("$FreeBSD$");
  * Method: shift and subtract
  */
 
-#include "math.h"
+#include <openlibm_math.h>
 #include "math_private.h"
 
 static const double one = 1.0, Zero[] = {0.0, -0.0,};

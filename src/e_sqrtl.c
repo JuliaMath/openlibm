@@ -25,13 +25,13 @@
  */
 
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD$");
+//__FBSDID("$FreeBSD$");
 
-#include <fenv.h>
+#include <openlibm_fenv.h>
 #include <float.h>
 
 #include "fpmath.h"
-#include "math.h"
+#include <openlibm_math.h>
 
 /* Return (x + ulp) for normal positive x. Assumes no overflow. */
 static inline long double

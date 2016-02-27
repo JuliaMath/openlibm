@@ -24,8 +24,8 @@
  * SUCH DAMAGE.
  */
 
-#include "cdefs-compat.h"
-//__FBSDID("$FreeBSD: src/lib/msun/src/s_csqrt.c,v 1.4 2008/08/08 00:15:16 das Exp $");
+#include "openlibm_compat.h"
+////__FBSDID("$FreeBSD: src/lib/msun/src/s_csqrt.c,v 1.4 2008/08/08 00:15:16 das Exp $");
 
 #include <float.h>
 #include <openlibm_complex.h>

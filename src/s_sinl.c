@@ -25,14 +25,14 @@
  */
 
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD$");
+//__FBSDID("$FreeBSD$");
 
 #include <float.h>
 #ifdef __i386__
 #include <ieeefp.h>
 #endif
 
-#include "math.h"
+#include <openlibm_math.h>
 #include "math_private.h"
 #if LDBL_MANT_DIG == 64
 #include "../ld80/e_rem_pio2l.h"

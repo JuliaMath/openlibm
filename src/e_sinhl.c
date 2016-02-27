@@ -12,7 +12,7 @@
  */
 
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD$");
+//__FBSDID("$FreeBSD$");
 
 /*
  * See e_sinh.c for complete comments.
@@ -26,8 +26,10 @@ __FBSDID("$FreeBSD$");
 #endif
 
 #include "fpmath.h"
-#include "math.h"
+#include <openlibm_math.h>
 #include "math_private.h"
+#include "math_private_openbsd.h"
+
 #include "k_expl.h"
 
 #if LDBL_MAX_EXP != 0x4000

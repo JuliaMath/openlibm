@@ -26,7 +26,7 @@
  * $FreeBSD$
  */
 
-#include <complex.h>
+#include <openlibm_complex.h>
 
 long double
 creall(long double complex z)

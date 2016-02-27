@@ -105,6 +105,8 @@ typedef uint64_t              u_int64_t;
 
 typedef float float_t;
 
-#define __always_inline
+#ifndef __always_inline
+# define __always_inline __inline __attribute__ ((__always_inline__))
+#endif
 
 #endif

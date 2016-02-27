@@ -14,13 +14,13 @@
  */
 
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD$");
+//__FBSDID("$FreeBSD$");
 
 /*
  * See e_j0.c for complete comments.
  */
 
-#include "math.h"
+#include <openlibm_math.h>
 #include "math_private.h"
 
 static __inline float pzerof(float), qzerof(float);

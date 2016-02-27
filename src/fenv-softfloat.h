@@ -27,13 +27,13 @@
  */
 
 #ifndef	_FENV_H_
-#error "This file is meant to be included only by <fenv.h>."
+#error "This file is meant to be included only by <openlibm_fenv.h>."
 #endif
 
 /*
- * This file implements the functionality of <fenv.h> on platforms that
+ * This file implements the functionality of <openlibm_fenv.h> on platforms that
  * lack an FPU and use softfloat in libc for floating point.  To use it,
- * you must write an <fenv.h> that provides the following:
+ * you must write an <openlibm_fenv.h> that provides the following:
  *
  *   - a typedef for fenv_t, which may be an integer or struct type
  *   - a typedef for fexcept_t (XXX This file assumes fexcept_t is a

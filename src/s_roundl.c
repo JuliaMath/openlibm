@@ -25,7 +25,7 @@
  */
 
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD$");
+//__FBSDID("$FreeBSD$");
 
 #include <float.h>
 #ifdef __i386__
@@ -33,7 +33,7 @@ __FBSDID("$FreeBSD$");
 #endif
 
 #include "fpmath.h"
-#include "math.h"
+#include <openlibm_math.h>
 #include "math_private.h"
 
 long double

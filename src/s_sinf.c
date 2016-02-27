@@ -15,11 +15,11 @@
  */
 
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD$");
+//__FBSDID("$FreeBSD$");
 
 #include <float.h>
 
-#include "math.h"
+#include <openlibm_math.h>
 #define	INLINE_KERNEL_COSDF
 #define	INLINE_KERNEL_SINDF
 #define INLINE_REM_PIO2F

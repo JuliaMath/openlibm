@@ -28,7 +28,7 @@
  */
 
 /* @(#)log.c	8.2 (Berkeley) 11/30/93 */
-#include "cdefs-compat.h"
+#include "openlibm_compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/bsdsrc/b_log.c,v 1.9 2008/02/22 02:26:51 das Exp $");
 
 #include <openlibm_math.h>

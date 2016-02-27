@@ -28,7 +28,7 @@
  */
 
 /* @(#)exp.c	8.1 (Berkeley) 6/4/93 */
-#include "cdefs-compat.h"
+#include "openlibm_compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/bsdsrc/b_exp.c,v 1.9 2011/10/16 05:37:20 das Exp $");
 
 #include <openlibm_math.h>

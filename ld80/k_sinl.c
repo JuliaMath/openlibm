@@ -11,7 +11,7 @@
  * ====================================================
  */
 
-#include <cdefs-compat.h>
+#include <openlibm_compat.h>
 __FBSDID("$FreeBSD$");
 
 /*

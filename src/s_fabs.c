@@ -18,7 +18,7 @@ static char rcsid[] = "$FreeBSD$";
  * fabs(x) returns the absolute value of x.
  */
 
-#include "math.h"
+#include <openlibm_math.h>
 #include "math_private.h"
 
 double

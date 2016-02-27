@@ -39,7 +39,7 @@ endif
 ifneq ($(ARCH), arm)
 ifneq ($(ARCH), powerpc)
 # C99 long double functions
-$(CUR_SRCS) +=	s_copysignl.c s_fabsl.c s_llrintl.c s_lrintl.c s_modfl.c s_roundl.c
+$(CUR_SRCS) +=	s_copysignl.c s_fabsl.c s_llrintl.c s_lrintl.c s_modfl.c # s_roundl.c
 
 # If long double != double use these; otherwise, we alias the double versions.
 $(CUR_SRCS) +=	e_acosl.c e_asinl.c e_atan2l.c e_fmodl.c \
