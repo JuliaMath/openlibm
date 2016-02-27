@@ -25,9 +25,9 @@
  */
 
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD$");
+//__FBSDID("$FreeBSD$");
 
-#include <math.h>
+#include <openlibm_math.h>
 
 /*
  * We simply call tgamma() rather than bloating the math library with

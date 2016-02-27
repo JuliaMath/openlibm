@@ -7,14 +7,14 @@
  *
  * Developed at SunSoft, a Sun Microsystems, Inc. business.
  * Permission to use, copy, modify, and distribute this
- * software is freely granted, provided that this notice 
+ * software is freely granted, provided that this notice
  * is preserved.
  * ====================================================
  *
  */
 
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD$");
+//__FBSDID("$FreeBSD$");
 
 /*
  * See e_acosh.c for complete comments.
@@ -29,8 +29,9 @@ __FBSDID("$FreeBSD$");
 #endif
 
 #include "fpmath.h"
-#include "math.h"
+#include <openlibm_math.h>
 #include "math_private.h"
+#include "math_private_openbsd.h"
 
 /* EXP_LARGE is the threshold above which we use acosh(x) ~= log(2x). */
 #if LDBL_MANT_DIG == 64
@@ -75,7 +76,7 @@ acoshl(long double x)
 	} else if (hx >= BIAS + EXP_LARGE) { /* x >= LARGE */
 	    if (hx >= 0x7fff) {		/* x is inf, NaN or misnormal */
 	        RETURNI(x+x);
-	    } else 
+	    } else
 		RETURNI(logl(x)+ln2);	/* acosh(huge)=log(2x), or misnormal */
 	} else if (hx == 0x3fff && x == 1) {
 	    RETURNI(0.0);		/* acosh(1) = 0 */

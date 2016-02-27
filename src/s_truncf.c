@@ -11,7 +11,7 @@
  */
 
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD$");
+//__FBSDID("$FreeBSD$");
 
 /*
  * truncf(x)
@@ -22,7 +22,7 @@ __FBSDID("$FreeBSD$");
  *	Inexact flag raised if x not equal to truncf(x).
  */
 
-#include "math.h"
+#include <openlibm_math.h>
 #include "math_private.h"
 
 static const float huge = 1.0e30F;

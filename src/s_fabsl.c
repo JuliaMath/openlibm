@@ -28,7 +28,7 @@
  * $FreeBSD$
  */
 
-#include <math.h>
+#include <openlibm_math.h>
 
 #include "fpmath.h"
 

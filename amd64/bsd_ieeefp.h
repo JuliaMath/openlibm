@@ -11,7 +11,11 @@
  * 2. Redistributions in binary form must reproduce the above copyright
  *    notice, this list of conditions and the following disclaimer in the
  *    documentation and/or other materials provided with the distribution.
- * 3. Neither the name of the University nor the names of its contributors
+ * 3. All advertising materials mentioning features or use of this software
+ *    must display the following acknowledgement:
+ *	This product includes software developed by the University of
+ *	California, Berkeley and its contributors.
+ * 4. Neither the name of the University nor the names of its contributors
  *    may be used to endorse or promote products derived from this software
  *    without specific prior written permission.
  *
@@ -28,28 +32,35 @@
  * SUCH DAMAGE.
  *
  * 	from: @(#) ieeefp.h 	1.0 (Berkeley) 9/23/93
- * $FreeBSD: src/sys/amd64/include/ieeefp.h,v 1.14 2005/04/12 23:12:00 jhb Exp $
- */
-
-/*
- *	IEEE floating point type and constant definitions.
+ * $FreeBSD$
  */
 
 #ifndef _MACHINE_IEEEFP_H_
 #define _MACHINE_IEEEFP_H_
 
 /*
- * FP rounding modes
+ * Deprecated historical FPU control interface
+ *
+ * IEEE floating point type, constant and function definitions.
+ * XXX: {FP,SSE}*FLD and {FP,SSE}*OFF are undocumented pollution.
+ */
+
+#ifndef _SYS_CDEFS_H_
+#error this file needs sys/cdefs.h as a prerequisite
+#endif
+
+/*
+ * Rounding modes.
  */
 typedef enum {
 	FP_RN=0,	/* round to nearest */
-	FP_RM,		/* round down to minus infinity */
-	FP_RP,		/* round up to plus infinity */
+	FP_RM,		/* round down towards minus infinity */
+	FP_RP,		/* round up towards plus infinity */
 	FP_RZ		/* truncate */
 } fp_rnd_t;
 
 /*
- * FP precision modes
+ * Precision (i.e., rounding precision) modes.
  */
 typedef enum {
 	FP_PS=0,	/* 24 bit (single-precision) */
@@ -61,7 +72,7 @@ typedef enum {
 #define fp_except_t	int
 
 /*
- * FP exception masks
+ * Exception bit masks.
  */
 #define FP_X_INV	0x01	/* invalid operation */
 #define FP_X_DNML	0x02	/* denormal */
@@ -72,23 +83,19 @@ typedef enum {
 #define FP_X_STK	0x40	/* stack fault */
 
 /*
- * FP registers
- */
-#define FP_MSKS_REG	0	/* exception masks */
-#define FP_PRC_REG	0	/* precision */
-#define FP_RND_REG	0	/* direction */
-#define FP_STKY_REG	1	/* sticky flags */
-
-/*
- * FP register bit field masks
+ * FPU control word bit-field masks.
  */
 #define FP_MSKS_FLD	0x3f	/* exception masks field */
 #define FP_PRC_FLD	0x300	/* precision control field */
-#define FP_RND_FLD	0xc00	/* round control field */
+#define	FP_RND_FLD	0xc00	/* rounding control field */
+
+/*
+ * FPU status word bit-field masks.
+ */
 #define FP_STKY_FLD	0x3f	/* sticky flags field */
 
 /*
- * SSE mxcsr register bit field masks
+ * SSE mxcsr register bit-field masks.
  */
 #define	SSE_STKY_FLD	0x3f	/* exception flags */
 #define	SSE_DAZ_FLD	0x40	/* Denormals are zero */
@@ -97,15 +104,19 @@ typedef enum {
 #define	SSE_FZ_FLD	0x8000	/* flush to zero on underflow */
 
 /*
- * FP register bit field offsets
+ * FPU control word bit-field offsets (shift counts).
  */
 #define FP_MSKS_OFF	0	/* exception masks offset */
 #define FP_PRC_OFF	8	/* precision control offset */
-#define FP_RND_OFF	10	/* round control offset */
+#define	FP_RND_OFF	10	/* rounding control offset */
+
+/*
+ * FPU status word bit-field offsets (shift counts).
+ */
 #define FP_STKY_OFF	0	/* sticky flags offset */
 
 /*
- * SSE mxcsr register bit field offsets
+ * SSE mxcsr register bit-field offsets (shift counts).
  */
 #define	SSE_STKY_OFF	0	/* exception flags offset */
 #define	SSE_DAZ_OFF	6	/* DAZ exception mask offset */
@@ -113,16 +124,43 @@ typedef enum {
 #define	SSE_RND_OFF	13	/* rounding control offset */
 #define	SSE_FZ_OFF	15	/* flush to zero offset */
 
-#if (defined(__GNUCLIKE_ASM) && defined(__CC_SUPPORTS___INLINE__)) || defined(_WIN32) \
-    && !defined(__cplusplus)
+#ifdef __GNUCLIKE_ASM
 
-#define	__fldenv(addr)	__asm __volatile("fldenv %0" : : "m" (*(addr)))
-#define	__fnstenv(addr)	__asm __volatile("fnstenv %0" : "=m" (*(addr)))
 #define	__fldcw(addr)	__asm __volatile("fldcw %0" : : "m" (*(addr)))
+#define	__fldenv(addr)	__asm __volatile("fldenv %0" : : "m" (*(addr)))
 #define	__fnstcw(addr)	__asm __volatile("fnstcw %0" : "=m" (*(addr)))
+#define	__fnstenv(addr)	__asm __volatile("fnstenv %0" : "=m" (*(addr)))
 #define	__fnstsw(addr)	__asm __volatile("fnstsw %0" : "=m" (*(addr)))
 #define	__ldmxcsr(addr)	__asm __volatile("ldmxcsr %0" : : "m" (*(addr)))
 #define	__stmxcsr(addr)	__asm __volatile("stmxcsr %0" : "=m" (*(addr)))
+
+/*
+ * Load the control word.  Be careful not to trap if there is a currently
+ * unmasked exception (ones that will become freshly unmasked are not a
+ * problem).  This case must be handled by a save/restore of the
+ * environment or even of the full x87 state.  Accessing the environment
+ * is very inefficient, so only do it when necessary.
+ */
+static __inline void
+__fnldcw(unsigned short _cw, unsigned short _newcw)
+{
+	struct {
+		unsigned _cw;
+		unsigned _other[6];
+	} _env;
+	unsigned short _sw;
+
+	if ((_cw & FP_MSKS_FLD) != FP_MSKS_FLD) {
+		__fnstsw(&_sw);
+		if (((_sw & ~_cw) & FP_STKY_FLD) != 0) {
+			__fnstenv(&_env);
+			_env._cw = _newcw;
+			__fldenv(&_env);
+			return;
+		}
+	}
+	__fldcw(&_newcw);
+}
 
 /*
  * General notes about conflicting SSE vs FP status bits.
@@ -135,28 +173,27 @@ typedef enum {
  * merge the two together.  I think.
  */
 
-/* Set rounding control */
-static __inline__ fp_rnd_t
+static __inline fp_rnd_t
 __fpgetround(void)
 {
 	unsigned short _cw;
 
 	__fnstcw(&_cw);
-	return ((_cw & FP_RND_FLD) >> FP_RND_OFF);
+	return ((fp_rnd_t)((_cw & FP_RND_FLD) >> FP_RND_OFF));
 }
 
-static __inline__ fp_rnd_t
+static __inline fp_rnd_t
 __fpsetround(fp_rnd_t _m)
 {
-	unsigned short _cw;
-	unsigned int _mxcsr;
 	fp_rnd_t _p;
+	unsigned _mxcsr;
+	unsigned short _cw, _newcw;
 
 	__fnstcw(&_cw);
-	_p = (_cw & FP_RND_FLD) >> FP_RND_OFF;
-	_cw &= ~FP_RND_FLD;
-	_cw |= (_m << FP_RND_OFF) & FP_RND_FLD;
-	__fldcw(&_cw);
+	_p = (fp_rnd_t)((_cw & FP_RND_FLD) >> FP_RND_OFF);
+	_newcw = _cw & ~FP_RND_FLD;
+	_newcw |= (_m << FP_RND_OFF) & FP_RND_FLD;
+	__fnldcw(_cw, _newcw);
 	__stmxcsr(&_mxcsr);
 	_mxcsr &= ~SSE_RND_FLD;
 	_mxcsr |= (_m << SSE_RND_OFF) & SSE_RND_FLD;
@@ -165,108 +202,107 @@ __fpsetround(fp_rnd_t _m)
 }
 
 /*
- * Set precision for fadd/fsub/fsqrt etc x87 instructions
+ * Get or set the rounding precision for x87 arithmetic operations.
  * There is no equivalent SSE mode or control.
  */
-static __inline__ fp_prec_t
+
+static __inline fp_prec_t
 __fpgetprec(void)
 {
 	unsigned short _cw;
 
 	__fnstcw(&_cw);
-	return ((_cw & FP_PRC_FLD) >> FP_PRC_OFF);
+	return ((fp_prec_t)((_cw & FP_PRC_FLD) >> FP_PRC_OFF));
 }
 
-static __inline__ fp_prec_t
-__fpsetprec(fp_rnd_t _m)
+static __inline fp_prec_t
+__fpsetprec(fp_prec_t _m)
 {
-	unsigned short _cw;
 	fp_prec_t _p;
+	unsigned short _cw, _newcw;
 
 	__fnstcw(&_cw);
-	_p = (_cw & FP_PRC_FLD) >> FP_PRC_OFF;
-	_cw &= ~FP_PRC_FLD;
-	_cw |= (_m << FP_PRC_OFF) & FP_PRC_FLD;
-	__fldcw(&_cw);
+	_p = (fp_prec_t)((_cw & FP_PRC_FLD) >> FP_PRC_OFF);
+	_newcw = _cw & ~FP_PRC_FLD;
+	_newcw |= (_m << FP_PRC_OFF) & FP_PRC_FLD;
+	__fnldcw(_cw, _newcw);
 	return (_p);
 }
 
 /*
- * Look at the exception masks
- * Note that x87 masks are inverse of the fp*() functions
- * API.  ie: mask = 1 means disable for x87 and SSE, but
- * for the fp*() api, mask = 1 means enabled.
+ * Get or set the exception mask.
+ * Note that the x87 mask bits are inverted by the API -- a mask bit of 1
+ * means disable for x87 and SSE, but for fp*mask() it means enable.
  */
-static __inline__ fp_except_t
+
+static __inline fp_except_t
 __fpgetmask(void)
 {
 	unsigned short _cw;
 
 	__fnstcw(&_cw);
-	return ((~_cw) & FP_MSKS_FLD);
+	return ((~_cw & FP_MSKS_FLD) >> FP_MSKS_OFF);
 }
 
-static __inline__ fp_except_t
+static __inline fp_except_t
 __fpsetmask(fp_except_t _m)
 {
-	unsigned short _cw;
-	unsigned int _mxcsr;
 	fp_except_t _p;
+	unsigned _mxcsr;
+	unsigned short _cw, _newcw;
 
 	__fnstcw(&_cw);
-	_p = (~_cw) & FP_MSKS_FLD;
-	_cw &= ~FP_MSKS_FLD;
-	_cw |= (~_m) & FP_MSKS_FLD;
-	__fldcw(&_cw);
+	_p = (~_cw & FP_MSKS_FLD) >> FP_MSKS_OFF;
+	_newcw = _cw & ~FP_MSKS_FLD;
+	_newcw |= (~_m << FP_MSKS_OFF) & FP_MSKS_FLD;
+	__fnldcw(_cw, _newcw);
 	__stmxcsr(&_mxcsr);
 	/* XXX should we clear non-ieee SSE_DAZ_FLD and SSE_FZ_FLD ? */
 	_mxcsr &= ~SSE_MSKS_FLD;
-	_mxcsr |= ((~_m) << SSE_MSKS_OFF) & SSE_MSKS_FLD;
+	_mxcsr |= (~_m << SSE_MSKS_OFF) & SSE_MSKS_FLD;
 	__ldmxcsr(&_mxcsr);
 	return (_p);
 }
 
-/* See which sticky exceptions are pending, and reset them */
-static __inline__ fp_except_t
+static __inline fp_except_t
 __fpgetsticky(void)
 {
+	unsigned _ex, _mxcsr;
 	unsigned short _sw;
-	unsigned int _mxcsr;
-	fp_except_t _ex;
 
 	__fnstsw(&_sw);
-	_ex = _sw & FP_STKY_FLD;
+	_ex = (_sw & FP_STKY_FLD) >> FP_STKY_OFF;
 	__stmxcsr(&_mxcsr);
-	_ex |= _mxcsr & SSE_STKY_FLD;
-	return (_ex);
+	_ex |= (_mxcsr & SSE_STKY_FLD) >> SSE_STKY_OFF;
+	return ((fp_except_t)_ex);
 }
 
-#endif /* __GNUCLIKE_ASM && __CC_SUPPORTS___INLINE__ && !__cplusplus */
+#endif /* __GNUCLIKE_ASM */
 
-#if !defined(__IEEEFP_NOINLINES__) && !defined(__cplusplus) \
-    && defined(__GNUCLIKE_ASM) && defined(__CC_SUPPORTS___INLINE__)
+#if !defined(__IEEEFP_NOINLINES__) && defined(__GNUCLIKE_ASM)
 
-#define	fpgetround()	__fpgetround()
-#define	fpsetround(_m)	__fpsetround(_m)
-#define	fpgetprec()	__fpgetprec()
-#define	fpsetprec(_m)	__fpsetprec(_m)
 #define	fpgetmask()	__fpgetmask()
-#define	fpsetmask(_m)	__fpsetmask(_m)
+#define	fpgetprec()	__fpgetprec()
+#define	fpgetround()	__fpgetround()
 #define	fpgetsticky()	__fpgetsticky()
+#define	fpsetmask(m)	__fpsetmask(m)
+#define	fpsetprec(m)	__fpsetprec(m)
+#define	fpsetround(m)	__fpsetround(m)
 
-/* Suppress prototypes in the MI header. */
-#define	_IEEEFP_INLINED_	1
+#else /* !(!__IEEEFP_NOINLINES__ && __GNUCLIKE_ASM) */
 
-#else /* !__IEEEFP_NOINLINES__ && !__cplusplus && __GNUCLIKE_ASM
-         && __CC_SUPPORTS___INLINE__ */
-
-/* Augment the userland declarations */
+/* Augment the userland declarations. */
 __BEGIN_DECLS
-extern fp_prec_t fpgetprec(void);
-extern fp_prec_t fpsetprec(fp_prec_t);
+extern fp_rnd_t    fpgetround(void);
+extern fp_rnd_t    fpsetround(fp_rnd_t);
+extern fp_except_t fpgetmask(void);
+extern fp_except_t fpsetmask(fp_except_t);
+extern fp_except_t fpgetsticky(void);
+extern fp_except_t fpsetsticky(fp_except_t);
+fp_prec_t	fpgetprec(void);
+fp_prec_t	fpsetprec(fp_prec_t);
 __END_DECLS
 
-#endif /* !__IEEEFP_NOINLINES__ && !__cplusplus && __GNUCLIKE_ASM
-          && __CC_SUPPORTS___INLINE__ */
+#endif /* !__IEEEFP_NOINLINES__ && __GNUCLIKE_ASM */
 
 #endif /* !_MACHINE_IEEEFP_H_ */

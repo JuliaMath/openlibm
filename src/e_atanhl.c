@@ -7,14 +7,14 @@
  *
  * Developed at SunSoft, a Sun Microsystems, Inc. business.
  * Permission to use, copy, modify, and distribute this
- * software is freely granted, provided that this notice 
+ * software is freely granted, provided that this notice
  * is preserved.
  * ====================================================
  *
  */
 
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD$");
+//__FBSDID("$FreeBSD$");
 
 /*
  * See e_atanh.c for complete comments.
@@ -29,8 +29,9 @@ __FBSDID("$FreeBSD$");
 #endif
 
 #include "fpmath.h"
-#include "math.h"
+#include <openlibm_math.h>
 #include "math_private.h"
+#include "math_private_openbsd.h"
 
 /* EXP_TINY is the threshold below which we use atanh(x) ~= x. */
 #if LDBL_MANT_DIG == 64
@@ -68,7 +69,7 @@ atanhl(long double x)
 	if (ix < 0x3ffe) {		/* |x| < 0.5, or misnormal */
 	    t = x+x;
 	    t = 0.5*log1pl(t+t*x/(one-x));
-	} else 
+	} else
 	    t = 0.5*log1pl((x+x)/(one-x));
 	RETURNI((hx & 0x8000) == 0 ? t : -t);
 }

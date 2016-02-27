@@ -45,6 +45,7 @@
 #include <openlibm_math.h>
 
 #include "math_private.h"
+#include "math_private_openbsd.h"
 
 long double
 hypotl(long double x, long double y)

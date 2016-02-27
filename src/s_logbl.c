@@ -16,7 +16,7 @@ static char rcsid[] = "$FreeBSD$";
 
 #include <float.h>
 #include <limits.h>
-#include <math.h>
+#include <openlibm_math.h>
 
 #include "fpmath.h"
 

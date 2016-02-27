@@ -6,7 +6,7 @@
  */
 /* $FreeBSD$ */
 
-#include "math.h"
+#include <openlibm_math.h>
 #include "math_private.h"
 
 float

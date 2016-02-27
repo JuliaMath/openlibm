@@ -11,7 +11,7 @@
  */
 
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD$");
+//__FBSDID("$FreeBSD$");
 
 /*
  * copysign(double x, double y)
@@ -19,7 +19,7 @@ __FBSDID("$FreeBSD$");
  * with the sign bit of y.
  */
 
-#include "math.h"
+#include <openlibm_math.h>
 #include "math_private.h"
 
 double

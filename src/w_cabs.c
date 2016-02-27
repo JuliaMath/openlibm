@@ -6,11 +6,11 @@
  */
 
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD$");
+//__FBSDID("$FreeBSD$");
 
-#include <complex.h>
+#include <openlibm_complex.h>
 #include <float.h>
-#include <math.h>
+#include <openlibm_math.h>
 
 double
 cabs(double complex z)

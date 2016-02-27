@@ -12,7 +12,7 @@
  */
 
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD$");
+//__FBSDID("$FreeBSD$");
 
 /* __ieee754_j1(x), __ieee754_y1(x)
  * Bessel function of the first and second kinds of order zero.
@@ -59,7 +59,7 @@ __FBSDID("$FreeBSD$");
  *	   by method mentioned above.
  */
 
-#include "math.h"
+#include <openlibm_math.h>
 #include "math_private.h"
 
 static __inline double pone(double), qone(double);

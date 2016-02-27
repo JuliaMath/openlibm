@@ -24,7 +24,7 @@ static char rcsid[] = "$FreeBSD$";
  *	No exception.
  */
 
-#include "math.h"
+#include <openlibm_math.h>
 #include "math_private.h"
 
 static const double one = 1.0;

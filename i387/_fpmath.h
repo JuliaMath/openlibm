@@ -23,7 +23,7 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  *
- * $FreeBSD: src/lib/libc/amd64/_fpmath.h,v 1.7 2008/01/17 16:39:06 bde Exp $
+ * $FreeBSD$
  */
 
 union IEEEl2bits {
@@ -33,13 +33,12 @@ union IEEEl2bits {
 		unsigned int	manh	:32;
 		unsigned int	exp	:15;
 		unsigned int	sign	:1;
-		unsigned int	junkl	:16;
-		unsigned int	junkh	:32;
+		unsigned int	junk	:16;
 	} bits;
 	struct {
-		unsigned long	man	:64;
-		unsigned int	expsign	:16;
-		unsigned long	junk	:48;
+		unsigned long long man	:64;
+		unsigned int 	expsign	:16;
+		unsigned int	junk	:16;
 	} xbits;
 };
 

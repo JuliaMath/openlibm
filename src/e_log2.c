@@ -12,7 +12,7 @@
  */
 
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD$");
+//__FBSDID("$FreeBSD$");
 
 /*
  * Return the base 2 logarithm of x.  See e_log.c and k_log.h for most
@@ -26,7 +26,7 @@ __FBSDID("$FreeBSD$");
 
 #include <float.h>
 
-#include "math.h"
+#include <openlibm_math.h>
 #include "math_private.h"
 #include "k_log.h"
 

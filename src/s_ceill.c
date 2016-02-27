@@ -12,7 +12,7 @@
  */
 
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD$");
+//__FBSDID("$FreeBSD$");
 
 /*
  * ceill(x)
@@ -24,7 +24,7 @@ __FBSDID("$FreeBSD$");
  */
 
 #include <float.h>
-#include <math.h>
+#include <openlibm_math.h>
 #include <stdint.h>
 
 #include "fpmath.h"

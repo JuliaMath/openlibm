@@ -14,9 +14,9 @@
  */
 
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD$");
+//__FBSDID("$FreeBSD$");
 
-#include "math.h"
+#include <openlibm_math.h>
 #include "math_private.h"
 
 #ifdef _SCALB_INT

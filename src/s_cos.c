@@ -11,7 +11,7 @@
  */
 
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD$");
+//__FBSDID("$FreeBSD$");
 
 /* cos(x)
  * Return cosine function of x.
@@ -46,7 +46,7 @@ __FBSDID("$FreeBSD$");
 
 #include <float.h>
 
-#include "math.h"
+#include <openlibm_math.h>
 #define INLINE_REM_PIO2
 #include "math_private.h"
 #include "e_rem_pio2.c"

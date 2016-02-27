@@ -9,7 +9,7 @@
  * ====================================================
 */
 
-#include "cdefs-compat.h"
+#include "openlibm_compat.h"
 
 #include <float.h>
 #include <openlibm_math.h>

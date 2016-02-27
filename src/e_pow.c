@@ -10,7 +10,7 @@
  */
 
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD$");
+//__FBSDID("$FreeBSD$");
 
 /* __ieee754_pow(x,y) return x**y
  *
@@ -57,7 +57,7 @@ __FBSDID("$FreeBSD$");
  * to produce the hexadecimal values shown.
  */
 
-#include "math.h"
+#include <openlibm_math.h>
 #include "math_private.h"
 
 static const double

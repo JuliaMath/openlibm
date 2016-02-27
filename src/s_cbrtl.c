@@ -15,15 +15,16 @@
  */
 
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD$");
+//__FBSDID("$FreeBSD$");
 
 #include <float.h>
 #ifdef __i386__
 #include <ieeefp.h>
 #endif
 
-#include "fpmath.h"    
-#include "math.h"
+#include <openlibm_complex.h>
+#include "fpmath.h"
+#include <openlibm_math.h>
 #include "math_private.h"
 
 #define	BIAS	(LDBL_MAX_EXP - 1)
@@ -65,7 +66,7 @@ cbrtl(long double x)
  	} else
 		k -= BIAS;
 	u.xbits.expsign = BIAS;
-	v.e = 1; 
+	v.e = 1;
 
 	x = u.e;
 	switch (k % 3) {

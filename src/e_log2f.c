@@ -10,13 +10,13 @@
  */
 
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD$");
+//__FBSDID("$FreeBSD$");
 
 /*
  * Float version of e_log2.c.  See the latter for most comments.
  */
 
-#include "math.h"
+#include <openlibm_math.h>
 #include "math_private.h"
 #include "k_logf.h"
 

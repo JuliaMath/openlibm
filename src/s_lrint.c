@@ -25,11 +25,11 @@
  */
 
 #include <sys/cdefs.h>
-#include <fenv.h>
-#include <math.h>
+#include <openlibm_fenv.h>
+#include <openlibm_math.h>
 
 #ifndef type
-__FBSDID("$FreeBSD$");
+//__FBSDID("$FreeBSD$");
 #define type		double
 #define	roundit		rint
 #define dtype		long

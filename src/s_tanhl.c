@@ -13,7 +13,7 @@
  */
 
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD$");
+//__FBSDID("$FreeBSD$");
 
 /*
  * See s_tanh.c for complete comments.
@@ -26,8 +26,9 @@ __FBSDID("$FreeBSD$");
 #include <ieeefp.h>
 #endif
 
-#include "math.h"
+#include <openlibm_math.h>
 #include "math_private.h"
+#include "math_private_openbsd.h"
 #include "fpmath.h"
 #include "k_expl.h"
 

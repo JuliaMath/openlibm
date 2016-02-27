@@ -14,7 +14,7 @@
  */
 
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD$");
+//__FBSDID("$FreeBSD$");
 
 /* __ieee754_gammaf_r(x, signgamp)
  * Reentrant version of the logarithm of the Gamma function
@@ -23,7 +23,7 @@ __FBSDID("$FreeBSD$");
  * Method: See __ieee754_lgammaf_r
  */
 
-#include "math.h"
+#include <openlibm_math.h>
 #include "math_private.h"
 
 float

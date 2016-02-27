@@ -25,10 +25,10 @@
  */
 
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD$");
+//__FBSDID("$FreeBSD$");
 
-#include <fenv.h>
-#include <math.h>
+#include <openlibm_fenv.h>
+#include <openlibm_math.h>
 
 /*
  * We save and restore the floating-point environment to avoid raising

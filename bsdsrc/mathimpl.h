@@ -33,7 +33,7 @@
 #ifndef _MATHIMPL_H_
 #define	_MATHIMPL_H_
 
-#include "cdefs-compat.h"
+#include "openlibm_compat.h"
 #include "math_private.h"
 
 /*

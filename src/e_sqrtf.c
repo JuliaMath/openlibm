@@ -17,7 +17,7 @@
 static char rcsid[] = "$FreeBSD$";
 #endif
 
-#include "math.h"
+#include <openlibm_math.h>
 #include "math_private.h"
 
 static	const float	one	= 1.0, tiny=1.0e-30;

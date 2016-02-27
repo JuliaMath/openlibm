@@ -10,7 +10,7 @@
  * ====================================================
  */
 
-#include <cdefs-compat.h>
+#include <openlibm_compat.h>
 __FBSDID("$FreeBSD$");
 
 /*
@@ -24,7 +24,7 @@ __FBSDID("$FreeBSD$");
 #endif
 
 #include "fpmath.h"
-#include "math.h"
+#include <openlibm_math.h>
 #include "math_private.h"
 
 /* XXX Prevent compilers from erroneously constant folding: */

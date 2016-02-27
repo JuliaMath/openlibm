@@ -12,7 +12,7 @@
  */
 
 #include <sys/cdefs.h>
-__FBSDID("$FreeBSD$");
+//__FBSDID("$FreeBSD$");
 
 /*
  * __ieee754_jn(n, x), __ieee754_yn(n, x)
@@ -40,7 +40,7 @@ __FBSDID("$FreeBSD$");
  *	
  */
 
-#include "math.h"
+#include <openlibm_math.h>
 #include "math_private.h"
 
 static const volatile double vone = 1, vzero = 0;
