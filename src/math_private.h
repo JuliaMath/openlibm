@@ -50,7 +50,6 @@
 #define	IEEE_WORD_ORDER	BYTE_ORDER
 #endif
 
-/*
 #if IEEE_WORD_ORDER == BIG_ENDIAN
 
 typedef union
@@ -68,7 +67,7 @@ typedef union
 } ieee_double_shape_type;
 
 #endif
-*/
+
 #if IEEE_WORD_ORDER == LITTLE_ENDIAN
 
 typedef union
