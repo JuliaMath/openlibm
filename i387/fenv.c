@@ -26,10 +26,10 @@
  * $FreeBSD: src/lib/msun/i387/fenv.c,v 1.8 2011/10/21 06:25:31 das Exp $
  */
 
-#include <cdefs-compat.h>
-#include <types-compat.h>
-#include <math_private.h>
-#include <i387/bsd_npx.h>
+#include "cdefs-compat.h"
+#include "types-compat.h"
+#include "math_private.h"
+#include "i387/bsd_npx.h"
 
 #define	__fenv_static
 #include <openlibm_fenv.h>
