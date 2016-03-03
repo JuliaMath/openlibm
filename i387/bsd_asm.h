@@ -40,7 +40,7 @@
 #include "osx_asm.h"
 #define CNAME(x) EXT(x)
 #else
-#include "bsd_cdefs.h"
+#include "cdefs-compat.h"
 
 #ifdef PIC
 #define	PIC_PROLOGUE	\

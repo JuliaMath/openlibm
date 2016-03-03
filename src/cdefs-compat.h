@@ -1,17 +1,6 @@
 #ifndef _CDEFS_COMPAT_H_
 #define	_CDEFS_COMPAT_H_
 
-#ifdef __MINIOS__
-/* No stdio.h on Mini-OS. */
-#include <sys/cdefs.h>
-#else
-/*
- * We cannot be certain that this operating system has <sys/cdefs.h>.
- * Instead, include a header file that is likely to pull in this header.
- */
-#include <stdio.h>
-#endif
-
 #if defined(__cplusplus)
 #define	__BEGIN_DECLS	extern "C" {
 #define	__END_DECLS	}
