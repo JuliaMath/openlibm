@@ -26,8 +26,10 @@ powerPC.
    Linux and Windows.
 3. Use `make USECLANG=1` to build with clang. This is the default on OS X
    and FreeBSD.
-4. Use `make ARCH=i386` to build for i386. Other supported architectures are
-   i486, i586, i686, x86_64, and various arm architectures.
+4. Architectures are auto-detected. Use `make ARCH=i386` to force a
+   build for i386. Other supported architectures are i486, i586, and
+   i686. GCC 4.8 is the minimum requirement for correct codegen on
+   older 32-bit architectures.
 5. On OpenBSD, you need to install GNU Make (port name: `gmake`) and a recent
    version of `gcc` (tested: 4.9.2), as the default version provided by OpenBSD
    is too old (4.2.1). If you use OpenBSD's port system for this (port name:
