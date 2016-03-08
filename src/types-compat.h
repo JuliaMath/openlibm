@@ -3,17 +3,6 @@
 
 #include <stdint.h>
 #include <limits.h>
-#include <stdint.h>
-
-#ifdef __GLIBC__
-/* Not sure what to do about __pure2 on linux */
-#define __pure2 
-#endif
-
-#ifdef _WIN32
-/* Not sure what to do about __pure2 on windows */
-#define __pure2 
-#endif
 
 typedef uint8_t               u_int8_t;
 typedef uint16_t              u_int16_t;

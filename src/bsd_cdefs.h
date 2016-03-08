@@ -93,7 +93,7 @@
  * for a given compiler, let the compile fail if it is told to use
  * a feature that we cannot live without.
  */
-#if __GNUC_PREREQ__(2, 7) || defined(__INTEL_COMPILER)
+#if !defined(__pure2) && (__GNUC_PREREQ__(2, 7) || defined(__INTEL_COMPILER))
 #define	__pure2		__attribute__((__const__))
 #endif
 
