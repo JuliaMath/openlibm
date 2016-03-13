@@ -30,7 +30,7 @@
 #include "math_private.h"
 
 #ifdef _WIN32
-#define __fenv_static
+#define __fenv_static DLLEXPORT
 #endif
 #include <openlibm_fenv.h>
 
