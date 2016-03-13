@@ -355,6 +355,7 @@ long double __kernel_sinl(long double, long double, int);
 long double __kernel_cosl(long double, long double);
 long double __kernel_tanl(long double, long double, int);
 
+#undef DLLEXPORT
 #ifdef _WIN32
 # ifdef IMPORT_EXPORTS
 #  define DLLEXPORT __declspec(dllimport)
@@ -364,5 +365,6 @@ long double __kernel_tanl(long double, long double, int);
 #else
 #define DLLEXPORT __attribute__ ((visibility("default")))
 #endif
+
 
 #endif /* !_MATH_PRIVATE_H_ */

@@ -33,6 +33,16 @@
 #define __pure2
 #endif
 
+#ifdef _WIN32
+# ifdef IMPORT_EXPORTS
+#  define DLLEXPORT __declspec(dllimport)
+# else
+#  define DLLEXPORT __declspec(dllexport)
+# endif
+#else
+#define DLLEXPORT __attribute__ ((visibility("default")))
+#endif
+
 /*
  * ANSI/POSIX
  */
@@ -200,286 +210,286 @@ int isopenlibm(void);
 /*
  * ANSI/POSIX
  */
-int	__fpclassifyd(double) __pure2;
-int	__fpclassifyf(float) __pure2;
-int	__fpclassifyl(long double) __pure2;
-int	__isfinitef(float) __pure2;
-int	__isfinite(double) __pure2;
-int	__isfinitel(long double) __pure2;
-int	__isinff(float) __pure2;
-int	__isinfl(long double) __pure2;
-int	__isnanf(float) __pure2;
-int	__isnanl(long double) __pure2;
-int	__isnormalf(float) __pure2;
-int	__isnormal(double) __pure2;
-int	__isnormall(long double) __pure2;
-int	__signbit(double) __pure2;
-int	__signbitf(float) __pure2;
-int	__signbitl(long double) __pure2;
+DLLEXPORT int	__fpclassifyd(double) __pure2;
+DLLEXPORT int	__fpclassifyf(float) __pure2;
+DLLEXPORT int	__fpclassifyl(long double) __pure2;
+DLLEXPORT int	__isfinitef(float) __pure2;
+DLLEXPORT int	__isfinite(double) __pure2;
+DLLEXPORT int	__isfinitel(long double) __pure2;
+DLLEXPORT int	__isinff(float) __pure2;
+DLLEXPORT int	__isinfl(long double) __pure2;
+DLLEXPORT int	__isnanf(float) __pure2;
+DLLEXPORT int	__isnanl(long double) __pure2;
+DLLEXPORT int	__isnormalf(float) __pure2;
+DLLEXPORT int	__isnormal(double) __pure2;
+DLLEXPORT int	__isnormall(long double) __pure2;
+DLLEXPORT int	__signbit(double) __pure2;
+DLLEXPORT int	__signbitf(float) __pure2;
+DLLEXPORT int	__signbitl(long double) __pure2;
 
-double	acos(double);
-double	asin(double);
-double	atan(double);
-double	atan2(double, double);
-double	cos(double);
-double	sin(double);
-double	tan(double);
+DLLEXPORT double	acos(double);
+DLLEXPORT double	asin(double);
+DLLEXPORT double	atan(double);
+DLLEXPORT double	atan2(double, double);
+DLLEXPORT double	cos(double);
+DLLEXPORT double	sin(double);
+DLLEXPORT double	tan(double);
 
-double	cosh(double);
-double	sinh(double);
-double	tanh(double);
+DLLEXPORT double	cosh(double);
+DLLEXPORT double	sinh(double);
+DLLEXPORT double	tanh(double);
 
-double	exp(double);
-double	frexp(double, int *);	/* fundamentally !__pure2 */
-double	ldexp(double, int);
-double	log(double);
-double	log10(double);
-double	modf(double, double *);	/* fundamentally !__pure2 */
+DLLEXPORT double	exp(double);
+DLLEXPORT double	frexp(double, int *);	/* fundamentally !__pure2 */
+DLLEXPORT double	ldexp(double, int);
+DLLEXPORT double	log(double);
+DLLEXPORT double	log10(double);
+DLLEXPORT double	modf(double, double *);	/* fundamentally !__pure2 */
 
-double	pow(double, double);
-double	sqrt(double);
+DLLEXPORT double	pow(double, double);
+DLLEXPORT double	sqrt(double);
 
-double	ceil(double);
-double	fabs(double) __pure2;
-double	floor(double);
-double	fmod(double, double);
+DLLEXPORT double	ceil(double);
+DLLEXPORT double	fabs(double) __pure2;
+DLLEXPORT double	floor(double);
+DLLEXPORT double	fmod(double, double);
 
 /*
  * These functions are not in C90.
  */
 #if __BSD_VISIBLE || __ISO_C_VISIBLE >= 1999 || __XSI_VISIBLE
-double	acosh(double);
-double	asinh(double);
-double	atanh(double);
-double	cbrt(double);
-double	erf(double);
-double	erfc(double);
-double	exp2(double);
-double	expm1(double);
-double	fma(double, double, double);
-double	hypot(double, double);
-int	ilogb(double) __pure2;
-int	(isinf)(double) __pure2;
-int	(isnan)(double) __pure2;
-double	lgamma(double);
-long long llrint(double);
-long long llround(double);
-double	log1p(double);
-double	log2(double);
-double	logb(double);
-long	lrint(double);
-long	lround(double);
-double	nan(const char *) __pure2;
-double	nextafter(double, double);
-double	remainder(double, double);
-double	remquo(double, double, int *);
-double	rint(double);
+DLLEXPORT double	acosh(double);
+DLLEXPORT double	asinh(double);
+DLLEXPORT double	atanh(double);
+DLLEXPORT double	cbrt(double);
+DLLEXPORT double	erf(double);
+DLLEXPORT double	erfc(double);
+DLLEXPORT double	exp2(double);
+DLLEXPORT double	expm1(double);
+DLLEXPORT double	fma(double, double, double);
+DLLEXPORT double	hypot(double, double);
+DLLEXPORT int	ilogb(double) __pure2;
+DLLEXPORT int	(isinf)(double) __pure2;
+DLLEXPORT int	(isnan)(double) __pure2;
+DLLEXPORT double	lgamma(double);
+DLLEXPORT long long llrint(double);
+DLLEXPORT long long llround(double);
+DLLEXPORT double	log1p(double);
+DLLEXPORT double	log2(double);
+DLLEXPORT double	logb(double);
+DLLEXPORT long	lrint(double);
+DLLEXPORT long	lround(double);
+DLLEXPORT double	nan(const char *) __pure2;
+DLLEXPORT double	nextafter(double, double);
+DLLEXPORT double	remainder(double, double);
+DLLEXPORT double	remquo(double, double, int *);
+DLLEXPORT double	rint(double);
 #endif /* __BSD_VISIBLE || __ISO_C_VISIBLE >= 1999 || __XSI_VISIBLE */
 
 #if __BSD_VISIBLE || __XSI_VISIBLE
-double	j0(double);
-double	j1(double);
-double	jn(int, double);
-double	y0(double);
-double	y1(double);
-double	yn(int, double);
+DLLEXPORT double	j0(double);
+DLLEXPORT double	j1(double);
+DLLEXPORT double	jn(int, double);
+DLLEXPORT double	y0(double);
+DLLEXPORT double	y1(double);
+DLLEXPORT double	yn(int, double);
 #endif /* __BSD_VISIBLE || __XSI_VISIBLE */
 
 #if __BSD_VISIBLE || __ISO_C_VISIBLE >= 1999
-double	copysign(double, double) __pure2;
-double	fdim(double, double);
-double	fmax(double, double) __pure2;
-double	fmin(double, double) __pure2;
-double	nearbyint(double);
-double	round(double);
-double	scalbln(double, long);
-double	scalbn(double, int);
-double	tgamma(double);
-double	trunc(double);
+DLLEXPORT double	copysign(double, double) __pure2;
+DLLEXPORT double	fdim(double, double);
+DLLEXPORT double	fmax(double, double) __pure2;
+DLLEXPORT double	fmin(double, double) __pure2;
+DLLEXPORT double	nearbyint(double);
+DLLEXPORT double	round(double);
+DLLEXPORT double	scalbln(double, long);
+DLLEXPORT double	scalbn(double, int);
+DLLEXPORT double	tgamma(double);
+DLLEXPORT double	trunc(double);
 #endif
 
 /*
  * BSD math library entry points
  */
 #if __BSD_VISIBLE
-int	isnanf(float) __pure2;
+DLLEXPORT int	isnanf(float) __pure2;
 
 /*
  * Reentrant version of lgamma; passes signgam back by reference as the
  * second argument; user must allocate space for signgam.
  */
-double	lgamma_r(double, int *);
+DLLEXPORT double	lgamma_r(double, int *);
 
 /*
  * Single sine/cosine function.
  */
-void	sincos(double, double *, double *);
+DLLEXPORT void	sincos(double, double *, double *);
 #endif /* __BSD_VISIBLE */
 
 /* float versions of ANSI/POSIX functions */
 #if __ISO_C_VISIBLE >= 1999
-float	acosf(float);
-float	asinf(float);
-float	atanf(float);
-float	atan2f(float, float);
-float	cosf(float);
-float	sinf(float);
-float	tanf(float);
+DLLEXPORT float	acosf(float);
+DLLEXPORT float	asinf(float);
+DLLEXPORT float	atanf(float);
+DLLEXPORT float	atan2f(float, float);
+DLLEXPORT float	cosf(float);
+DLLEXPORT float	sinf(float);
+DLLEXPORT float	tanf(float);
 
-float	coshf(float);
-float	sinhf(float);
-float	tanhf(float);
+DLLEXPORT float	coshf(float);
+DLLEXPORT float	sinhf(float);
+DLLEXPORT float	tanhf(float);
 
-float	exp2f(float);
-float	expf(float);
-float	expm1f(float);
-float	frexpf(float, int *);	/* fundamentally !__pure2 */
-int	ilogbf(float) __pure2;
-float	ldexpf(float, int);
-float	log10f(float);
-float	log1pf(float);
-float	log2f(float);
-float	logf(float);
-float	modff(float, float *);	/* fundamentally !__pure2 */
+DLLEXPORT float	exp2f(float);
+DLLEXPORT float	expf(float);
+DLLEXPORT float	expm1f(float);
+DLLEXPORT float	frexpf(float, int *);	/* fundamentally !__pure2 */
+DLLEXPORT int	ilogbf(float) __pure2;
+DLLEXPORT float	ldexpf(float, int);
+DLLEXPORT float	log10f(float);
+DLLEXPORT float	log1pf(float);
+DLLEXPORT float	log2f(float);
+DLLEXPORT float	logf(float);
+DLLEXPORT float	modff(float, float *);	/* fundamentally !__pure2 */
 
-float	powf(float, float);
-float	sqrtf(float);
+DLLEXPORT float	powf(float, float);
+DLLEXPORT float	sqrtf(float);
 
-float	ceilf(float);
-float	fabsf(float) __pure2;
-float	floorf(float);
-float	fmodf(float, float);
-float	roundf(float);
+DLLEXPORT float	ceilf(float);
+DLLEXPORT float	fabsf(float) __pure2;
+DLLEXPORT float	floorf(float);
+DLLEXPORT float	fmodf(float, float);
+DLLEXPORT float	roundf(float);
 
-float	erff(float);
-float	erfcf(float);
-float	hypotf(float, float);
-float	lgammaf(float);
-float	tgammaf(float);
+DLLEXPORT float	erff(float);
+DLLEXPORT float	erfcf(float);
+DLLEXPORT float	hypotf(float, float);
+DLLEXPORT float	lgammaf(float);
+DLLEXPORT float	tgammaf(float);
 
-float	acoshf(float);
-float	asinhf(float);
-float	atanhf(float);
-float	cbrtf(float);
-float	logbf(float);
-float	copysignf(float, float) __pure2;
-long long llrintf(float);
-long long llroundf(float);
-long	lrintf(float);
-long	lroundf(float);
-float	nanf(const char *) __pure2;
-float	nearbyintf(float);
-float	nextafterf(float, float);
-float	remainderf(float, float);
-float	remquof(float, float, int *);
-float	rintf(float);
-float	scalblnf(float, long);
-float	scalbnf(float, int);
-float	truncf(float);
+DLLEXPORT float	acoshf(float);
+DLLEXPORT float	asinhf(float);
+DLLEXPORT float	atanhf(float);
+DLLEXPORT float	cbrtf(float);
+DLLEXPORT float	logbf(float);
+DLLEXPORT float	copysignf(float, float) __pure2;
+DLLEXPORT long long llrintf(float);
+DLLEXPORT long long llroundf(float);
+DLLEXPORT long	lrintf(float);
+DLLEXPORT long	lroundf(float);
+DLLEXPORT float	nanf(const char *) __pure2;
+DLLEXPORT float	nearbyintf(float);
+DLLEXPORT float	nextafterf(float, float);
+DLLEXPORT float	remainderf(float, float);
+DLLEXPORT float	remquof(float, float, int *);
+DLLEXPORT float	rintf(float);
+DLLEXPORT float	scalblnf(float, long);
+DLLEXPORT float	scalbnf(float, int);
+DLLEXPORT float	truncf(float);
 
-float	fdimf(float, float);
-float	fmaf(float, float, float);
-float	fmaxf(float, float) __pure2;
-float	fminf(float, float) __pure2;
+DLLEXPORT float	fdimf(float, float);
+DLLEXPORT float	fmaf(float, float, float);
+DLLEXPORT float	fmaxf(float, float) __pure2;
+DLLEXPORT float	fminf(float, float) __pure2;
 #endif
 
 /*
  * float versions of BSD math library entry points
  */
 #if __BSD_VISIBLE
-float	dremf(float, float);
-float	j0f(float);
-float	j1f(float);
-float	jnf(int, float);
-float	y0f(float);
-float	y1f(float);
-float	ynf(int, float);
+DLLEXPORT float	dremf(float, float);
+DLLEXPORT float	j0f(float);
+DLLEXPORT float	j1f(float);
+DLLEXPORT float	jnf(int, float);
+DLLEXPORT float	y0f(float);
+DLLEXPORT float	y1f(float);
+DLLEXPORT float	ynf(int, float);
 
 /*
  * Float versions of reentrant version of lgamma; passes signgam back by
  * reference as the second argument; user must allocate space for signgam.
  */
-float	lgammaf_r(float, int *);
+DLLEXPORT float	lgammaf_r(float, int *);
 
 /*
  * Single sine/cosine function.
  */
-void	sincosf(float, float *, float *);
+DLLEXPORT void	sincosf(float, float *, float *);
 #endif	/* __BSD_VISIBLE */
 
 /*
  * long double versions of ISO/POSIX math functions
  */
 #if __ISO_C_VISIBLE >= 1999
-long double	acoshl(long double);
-long double	acosl(long double);
-long double	asinhl(long double);
-long double	asinl(long double);
-long double	atan2l(long double, long double);
-long double	atanhl(long double);
-long double	atanl(long double);
-long double	cbrtl(long double);
-long double	ceill(long double);
-long double	copysignl(long double, long double) __pure2;
-long double	coshl(long double);
-long double	cosl(long double);
-long double	erfcl(long double);
-long double	erfl(long double);
-long double	exp2l(long double);
-long double	expl(long double);
-long double	expm1l(long double);
-long double	fabsl(long double) __pure2;
-long double	fdiml(long double, long double);
-long double	floorl(long double);
-long double	fmal(long double, long double, long double);
-long double	fmaxl(long double, long double) __pure2;
-long double	fminl(long double, long double) __pure2;
-long double	fmodl(long double, long double);
-long double	frexpl(long double value, int *); /* fundamentally !__pure2 */
-long double	hypotl(long double, long double);
-int		ilogbl(long double) __pure2;
-long double	ldexpl(long double, int);
-long double	lgammal(long double);
-long long	llrintl(long double);
-long long	llroundl(long double);
-long double	log10l(long double);
-long double	log1pl(long double);
-long double	log2l(long double);
-long double	logbl(long double);
-long double	logl(long double);
-long		lrintl(long double);
-long		lroundl(long double);
-long double	modfl(long double, long double *); /* fundamentally !__pure2 */
-long double	nanl(const char *) __pure2;
-long double	nearbyintl(long double);
-long double	nextafterl(long double, long double);
-double		nexttoward(double, long double);
-float		nexttowardf(float, long double);
-long double	nexttowardl(long double, long double);
-long double	powl(long double, long double);
-long double	remainderl(long double, long double);
-long double	remquol(long double, long double, int *);
-long double	rintl(long double);
-long double	roundl(long double);
-long double	scalblnl(long double, long);
-long double	scalbnl(long double, int);
-long double	sinhl(long double);
-long double	sinl(long double);
-long double	sqrtl(long double);
-long double	tanhl(long double);
-long double	tanl(long double);
-long double	tgammal(long double);
-long double	truncl(long double);
+DLLEXPORT long double	acoshl(long double);
+DLLEXPORT long double	acosl(long double);
+DLLEXPORT long double	asinhl(long double);
+DLLEXPORT long double	asinl(long double);
+DLLEXPORT long double	atan2l(long double, long double);
+DLLEXPORT long double	atanhl(long double);
+DLLEXPORT long double	atanl(long double);
+DLLEXPORT long double	cbrtl(long double);
+DLLEXPORT long double	ceill(long double);
+DLLEXPORT long double	copysignl(long double, long double) __pure2;
+DLLEXPORT long double	coshl(long double);
+DLLEXPORT long double	cosl(long double);
+DLLEXPORT long double	erfcl(long double);
+DLLEXPORT long double	erfl(long double);
+DLLEXPORT long double	exp2l(long double);
+DLLEXPORT long double	expl(long double);
+DLLEXPORT long double	expm1l(long double);
+DLLEXPORT long double	fabsl(long double) __pure2;
+DLLEXPORT long double	fdiml(long double, long double);
+DLLEXPORT long double	floorl(long double);
+DLLEXPORT long double	fmal(long double, long double, long double);
+DLLEXPORT long double	fmaxl(long double, long double) __pure2;
+DLLEXPORT long double	fminl(long double, long double) __pure2;
+DLLEXPORT long double	fmodl(long double, long double);
+DLLEXPORT long double	frexpl(long double value, int *); /* fundamentally !__pure2 */
+DLLEXPORT long double	hypotl(long double, long double);
+DLLEXPORT int		ilogbl(long double) __pure2;
+DLLEXPORT long double	ldexpl(long double, int);
+DLLEXPORT long double	lgammal(long double);
+DLLEXPORT long long	llrintl(long double);
+DLLEXPORT long long	llroundl(long double);
+DLLEXPORT long double	log10l(long double);
+DLLEXPORT long double	log1pl(long double);
+DLLEXPORT long double	log2l(long double);
+DLLEXPORT long double	logbl(long double);
+DLLEXPORT long double	logl(long double);
+DLLEXPORT long		lrintl(long double);
+DLLEXPORT long		lroundl(long double);
+DLLEXPORT long double	modfl(long double, long double *); /* fundamentally !__pure2 */
+DLLEXPORT long double	nanl(const char *) __pure2;
+DLLEXPORT long double	nearbyintl(long double);
+DLLEXPORT long double	nextafterl(long double, long double);
+DLLEXPORT double		nexttoward(double, long double);
+DLLEXPORT float		nexttowardf(float, long double);
+DLLEXPORT long double	nexttowardl(long double, long double);
+DLLEXPORT long double	powl(long double, long double);
+DLLEXPORT long double	remainderl(long double, long double);
+DLLEXPORT long double	remquol(long double, long double, int *);
+DLLEXPORT long double	rintl(long double);
+DLLEXPORT long double	roundl(long double);
+DLLEXPORT long double	scalblnl(long double, long);
+DLLEXPORT long double	scalbnl(long double, int);
+DLLEXPORT long double	sinhl(long double);
+DLLEXPORT long double	sinl(long double);
+DLLEXPORT long double	sqrtl(long double);
+DLLEXPORT long double	tanhl(long double);
+DLLEXPORT long double	tanl(long double);
+DLLEXPORT long double	tgammal(long double);
+DLLEXPORT long double	truncl(long double);
 #endif /* __ISO_C_VISIBLE >= 1999 */
 
 /* Reentrant version of lgammal. */
 #if __BSD_VISIBLE
-long double	lgammal_r(long double, int *);
+DLLEXPORT long double	lgammal_r(long double, int *);
 
 /*
  * Single sine/cosine function.
  */
-void	sincosl(long double, long double *, long double *);
+DLLEXPORT void	sincosl(long double, long double *, long double *);
 #endif	/* __BSD_VISIBLE */
 
 #if defined(__cplusplus)

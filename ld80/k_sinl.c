@@ -49,7 +49,7 @@ S6 =  1.6059006598854211e-10,		/*  0x161242b90243b5.0p-85 */
 S7 = -7.6429779983024564e-13,		/* -0x1ae42ebd1b2e00.0p-93 */
 S8 =  2.6174587166648325e-15;		/*  0x179372ea0b3f64.0p-101 */
 
-DLLEXPORT long double
+long double
 __kernel_sinl(long double x, long double y, int iy)
 {
 	long double z,r,v;
