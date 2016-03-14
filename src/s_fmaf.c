@@ -39,7 +39,7 @@
  * direct double-precision arithmetic suffices, except where double
  * rounding occurs.
  */
-DLLEXPORT float
+OLM_DLLEXPORT float
 fmaf(float x, float y, float z)
 {
 	double xy, result;

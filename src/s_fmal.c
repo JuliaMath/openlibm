@@ -163,7 +163,7 @@ dd_mul(long double a, long double b)
  *	Dekker, T.  A Floating-Point Technique for Extending the
  *	Available Precision.  Numer. Math. 18, 224-242 (1971).
  */
-DLLEXPORT long double
+OLM_DLLEXPORT long double
 fmal(long double x, long double y, long double z)
 {
 	long double xs, ys, zs, adj;

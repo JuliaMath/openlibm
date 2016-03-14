@@ -2,6 +2,6 @@
 
 #include "math_private.h"
 
-DLLEXPORT int isopenlibm(void) {
+OLM_DLLEXPORT int isopenlibm(void) {
     return 1;
 }

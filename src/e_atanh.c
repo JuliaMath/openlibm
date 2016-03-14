@@ -40,7 +40,7 @@
 static const double one = 1.0, huge = 1e300;
 static const double zero = 0.0;
 
-DLLEXPORT double
+OLM_DLLEXPORT double
 __ieee754_atanh(double x)
 {
 	double t;

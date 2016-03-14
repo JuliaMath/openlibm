@@ -30,7 +30,7 @@
 #include "math_private.h"
 
 #ifdef _WIN32
-#define __fenv_static
+#define __fenv_static OLM_DLLEXPORT
 #endif
 #include <openlibm_fenv.h>
 
@@ -48,10 +48,10 @@ const fenv_t __fe_dfl_env = {
 	__INITIAL_MXCSR__
 };
 
-extern inline DLLEXPORT int feclearexcept(int __excepts);
-extern inline DLLEXPORT int fegetexceptflag(fexcept_t *__flagp, int __excepts);
+extern inline OLM_DLLEXPORT int feclearexcept(int __excepts);
+extern inline OLM_DLLEXPORT int fegetexceptflag(fexcept_t *__flagp, int __excepts);
 
-DLLEXPORT int
+OLM_DLLEXPORT int
 fesetexceptflag(const fexcept_t *flagp, int excepts)
 {
 	fenv_t env;
@@ -69,7 +69,7 @@ fesetexceptflag(const fexcept_t *flagp, int excepts)
 	return (0);
 }
 
-DLLEXPORT int
+OLM_DLLEXPORT int
 feraiseexcept(int excepts)
 {
 	fexcept_t ex = excepts;
@@ -79,11 +79,11 @@ feraiseexcept(int excepts)
 	return (0);
 }
 
-extern inline DLLEXPORT int fetestexcept(int __excepts);
-extern inline DLLEXPORT int fegetround(void);
-extern inline DLLEXPORT int fesetround(int __round);
+extern inline OLM_DLLEXPORT int fetestexcept(int __excepts);
+extern inline OLM_DLLEXPORT int fegetround(void);
+extern inline OLM_DLLEXPORT int fesetround(int __round);
 
-DLLEXPORT int
+OLM_DLLEXPORT int
 fegetenv(fenv_t *envp)
 {
 
@@ -97,7 +97,7 @@ fegetenv(fenv_t *envp)
 	return (0);
 }
 
-DLLEXPORT int
+OLM_DLLEXPORT int
 feholdexcept(fenv_t *envp)
 {
 	uint32_t mxcsr;
@@ -112,9 +112,9 @@ feholdexcept(fenv_t *envp)
 	return (0);
 }
 
-extern inline DLLEXPORT int fesetenv(const fenv_t *__envp);
+extern inline OLM_DLLEXPORT int fesetenv(const fenv_t *__envp);
 
-DLLEXPORT int
+OLM_DLLEXPORT int
 feupdateenv(const fenv_t *envp)
 {
 	uint32_t mxcsr;

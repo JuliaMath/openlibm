@@ -32,7 +32,7 @@
 
 #include "math_private.h"
 
-DLLEXPORT long double
+OLM_DLLEXPORT long double
 cargl(long double complex z)
 {
 

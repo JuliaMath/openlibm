@@ -24,7 +24,7 @@
 
 #include "math_private.h"
 
-DLLEXPORT float
+OLM_DLLEXPORT float
 fabsf(float x)
 {
 	u_int32_t ix;

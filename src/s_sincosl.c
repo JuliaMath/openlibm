@@ -23,7 +23,7 @@
 #error "Unsupported long double format"
 #endif
 
-DLLEXPORT void
+OLM_DLLEXPORT void
 sincosl( long double x, long double * s, long double * c )
 {
     *s = cosl( x );

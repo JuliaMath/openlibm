@@ -28,7 +28,7 @@ TWO23[2]={
  -8.3886080000e+06, /* 0xcb000000 */
 };
 
-DLLEXPORT float
+OLM_DLLEXPORT float
 rintf(float x)
 {
 	int32_t i0,j0,sx;

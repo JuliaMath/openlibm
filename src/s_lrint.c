@@ -46,7 +46,7 @@
  * significant bits than 'type'.  Hence, we bend over backwards for the
  * sake of correctness; an MD implementation could be more efficient.
  */
-DLLEXPORT dtype
+OLM_DLLEXPORT dtype
 fn(type x)
 {
 	fenv_t env;

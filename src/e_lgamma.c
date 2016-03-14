@@ -25,7 +25,7 @@
 
 #include "math_private.h"
 
-DLLEXPORT double
+OLM_DLLEXPORT double
 __ieee754_lgamma(double x)
 {
 #ifdef OPENLIBM_ONLY_THREAD_SAFE

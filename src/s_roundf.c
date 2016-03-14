@@ -31,7 +31,7 @@
 
 #include "math_private.h"
 
-DLLEXPORT float
+OLM_DLLEXPORT float
 roundf(float x)
 {
 	float t;

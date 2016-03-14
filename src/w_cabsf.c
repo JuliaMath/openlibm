@@ -10,7 +10,7 @@
 
 #include "math_private.h"
 
-DLLEXPORT float
+OLM_DLLEXPORT float
 cabsf(z)
 	float complex z;
 {

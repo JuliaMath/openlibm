@@ -19,7 +19,7 @@
 
 static	const float	one	= 1.0, tiny=1.0e-30;
 
-DLLEXPORT float
+OLM_DLLEXPORT float
 __ieee754_sqrtf(float x)
 {
 	float z;

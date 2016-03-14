@@ -18,7 +18,7 @@
 
 #include "math_private.h"
 
-DLLEXPORT double
+OLM_DLLEXPORT double
 fabs(double x)
 {
 	u_int32_t high;

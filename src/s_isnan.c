@@ -33,7 +33,7 @@
 
 /* Provided by libc */
 #if 1
-DLLEXPORT int
+OLM_DLLEXPORT int
 (isnan) (double d)
 {
 	union IEEEd2bits u;
@@ -43,7 +43,7 @@ DLLEXPORT int
 }
 #endif
 
-DLLEXPORT int
+OLM_DLLEXPORT int
 __isnanf(float f)
 {
 	union IEEEf2bits u;
@@ -53,7 +53,7 @@ __isnanf(float f)
 }
 
 #ifdef LONG_DOUBLE
-DLLEXPORT int
+OLM_DLLEXPORT int
 __isnanl(long double e)
 {
 	union IEEEl2bits u;

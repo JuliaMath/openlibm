@@ -30,7 +30,7 @@
 
 #include "math_private.h"
 
-DLLEXPORT float complex
+OLM_DLLEXPORT float complex
 conjf(float complex z)
 {
 

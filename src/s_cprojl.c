@@ -32,7 +32,7 @@
 
 #include "math_private.h"
 
-DLLEXPORT long double complex
+OLM_DLLEXPORT long double complex
 cprojl(long double complex z)
 {
 

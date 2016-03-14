@@ -24,7 +24,7 @@ static const float
 one	= 1.0,
 ln2	= 6.9314718246e-01;  /* 0x3f317218 */
 
-DLLEXPORT float
+OLM_DLLEXPORT float
 __ieee754_acoshf(float x)
 {
 	float t;

@@ -43,7 +43,7 @@
 
 static const double one = 1.0, two = 2.0, tiny = 1.0e-300, huge = 1.0e300;
 
-DLLEXPORT double
+OLM_DLLEXPORT double
 tanh(double x)
 {
 	double t,z;

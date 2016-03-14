@@ -36,7 +36,7 @@ ivln2lo    =  1.67517131648865118353e-10; /* 0x3de705fc, 0x2eefa200 */
 
 static const double zero   =  0.0;
 
-DLLEXPORT double
+OLM_DLLEXPORT double
 __ieee754_log2(double x)
 {
 	double f,hfsq,hi,lo,r,val_hi,val_lo,w,y;

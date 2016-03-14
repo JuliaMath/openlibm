@@ -26,7 +26,7 @@
 
 #include "math_private.h"
 
-DLLEXPORT float
+OLM_DLLEXPORT float
 copysignf(float x, float y)
 {
 	u_int32_t ix,iy;

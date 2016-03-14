@@ -77,7 +77,7 @@ static const double xxx[] = {
 #define	T	xxx
 /* INDENT ON */
 
-DLLEXPORT double
+double
 __kernel_tan(double x, double y, int iy) {
 	double z, r, v, w, s;
 	int32_t ix, hx;

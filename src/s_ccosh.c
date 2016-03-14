@@ -44,7 +44,7 @@
 
 static const double huge = 0x1p1023;
 
-DLLEXPORT double complex
+OLM_DLLEXPORT double complex
 ccosh(double complex z)
 {
 	double x, y, h;
@@ -146,7 +146,7 @@ ccosh(double complex z)
 	return (CMPLX((x * x) * (y - y), (x + x) * (y - y)));
 }
 
-DLLEXPORT double complex
+OLM_DLLEXPORT double complex
 ccos(double complex z)
 {
 

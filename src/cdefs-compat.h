@@ -15,7 +15,7 @@
 #define __strong_reference(sym,aliassym) __weak_reference(sym,aliassym)
 #else
 #define __strong_reference(sym,aliassym)	\
-	DLLEXPORT extern __typeof (sym) aliassym __attribute__ ((__alias__ (#sym)));
+	OLM_DLLEXPORT extern __typeof (sym) aliassym __attribute__ ((__alias__ (#sym)));
 #endif /* __APPLE__ */
 #endif /* __strong_reference */
 

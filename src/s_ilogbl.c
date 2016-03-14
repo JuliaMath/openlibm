@@ -20,7 +20,7 @@
 #include "fpmath.h"
 #include "math_private.h"
 
-DLLEXPORT int
+OLM_DLLEXPORT int
 ilogbl(long double x)
 {
 	union IEEEl2bits u;

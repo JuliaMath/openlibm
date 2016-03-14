@@ -32,7 +32,7 @@
 #include "fpmath.h"
 #include "math_private.h"
 
-DLLEXPORT float
+OLM_DLLEXPORT float
 fminf(float x, float y)
 {
 	union IEEEf2bits u[2];

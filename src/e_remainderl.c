@@ -30,7 +30,7 @@
 #include <openlibm_math.h>
 #include "math_private.h"
 
-DLLEXPORT long double
+OLM_DLLEXPORT long double
 remainderl(long double x, long double y)
 {
 	int quo;

@@ -39,7 +39,7 @@
 #error "Unsupported long double format"
 #endif
 
-DLLEXPORT long double
+OLM_DLLEXPORT long double
 sinl(long double x)
 {
 	union IEEEl2bits z;

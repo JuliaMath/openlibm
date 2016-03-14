@@ -28,7 +28,7 @@
 
 static const float huge = 1.0e30F;
 
-DLLEXPORT float
+OLM_DLLEXPORT float
 truncf(float x)
 {
 	int32_t i0,j0;

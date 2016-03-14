@@ -36,7 +36,7 @@
 #error "Unsupported long double format"
 #endif
 
-DLLEXPORT long double
+OLM_DLLEXPORT long double
 frexpl(long double x, int *ex)
 {
 	union IEEEl2bits u;

@@ -35,7 +35,7 @@ s2pio2 = 2*M_PI_2,			/* 0x400921FB, 0x54442D18 */
 s3pio2 = 3*M_PI_2,			/* 0x4012D97C, 0x7F3321D2 */
 s4pio2 = 4*M_PI_2;			/* 0x401921FB, 0x54442D18 */
 
-DLLEXPORT float
+OLM_DLLEXPORT float
 sinf(float x)
 {
 	double y;

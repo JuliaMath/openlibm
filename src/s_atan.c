@@ -70,7 +70,7 @@ static const double aT[] = {
 one   = 1.0,
 huge   = 1.0e300;
 
-DLLEXPORT double
+OLM_DLLEXPORT double
 atan(double x)
 {
 	double w,s1,s2,z;

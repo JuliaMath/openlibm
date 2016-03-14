@@ -32,7 +32,7 @@
 #include "fpmath.h"
 #include "math_private.h"
 
-DLLEXPORT double
+OLM_DLLEXPORT double
 fmax(double x, double y)
 {
 	union IEEEd2bits u[2];

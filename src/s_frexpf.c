@@ -23,7 +23,7 @@
 static const float
 two25 =  3.3554432000e+07; /* 0x4c000000 */
 
-DLLEXPORT float
+OLM_DLLEXPORT float
 frexpf(float x, int *eptr)
 {
 	int32_t hx,ix;

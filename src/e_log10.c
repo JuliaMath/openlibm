@@ -36,7 +36,7 @@ log10_2lo  =  3.69423907715893078616e-13; /* 0x3D59FEF3, 0x11F12B36 */
 
 static const double zero   =  0.0;
 
-DLLEXPORT double
+OLM_DLLEXPORT double
 __ieee754_log10(double x)
 {
 	double f,hfsq,hi,lo,r,val_hi,val_lo,w,y,y2;

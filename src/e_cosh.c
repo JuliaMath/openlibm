@@ -41,7 +41,7 @@
 
 static const double one = 1.0, half=0.5, huge = 1.0e300;
 
-DLLEXPORT double
+OLM_DLLEXPORT double
 __ieee754_cosh(double x)
 {
 	double t,w;

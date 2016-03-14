@@ -174,7 +174,7 @@ dd_mul(double a, double b)
  * Hardware instructions should be used on architectures that support it,
  * since this implementation will likely be several times slower.
  */
-DLLEXPORT double
+OLM_DLLEXPORT double
 fma(double x, double y, double z)
 {
 	double xs, ys, zs, adj;

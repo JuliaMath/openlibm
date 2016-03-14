@@ -38,7 +38,7 @@
 
 static const float huge = 0x1p127;
 
-DLLEXPORT float complex
+OLM_DLLEXPORT float complex
 csinhf(float complex z)
 {
 	float x, y, h;
@@ -96,7 +96,7 @@ csinhf(float complex z)
 	return (CMPLXF((x * x) * (y - y), (x + x) * (y - y)));
 }
 
-DLLEXPORT float complex
+OLM_DLLEXPORT float complex
 csinf(float complex z)
 {
 

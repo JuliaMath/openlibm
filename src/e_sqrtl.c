@@ -75,7 +75,7 @@ dec(long double x)
  * if possible.
  */
 
-DLLEXPORT long double
+OLM_DLLEXPORT long double
 sqrtl(long double x)
 {
 	union IEEEl2bits u;

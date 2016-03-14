@@ -37,7 +37,7 @@ T[] =  {
 extern
 #endif
 //__inline float
-DLLEXPORT float
+OLM_DLLEXPORT float
 __kernel_tandf(double x, int iy)
 {
 	double z,r,w,s,t,u;

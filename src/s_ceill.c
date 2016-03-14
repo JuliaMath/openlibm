@@ -52,7 +52,7 @@
 
 static const long double huge = 1.0e300;
 
-DLLEXPORT long double
+OLM_DLLEXPORT long double
 ceill(long double x)
 {
 	union IEEEl2bits u = { .e = x };

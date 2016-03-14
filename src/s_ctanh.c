@@ -71,7 +71,7 @@
 
 #include "math_private.h"
 
-DLLEXPORT double complex
+OLM_DLLEXPORT double complex
 ctanh(double complex z)
 {
 	double x, y;
@@ -134,7 +134,7 @@ ctanh(double complex z)
 	return (CMPLX((beta * rho * s) / denom, t / denom));
 }
 
-DLLEXPORT double complex
+OLM_DLLEXPORT double complex
 ctan(double complex z)
 {
 

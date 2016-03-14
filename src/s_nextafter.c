@@ -25,7 +25,7 @@
 
 #include "math_private.h"
 
-DLLEXPORT double
+OLM_DLLEXPORT double
 nextafter(double x, double y)
 {
 	volatile double t;

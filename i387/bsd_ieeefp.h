@@ -172,7 +172,7 @@ fpsetround(fp_rnd_t _m)
 }
 
 //static __inline fp_prec_t
-DLLEXPORT fp_prec_t
+OLM_DLLEXPORT fp_prec_t
 fpgetprec(void)
 {
 	unsigned short _cw;
@@ -182,7 +182,7 @@ fpgetprec(void)
 }
 
 //static __inline fp_prec_t
-DLLEXPORT fp_prec_t
+OLM_DLLEXPORT fp_prec_t
 fpsetprec(fp_prec_t _m)
 {
 	fp_prec_t _p;
