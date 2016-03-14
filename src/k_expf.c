@@ -54,7 +54,7 @@ __frexp_expf(float x, int *expt)
 	return (exp_x);
 }
 
-DLLEXPORT float
+OLM_DLLEXPORT float
 __ldexp_expf(float x, int expt)
 {
 	float exp_x, scale;
@@ -66,7 +66,7 @@ __ldexp_expf(float x, int expt)
 	return (exp_x * scale);
 }
 
-DLLEXPORT float complex
+OLM_DLLEXPORT float complex
 __ldexp_cexpf(float complex z, int expt)
 {
 	float x, y, exp_x, scale1, scale2;

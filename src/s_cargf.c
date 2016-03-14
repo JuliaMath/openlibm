@@ -32,7 +32,7 @@
 
 #include "math_private.h"
 
-DLLEXPORT float
+OLM_DLLEXPORT float
 cargf(float complex z)
 {
 

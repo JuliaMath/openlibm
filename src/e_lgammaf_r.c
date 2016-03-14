@@ -135,7 +135,7 @@ static const float zero=  0.0000000000e+00;
 }
 
 
-DLLEXPORT float
+OLM_DLLEXPORT float
 __ieee754_lgammaf_r(float x, int *signgamp)
 {
 	float t,y,z,nadj,p,p1,p2,p3,q,r,w;

@@ -34,7 +34,7 @@ S4 =  0x16cd878c3b46a7.0p-71;	/*  0.0000027183114939898219064 */
 extern
 #endif
 //__inline float
-DLLEXPORT float 
+OLM_DLLEXPORT float 
 __kernel_sindf(double x)
 {
 	double r, s, w, z;

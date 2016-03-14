@@ -26,7 +26,7 @@ one   =  1.0000000000e+00; /* 0x3F800000 */
 
 static const float zero  =  0.0000000000e+00;
 
-DLLEXPORT float
+OLM_DLLEXPORT float
 __ieee754_jnf(int n, float x)
 {
 	int32_t i,hx,ix, sgn;
@@ -164,7 +164,7 @@ __ieee754_jnf(int n, float x)
 	if(sgn==1) return -b; else return b;
 }
 
-DLLEXPORT float
+OLM_DLLEXPORT float
 __ieee754_ynf(int n, float x)
 {
 	int32_t i,hx,ix,ib;

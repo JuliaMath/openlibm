@@ -40,7 +40,7 @@
  * rounding can't overflow as long as emax >= p.
  */
 #define	DECL(type, fn, rint)	\
-DLLEXPORT type				\
+OLM_DLLEXPORT type				\
 fn(type x)			\
 {				\
 	type ret;		\

@@ -28,7 +28,7 @@
 
 static const float one = 1.0, Zero[] = {0.0, -0.0,};
 
-DLLEXPORT float
+OLM_DLLEXPORT float
 __ieee754_fmodf(float x, float y)
 {
 	int32_t n,hx,hy,hz,ix,iy,sx,i;

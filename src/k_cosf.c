@@ -35,7 +35,7 @@ C3  =  0x199342e0ee5069.0p-68;	/*  0.0000243904487962774090654 */
 extern
 #endif
 //__inline float
-DLLEXPORT float
+OLM_DLLEXPORT float
 __kernel_cosdf(double x)
 {
 	double r, w, z;

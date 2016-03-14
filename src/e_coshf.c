@@ -22,7 +22,7 @@
 
 static const float one = 1.0, half=0.5, huge = 1.0e30;
 
-DLLEXPORT float
+OLM_DLLEXPORT float
 __ieee754_coshf(float x)
 {
 	float t,w;

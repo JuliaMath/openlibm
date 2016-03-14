@@ -30,7 +30,7 @@
 #include "math_private.h"
 
 #define	DECL(type, fn)			\
-DLLEXPORT type					\
+OLM_DLLEXPORT type					\
 fn(type x, type y)			\
 {					\
 					\

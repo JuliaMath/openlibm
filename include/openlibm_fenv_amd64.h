@@ -125,8 +125,8 @@ fegetexceptflag(fexcept_t *__flagp, int __excepts)
 	return (0);
 }
 
-DLLEXPORT int fesetexceptflag(const fexcept_t *__flagp, int __excepts);
-DLLEXPORT int feraiseexcept(int __excepts);
+OLM_DLLEXPORT int fesetexceptflag(const fexcept_t *__flagp, int __excepts);
+OLM_DLLEXPORT int feraiseexcept(int __excepts);
 
 __fenv_static __attribute__((always_inline)) inline int
 fetestexcept(int __excepts)
@@ -176,8 +176,8 @@ fesetround(int __round)
 	return (0);
 }
 
-DLLEXPORT int fegetenv(fenv_t *__envp);
-DLLEXPORT int feholdexcept(fenv_t *__envp);
+OLM_DLLEXPORT int fegetenv(fenv_t *__envp);
+OLM_DLLEXPORT int feholdexcept(fenv_t *__envp);
 
 __fenv_static inline int
 fesetenv(const fenv_t *__envp)
@@ -196,12 +196,12 @@ fesetenv(const fenv_t *__envp)
 	return (0);
 }
 
-DLLEXPORT int feupdateenv(const fenv_t *__envp);
+OLM_DLLEXPORT int feupdateenv(const fenv_t *__envp);
 
 #if __BSD_VISIBLE
 
-DLLEXPORT int feenableexcept(int __mask);
-DLLEXPORT int fedisableexcept(int __mask);
+OLM_DLLEXPORT int feenableexcept(int __mask);
+OLM_DLLEXPORT int fedisableexcept(int __mask);
 
 /* We currently provide no external definition of fegetexcept(). */
 static inline int

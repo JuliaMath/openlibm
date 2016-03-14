@@ -30,7 +30,7 @@ pi      = 3.1415927410e+00; /* 0x40490fdb */
 static volatile float
 pi_lo   = -8.7422776573e-08; /* 0xb3bbbd2e */
 
-DLLEXPORT float
+OLM_DLLEXPORT float
 __ieee754_atan2f(float y, float x)
 {
 	float z;

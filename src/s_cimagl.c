@@ -30,7 +30,7 @@
 
 #include "math_private.h"
 
-DLLEXPORT long double
+OLM_DLLEXPORT long double
 cimagl(long double complex z)
 {
 	return (__imag__ z);

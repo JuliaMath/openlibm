@@ -32,7 +32,7 @@
 #include "fpmath.h"
 #include "math_private.h"
 
-DLLEXPORT long double
+OLM_DLLEXPORT long double
 fminl(long double x, long double y)
 {
 	union IEEEl2bits u[2];

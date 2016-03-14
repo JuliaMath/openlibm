@@ -337,7 +337,7 @@ static const double tbl[TBLSIZE * 2] = {
  *	Gal, S. and Bachelis, B.  An Accurate Elementary Mathematical Library
  *	for the IEEE Floating Point Standard.  TOMS 17(1), 26-46 (1991).
  */
-DLLEXPORT double
+OLM_DLLEXPORT double
 exp2(double x)
 {
 	double r, t, twopk, twopkp1000, z;

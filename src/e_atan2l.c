@@ -43,7 +43,7 @@ static const long double
 pi =  3.14159265358979323846264338327950280e+00L;
 #endif
 
-DLLEXPORT long double
+OLM_DLLEXPORT long double
 atan2l(long double y, long double x)
 {
 	union IEEEl2bits ux, uy;

@@ -26,7 +26,7 @@
 
 #include "math_private.h"
 
-DLLEXPORT float
+OLM_DLLEXPORT float
 __ieee754_lgammaf(float x)
 {
 #ifdef OPENLIBM_ONLY_THREAD_SAFE

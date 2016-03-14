@@ -55,7 +55,7 @@ static const type dtype_max = DTYPE_MAX + 0.5;
 #define	INRANGE(x)	(dtype_max - DTYPE_MAX != 0.5 || \
 			 ((x) > dtype_min && (x) < dtype_max))
 
-DLLEXPORT dtype
+OLM_DLLEXPORT dtype
 fn(type x)
 {
 

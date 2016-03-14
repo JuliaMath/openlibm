@@ -80,7 +80,7 @@ sb3  =  4.72810211e+01F, /*  0x1.7a3f88p+5 */
 sb4  =  8.93033314e+00F; /*  0x1.1dc54ap+3 */
 
 
-DLLEXPORT float
+OLM_DLLEXPORT float
 erff(float x)
 {
 	int32_t hx,ix,i;
@@ -127,7 +127,7 @@ erff(float x)
 	if(hx>=0) return one-r/x; else return  r/x-one;
 }
 
-DLLEXPORT float
+OLM_DLLEXPORT float
 erfcf(float x)
 {
 	int32_t hx,ix;

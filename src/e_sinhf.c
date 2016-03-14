@@ -22,7 +22,7 @@
 
 static const float one = 1.0, shuge = 1.0e37;
 
-DLLEXPORT float
+OLM_DLLEXPORT float
 __ieee754_sinhf(float x)
 {
 	float t,h;

@@ -355,15 +355,15 @@ long double __kernel_sinl(long double, long double, int);
 long double __kernel_cosl(long double, long double);
 long double __kernel_tanl(long double, long double, int);
 
-#undef DLLEXPORT
+#undef OLM_DLLEXPORT
 #ifdef _WIN32
 # ifdef IMPORT_EXPORTS
-#  define DLLEXPORT __declspec(dllimport)
+#  define OLM_DLLEXPORT __declspec(dllimport)
 # else
-#  define DLLEXPORT __declspec(dllexport)
+#  define OLM_DLLEXPORT __declspec(OLM_DLLEXPORT)
 # endif
 #else
-#define DLLEXPORT __attribute__ ((visibility("default")))
+#define OLM_DLLEXPORT __attribute__ ((visibility("default")))
 #endif
 
 

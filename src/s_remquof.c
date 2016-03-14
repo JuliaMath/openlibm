@@ -27,7 +27,7 @@ static const float Zero[] = {0.0, -0.0,};
  * method.  In practice, this is far more bits than are needed to use
  * remquo in reduction algorithms.
  */
-DLLEXPORT float
+OLM_DLLEXPORT float
 remquof(float x, float y, int *quo)
 {
 	int32_t n,hx,hy,hz,ix,iy,sx,i;

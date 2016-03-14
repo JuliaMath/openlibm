@@ -29,7 +29,7 @@
 
 static const double huge = 1.0e300;
 
-DLLEXPORT double
+OLM_DLLEXPORT double
 floor(double x)
 {
 	int32_t i0,i1,j0;

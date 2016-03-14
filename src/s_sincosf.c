@@ -63,7 +63,7 @@ __kernel_sincosdf( double x, float * s, float * c )
 	*s = k_s;
 }
 
-DLLEXPORT void
+OLM_DLLEXPORT void
 sincosf(float x, float * s, float * c) {
 	// Worst approximation of sin and cos NA
 	*s = x;

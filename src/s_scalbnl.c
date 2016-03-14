@@ -39,7 +39,7 @@ static const long double
 huge = 0x1p16000L,
 tiny = 0x1p-16000L;
 
-DLLEXPORT long double
+OLM_DLLEXPORT long double
 scalbnl (long double x, int n)
 {
 	union IEEEl2bits u;

@@ -30,7 +30,7 @@
 
 #include "math_private.h"
 
-DLLEXPORT long double complex
+OLM_DLLEXPORT long double complex
 conjl(long double complex z)
 {
 

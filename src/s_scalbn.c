@@ -30,7 +30,7 @@ twom54  =  5.55111512312578270212e-17, /* 0x3C900000, 0x00000000 */
 huge   = 1.0e+300,
 tiny   = 1.0e-300;
 
-DLLEXPORT double
+OLM_DLLEXPORT double
 scalbn (double x, int n)
 {
 	int32_t k,hx,lx;

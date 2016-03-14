@@ -86,7 +86,7 @@ __kernel_sincos( double x, double y, int iy, double * k_s, double * k_c )
         *k_s = x-((z*(half*y-v*r)-y)-v*S1);
 }
 
-DLLEXPORT void
+OLM_DLLEXPORT void
 sincos(double x, double * s, double * c)
 {
     double y[2];

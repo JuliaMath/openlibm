@@ -39,7 +39,7 @@
 static const long double huge = 1.0e300;
 static const float zero[] = { 0.0, -0.0 };
 
-DLLEXPORT long double
+OLM_DLLEXPORT long double
 truncl(long double x)
 {
 	union IEEEl2bits u = { .e = x };

@@ -30,7 +30,7 @@
 
 #include "math_private.h"
 
-DLLEXPORT float
+OLM_DLLEXPORT float
 crealf(float complex z)
 {
 	return z;

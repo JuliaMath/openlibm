@@ -50,7 +50,7 @@
 
 #include "math_private.h"
 
-DLLEXPORT long double complex
+OLM_DLLEXPORT long double complex
 cpowl(long double complex a, long double complex z)
 {
 	long double complex w;

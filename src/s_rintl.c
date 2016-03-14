@@ -56,7 +56,7 @@ shift[2] = {
 };
 static const float zero[2] = { 0.0, -0.0 };
 
-DLLEXPORT long double
+OLM_DLLEXPORT long double
 rintl(long double x)
 {
 	union IEEEl2bits u;
@@ -102,7 +102,7 @@ rintl(long double x)
  * rounding can't overflow as long as emax >= p.
  */
 #define	DECL(type, fn, rint)	\
-DLLEXPORT type				\
+OLM_DLLEXPORT type				\
 fn(type x)			\
 {				\
 	type ret;		\

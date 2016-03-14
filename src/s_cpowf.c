@@ -49,7 +49,7 @@
 
 #include "math_private.h"
 
-DLLEXPORT float complex
+OLM_DLLEXPORT float complex
 cpowf(float complex a, float complex z)
 {
 	float complex w;

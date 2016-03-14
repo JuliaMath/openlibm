@@ -30,7 +30,7 @@
 
 #include "math_private.h"
 
-DLLEXPORT double
+OLM_DLLEXPORT double
 creal(double complex z)
 {
 	return z;

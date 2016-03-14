@@ -211,7 +211,7 @@ static const double tbl[TBLSIZE * 2] = {
  *   The table entries each have 104 bits of accuracy, encoded as
  *   a pair of double precision values.
  */
-DLLEXPORT long double
+OLM_DLLEXPORT long double
 exp2l(long double x)
 {
 	union IEEEl2bits u, v;

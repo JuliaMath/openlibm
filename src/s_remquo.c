@@ -28,7 +28,7 @@ static const double Zero[] = {0.0, -0.0,};
  * method.  In practice, this is far more bits than are needed to use
  * remquo in reduction algorithms.
  */
-DLLEXPORT double
+OLM_DLLEXPORT double
 remquo(double x, double y, int *quo)
 {
 	int32_t n,hx,hy,hz,ix,iy,sx,i;

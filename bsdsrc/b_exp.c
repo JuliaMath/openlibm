@@ -83,7 +83,7 @@ static const double lntiny = -0x1.77af8ebeae354p9;
 static const double invln2 = 0x1.71547652b82fep0;
 
 #if 0
-DLLEXPORT double exp(x)
+OLM_DLLEXPORT double exp(x)
 double x;
 {
 	double  z,hi,lo,c;

@@ -15,7 +15,7 @@
 
 #include "math_private.h"
 
-DLLEXPORT long double
+OLM_DLLEXPORT long double
 cabsl(long double complex z)
 {
 	return hypotl(creall(z), cimagl(z));

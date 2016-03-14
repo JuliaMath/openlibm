@@ -44,7 +44,7 @@
 
 static const double huge = 0x1p1023;
 
-DLLEXPORT double complex
+OLM_DLLEXPORT double complex
 csinh(double complex z)
 {
 	double x, y, h;
@@ -147,7 +147,7 @@ csinh(double complex z)
 	return (CMPLX((x * x) * (y - y), (x + x) * (y - y)));
 }
 
-DLLEXPORT double complex
+OLM_DLLEXPORT double complex
 csin(double complex z)
 {
 

@@ -30,7 +30,7 @@
 
 #include "math_private.h"
 
-DLLEXPORT long double
+OLM_DLLEXPORT long double
 creall(long double complex z)
 {
 	return z;

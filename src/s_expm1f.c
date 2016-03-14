@@ -37,7 +37,7 @@ invln2		= 1.4426950216e+00,/* 0x3fb8aa3b */
 Q1 = -3.3333212137e-2,		/* -0x888868.0p-28 */
 Q2 =  1.5807170421e-3;		/*  0xcf3010.0p-33 */
 
-DLLEXPORT float
+OLM_DLLEXPORT float
 expm1f(float x)
 {
 	float y,hi,lo,c,t,e,hxs,hfx,r1,twopk;

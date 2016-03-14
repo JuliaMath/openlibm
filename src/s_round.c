@@ -31,7 +31,7 @@
 
 #include "math_private.h"
 
-DLLEXPORT double
+OLM_DLLEXPORT double
 round(double x)
 {
 	double t;

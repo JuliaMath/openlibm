@@ -37,7 +37,7 @@
  * essentially useless, since the function is superexponential and
  * floats have very limited range.
  */
-DLLEXPORT float
+OLM_DLLEXPORT float
 tgammaf(float x)
 {
 

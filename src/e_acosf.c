@@ -32,7 +32,7 @@ pS1 = -4.2743422091e-02,
 pS2 = -8.6563630030e-03,
 qS1 = -7.0662963390e-01;
 
-DLLEXPORT float
+OLM_DLLEXPORT float
 __ieee754_acosf(float x)
 {
 	float z,p,q,r,w,s,c,df;

@@ -31,7 +31,7 @@ ivln2lo    = -1.7605285393e-04; /* 0xb9389ad4 */
 
 static const float zero   =  0.0;
 
-DLLEXPORT float
+OLM_DLLEXPORT float
 __ieee754_log2f(float x)
 {
 	float f,hfsq,hi,lo,r,y;

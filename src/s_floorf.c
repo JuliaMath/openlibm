@@ -31,7 +31,7 @@
 
 static const float huge = 1.0e30;
 
-DLLEXPORT float
+OLM_DLLEXPORT float
 floorf(float x)
 {
 	int32_t i0,j0;

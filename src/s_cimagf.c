@@ -30,7 +30,7 @@
 
 #include "math_private.h"
 
-DLLEXPORT float
+OLM_DLLEXPORT float
 cimagf(float complex z)
 {
 	return (__imag__ z);

@@ -14,7 +14,7 @@
 
 #include "math_private.h"
 
-DLLEXPORT double
+OLM_DLLEXPORT double
 cabs(double complex z)
 {
 	return hypot(creal(z), cimag(z));

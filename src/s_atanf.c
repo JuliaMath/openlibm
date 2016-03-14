@@ -46,7 +46,7 @@ static const float
 one   = 1.0,
 huge   = 1.0e30;
 
-DLLEXPORT float
+OLM_DLLEXPORT float
 atanf(float x)
 {
 	float w,s1,s2,z;

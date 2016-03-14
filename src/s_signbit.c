@@ -31,7 +31,7 @@
 #include "fpmath.h"
 #include "math_private.h"
 
-DLLEXPORT int
+OLM_DLLEXPORT int
 __signbit(double d)
 {
 	union IEEEd2bits u;
@@ -40,7 +40,7 @@ __signbit(double d)
 	return (u.bits.sign);
 }
 
-DLLEXPORT int
+OLM_DLLEXPORT int
 __signbitf(float f)
 {
 	union IEEEf2bits u;
@@ -50,7 +50,7 @@ __signbitf(float f)
 }
 
 #ifdef LONG_DOUBLE
-DLLEXPORT int
+OLM_DLLEXPORT int
 __signbitl(long double e)
 {
 	union IEEEl2bits u;

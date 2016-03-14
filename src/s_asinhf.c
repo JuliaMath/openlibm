@@ -25,7 +25,7 @@ one =  1.0000000000e+00, /* 0x3F800000 */
 ln2 =  6.9314718246e-01, /* 0x3f317218 */
 huge=  1.0000000000e+30;
 
-DLLEXPORT float
+OLM_DLLEXPORT float
 asinhf(float x)
 {
 	float t,w;

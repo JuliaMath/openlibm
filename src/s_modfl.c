@@ -54,7 +54,7 @@
 
 static const long double zero[] = { 0.0L, -0.0L };
 
-DLLEXPORT long double
+OLM_DLLEXPORT long double
 modfl(long double x, long double *iptr)
 {
 	union IEEEl2bits ux;

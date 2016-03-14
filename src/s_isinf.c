@@ -32,7 +32,7 @@
 
 /* Provided by libc */
 #if 1
-DLLEXPORT int
+OLM_DLLEXPORT int
 (isinf) (double d)
 {
 	union IEEEd2bits u;
@@ -42,7 +42,7 @@ DLLEXPORT int
 }
 #endif
 
-DLLEXPORT int
+OLM_DLLEXPORT int
 __isinff(float f)
 {
 	union IEEEf2bits u;
@@ -52,7 +52,7 @@ __isinff(float f)
 }
 
 #ifdef LONG_DOUBLE
-DLLEXPORT int
+OLM_DLLEXPORT int
 __isinfl(long double e)
 {
 	union IEEEl2bits u;
