@@ -129,13 +129,6 @@ endif
 endif
 
 
-# *int / *intf need to be built with -O0
-src/%int.c.o: src/%int.c
-	$(CC) $(CPPFLAGS) -O0 $(CFLAGS_add) -c $< -o $@
-
-src/%intf.c.o: src/%intf.c
-	$(CC) $(CPPFLAGS) -O0 $(CFLAGS_add) -c $< -o $@
-
 %.c.o: %.c
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(CFLAGS_add) -c $< -o $@
 
