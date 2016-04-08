@@ -128,16 +128,16 @@ tgamma(x)
 {
 	struct Double u;
 
-	if (x >= 6) {
+	if (isgreaterequal(x, 6)) {
 		if(x > 171.63)
 			return (x / zero);
 		u = large_gam(x);
 		return(__exp__D(u.a, u.b));
-	} else if (x >= 1.0 + LEFT + x0)
+	} else if (isgreaterequal(x, 1.0 + LEFT + x0))
 		return (small_gam(x));
-	else if (x > 1.e-17)
+	else if (isgreater(x, 1.e-17))
 		return (smaller_gam(x));
-	else if (x > -1.e-17) {
+	else if (isgreater(x, -1.e-17)) {
 		if (x != 0.0)
 			u.a = one - tiny;	/* raise inexact */
 		return (one/x);

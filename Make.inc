@@ -73,6 +73,9 @@ REAL_ARCH := $(ARCH)
 ifeq ($(findstring arm,$(ARCH)),arm)
 override ARCH := arm
 endif
+ifeq ($(ARCH),aarch64)
+override ARCH := arm
+endif
 ifeq ($(findstring powerpc,$(ARCH)),powerpc)
 override ARCH := powerpc
 endif

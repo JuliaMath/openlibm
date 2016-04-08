@@ -2,7 +2,7 @@
 #include <fenv.h>
 #else /* !OPENLIBM_USE_HOST_FENV_H */
 
-#if defined(__arm__)
+#if defined(__aarch64__) || defined(__arm__)
 #include <openlibm_fenv_arm.h>
 #elif defined(__x86_64__)
 #include <openlibm_fenv_amd64.h>
