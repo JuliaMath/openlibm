@@ -2489,7 +2489,7 @@ expm1_test (void)
 #endif
   check_float ("expm1 (NaN) == NaN",  FUNC(expm1) (nan_value), nan_value, 0, 0, 0);
 
-  check_float ("expm1 (1) == M_El - 1.0",  FUNC(expm1) (1), M_El - 1.0, 0, 0, 0);
+  check_float ("expm1 (1) == M_El - 1.0",  FUNC(expm1) (1), M_El - 1.0, 1, 0, 0);
   check_float ("expm1 (0.7) == 1.0137527074704765216",  FUNC(expm1) (0.7L), 1.0137527074704765216L, DELTA859, 0, 0);
 
   print_max_error ("expm1", DELTAexpm1, 0);
@@ -3412,7 +3412,6 @@ modf_test (void)
 
   print_max_error ("modf", 0, 0);
 }
-
 
 static void
 nearbyint_test (void)

@@ -36,13 +36,13 @@
 #define DELTAexp CHOOSE(754, 0, 0, 754, 0, 0)	/* exp  */
 #define DELTAexp10 CHOOSE(1182, 1, 0, 1182, 1, 0)	/* exp10  */
 #define DELTAexp2 CHOOSE(462, 0, 0, 462, 0, 0)	/* exp2  */
-#define DELTAexpm1 CHOOSE(825, 0, 0, 825, 0, 0)	/* expm1  */
+#define DELTAexpm1 CHOOSE(825, 1, 1, 825, 0, 0)	/* expm1  */
 #define DELTAfmod CHOOSE(4096, 2, 1, 4096, 2, 1)	/* fmod  */
 #define DELTAgamma CHOOSE(1, 1, 0, 1, 1, 0)	/* gamma  */
 #define DELTAhypot CHOOSE(560, 1, 1, 560, 0, 0)	/* hypot  */
-#define DELTAj0 CHOOSE(0, 2, 1, 0, 2, 1)	/* j0  */
-#define DELTAj1 CHOOSE(2, 2, 1, 2, 2, 1)	/* j1  */
-#define DELTAjn CHOOSE(2, 5, 2, 2, 5, 2)	/* jn  */
+#define DELTAj0 CHOOSE(0, 2, 2, 0, 2, 1)	/* j0  */
+#define DELTAj1 CHOOSE(2, 2, 2, 2, 2, 1)	/* j1  */
+#define DELTAjn CHOOSE(2, 6, 4, 2, 5, 2)	/* jn  */
 #define DELTAlgamma CHOOSE(1, 1, 2, 1, 1, 2)	/* lgamma  */
 #define DELTAlog CHOOSE(2341, 1, 1, 2341, 1, 1)	/* log  */
 #define DELTAlog10 CHOOSE(2033, 1, 1, 2033, 1, 1)	/* log10  */
@@ -51,10 +51,10 @@
 #define DELTApow CHOOSE(725, 0, 0, 725, 0, 0)	/* pow  */
 #define DELTAsin CHOOSE(627, 0, 0, 627, 0, 0)	/* sin  */
 #define DELTAsincos CHOOSE(627, 1, 1, 627, 1, 1)	/* sincos  */
-#define DELTAsinh CHOOSE(1029, 0, 1, 1028, 0, 1)	/* sinh  */
+#define DELTAsinh CHOOSE(1029, 1, 1, 1028, 0, 1)	/* sinh  */
 #define DELTAsqrt CHOOSE(489, 0, 0, 489, 0, 0)	/* sqrt  */
 #define DELTAtan CHOOSE(1401, 0.5, 0, 1401, 0.5, 0)	/* tan  */
-#define DELTAtanh CHOOSE(521, 0, 0, 521, 0, 0)	/* tanh  */
+#define DELTAtanh CHOOSE(521, 1, 1, 521, 0, 0)	/* tanh  */
 #define DELTAtgamma CHOOSE(2, 2, 1, 2, 2, 1)	/* tgamma  */
 #define DELTAy0 CHOOSE(2, 3, 1, 2, 3, 1)	/* y0  */
 #define DELTAy1 CHOOSE(2, 3, 2, 2, 3, 2)	/* y1  */
@@ -67,7 +67,7 @@
 #define DELTA26 CHOOSE(1, 0, 0, 1, 0, 0)	/* asin (1.0) == pi/2  */
 #define DELTA27 CHOOSE(1, 0, 0, 1, 0, 0)	/* asin (-1.0) == -pi/2  */
 #define DELTA28 CHOOSE(1, 1, 0, 1, 0, 0)	/* asin (0.7) == 0.77539749661075306374035335271498708  */
-#define DELTA34 CHOOSE(656, 0, 0, 656, 0, 0)	/* asinh (0.7) == 0.652666566082355786  */
+#define DELTA34 CHOOSE(656, 1, 0, 656, 0, 0)	/* asinh (0.7) == 0.652666566082355786  */
 #define DELTA42 CHOOSE(549, 0, 0, 549, 0, 0)	/* atan (0.7) == 0.61072596438920861654375887649023613  */
 #define DELTA50 CHOOSE(1605, 1, 0, 1605, 1, 0)	/* atanh (0.7) == 0.8673005276940531944  */
 #define DELTA74 CHOOSE(549, 0, 0, 549, 0, 0)	/* atan2 (0.7, 1) == 0.61072596438920861654375887649023613  */
@@ -138,7 +138,7 @@
 #define DELTA801 CHOOSE(BUILD_COMPLEX (5, 25), 0, BUILD_COMPLEX (0, 1), BUILD_COMPLEX (5, 25), 0, BUILD_COMPLEX (0, 1))	/* ctanh (-2 - 3 i) == -0.9653858790221331242 + 0.0098843750383224937 i  */
 #define DELTA817 CHOOSE(1, 1, 0, 1, 1, 0)	/* erfc (0.7) == 0.32219880616258152702  */
 #define DELTA818 CHOOSE(3, 1, 2, 3, 1, 2)	/* erfc (1.2) == 0.089686021770364619762  */
-#define DELTA819 CHOOSE(0, 1, 0, 0, 1, 0)	/* erfc (2.0) == 0.0046777349810472658379  */
+#define DELTA819 CHOOSE(0, 1, 1, 0, 1, 0)	/* erfc (2.0) == 0.0046777349810472658379  */
 #define DELTA820 CHOOSE(12, 24, 12, 12, 24, 12)	/* erfc (4.1) == 0.67000276540848983727e-8  */
 #define DELTA821 CHOOSE(36, 0, 0, 36, 0, 0)	/* erfc (9) == 0.41370317465138102381e-36  */
 #define DELTA830 CHOOSE(412, 0, 0, 412, 0, 0)	/* exp (0.7) == 2.0137527074704765216  */
@@ -163,30 +163,30 @@
 #define DELTA1019 CHOOSE(406, 0, 1, 406, 0, 0)	/* hypot (12.4, -0.7) == 12.419742348374220601176836866763271  */
 #define DELTA1020 CHOOSE(406, 0, 1, 406, 0, 0)	/* hypot (-12.4, -0.7) == 12.419742348374220601176836866763271  */
 #define DELTA1024 CHOOSE(560, 1, 0, 560, 0, 0)	/* hypot (0.7, 1.2) == 1.3892443989449804508432547041028554  */
-#define DELTA1053 CHOOSE(0, 1, 1, 0, 1, 1)	/* j0 (2.0) == 0.22389077914123566805  */
+#define DELTA1053 CHOOSE(0, 2, 2, 0, 1, 1)	/* j0 (2.0) == 0.22389077914123566805  */
 #define DELTA1054 CHOOSE(0, 0, 1, 0, 0, 1)	/* j0 (8.0) == 0.17165080713755390609  */
-#define DELTA1055 CHOOSE(0, 2, 1, 0, 2, 1)	/* j0 (10.0) == -0.24593576445134833520  */
+#define DELTA1055 CHOOSE(0, 2, 2, 0, 2, 1)	/* j0 (10.0) == -0.24593576445134833520  */
 #define DELTA1064 CHOOSE(0, 1, 0, 0, 1, 0)	/* j1 (2.0) == 0.57672480775687338720  */
-#define DELTA1065 CHOOSE(1, 0, 1, 1, 0, 1)	/* j1 (8.0) == 0.23463634685391462438  */
-#define DELTA1066 CHOOSE(2, 2, 1, 2, 2, 1)	/* j1 (10.0) == 0.043472746168861436670  */
-#define DELTA1075 CHOOSE(0, 1, 1, 0, 1, 1)	/* jn (0, 2.0) == 0.22389077914123566805  */
+#define DELTA1065 CHOOSE(1, 1, 1, 1, 0, 1)	/* j1 (8.0) == 0.23463634685391462438  */
+#define DELTA1066 CHOOSE(2, 2, 2, 2, 2, 1)	/* j1 (10.0) == 0.043472746168861436670  */
+#define DELTA1075 CHOOSE(0, 2, 2, 0, 1, 1)	/* jn (0, 2.0) == 0.22389077914123566805  */
 #define DELTA1076 CHOOSE(1, 0, 1, 1, 0, 1)	/* jn (0, 8.0) == 0.17165080713755390609  */
 #define DELTA1077 CHOOSE(2, 2, 1, 2, 2, 1)	/* jn (0, 10.0) == -0.24593576445134833520  */
 #define DELTA1086 CHOOSE(0, 1, 0, 0, 1, 0)	/* jn (1, 2.0) == 0.57672480775687338720  */
-#define DELTA1087 CHOOSE(1, 0, 1, 1, 0, 1)	/* jn (1, 8.0) == 0.23463634685391462438  */
-#define DELTA1088 CHOOSE(2, 2, 1, 2, 2, 1)	/* jn (1, 10.0) == 0.043472746168861436670  */
+#define DELTA1087 CHOOSE(1, 1, 1, 1, 0, 1)	/* jn (1, 8.0) == 0.23463634685391462438  */
+#define DELTA1088 CHOOSE(2, 2, 2, 2, 2, 1)	/* jn (1, 10.0) == 0.043472746168861436670  */
 #define DELTA1091 CHOOSE(1, 0, 0, 1, 0, 0)	/* jn (3, -1.0) == -0.019563353982668405919  */
 #define DELTA1093 CHOOSE(1, 1, 0, 1, 1, 0)	/* jn (3, 0.1) == 0.000020820315754756261429  */
-#define DELTA1094 CHOOSE(0, 2, 0, 0, 2, 0)	/* jn (3, 0.7) == 0.0069296548267508408077  */
+#define DELTA1094 CHOOSE(0, 2, 1, 0, 2, 0)	/* jn (3, 0.7) == 0.0069296548267508408077  */
 #define DELTA1095 CHOOSE(1, 0, 0, 1, 0, 0)	/* jn (3, 1.0) == 0.019563353982668405919  */
 #define DELTA1096 CHOOSE(0, 1, 1, 0, 1, 1)	/* jn (3, 2.0) == 0.12894324947440205110  */
 #define DELTA1097 CHOOSE(1, 3, 1, 1, 3, 1)	/* jn (3, 10.0) == 0.058379379305186812343  */
 #define DELTA1100 CHOOSE(1, 1, 1, 1, 1, 1)	/* jn (10, -1.0) == 0.26306151236874532070e-9  */
-#define DELTA1102 CHOOSE(1, 5, 2, 1, 5, 2)	/* jn (10, 0.1) == 0.26905328954342155795e-19  */
+#define DELTA1102 CHOOSE(1, 6, 4, 1, 5, 2)	/* jn (10, 0.1) == 0.26905328954342155795e-19  */
 #define DELTA1103 CHOOSE(2, 4, 1, 2, 4, 1)	/* jn (10, 0.7) == 0.75175911502153953928e-11  */
 #define DELTA1104 CHOOSE(1, 1, 1, 1, 1, 1)	/* jn (10, 1.0) == 0.26306151236874532070e-9  */
-#define DELTA1105 CHOOSE(1, 2, 1, 1, 2, 1)	/* jn (10, 2.0) == 0.25153862827167367096e-6  */
-#define DELTA1106 CHOOSE(2, 4, 2, 2, 4, 2)	/* jn (10, 10.0) == 0.20748610663335885770  */
+#define DELTA1105 CHOOSE(1, 2, 2, 1, 2, 1)	/* jn (10, 2.0) == 0.25153862827167367096e-6  */
+#define DELTA1106 CHOOSE(2, 4, 3, 2, 4, 2)	/* jn (10, 10.0) == 0.20748610663335885770  */
 #define DELTA1126 CHOOSE(1, 1, 0, 1, 1, 0)	/* lgamma (-0.5) == log(2*sqrt(pi))  */
 #define DELTA1128 CHOOSE(0, 1, 1, 0, 1, 1)	/* lgamma (0.7) == 0.26086724653166651439  */
 #define DELTA1130 CHOOSE(1, 1, 2, 1, 1, 2)	/* lgamma (1.2) == -0.853740900033158497197e-1  */
@@ -205,12 +205,12 @@
 #define DELTA1540 CHOOSE(0, 1, 0.5, 0, 1, 0.5)	/* sincos (M_PI_6l*2.0, &sin_res, &cos_res) puts 0.5 in cos_res  */
 #define DELTA1541 CHOOSE(627, 0, 0, 627, 0, 0)	/* sincos (0.7, &sin_res, &cos_res) puts 0.64421768723769105367261435139872014 in sin_res  */
 #define DELTA1542 CHOOSE(528, 1, 0, 528, 1, 0)	/* sincos (0.7, &sin_res, &cos_res) puts 0.76484218728448842625585999019186495 in cos_res  */
-#define DELTA1548 CHOOSE(1029, 0, 1, 1028, 0, 1)	/* sinh (0.7) == 0.75858370183953350346  */
+#define DELTA1548 CHOOSE(1029, 1, 1, 1028, 0, 1)	/* sinh (0.7) == 0.75858370183953350346  */
 #define DELTA1562 CHOOSE(325, 0, 0, 325, 0, 0)	/* sqrt (15239.9025) == 123.45  */
 #define DELTA1569 CHOOSE(0, 0.5, 0, 0, 0.5, 0)	/* tan (pi/4) == 1  */
 #define DELTA1570 CHOOSE(1401, 0, 0, 1401, 0, 0)	/* tan (0.7) == 0.84228838046307944812813500221293775  */
-#define DELTA1576 CHOOSE(521, 0, 0, 521, 0, 0)	/* tanh (0.7) == 0.60436777711716349631  */
-#define DELTA1577 CHOOSE(1, 0, 0, 1, 0, 0)	/* tanh (-0.7) == -0.60436777711716349631  */
+#define DELTA1576 CHOOSE(521, 1, 1, 521, 0, 0)	/* tanh (0.7) == 0.60436777711716349631  */
+#define DELTA1577 CHOOSE(1, 1, 1, 1, 0, 0)	/* tanh (-0.7) == -0.60436777711716349631  */
 #define DELTA1587 CHOOSE(0, 0, 1, 0, 0, 1)	/* tgamma (0.5) == sqrt (pi)  */
 #define DELTA1588 CHOOSE(2, 2, 1, 2, 2, 1)	/* tgamma (-0.5) == -2 sqrt (pi)  */
 #define DELTA1590 CHOOSE(2, 0, 0, 2, 0, 0)	/* tgamma (4) == 6  */
@@ -223,11 +223,11 @@
 #define DELTA1619 CHOOSE(1, 1, 1, 1, 1, 1)	/* y0 (8.0) == 0.22352148938756622053  */
 #define DELTA1620 CHOOSE(1, 2, 1, 2, 2, 1)	/* y0 (10.0) == 0.055671167283599391424  */
 #define DELTA1625 CHOOSE(1, 1, 1, 1, 1, 1)	/* y1 (0.1) == -6.4589510947020269877  */
-#define DELTA1626 CHOOSE(0, 1, 0, 0, 1, 0)	/* y1 (0.7) == -1.1032498719076333697  */
+#define DELTA1626 CHOOSE(0, 1, 1, 0, 1, 0)	/* y1 (0.7) == -1.1032498719076333697  */
 #define DELTA1627 CHOOSE(0, 1, 0, 0, 1, 0)	/* y1 (1.0) == -0.78121282130028871655  */
 #define DELTA1628 CHOOSE(0, 0, 1, 0, 0, 1)	/* y1 (1.5) == -0.41230862697391129595  */
 #define DELTA1629 CHOOSE(1, 1, 2, 1, 1, 2)	/* y1 (2.0) == -0.10703243154093754689  */
-#define DELTA1630 CHOOSE(2, 0, 2, 2, 0, 2)	/* y1 (8.0) == -0.15806046173124749426  */
+#define DELTA1630 CHOOSE(2, 1, 2, 2, 0, 2)	/* y1 (8.0) == -0.15806046173124749426  */
 #define DELTA1631 CHOOSE(0, 3, 2, 0, 3, 2)	/* y1 (10.0) == 0.24901542420695388392  */
 #define DELTA1636 CHOOSE(0, 1, 1, 0, 1, 1)	/* yn (0, 0.1) == -1.5342386513503668441  */
 #define DELTA1637 CHOOSE(2, 3, 1, 2, 3, 1)	/* yn (0, 0.7) == -0.19066492933739506743  */
@@ -237,17 +237,17 @@
 #define DELTA1641 CHOOSE(1, 1, 1, 1, 1, 1)	/* yn (0, 8.0) == 0.22352148938756622053  */
 #define DELTA1642 CHOOSE(1, 2, 1, 1, 2, 1)	/* yn (0, 10.0) == 0.055671167283599391424  */
 #define DELTA1647 CHOOSE(1, 1, 1, 1, 1, 1)	/* yn (1, 0.1) == -6.4589510947020269877  */
-#define DELTA1648 CHOOSE(0, 1, 0, 0, 1, 0)	/* yn (1, 0.7) == -1.1032498719076333697  */
+#define DELTA1648 CHOOSE(0, 1, 1, 0, 1, 0)	/* yn (1, 0.7) == -1.1032498719076333697  */
 #define DELTA1649 CHOOSE(0, 1, 0, 0, 1, 0)	/* yn (1, 1.0) == -0.78121282130028871655  */
 #define DELTA1650 CHOOSE(0, 0, 1, 0, 0, 1)	/* yn (1, 1.5) == -0.41230862697391129595  */
 #define DELTA1651 CHOOSE(1, 1, 2, 1, 1, 2)	/* yn (1, 2.0) == -0.10703243154093754689  */
-#define DELTA1652 CHOOSE(2, 0, 2, 2, 0, 2)	/* yn (1, 8.0) == -0.15806046173124749426  */
+#define DELTA1652 CHOOSE(2, 1, 2, 2, 0, 2)	/* yn (1, 8.0) == -0.15806046173124749426  */
 #define DELTA1653 CHOOSE(0, 3, 2, 0, 3, 2)	/* yn (1, 10.0) == 0.24901542420695388392  */
 #define DELTA1656 CHOOSE(2, 1, 1, 2, 1, 1)	/* yn (3, 0.1) == -5099.3323786129048894  */
 #define DELTA1657 CHOOSE(2, 3, 1, 2, 3, 1)	/* yn (3, 0.7) == -15.819479052819633505  */
 #define DELTA1659 CHOOSE(0, 1, 1, 0, 1, 1)	/* yn (3, 2.0) == -1.1277837768404277861  */
 #define DELTA1660 CHOOSE(0, 1, 1, 0, 1, 1)	/* yn (3, 10.0) == -0.25136265718383732978  */
-#define DELTA1663 CHOOSE(2, 2, 1, 2, 2, 1)	/* yn (10, 0.1) == -0.11831335132045197885e19  */
+#define DELTA1663 CHOOSE(2, 2, 2, 2, 2, 1)	/* yn (10, 0.1) == -0.11831335132045197885e19  */
 #define DELTA1664 CHOOSE(7, 6, 3, 7, 6, 3)	/* yn (10, 0.7) == -0.42447194260703866924e10  */
 #define DELTA1665 CHOOSE(0, 1, 1, 0, 1, 1)	/* yn (10, 1.0) == -0.12161801427868918929e9  */
 #define DELTA1666 CHOOSE(1, 2, 1, 1, 2, 1)	/* yn (10, 2.0) == -129184.54220803928264  */
