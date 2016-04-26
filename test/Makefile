@@ -11,6 +11,11 @@ all: test-double test-float # test-double-system test-float-system
 
 bench: bench-syslibm bench-openlibm
 
+ifeq ($(USECLANG),1)
+CPPFLAGS += -DUSECLANG=1
+endif
+
+
 test-double: test-double.c libm-test.c libm-test-ulps.h
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(CFLAGS_add_TARGET_$(ARCH)) $(LDFLAGS) $@.c -D__BSD_VISIBLE -I ../include -I../src $(OPENLIBM_LIB) -o $@
 
