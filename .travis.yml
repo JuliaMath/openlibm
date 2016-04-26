@@ -12,6 +12,9 @@ script:
 
 matrix:
     include:
+        - os: osx
+          env: FLAGS="CC=clang"
+
         - os: linux
           env: FLAGS="CC=gcc"
 
