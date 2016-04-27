@@ -4,7 +4,7 @@
 
 
 /* Maximal error of functions.  */
-#define DELTAacos CHOOSE(1150, 0, 0, 1150, 0, 0)	/* acos  */
+#define DELTAacos CHOOSE(1150, 1, 1, 1150, 0, 0)	/* acos  */
 #define DELTAacosh CHOOSE(1, 0, 0, 1, 0, 0)	/* acosh  */
 #define DELTAasin CHOOSE(1, 1, 0, 1, 0, 0)	/* asin  */
 #define DELTAasinh CHOOSE(656, 0, 0, 656, 0, 0)	/* asinh  */
@@ -53,7 +53,7 @@
 #define DELTAsincos CHOOSE(627, 1, 1, 627, 1, 1)	/* sincos  */
 #define DELTAsinh CHOOSE(1029, 1, 1, 1028, 0, 1)	/* sinh  */
 #define DELTAsqrt CHOOSE(489, 0, 0, 489, 0, 0)	/* sqrt  */
-#define DELTAtan CHOOSE(1401, 0.5, 0, 1401, 0.5, 0)	/* tan  */
+#define DELTAtan CHOOSE(1401, 1, 1, 1401, 0.5, 0)	/* tan  */
 #define DELTAtanh CHOOSE(521, 1, 1, 521, 0, 0)	/* tanh  */
 #define DELTAtgamma CHOOSE(2, 2, 1, 2, 2, 1)	/* tgamma  */
 #define DELTAy0 CHOOSE(2, 3, 1, 2, 3, 1)	/* y0  */
@@ -62,8 +62,8 @@
 
 /* Error of single function calls.  */
 #define DELTA16 CHOOSE(1, 0, 0, 1, 0, 0)	/* acosh (7) == 2.633915793849633417250092694615937  */
-#define DELTA24 CHOOSE(1, 0, 0, 1, 0, 0)	/* asin (0.5) == pi/6  */
-#define DELTA25 CHOOSE(1, 0, 0, 1, 0, 0)	/* asin (-0.5) == -pi/6  */
+#define DELTA24 CHOOSE(1, 1, 0, 1, 0, 0)	/* asin (0.5) == pi/6  */
+#define DELTA25 CHOOSE(1, 1, 0, 1, 0, 0)	/* asin (-0.5) == -pi/6  */
 #define DELTA26 CHOOSE(1, 0, 0, 1, 0, 0)	/* asin (1.0) == pi/2  */
 #define DELTA27 CHOOSE(1, 0, 0, 1, 0, 0)	/* asin (-1.0) == -pi/2  */
 #define DELTA28 CHOOSE(1, 1, 0, 1, 0, 0)	/* asin (0.7) == 0.77539749661075306374035335271498708  */
@@ -208,7 +208,7 @@
 #define DELTA1548 CHOOSE(1029, 1, 1, 1028, 0, 1)	/* sinh (0.7) == 0.75858370183953350346  */
 #define DELTA1562 CHOOSE(325, 0, 0, 325, 0, 0)	/* sqrt (15239.9025) == 123.45  */
 #define DELTA1569 CHOOSE(0, 0.5, 0, 0, 0.5, 0)	/* tan (pi/4) == 1  */
-#define DELTA1570 CHOOSE(1401, 0, 0, 1401, 0, 0)	/* tan (0.7) == 0.84228838046307944812813500221293775  */
+#define DELTA1570 CHOOSE(1401, 1, 1, 1401, 0, 0)	/* tan (0.7) == 0.84228838046307944812813500221293775  */
 #define DELTA1576 CHOOSE(521, 1, 1, 521, 0, 0)	/* tanh (0.7) == 0.60436777711716349631  */
 #define DELTA1577 CHOOSE(1, 1, 1, 1, 0, 0)	/* tanh (-0.7) == -0.60436777711716349631  */
 #define DELTA1587 CHOOSE(0, 0, 1, 0, 0, 1)	/* tgamma (0.5) == sqrt (pi)  */
