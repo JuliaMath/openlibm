@@ -410,7 +410,7 @@ test_single_exception (const char *test_name,
 {
 /* Don't perform these checks if we're compiling with clang, because clang
    doesn't bother to set floating-point exceptions properly */
-#ifndef USECLANG
+#ifndef __clang__
 #ifndef TEST_INLINE
   int ok = 1;
   if (exception & exc_flag)
@@ -448,7 +448,7 @@ test_single_exception (const char *test_name,
     ++noErrors;
 
 #endif
-#endif // USECLANG
+#endif // __clang__
 }
 
 
