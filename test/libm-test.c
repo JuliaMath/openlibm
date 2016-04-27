@@ -744,7 +744,7 @@ acos_test (void)
   check_float ("acos (-0) == pi/2",  FUNC(acos) (minus_zero), M_PI_2l, 0, 0, 0);
   check_float ("acos (1) == 0",  FUNC(acos) (1), 0, 0, 0, 0);
   check_float ("acos (-1) == pi",  FUNC(acos) (-1), M_PIl, 0, 0, 0);
-  check_float ("acos (0.5) == M_PI_6l*2.0",  FUNC(acos) (0.5), M_PI_6l*2.0, 0, 0, 0);
+  check_float ("acos (0.5) == M_PI_6l*2.0",  FUNC(acos) (0.5), M_PI_6l*2.0, 1, 0, 0);
   check_float ("acos (-0.5) == M_PI_6l*4.0",  FUNC(acos) (-0.5), M_PI_6l*4.0, 0, 0, 0);
   check_float ("acos (0.7) == 0.79539883018414355549096833892476432",  FUNC(acos) (0.7L), 0.79539883018414355549096833892476432L, 0, 0, 0);
 
