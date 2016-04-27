@@ -12,6 +12,17 @@ script:
 
 matrix:
     include:
+        - compiler: clang
+          os: linux
+          addons:
+              apt:
+                  sources:
+                      - ubuntu-toolchain-r-test
+                      - llvm-toolchain-precise-3.7
+                  packages:
+                      - clang-3.7
+          env: FLAGS="CC=clang-3.7 CXX=clang++-3.7"
+
         - os: osx
           env: FLAGS="CC=clang"
 
