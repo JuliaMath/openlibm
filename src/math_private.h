@@ -360,7 +360,7 @@ long double __kernel_tanl(long double, long double, int);
 # ifdef IMPORT_EXPORTS
 #  define OLM_DLLEXPORT __declspec(dllimport)
 # else
-#  define OLM_DLLEXPORT __declspec(OLM_DLLEXPORT)
+#  define OLM_DLLEXPORT __declspec(dllexport)
 # endif
 #else
 #define OLM_DLLEXPORT __attribute__ ((visibility("default")))
