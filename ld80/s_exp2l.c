@@ -30,7 +30,7 @@
 #include <float.h>
 #include <stdint.h>
 
-#include "cdefs-compat.h"
+#include "bsd_cdefs.h"
 #include "amd64/bsd_ieeefp.h"
 
 #include <openlibm_math.h>

@@ -40,7 +40,7 @@
 #include "../i387/osx_asm.h"
 #define CNAME(x) EXT(x)
 #else
-#include "cdefs-compat.h"
+#include "bsd_cdefs.h"
 
 #ifdef PIC
 #define	PIC_PLT(x)	x@PLT
