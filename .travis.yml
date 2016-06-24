@@ -12,5 +12,12 @@ matrix:
         - os: linux
           env: FLAGS="CC=gcc"
 
+        - os: linux
+          env: FLAGS="CC=gcc ARCH=i686"  # implies -m32 -march=i686
+          addons:
+              apt:
+                  packages:
+                      - gcc-multilib
+
 notifications:
     email: false
