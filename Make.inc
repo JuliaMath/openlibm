@@ -111,7 +111,7 @@ endif
 ifeq ($(OS), WINNT)
   SHLIB_EXT = dll
   SONAME_FLAG = -soname
-  override CFLAGS_add += -nodefaultlibs
+  CFLAGS_add += -nodefaultlibs
   shlibdir = $(bindir)
 else
   ifeq ($(OS), Darwin)
@@ -121,7 +121,7 @@ else
     SHLIB_EXT = so
     SONAME_FLAG = -soname
   endif
-  override CFLAGS_add += -fPIC
+  CFLAGS_add += -fPIC
   shlibdir = $(libdir)
 endif
 
