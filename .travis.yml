@@ -1,13 +1,36 @@
+# We require a full (virtual) machine to load the kernel module for
+# binfmt support, which is needed to test other architectures besides
+# x86 using qemu user emulation. (This will not work in a container.)
+sudo: required
+dist: trusty
 language: c
-script: ./.travis.sh
-os:
-    - linux
-env:
-    - TARGET=host
-    - TARGET=arm32
+
+script:
+    - make $FLAGS
+    - make check $FLAGS $TEST_FLAGS
+    - make clean && git status --ignored --porcelain && test -z "$(git status --ignored --porcelain)"
+
 matrix:
-    exclude:
-        - os: osx
-          env: TARGET=arm32
+    include:
+        - os: linux
+          env: FLAGS="CC=gcc"
+
+        - os: linux
+          env: FLAGS="CC=gcc ARCH=i686"  # implies -m32 -march=i686
+          addons:
+              apt:
+                  packages:
+                      - gcc-multilib
+
+        - os: linux
+          env: FLAGS="CC=aarch64-linux-gnu-gcc" TEST_FLAGS="LDFLAGS=-static"
+          addons:
+              apt:
+                  packages:
+                      - gcc-aarch64-linux-gnu
+                      - libc6-dev-arm64-cross
+                      - qemu-user-static
+                      - binfmt-support
+
 notifications:
     email: false
