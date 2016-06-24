@@ -1,10 +1,13 @@
+# We require a full (virtual) machine to load the kernel module for
+# binfmt support, which is needed to test other architectures besides
+# x86 using qemu user emulation. (This will not work in a container.)
 sudo: required
 dist: trusty
 language: c
 
 script:
     - make $FLAGS
-    - make check $FLAGS
+    - make check $FLAGS $TEST_FLAGS
     - make clean && git status --ignored --porcelain && test -z "$(git status --ignored --porcelain)"
 
 matrix:
@@ -18,6 +21,16 @@ matrix:
               apt:
                   packages:
                       - gcc-multilib
+
+        - os: linux
+          env: FLAGS="CC=aarch64-linux-gnu-gcc" TEST_FLAGS="LDFLAGS=-static"
+          addons:
+              apt:
+                  packages:
+                      - gcc-aarch64-linux-gnu
+                      - libc6-dev-arm64-cross
+                      - qemu-user-static
+                      - binfmt-support
 
 notifications:
     email: false
