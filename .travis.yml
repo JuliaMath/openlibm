@@ -1,13 +1,16 @@
+sudo: required
+dist: trusty
 language: c
-script: ./.travis.sh
-os:
-    - linux
-env:
-    - TARGET=host
-    - TARGET=arm32
+
+script:
+    - make $FLAGS
+    - make check $FLAGS
+    - make clean && git status --ignored --porcelain && test -z "$(git status --ignored --porcelain)"
+
 matrix:
-    exclude:
-        - os: osx
-          env: TARGET=arm32
+    include:
+        - os: linux
+          env: FLAGS="CC=gcc"
+
 notifications:
     email: false
