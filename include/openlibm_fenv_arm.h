@@ -31,6 +31,8 @@
 
 #include <stdint.h>
 
+#include "cdefs-compat.h"
+
 #ifndef	__fenv_static
 #define	__fenv_static	static
 #endif
