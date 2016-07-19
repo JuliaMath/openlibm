@@ -40,7 +40,8 @@ OLM_MAJOR_SHLIB_EXT := $(SHLIB_EXT).$(SOMAJOR)
 endif
 endif
 
-.PHONY: all check test clean distclean install
+.PHONY: all check test clean distclean \
+	install install-static install-shared install-pkgconfig install-headers
 
 all: libopenlibm.a libopenlibm.$(OLM_MAJOR_MINOR_SHLIB_EXT)
 
@@ -74,12 +75,21 @@ openlibm.pc: openlibm.pc.in Make.inc Makefile
 	echo "version=${VERSION}" >> openlibm.pc
 	cat openlibm.pc.in >> openlibm.pc
 
-install: all openlibm.pc
-	mkdir -p $(DESTDIR)$(shlibdir)
-	mkdir -p $(DESTDIR)$(pkgconfigdir)
-	mkdir -p $(DESTDIR)$(includedir)/openlibm
-	cp -f -a libopenlibm.*$(SHLIB_EXT)* $(DESTDIR)$(shlibdir)/
+install-static: libopenlibm.a
+	mkdir -p $(DESTDIR)$(libdir)
 	cp -f -a libopenlibm.a $(DESTDIR)$(libdir)/
+
+install-shared: libopenlibm.$(OLM_MAJOR_MINOR_SHLIB_EXT)
+	mkdir -p $(DESTDIR)$(shlibdir)
+	cp -f -a libopenlibm.*$(SHLIB_EXT)* $(DESTDIR)$(shlibdir)/
+
+install-pkgconfig: openlibm.pc
+	mkdir -p $(DESTDIR)$(pkgconfigdir)
+	cp -f -a openlibm.pc $(DESTDIR)$(pkgconfigdir)/
+
+install-headers:
+	mkdir -p $(DESTDIR)$(includedir)/openlibm
 	cp -f -a include/*.h $(DESTDIR)$(includedir)/openlibm
 	cp -f -a src/*.h $(DESTDIR)$(includedir)/openlibm
-	cp -f -a openlibm.pc $(DESTDIR)$(pkgconfigdir)/
+
+install: install-static install-shared install-pkgconfig install-headers
