@@ -100,7 +100,7 @@ override ARCH := amd64
 endif
 
 # The optimization flag may be overriden with the environment variable CFLAGS.
-CFLAGS ?= -O2
+CFLAGS ?= -O3
 
 ifneq (,$(findstring MINGW,$(OS)))
 override OS=WINNT
