@@ -99,8 +99,10 @@ ifeq ($(ARCH),x86_64)
 override ARCH := amd64
 endif
 
-# The optimization flag may be overriden with the environment variable CFLAGS.
-CFLAGS ?= -O3
+# If CFLAGS does not contain a -O optimization flag, default to -O3
+ifeq ($(findstring -O,$(CFLAGS)),)
+CFLAGS_add += -O3
+endif
 
 ifneq (,$(findstring MINGW,$(OS)))
 override OS=WINNT
