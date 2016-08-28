@@ -26,10 +26,12 @@ OBJS =  $(patsubst %.f,%.f.o,\
 	$(patsubst %.S,%.S.o,\
 	$(patsubst %.c,%.c.o,$(filter-out $(addprefix src/,$(DUPLICATE_SRCS)),$(SRCS)))))
 
-# If we're on windows, don't do versioned shared libraries.  If we're on OSX,
-# put the version number before the .dylib.  Otherwise, put it after.
+# If we're on windows, don't do versioned shared libraries. Also, generate an import library
+# for the DLL. If we're on OSX, put the version number before the .dylib.  Otherwise,
+# put it after.
 ifeq ($(OS), WINNT)
 OLM_MAJOR_MINOR_SHLIB_EXT := $(SHLIB_EXT)
+LDFLAGS_add += -Wl,--out-implib,libopenlibm.$(OLM_MAJOR_MINOR_SHLIB_EXT).a
 else
 ifeq ($(OS), Darwin)
 OLM_MAJOR_MINOR_SHLIB_EXT := $(SOMAJOR).$(SOMINOR).$(SHLIB_EXT)
