@@ -188,9 +188,7 @@ sqrt(double x)
 	return z;
 }
 
-#if (LDBL_MANT_DIG == 53)
-__weak_reference(sqrt, sqrtl);
-#endif
+OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(sqrt, sqrtl);
 
 /*
 Other methods  (use floating-point arithmetic)

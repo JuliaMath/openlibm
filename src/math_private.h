@@ -22,6 +22,7 @@
 #include "cdefs-compat.h"
 #include "types-compat.h"
 #include "fpmath.h"
+#include <float.h>
 #include <stdint.h>
 #include "math_private_openbsd.h"
 
@@ -311,5 +312,25 @@ long double __kernel_tanl(long double, long double, int);
 #define OLM_DLLEXPORT __attribute__ ((visibility("default")))
 #endif
 
+/*
+ * As this implementation requires that FLT_RADIX == 2, functions like
+ * scalbn() can be aliased directly to ldexp(). This macro can be used
+ * to alias these functions, so that both call into the same function
+ * body directly.
+ */
+#define OLM_SYMBOL_ALIAS(from, to) \
+    __asm__(".global " #to "; " #to " = " #from)
+
+/*
+ * In case 'double' and 'long double' are the same size, there is no
+ * need to provide separate *l() functions. Instead, we can alias these
+ * to the functions using 'double' instead.
+ */
+#if DBL_MANT_DIG == LDBL_MANT_DIG
+#define OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(from, to) \
+    OLM_SYMBOL_ALIAS(from, to)
+#else
+#define OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(from, to)
+#endif
 
 #endif /* !_MATH_PRIVATE_H_ */

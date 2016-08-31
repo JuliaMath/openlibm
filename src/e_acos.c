@@ -106,6 +106,4 @@ acos(double x)
 	}
 }
 
-#if LDBL_MANT_DIG == 53
-__weak_reference(acos, acosl);
-#endif
+OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(acos, acosl);

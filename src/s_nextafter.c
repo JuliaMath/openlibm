@@ -76,8 +76,7 @@ nextafter(double x, double y)
 	return x;
 }
 
-#if (LDBL_MANT_DIG == 53)
-__weak_reference(nextafter, nexttoward);
-__weak_reference(nextafter, nexttowardl);
-__weak_reference(nextafter, nextafterl);
-#endif
+OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(nextafter, nextafterl);
+
+OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(nextafter, nexttoward);
+OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(nextafter, nexttowardl);

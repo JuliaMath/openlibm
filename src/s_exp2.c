@@ -391,6 +391,4 @@ exp2(double x)
 	}
 }
 
-#if (LDBL_MANT_DIG == 53)
-__weak_reference(exp2, exp2l);
-#endif
+OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(exp2, exp2l);

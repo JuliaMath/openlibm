@@ -124,6 +124,4 @@ atan2(double y, double x)
 	}
 }
 
-#if LDBL_MANT_DIG == 53
-__weak_reference(atan2, atan2l);
-#endif
+OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(atan2, atan2l);

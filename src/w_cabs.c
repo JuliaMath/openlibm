@@ -20,6 +20,4 @@ cabs(double complex z)
 	return hypot(creal(z), cimag(z));
 }
 
-#if LDBL_MANT_DIG == 53
-__weak_reference(cabs, cabsl);
-#endif
+OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(cabs, cabsl);

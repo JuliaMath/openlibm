@@ -87,4 +87,4 @@ nextafterl(long double x, long double y)
 	return x;
 }
 
-//__strong_alias(nexttowardl, nextafterl);
+// OLM_SYMBOL_ALIAS(nextafterl, nexttowardl);

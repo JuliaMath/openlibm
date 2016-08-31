@@ -74,6 +74,4 @@ remainder(double x, double p)
 	return x;
 }
 
-#if LDBL_MANT_DIG == 53
-__weak_reference(remainder, remainderl);
-#endif
+OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(remainder, remainderl);

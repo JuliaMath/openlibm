@@ -112,6 +112,4 @@ asin(double x)
 	if(hx>0) return t; else return -t;    
 }
 
-#if LDBL_MANT_DIG == 53
-__weak_reference(asin, asinl);
-#endif
+OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(asin, asinl);

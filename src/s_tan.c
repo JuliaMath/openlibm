@@ -78,6 +78,4 @@ tan(double x)
 	}
 }
 
-#if (LDBL_MANT_DIG == 53)
-__weak_reference(tan, tanl);
-#endif
+OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(tan, tanl);

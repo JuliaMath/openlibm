@@ -145,6 +145,4 @@ sincos(double x, double * s, double * c)
     }
 }
 
-#if (LDBL_MANT_DIG == 53)
-__weak_reference(sincos, sincosl);
-#endif
+OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(sincos, sincosl);

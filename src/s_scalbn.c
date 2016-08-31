@@ -58,9 +58,7 @@ scalbn (double x, int n)
         return x*twom54;
 }
 
-#if (LDBL_MANT_DIG == 53)
-__weak_reference(scalbn, ldexpl);
-__weak_reference(scalbn, scalbnl);
-#endif
+OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(scalbn, scalbnl);
 
-__strong_reference(scalbn, ldexp);
+OLM_SYMBOL_ALIAS(scalbn, ldexp);
+OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(scalbn, ldexpl);
