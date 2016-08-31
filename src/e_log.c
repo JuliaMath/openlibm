@@ -14,7 +14,7 @@
 #include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/e_log.c,v 1.15 2008/03/29 16:37:59 das Exp $");
 
-/* __ieee754_log(x)
+/* log(x)
  * Return the logrithm of x
  *
  * Method :                  
@@ -84,7 +84,7 @@ Lg7 = 1.479819860511658591e-01;  /* 3FC2F112 DF3E5244 */
 static const double zero   =  0.0;
 
 OLM_DLLEXPORT double
-__ieee754_log(double x)
+log(double x)
 {
 	double hfsq,f,s,z,R,w,t1,t2,dk;
 	int32_t k,hx,i,j;

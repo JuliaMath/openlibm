@@ -13,7 +13,7 @@
 #include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/e_exp.c,v 1.14 2011/10/21 06:26:38 das Exp $");
 
-/* __ieee754_exp(x)
+/* exp(x)
  * Returns the exponential of x.
  *
  * Method
@@ -102,7 +102,7 @@ static volatile double
 twom1000= 9.33263618503218878990e-302;     /* 2**-1000=0x01700000,0*/
 
 OLM_DLLEXPORT double
-__ieee754_exp(double x)	/* default IEEE double exp */
+exp(double x)	/* default IEEE double exp */
 {
 	double y,hi=0.0,lo=0.0,c,t,twopk;
 	int32_t k=0,xsb;

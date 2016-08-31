@@ -31,7 +31,7 @@ static volatile float
 pi_lo   = -8.7422776573e-08; /* 0xb3bbbd2e */
 
 OLM_DLLEXPORT float
-__ieee754_atan2f(float y, float x)
+atan2f(float y, float x)
 {
 	float z;
 	int32_t k,m,hx,hy,ix,iy;

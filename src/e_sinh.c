@@ -14,7 +14,7 @@
 #include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/e_sinh.c,v 1.11 2011/10/21 06:28:47 das Exp $");
 
-/* __ieee754_sinh(x)
+/* sinh(x)
  * Method : 
  * mathematically sinh(x) if defined to be (exp(x)-exp(-x))/2
  *	1. Replace x by |x| (sinh(-x) = -sinh(x)). 
@@ -39,7 +39,7 @@
 static const double one = 1.0, shuge = 1.0e307;
 
 OLM_DLLEXPORT double
-__ieee754_sinh(double x)
+sinh(double x)
 {
 	double t,h;
 	int32_t ix,jx;
@@ -63,7 +63,7 @@ __ieee754_sinh(double x)
 	}
 
     /* |x| in [22, log(maxdouble)] return 0.5*exp(|x|) */
-	if (ix < 0x40862E42)  return h*__ieee754_exp(fabs(x));
+	if (ix < 0x40862E42)  return h*exp(fabs(x));
 
     /* |x| in [log(maxdouble), overflowthresold] */
 	if (ix<=0x408633CE)
