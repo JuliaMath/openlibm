@@ -55,3 +55,5 @@ asinh(double x)
 	}
 	if(hx>0) return w; else return -w;
 }
+
+OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(asinh, asinhl);

@@ -74,3 +74,5 @@ modf(double x, double *iptr)
 	    }
 	}
 }
+
+OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(modf, modfl);

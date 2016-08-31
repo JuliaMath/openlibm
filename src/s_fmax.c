@@ -52,3 +52,5 @@ fmax(double x, double y)
 
 	return (x > y ? x : y);
 }
+
+OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(fmax, fmaxl);

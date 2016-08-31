@@ -165,3 +165,5 @@ exp(double x)	/* default IEEE double exp */
 	    return y*twopk*twom1000;
 	}
 }
+
+OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(exp, expl);

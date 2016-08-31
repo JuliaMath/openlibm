@@ -78,3 +78,5 @@ cosh(double x)
     /* |x| > overflowthresold, cosh(x) overflow */
 	return huge*huge;
 }
+
+OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(cosh, coshl);

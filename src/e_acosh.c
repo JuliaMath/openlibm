@@ -61,3 +61,5 @@ acosh(double x)
 	    return log1p(t+sqrt(2.0*t+t*t));
 	}
 }
+
+OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(acosh, acoshl);

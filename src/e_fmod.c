@@ -131,3 +131,5 @@ fmod(double x, double y)
 	}
 	return x;		/* exact output */
 }
+
+OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(fmod, fmodl);

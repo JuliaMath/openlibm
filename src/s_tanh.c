@@ -76,3 +76,5 @@ tanh(double x)
 	}
 	return (jx>=0)? z: -z;
 }
+
+OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(tanh, tanhl);

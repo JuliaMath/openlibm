@@ -139,3 +139,5 @@ log(double x)
 		     return dk*ln2_hi-((s*(f-R)-dk*ln2_lo)-f);
 	}
 }
+
+OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(log, logl);

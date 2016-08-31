@@ -61,3 +61,5 @@ atanh(double x)
 	    t = 0.5*log1p((x+x)/(one-x));
 	if(hx>=0) return t; else return -t;
 }
+
+OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(atanh, atanhl);

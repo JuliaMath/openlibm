@@ -310,3 +310,5 @@ pow(double x, double y)
 	else SET_HIGH_WORD(z,j);
 	return s*z;
 }
+
+OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(pow, powl);

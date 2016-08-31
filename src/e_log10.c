@@ -86,3 +86,5 @@ log10(double x)
 
 	return val_lo + val_hi;
 }
+
+OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(log10, log10l);

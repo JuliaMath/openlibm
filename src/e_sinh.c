@@ -72,3 +72,5 @@ sinh(double x)
     /* |x| > overflowthresold, sinh(x) overflow */
 	return x*shuge;
 }
+
+OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(sinh, sinhl);

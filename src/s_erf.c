@@ -238,6 +238,8 @@ erf(double x)
 	if(hx>=0) return one-r/x; else return  r/x-one;
 }
 
+OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(erf, erfl);
+
 OLM_DLLEXPORT double
 erfc(double x)
 {
@@ -299,3 +301,5 @@ erfc(double x)
 	    if(hx>0) return tiny*tiny; else return two-tiny;
 	}
 }
+
+OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(erfc, erfcl);

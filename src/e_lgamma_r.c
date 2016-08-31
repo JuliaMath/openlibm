@@ -296,3 +296,5 @@ lgamma_r(double x, int *signgamp)
 	if(hx<0) r = nadj - r;
 	return r;
 }
+
+OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(lgamma_r, lgammal_r);
