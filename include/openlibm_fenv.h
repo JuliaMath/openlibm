@@ -12,6 +12,8 @@
 #include <openlibm_fenv_powerpc.h>
 #elif defined(__mips__)
 #include <openlibm_fenv_mips.h>
+#elif defined(__s390__)
+#include <openlibm_fenv_s390.h>
 #else
 #error "Unsupported platform"
 #endif
