@@ -18,7 +18,11 @@ else
   pkgconfigdir = $(libdir)/pkgconfig
 endif
 
-ifndef CC
+ifdef CROSSCC
+
+CC = $(CROSSCC)
+
+else
 
 USEGCC = 1
 USECLANG = 0
