@@ -69,11 +69,13 @@ extern const fenv_t	__fe_dfl_env;
 #if defined(__aarch64__)
 #define __rfs(__fpsr)   __asm __volatile("mrs %0,fpsr" : "=r" (*(__fpsr)))
 #define __wfs(__fpsr)   __asm __volatile("msr fpsr,%0" : : "r" (__fpsr))
-#elif defined(ARM_HARD_FLOAT)
-#define	__rfs(__fpsr)	__asm __volatile("rfs %0" : "=r" (*(__fpsr)))
-#define	__wfs(__fpsr)	__asm __volatile("wfs %0" : : "r" (__fpsr))
+/* Test for hardware support for ARM floating point operations, explicitly
+checking for float and double support, see "ARM C Language Extensions", 6.5.1 */
+#elif defined(__ARM_FP) && (__ARM_FP & 0x0C) != 0
+#define __rfs(__fpsr)   __asm __volatile("vmrs %0,fpscr" : "=&r" (*(__fpsr)))
+#define __wfs(__fpsr)   __asm __volatile("vmsr fpscr,%0" : : "r" (__fpsr))
 #else
-#define __rfs(__fpsr)
+#define __rfs(__fpsr)	(*(__fpsr) = 0)
 #define __wfs(__fpsr)
 #endif
 
