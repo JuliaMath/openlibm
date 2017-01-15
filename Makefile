@@ -2,10 +2,9 @@ OPENLIBM_HOME=$(abspath .)
 include ./Make.inc
 
 SUBDIRS = src $(ARCH) bsdsrc
-ifneq ($(ARCH), arm)
-ifneq ($(ARCH), powerpc)
+# Add ld80 directory on x86 and x64
+ifneq ($(filter $(ARCH),i387 amd64),)
 SUBDIRS += ld80
-endif
 endif
 
 define INC_template
@@ -68,7 +67,7 @@ test/test-float: libopenlibm.$(OLM_MAJOR_MINOR_SHLIB_EXT)
 	$(MAKE) -C test test-float
 
 clean:
-	rm -f amd64/*.o arm/*.o bsdsrc/*.o i387/*.o ld128/*.o ld80/*.o src/*.o
+	rm -f aarch64/*.o amd64/*.o arm/*.o bsdsrc/*.o i387/*.o ld80/*.o ld128/*.o src/*.o powerpc/*.o
 	rm -f libopenlibm.a libopenlibm.*$(SHLIB_EXT)*
 	$(MAKE) -C test clean
 
