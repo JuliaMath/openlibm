@@ -46,5 +46,28 @@ matrix:
                       - qemu-user-static
                       - binfmt-support
 
+        - os: linux
+          env: FLAGS="CC=arm-linux-gnueabihf-gcc" TEST_FLAGS="LDFLAGS=-static"
+          addons:
+              apt:
+                  packages:
+                      - gcc-arm-linux-gnueabihf
+                      - libc6-dev-armhf-cross
+                      - qemu-user-static
+                      - binfmt-support
+
+        # This works, but only if qemu-user-static is >= v2.4.  This is not the
+        # case on the default trusty images, so we add a PPA that has qemu 2.5
+        - os: linux
+          env: FLAGS="CC=powerpc64le-linux-gnu-gcc" TEST_FLAGS="LDFLAGS=-static"
+          addons:
+              apt:
+                  sources:
+                      - sourceline: "ppa:gns3/qemu"
+                  packages:
+                      - gcc-powerpc64le-linux-gnu
+                      - libc6-dev-ppc64el-cross
+                      - qemu-user-static
+                      - binfmt-support
 notifications:
     email: false
