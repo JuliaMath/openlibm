@@ -10,6 +10,8 @@
 #include <openlibm_fenv_i387.h>
 #elif defined(__powerpc__)
 #include <openlibm_fenv_powerpc.h>
+#elif defined(__mips__)
+#include <openlibm_fenv_mips.h>
 #else
 #error "Unsupported platform"
 #endif
