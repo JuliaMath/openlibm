@@ -21,6 +21,12 @@ else
 pkgconfigdir = $(libdir)/pkgconfig
 endif
 
+ifdef CROSSCC
+
+CC = $(CROSSCC)
+
+else
+
 USEGCC = 1
 USECLANG = 0
 
@@ -45,6 +51,8 @@ endif
 ifeq ($(USEGCC),1)
 CC = gcc
 CFLAGS_add += -fno-gnu89-inline -fno-builtin
+endif
+
 endif
 
 ARCH ?= $(shell $(CC) -dumpmachine | sed "s/\([^-]*\).*$$/\1/")
