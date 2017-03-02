@@ -39,7 +39,7 @@ AR = ar
 ifeq ($(USECLANG),1)
 USEGCC = 0
 CC = clang
-CFLAGS_add += -fno-builtin
+CFLAGS_add += -fno-builtin -fno-strict-aliasing
 endif
 
 ifeq ($(USEGCC),1)
