@@ -36,8 +36,8 @@ ifneq ($(OS), WINNT)
 $(CUR_SRCS) += s_nan.c
 endif
 
-# Add in long double functions for x86 and x64
-ifneq ($(filter $(ARCH),i387 amd64),)
+# Add in long double functions for x86, x64 and aarch64
+ifneq ($(filter $(ARCH),i387 amd64 aarch64),)
 # C99 long double functions
 $(CUR_SRCS) +=	s_copysignl.c s_fabsl.c s_llrintl.c s_lrintl.c s_modfl.c
 
