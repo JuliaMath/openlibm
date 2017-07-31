@@ -3,7 +3,7 @@ include ../Make.inc
 
 # Set rpath of tests to builddir for loading shared library
 OPENLIBM_LIB = -L.. -lopenlibm
-ifeq ($(OS),Linux)
+ifneq ($(OS), Darwin)
 OPENLIBM_LIB += -Wl,-rpath=$(OPENLIBM_HOME)
 endif
 
