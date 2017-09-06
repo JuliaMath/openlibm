@@ -6,9 +6,9 @@ default: all
 OS := $(shell uname)
 # Do not forget to bump SOMINOR when changing VERSION,
 # and SOMAJOR when breaking ABI in a backward-incompatible way
-VERSION = 0.5.4
+VERSION = 0.5.5
 SOMAJOR = 2
-SOMINOR = 3
+SOMINOR = 4
 DESTDIR =
 prefix = /usr/local
 bindir = $(prefix)/bin
