@@ -3,7 +3,7 @@ include ../Make.inc
 
 # Set rpath of tests to builddir for loading shared library
 OPENLIBM_LIB = -L.. -lopenlibm
-ifeq ($(OS),Linux)
+ifneq (,$(findstring $(OS),Linux FreeBSD))
 OPENLIBM_LIB += -Wl,-rpath=$(OPENLIBM_HOME)
 endif
 
