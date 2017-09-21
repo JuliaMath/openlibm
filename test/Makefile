@@ -3,8 +3,10 @@ include ../Make.inc
 
 # Set rpath of tests to builddir for loading shared library
 OPENLIBM_LIB = -L.. -lopenlibm
-ifneq (,$(findstring $(OS),Linux FreeBSD))
+ifneq ($(OS),WINNT)
+ifneq ($(OS),Darwin)
 OPENLIBM_LIB += -Wl,-rpath=$(OPENLIBM_HOME)
+endif
 endif
 
 all: test-double test-float # test-double-system test-float-system
