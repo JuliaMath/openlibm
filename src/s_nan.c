@@ -36,7 +36,7 @@
 
 #include "math_private.h"
 
-#if !defined(__APPLE__) && !defined(__FreeBSD__)
+#if !defined(__APPLE__) && !defined(__FreeBSD__) && !defined(__DragonFly__)
 static __inline int digittoint(int c) {
 	if ('0' <= c && c <= '9')
 		return (c - '0');
