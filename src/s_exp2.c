@@ -306,6 +306,31 @@ static const double tbl[TBLSIZE * 2] = {
 	0x1.690f4b19e9471p+0,	-0x1.9780p-45,
 };
 
+
+/*
+ * Compute round(x*2^p)/2^p
+ *
+ * Contains two versions that one can select at compile time. One is a
+ * platform independent mathematical form, that might be perhaps abit slower.
+ * The other is a very fast version, that depends on the double precision
+ * floating point representation. Both versions compile with `-ffast-math` or
+ * an equivalent compiler option.
+ */
+double ldexp_floor_ldexp(double x, int p)
+{
+#if 0
+    // Mathematical form
+	return ldexp(floor(ldexp(x, p)+0.5), -p);
+#else
+    // Fast form
+    double r = 0x1.8p52 / (1 << p);
+    volatile double t;
+    t = x + r;
+    return t - r;
+#endif
+}
+
+
 /*
  * exp2(x): compute the base 2 exponential of x
  *
@@ -369,7 +394,7 @@ exp2(double x)
 	i0 += TBLSIZE / 2;
 	k = (i0 >> TBLBITS) << 20;
 	i0 = (i0 & (TBLSIZE - 1)) << 1;
-	t -= redux;
+	t = ldexp_floor_ldexp(x, TBLBITS);
 	z = x - t;
 
 	/* Compute r = exp2(y) = exp2t[i0] * p(z - eps[i]). */
