@@ -3,6 +3,10 @@
 set -e
 set -x
 
-cd ..
+FFLAGS="-Wall -Wextra -Wimplicit-interface -fPIC -g -fcheck=all -fbacktrace"
 
-gcc -fno-gnu89-inline -fno-builtin -O3 -fPIC -m64 -std=c99 -Wall -Iinclude -DASSEMBLER -D__BSD_VISIBLE -Wno-implicit-function-declaration -c src/s_exp2.c -o src/s_exp2.c.o
+gcc -fno-gnu89-inline -fno-builtin -O3 -fPIC -m64 -std=c99 -Wall -I../include -DASSEMBLER -D__BSD_VISIBLE -Wno-implicit-function-declaration -c ../src/s_exp2.c -o s_exp2.c.o
+gfortran $FFLAGS -c test_exp2.f90 -o test_exp2.o
+gfortran $FFLAGS s_exp2.c.o test_exp2.o -o test_exp2
+
+./test_exp2
