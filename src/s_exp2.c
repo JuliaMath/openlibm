@@ -374,6 +374,7 @@ exp2(double x)
 	i0 = (i0 & (TBLSIZE - 1)) << 1;
 	//t -= redux;
 	t = round256(x);
+	//t = round(x*256)/256.;
 	z = x - t;
 
 	/* Compute r = exp2(y) = exp2t[i0] * p(z - eps[i]). */
