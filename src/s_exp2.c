@@ -306,6 +306,9 @@ static const double tbl[TBLSIZE * 2] = {
 	0x1.690f4b19e9471p+0,	-0x1.9780p-45,
 };
 
+
+double round256(double x);
+
 /*
  * exp2(x): compute the base 2 exponential of x
  *
@@ -369,7 +372,8 @@ exp2(double x)
 	i0 += TBLSIZE / 2;
 	k = (i0 >> TBLBITS) << 20;
 	i0 = (i0 & (TBLSIZE - 1)) << 1;
-	t -= redux;
+	//t -= redux;
+	t = round256(x);
 	z = x - t;
 
 	/* Compute r = exp2(y) = exp2t[i0] * p(z - eps[i]). */
