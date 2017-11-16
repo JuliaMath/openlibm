@@ -17,7 +17,10 @@ integer, allocatable :: err_ulp(:)
 real(dp) :: t1, t2, x_min, x_max
 integer :: i, n
 
-n = 100000
+! Used for testing:
+! n = 100000
+! Used for benchmarking:
+n = 100000000
 allocate(x(n), r(n), r_exact(n), err_abs(n), err_ulp(n))
 
 call random_number(x)
