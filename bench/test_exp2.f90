@@ -15,7 +15,7 @@ end interface
 real(dp), allocatable :: x(:), r(:), r_exact(:), err_abs(:)
 integer, allocatable :: err_ulp(:)
 real(dp) :: t1, t2, x_min, x_max
-integer :: i, n
+integer :: i, j, n, n2
 integer, allocatable :: seed(:)
 
 call random_seed(size=n)
@@ -24,9 +24,10 @@ seed = 1
 call random_seed(put=seed)
 
 ! Used for testing:
-! n = 100000
+!n = 100000
 ! Used for benchmarking:
-n = 100000000
+n = 1000
+n2 = 100000
 allocate(x(n), r(n), r_exact(n), err_abs(n), err_ulp(n))
 
 call random_number(x)
@@ -37,7 +38,9 @@ print *, x(:10)
 print *, "Running c_exp2()"
 call cpu_time(t1)
 do i = 1, n
-    r(i) = c_exp2(x(i))
+    do j = 1, n2
+        r(i) = c_exp2(x(i))
+    end do
 end do
 call cpu_time(t2)
 print *, "Time:", t2-t1
