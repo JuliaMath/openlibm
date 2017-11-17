@@ -16,6 +16,12 @@ real(dp), allocatable :: x(:), r(:), r_exact(:), err_abs(:)
 integer, allocatable :: err_ulp(:)
 real(dp) :: t1, t2, x_min, x_max
 integer :: i, n
+integer, allocatable :: seed(:)
+
+call random_seed(size=n)
+allocate(seed(n))
+seed = 1
+call random_seed(put=seed)
 
 ! Used for testing:
 ! n = 100000
@@ -27,6 +33,7 @@ call random_number(x)
 x_min = -1075
 x_max = 1024
 x = x*(x_max - x_min) + x_min
+print *, x(:10)
 print *, "Running c_exp2()"
 call cpu_time(t1)
 do i = 1, n
