@@ -10,6 +10,12 @@ interface
     import :: c_double
     real(c_double), value, intent(in) :: x
     end function
+
+    real(c_double) function c_pow(x, y) bind(c, name="ieee754_pow")
+    ! The range of x is (-1075, 1024).
+    import :: c_double
+    real(c_double), value, intent(in) :: x, y
+    end function
 end interface
 
 real(dp), allocatable :: x(:), r(:), r_exact(:), err_abs(:)
@@ -27,7 +33,10 @@ call random_seed(put=seed)
 !n = 100000
 ! Used for benchmarking:
 n = 1000
-n2 = 100000
+n2 = 10000
+
+n = 10000000
+n2 = 1
 allocate(x(n), r(n), r_exact(n), err_abs(n), err_ulp(n))
 
 call random_number(x)
@@ -39,7 +48,8 @@ print *, "Running c_exp2()"
 call cpu_time(t1)
 do i = 1, n
     do j = 1, n2
-        r(i) = c_exp2(x(i))
+        !r(i) = c_exp2(x(i))
+        r(i) = c_pow(2._dp, x(i))
     end do
 end do
 call cpu_time(t2)
