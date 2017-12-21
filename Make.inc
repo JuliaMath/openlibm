@@ -34,7 +34,7 @@ USEGCC = 0
 USECLANG = 1
 endif
 
-AR = ar
+AR = $(TOOLPREFIX)ar
 
 ifeq ($(USECLANG),1)
 USEGCC = 0
@@ -43,7 +43,7 @@ CFLAGS_add += -fno-builtin -fno-strict-aliasing
 endif
 
 ifeq ($(USEGCC),1)
-CC = gcc
+CC = $(TOOLPREFIX)gcc
 CFLAGS_add += -fno-gnu89-inline -fno-builtin
 endif
 
