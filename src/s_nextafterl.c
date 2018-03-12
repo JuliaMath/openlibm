@@ -77,4 +77,4 @@ nextafterl(long double x, long double y)
 	return ux.e;
 }
 
-__strong_reference(nextafterl, nexttowardl);
+OLM_SYMBOL_ALIAS(nextafterl, nexttowardl);

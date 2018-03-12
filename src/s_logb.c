@@ -44,6 +44,4 @@ logb(double x)
 		return (double) ((ix>>20)-1023);
 }
 
-#if (LDBL_MANT_DIG == 53)
-__weak_reference(logb, logbl);
-#endif
+OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(logb, logbl);

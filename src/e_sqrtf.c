@@ -20,7 +20,7 @@
 static	const float	one	= 1.0, tiny=1.0e-30;
 
 OLM_DLLEXPORT float
-__ieee754_sqrtf(float x)
+sqrtf(float x)
 {
 	float z;
 	int32_t sign = (int)0x80000000;

@@ -46,6 +46,8 @@
 #include <openlibm_complex.h>
 #include <openlibm_math.h>
 
+#include "math_private.h"
+
 double complex
 catanh(double complex z)
 {
@@ -55,6 +57,4 @@ catanh(double complex z)
 	return (w);
 }
 
-#if	LDBL_MANT_DIG == DBL_MANT_DIG
-__strong_alias(catanhl, catanh);
-#endif	/* LDBL_MANT_DIG == DBL_MANT_DIG */
+OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(catanh, catanhl);

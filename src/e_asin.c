@@ -14,7 +14,7 @@
 #include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/e_asin.c,v 1.15 2011/02/10 07:37:50 das Exp $");
 
-/* __ieee754_asin(x)
+/* asin(x)
  * Method :                  
  *	Since  asin(x) = x + x^3/6 + x^5*3/40 + x^7*15/336 + ...
  *	we approximate asin(x) on [0,0.5] by
@@ -68,7 +68,7 @@ qS3 = -6.88283971605453293030e-01, /* 0xBFE6066C, 0x1B8D0159 */
 qS4 =  7.70381505559019352791e-02; /* 0x3FB3B8C5, 0xB12E9282 */
 
 OLM_DLLEXPORT double
-__ieee754_asin(double x)
+asin(double x)
 {
 	double t=0.0,w,p,q,c,r,s;
 	int32_t hx,ix;
@@ -112,6 +112,4 @@ __ieee754_asin(double x)
 	if(hx>0) return t; else return -t;    
 }
 
-#if LDBL_MANT_DIG == 53
-__weak_reference(asin, asinl);
-#endif
+OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(asin, asinl);

@@ -113,6 +113,4 @@ cbrt(double x)
 	return(t);
 }
 
-#if (LDBL_MANT_DIG == 53)
-__weak_reference(cbrt, cbrtl);
-#endif
+OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(cbrt, cbrtl);

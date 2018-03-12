@@ -62,6 +62,4 @@ trunc(double x)
 	return x;
 }
 
-#if LDBL_MANT_DIG == 53
-__weak_reference(trunc, truncl);
-#endif
+OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(trunc, truncl);

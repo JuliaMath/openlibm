@@ -153,6 +153,4 @@ fixup:
 	return x;
 }
 
-#if LDBL_MANT_DIG == 53
-__weak_reference(remquo, remquol);
-#endif
+OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(remquo, remquol);

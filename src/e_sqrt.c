@@ -14,7 +14,7 @@
 #include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/e_sqrt.c,v 1.11 2008/03/02 01:47:58 das Exp $");
 
-/* __ieee754_sqrt(x)
+/* sqrt(x)
  * Return correctly rounded sqrt.
  *           ------------------------------------------
  *	     |  Use the hardware sqrt if you have one |
@@ -92,7 +92,7 @@
 static	const double	one	= 1.0, tiny=1.0e-300;
 
 OLM_DLLEXPORT double
-__ieee754_sqrt(double x)
+sqrt(double x)
 {
 	double z;
 	int32_t sign = (int)0x80000000;
@@ -188,9 +188,7 @@ __ieee754_sqrt(double x)
 	return z;
 }
 
-#if (LDBL_MANT_DIG == 53)
-__weak_reference(sqrt, sqrtl);
-#endif
+OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(sqrt, sqrtl);
 
 /*
 Other methods  (use floating-point arithmetic)

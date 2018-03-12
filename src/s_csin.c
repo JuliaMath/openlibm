@@ -86,6 +86,4 @@ csin(double complex z)
 	return (w);
 }
 
-#if	LDBL_MANT_DIG == DBL_MANT_DIG
-__strong_alias(csinl, csin);
-#endif	/* LDBL_MANT_DIG == DBL_MANT_DIG */
+OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(csin, csinl);

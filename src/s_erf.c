@@ -234,9 +234,11 @@ erf(double x)
 	}
 	z  = x;
 	SET_LOW_WORD(z,0);
-	r  =  __ieee754_exp(-z*z-0.5625)*__ieee754_exp((z-x)*(z+x)+R/S);
+	r  =  exp(-z*z-0.5625)*exp((z-x)*(z+x)+R/S);
 	if(hx>=0) return one-r/x; else return  r/x-one;
 }
+
+OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(erf, erfl);
 
 OLM_DLLEXPORT double
 erfc(double x)
@@ -292,10 +294,12 @@ erfc(double x)
 	    }
 	    z  = x;
 	    SET_LOW_WORD(z,0);
-	    r  =  __ieee754_exp(-z*z-0.5625)*
-			__ieee754_exp((z-x)*(z+x)+R/S);
+	    r  =  exp(-z*z-0.5625)*
+			exp((z-x)*(z+x)+R/S);
 	    if(hx>0) return r/x; else return two-r/x;
 	} else {
 	    if(hx>0) return tiny*tiny; else return two-tiny;
 	}
 }
+
+OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(erfc, erfcl);

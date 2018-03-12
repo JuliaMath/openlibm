@@ -67,4 +67,4 @@ scalbnl (long double x, int n)
         return u.e*0x1p-128;
 }
 
-__strong_reference(scalbnl, ldexpl);
+OLM_SYMBOL_ALIAS(scalbnl, ldexpl);

@@ -66,6 +66,8 @@
 #include <openlibm_complex.h>
 #include <openlibm_math.h>
 
+#include "math_private.h"
+
 #define MAXNUM 1.0e308
 
 static const double DP1 = 3.14159265160560607910E0;
@@ -126,6 +128,4 @@ ovrf:
 	return (w);
 }
 
-#if	LDBL_MANT_DIG == DBL_MANT_DIG
-__strong_alias(catanl, catan);
-#endif	/* LDBL_MANT_DIG == DBL_MANT_DIG */
+OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(catan, catanl);

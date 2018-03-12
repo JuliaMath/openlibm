@@ -14,7 +14,7 @@
 #include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/e_remainder.c,v 1.12 2008/03/30 20:47:42 das Exp $");
 
-/* __ieee754_remainder(x,p)
+/* remainder(x,p)
  * Return :                  
  * 	returns  x REM p  =  x - [x/p]*p as if in infinite 
  * 	precise arithmetic, where [x/p] is the (infinite bit) 
@@ -32,7 +32,7 @@ static const double zero = 0.0;
 
 
 OLM_DLLEXPORT double
-__ieee754_remainder(double x, double p)
+remainder(double x, double p)
 {
 	int32_t hx,hp;
 	u_int32_t sx,lx,lp;
@@ -52,7 +52,7 @@ __ieee754_remainder(double x, double p)
 	    return ((long double)x*p)/((long double)x*p);
 
 
-	if (hp<=0x7fdfffff) x = __ieee754_fmod(x,p+p);	/* now x < 2p */
+	if (hp<=0x7fdfffff) x = fmod(x,p+p);	/* now x < 2p */
 	if (((hx-hp)|(lx-lp))==0) return zero*x;
 	x  = fabs(x);
 	p  = fabs(p);
@@ -74,6 +74,4 @@ __ieee754_remainder(double x, double p)
 	return x;
 }
 
-#if LDBL_MANT_DIG == 53
-__weak_reference(remainder, remainderl);
-#endif
+OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(remainder, remainderl);

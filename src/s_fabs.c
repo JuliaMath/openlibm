@@ -26,3 +26,5 @@ fabs(double x)
 	SET_HIGH_WORD(x,high&0x7fffffff);
         return x;
 }
+
+OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(fabs, fabsl);

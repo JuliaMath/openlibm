@@ -14,7 +14,7 @@
 #include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/e_acos.c,v 1.13 2008/07/31 22:41:26 das Exp $");
 
-/* __ieee754_acos(x)
+/* acos(x)
  * Method :                  
  *	acos(x)  = pi/2 - asin(x)
  *	acos(-x) = pi/2 + asin(x)
@@ -62,7 +62,7 @@ qS3 = -6.88283971605453293030e-01, /* 0xBFE6066C, 0x1B8D0159 */
 qS4 =  7.70381505559019352791e-02; /* 0x3FB3B8C5, 0xB12E9282 */
 
 OLM_DLLEXPORT double
-__ieee754_acos(double x)
+acos(double x)
 {
 	double z,p,q,r,w,s,c,df;
 	int32_t hx,ix;
@@ -106,6 +106,4 @@ __ieee754_acos(double x)
 	}
 }
 
-#if LDBL_MANT_DIG == 53
-__weak_reference(acos, acosl);
-#endif
+OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(acos, acosl);

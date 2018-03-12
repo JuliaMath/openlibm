@@ -146,6 +146,9 @@ tgamma(x)
 	else
 		return (neg_gam(x));
 }
+
+OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(tgamma, tgammal);
+
 /*
  * Accurate to max(ulp(1/128) absolute, 2^-66 relative) error.
  */

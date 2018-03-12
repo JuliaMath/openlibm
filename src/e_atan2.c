@@ -15,7 +15,7 @@
 #include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/e_atan2.c,v 1.14 2008/08/02 19:17:00 das Exp $");
 
-/* __ieee754_atan2(y,x)
+/* atan2(y,x)
  * Method :
  *	1. Reduce y to positive by atan2(y,x)=-atan2(-y,x).
  *	2. Reduce x to positive by (if x and y are unexceptional): 
@@ -58,7 +58,7 @@ static volatile double
 pi_lo   = 1.2246467991473531772E-16; /* 0x3CA1A626, 0x33145C07 */
 
 OLM_DLLEXPORT double
-__ieee754_atan2(double y, double x)
+atan2(double y, double x)
 {
 	double z;
 	int32_t k,m,hx,hy,ix,iy;
@@ -124,6 +124,4 @@ __ieee754_atan2(double y, double x)
 	}
 }
 
-#if LDBL_MANT_DIG == 53
-__weak_reference(atan2, atan2l);
-#endif
+OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(atan2, atan2l);

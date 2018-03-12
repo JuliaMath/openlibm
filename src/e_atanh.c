@@ -15,7 +15,7 @@
 #include "cdefs-compat.h"
 //__FBSDID("$FreeBSD: src/lib/msun/src/e_atanh.c,v 1.8 2008/02/22 02:30:34 das Exp $");
 
-/* __ieee754_atanh(x)
+/* atanh(x)
  * Method :
  *    1.Reduced x to positive by atanh(-x) = -atanh(x)
  *    2.For x>=0.5
@@ -41,7 +41,7 @@ static const double one = 1.0, huge = 1e300;
 static const double zero = 0.0;
 
 OLM_DLLEXPORT double
-__ieee754_atanh(double x)
+atanh(double x)
 {
 	double t;
 	int32_t hx,ix;
@@ -61,3 +61,5 @@ __ieee754_atanh(double x)
 	    t = 0.5*log1p((x+x)/(one-x));
 	if(hx>=0) return t; else return -t;
 }
+
+OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(atanh, atanhl);

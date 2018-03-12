@@ -51,6 +51,8 @@ __isinff(float f)
 	return (u.bits.exp == 255 && u.bits.man == 0);
 }
 
+OLM_SYMBOL_ALIAS(__isinff, isinff);
+
 #ifdef LONG_DOUBLE
 OLM_DLLEXPORT int
 __isinfl(long double e)
@@ -62,5 +64,3 @@ __isinfl(long double e)
 	return (u.bits.exp == 32767 && u.bits.manl == 0 && u.bits.manh == 0);
 }
 #endif
-
-__weak_reference(__isinff, isinff);

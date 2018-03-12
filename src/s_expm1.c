@@ -215,3 +215,5 @@ expm1(double x)
 	}
 	return y;
 }
+
+OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(expm1, expm1l);

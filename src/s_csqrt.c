@@ -109,6 +109,4 @@ csqrt(double complex z)
 		return (result);
 }
 
-#if LDBL_MANT_DIG == 53
-__weak_reference(csqrt, csqrtl);
-#endif
+OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(csqrt, csqrtl);

@@ -33,7 +33,7 @@ Lg4 =      0xf89e26.0p-26;	/* 0.24279078841 */
 static const float zero   =  0.0;
 
 OLM_DLLEXPORT float
-__ieee754_logf(float x)
+logf(float x)
 {
 	float hfsq,f,s,z,R,w,t1,t2,dk;
 	int32_t k,ix,i,j;

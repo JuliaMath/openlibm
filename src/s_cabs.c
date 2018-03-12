@@ -19,12 +19,12 @@
 #include <openlibm_complex.h>
 #include <openlibm_math.h>
 
+#include "math_private.h"
+
 double
 cabs(double complex z)
 {
 	return hypot(__real__ z, __imag__ z);
 }
 
-#if	LDBL_MANT_DIG == DBL_MANT_DIG
-__strong_alias(cabsl, cabs);
-#endif	/* LDBL_MANT_DIG == DBL_MANT_DIG */
+OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(cabs, cabsl);

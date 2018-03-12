@@ -47,3 +47,5 @@ ilogb(double x)
 	else if (hx>0x7ff00000 || lx!=0) return FP_ILOGBNAN;
 	else return INT_MAX;
 }
+
+OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(ilogb, ilogbl);

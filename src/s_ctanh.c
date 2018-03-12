@@ -142,3 +142,5 @@ ctan(double complex z)
 	z = ctanh(CMPLX(-cimag(z), creal(z)));
 	return (CMPLX(cimag(z), -creal(z)));
 }
+
+OLM_SYMBOL_ALIAS_IF_DOUBLE_IS_LONG_DOUBLE(ctan, ctanl);

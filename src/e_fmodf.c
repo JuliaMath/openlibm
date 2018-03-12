@@ -17,7 +17,7 @@
 //__FBSDID("$FreeBSD: src/lib/msun/src/e_fmodf.c,v 1.7 2008/02/22 02:30:34 das Exp $");
 
 /*
- * __ieee754_fmodf(x,y)
+ * fmodf(x,y)
  * Return x mod y in exact arithmetic
  * Method: shift and subtract
  */
@@ -29,7 +29,7 @@
 static const float one = 1.0, Zero[] = {0.0, -0.0,};
 
 OLM_DLLEXPORT float
-__ieee754_fmodf(float x, float y)
+fmodf(float x, float y)
 {
 	int32_t n,hx,hy,hz,ix,iy,sx,i;
 
