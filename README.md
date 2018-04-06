@@ -1,6 +1,7 @@
 # OpenLibm
 
-[![Build Status](https://travis-ci.org/JuliaLang/openlibm.svg?branch=master)](https://travis-ci.org/JuliaLang/openlibm)
+[![Travis](https://travis-ci.org/JuliaLang/openlibm.svg?branch=master)](https://travis-ci.org/JuliaLang/openlibm)
+[![AppVeyor](https://ci.appveyor.com/api/projects/status/30kn644g79f0x6va/branch/master?svg=true)](https://ci.appveyor.com/project/ararslan/openlibm/branch/master)
 
 [OpenLibm](http://www.openlibm.org) is an effort to have a high quality, portable, standalone
 C mathematical library ([`libm`](http://en.wikipedia.org/wiki/libm)).
