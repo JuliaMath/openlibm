@@ -24,12 +24,7 @@ endif
 USEGCC = 1
 USECLANG = 0
 
-ifeq ($(OS), Darwin)
-USEGCC = 0
-USECLANG = 1
-endif
-
-ifeq ($(OS), FreeBSD)
+ifneq (,$(findstring $(OS),Darwin FreeBSD OpenBSD))
 USEGCC = 0
 USECLANG = 1
 endif

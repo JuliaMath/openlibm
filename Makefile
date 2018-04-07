@@ -83,19 +83,19 @@ openlibm.pc: openlibm.pc.in Make.inc Makefile
 
 install-static: libopenlibm.a
 	mkdir -p $(DESTDIR)$(libdir)
-	cp -f -a libopenlibm.a $(DESTDIR)$(libdir)/
+	cp -RpP -f libopenlibm.a $(DESTDIR)$(libdir)/
 
 install-shared: libopenlibm.$(OLM_MAJOR_MINOR_SHLIB_EXT)
 	mkdir -p $(DESTDIR)$(shlibdir)
-	cp -f -a libopenlibm.*$(SHLIB_EXT)* $(DESTDIR)$(shlibdir)/
+	cp -RpP -f libopenlibm.*$(SHLIB_EXT)* $(DESTDIR)$(shlibdir)/
 
 install-pkgconfig: openlibm.pc
 	mkdir -p $(DESTDIR)$(pkgconfigdir)
-	cp -f -a openlibm.pc $(DESTDIR)$(pkgconfigdir)/
+	cp -RpP -f openlibm.pc $(DESTDIR)$(pkgconfigdir)/
 
 install-headers:
 	mkdir -p $(DESTDIR)$(includedir)/openlibm
-	cp -f -a include/*.h $(DESTDIR)$(includedir)/openlibm
-	cp -f -a src/*.h $(DESTDIR)$(includedir)/openlibm
+	cp -RpP -f include/*.h $(DESTDIR)$(includedir)/openlibm
+	cp -RpP -f src/*.h $(DESTDIR)$(includedir)/openlibm
 
 install: install-static install-shared install-pkgconfig install-headers

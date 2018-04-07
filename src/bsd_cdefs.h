@@ -78,12 +78,14 @@
 /*
  * Macro to test if we're using a specific version of gcc or later.
  */
+#ifndef __GNUC_PREREQ__
 #if defined(__GNUC__) && !defined(__INTEL_COMPILER)
 #define	__GNUC_PREREQ__(ma, mi)	\
 	(__GNUC__ > (ma) || __GNUC__ == (ma) && __GNUC_MINOR__ >= (mi))
 #else
 #define	__GNUC_PREREQ__(ma, mi)	0
 #endif
+#endif /* __GNUC_PREREQ__ */
 
 /*
  * Compiler-dependent macro to help declare pure (no side effects) functions.
