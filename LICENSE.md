@@ -16,7 +16,7 @@ are under the LGPL.
 ## Parts copyrighted by the Julia project (MIT License)
 
 >       Copyright (c) 2011-14 The Julia Project.
->       https://github.com/JuliaLang/openlibm/graphs/contributors
+>       https://github.com/JuliaMath/openlibm/graphs/contributors
 >
 >       Permission is hereby granted, free of charge, to any person obtaining
 >       a copy of this software and associated documentation files (the
