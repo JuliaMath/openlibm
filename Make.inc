@@ -67,6 +67,9 @@ endif
 ifeq ($(ARCH),x86_64)
 override ARCH := amd64
 endif
+ifeq ($(findstring mips,$(ARCH)),mips)
+override ARCH := mips
+endif
 
 # If CFLAGS does not contain a -O optimization flag, default to -O3
 ifeq ($(findstring -O,$(CFLAGS)),)
