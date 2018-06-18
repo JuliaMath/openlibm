@@ -6,7 +6,7 @@ default: all
 OS := $(shell uname)
 # Do not forget to bump SOMINOR when changing VERSION,
 # and SOMAJOR when breaking ABI in a backward-incompatible way
-VERSION = 0.5.6
+VERSION = 0.6.0
 SOMAJOR = 2
 SOMINOR = 5
 DESTDIR =
