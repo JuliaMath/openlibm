@@ -72,7 +72,7 @@ test/test-float: libopenlibm.$(OLM_MAJOR_MINOR_SHLIB_EXT)
 	$(MAKE) -C test test-float
 
 clean:
-	rm -f aarch64/*.o amd64/*.o arm/*.o bsdsrc/*.o i387/*.o ld80/*.o ld128/*.o src/*.o powerpc/*.o
+	rm -f aarch64/*.o amd64/*.o arm/*.o bsdsrc/*.o i387/*.o ld80/*.o ld128/*.o src/*.o powerpc/*.o mips/*.o
 	rm -f libopenlibm.a libopenlibm.*$(SHLIB_EXT)*
 	$(MAKE) -C test clean
 

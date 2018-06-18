@@ -69,5 +69,38 @@ matrix:
                       - libc6-dev-ppc64el-cross
                       - qemu-user-static
                       - binfmt-support
+
+        - os: linux
+          env: FLAGS="CC=mips-linux-gnu-gcc" TEST_FLAGS="LDFLAGS=-static"
+          addons:
+              apt:
+                  sources:
+                      - sourceline: "deb http://archive.ubuntu.com/ubuntu/ xenial main universe"
+                  packages:
+                      - gcc-mips-linux-gnu
+                      - libc6-dev-mips-cross
+                      - qemu-user-binfmt
+
+        - os: linux
+          env: FLAGS="CC=mipsel-linux-gnu-gcc" TEST_FLAGS="LDFLAGS=-static"
+          addons:
+              apt:
+                  sources:
+                      - sourceline: "deb http://archive.ubuntu.com/ubuntu/ xenial main universe"
+                  packages:
+                      - gcc-mipsel-linux-gnu
+                      - libc6-dev-mipsel-cross
+                      - qemu-user-binfmt
+
+        - os: linux
+          env: FLAGS="CC=mips64el-linux-gnuabi64-gcc" TEST_FLAGS="LDFLAGS=-static"
+          addons:
+              apt:
+                  sources:
+                      - sourceline: "deb http://archive.ubuntu.com/ubuntu/ xenial main universe"
+                  packages:
+                      - gcc-mips64el-linux-gnuabi64
+                      - libc6-dev-mips64el-cross
+                      - qemu-user-binfmt
 notifications:
     email: false
