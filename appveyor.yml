@@ -1,6 +1,5 @@
 environment:
   matrix:
-    - ARCH: "i686"
     - ARCH: "x86_64"
 
 branches:
