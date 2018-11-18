@@ -51,7 +51,7 @@ __isinff(float f)
 	return (u.bits.exp == 255 && u.bits.man == 0);
 }
 
-#ifdef LONG_DOUBLE
+#ifdef OPENLIBM_LONG_DOUBLE
 OLM_DLLEXPORT int
 __isinfl(long double e)
 {

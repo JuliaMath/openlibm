@@ -26,7 +26,7 @@
 #endif
 
 #ifndef __arm__
-#define LONG_DOUBLE
+#define OPENLIBM_LONG_DOUBLE
 #endif
 
 #ifndef __pure2

@@ -49,7 +49,7 @@ __fpclassifyd(double d)
 		return FP_SUBNORMAL;
 	}
 }
-		
+
 
 OLM_DLLEXPORT int
 __fpclassifyf(float f)
@@ -72,7 +72,7 @@ __fpclassifyf(float f)
 	}
 }
 
-#ifdef LONG_DOUBLE
+#ifdef OPENLIBM_LONG_DOUBLE
 OLM_DLLEXPORT int
 __fpclassifyl(long double e)
 {
@@ -95,4 +95,3 @@ __fpclassifyl(long double e)
 	}
 }
 #endif
-
