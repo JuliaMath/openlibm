@@ -72,7 +72,7 @@ __fpclassifyf(float f)
 	}
 }
 
-#ifdef LONG_DOUBLE
+#ifdef OLM_LONG_DOUBLE
 OLM_DLLEXPORT int
 __fpclassifyl(long double e)
 {

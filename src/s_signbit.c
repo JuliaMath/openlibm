@@ -49,7 +49,7 @@ __signbitf(float f)
 	return (u.bits.sign);
 }
 
-#ifdef LONG_DOUBLE
+#ifdef OLM_LONG_DOUBLE
 OLM_DLLEXPORT int
 __signbitl(long double e)
 {

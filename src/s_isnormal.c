@@ -49,7 +49,7 @@ __isnormalf(float f)
 	return (u.bits.exp != 0 && u.bits.exp != 255);
 }
 
-#ifdef LONG_DOUBLE
+#ifdef OLM_LONG_DOUBLE
 OLM_DLLEXPORT int
 __isnormall(long double e)
 {

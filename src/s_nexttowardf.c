@@ -20,7 +20,7 @@
 
 #define	LDBL_INFNAN_EXP	(LDBL_MAX_EXP * 2 - 1)
 
-#ifdef LONG_DOUBLE
+#ifdef OLM_LONG_DOUBLE
 OLM_DLLEXPORT float
 nexttowardf(float x, long double y)
 {
