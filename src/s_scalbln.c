@@ -62,6 +62,7 @@ scalblnf (float x, long n)
 	return (scalbnf(x, in));
 }
 
+#ifdef OLM_LONG_DOUBLE
 OLM_DLLEXPORT long double
 scalblnl (long double x, long n)
 {
@@ -76,3 +77,4 @@ scalblnl (long double x, long n)
 	}
 	return (scalbnl(x, (int)n));
 }
+#endif

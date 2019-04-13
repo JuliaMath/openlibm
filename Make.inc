@@ -31,6 +31,12 @@ endif
 
 AR = $(TOOLPREFIX)ar
 
+ifeq ($(ARCH),wasm32)
+CC = clang-8
+USEGCC = 0
+CFLAGS_add += -fno-builtin -fno-strict-aliasing
+endif
+
 ifeq ($(USECLANG),1)
 USEGCC = 0
 CC = clang
@@ -116,6 +122,10 @@ ifeq ($(ARCH),amd64)
 CFLAGS_arch  += -m64
 SFLAGS_arch  += -m64
 LDFLAGS_arch += -m64
+endif
+
+ifeq ($(ARCH),wasm32)
+CFLAGS_arch += -ffreestanding -nostdlib -nostdinc --target=wasm32-unknown-unknown
 endif
 
 # Add our "arch"-related FLAGS in.  We separate arch-related flags out so that

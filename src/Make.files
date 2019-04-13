@@ -15,15 +15,14 @@ $(CUR_SRCS) = common.c \
 	s_copysign.c s_copysignf.c s_cos.c s_cosf.c \
 	s_csqrt.c s_csqrtf.c s_erf.c s_erff.c \
 	s_exp2.c s_exp2f.c s_expm1.c s_expm1f.c s_fabs.c s_fabsf.c s_fdim.c \
-	s_floor.c s_floorf.c s_fma.c s_fmaf.c \
+	s_floor.c s_floorf.c \
 	s_fmax.c s_fmaxf.c s_fmin.c \
 	s_fminf.c s_fpclassify.c \
 	s_frexp.c s_frexpf.c s_ilogb.c s_ilogbf.c \
 	s_isinf.c s_isfinite.c s_isnormal.c s_isnan.c \
-	s_llrint.c s_llrintf.c s_llround.c s_llroundf.c  \
-	s_log1p.c s_log1pf.c s_logb.c s_logbf.c s_lrint.c s_lrintf.c \
-	s_lround.c s_lroundf.c s_modf.c s_modff.c \
-	s_nearbyint.c s_nextafter.c s_nextafterf.c \
+	s_log1p.c s_log1pf.c s_logb.c s_logbf.c \
+	s_modf.c s_modff.c \
+	s_nextafter.c s_nextafterf.c \
 	s_nexttowardf.c s_remquo.c s_remquof.c \
 	s_rint.c s_rintf.c s_round.c s_roundf.c \
 	s_scalbln.c s_scalbn.c s_scalbnf.c s_signbit.c \
@@ -32,8 +31,16 @@ $(CUR_SRCS) = common.c \
 	s_trunc.c s_truncf.c s_cpow.c  s_cpowf.c \
 	w_cabs.c w_cabsf.c
 
+ifneq ($(ARCH), wasm32)
+
+$(CUR_SRCS) += \
+        s_fma.c s_fmaf.c s_lrint.c s_lrintf.c s_lround.c s_lroundf.c \
+	s_llrint.c s_llrintf.c s_llround.c s_llroundf.c s_nearbyint.c
+
 ifneq ($(OS), WINNT)
 $(CUR_SRCS) += s_nan.c
+endif
+
 endif
 
 # Add in long double functions for x86, x64 and aarch64

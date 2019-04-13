@@ -49,7 +49,13 @@ endif
 .PHONY: all check test clean distclean \
 	install install-static install-shared install-pkgconfig install-headers
 
-all: libopenlibm.a libopenlibm.$(OLM_MAJOR_MINOR_SHLIB_EXT)
+
+OLM_LIBS := libopenlibm.a
+ifneq ($(ARCH), wasm32)
+OLM_LIBS += libopenlibm.$(OLM_MAJOR_MINOR_SHLIB_EXT)
+endif
+
+all : $(OLM_LIBS)
 
 check test: test/test-double test/test-float
 	test/test-double

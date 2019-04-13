@@ -43,4 +43,6 @@ fn(type x, type y)			\
 
 DECL(double, fdim)
 DECL(float, fdimf)
+#ifdef OLM_LONG_DOUBLE
 DECL(long double, fdiml)
+#endif
