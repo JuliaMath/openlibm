@@ -27,7 +27,8 @@ also supports arm, aarch64, ppc64le, and mips.
    Linux and Windows.
 3. Use `make USECLANG=1` to build with clang. This is the default on OS X, FreeBSD,
    and OpenBSD.
-4. Architectures are auto-detected. Use `make ARCH=i386` to force a
+4. Use `make ARCH=wasm32` to build the wasm32 library with clang. Requires clang-8.
+5. Architectures are auto-detected. Use `make ARCH=i386` to force a
    build for i386. Other supported architectures are i486, i586, and
    i686. GCC 4.8 is the minimum requirement for correct codegen on
    older 32-bit architectures.

@@ -25,7 +25,7 @@
     #define __WIN32__
 #endif
 
-#ifndef __arm__
+#if !defined(__arm__) && !defined(__wasm__)
 #define OLM_LONG_DOUBLE
 #endif
 

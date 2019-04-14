@@ -21,6 +21,10 @@
 #endif /* __APPLE__ */
 #endif /* __strong_reference */
 
+#ifdef __wasm__
+#  define __weak_reference(sym,alias) __strong_reference(sym,alias)
+#endif
+
 #ifndef __weak_reference
 #ifdef __ELF__
 #ifdef __STDC__
