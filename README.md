@@ -3,7 +3,7 @@
 [![Travis](https://travis-ci.org/JuliaMath/openlibm.svg?branch=master)](https://travis-ci.org/JuliaMath/openlibm)
 [![AppVeyor](https://ci.appveyor.com/api/projects/status/sia04r4089rr19uc/branch/master?svg=true)](https://ci.appveyor.com/project/ararslan/openlibm-19152/branch/master)
 
-[OpenLibm](http://www.openlibm.org) is an effort to have a high quality, portable, standalone
+[OpenLibm](https://openlibm.org/) is an effort to have a high quality, portable, standalone
 C mathematical library ([`libm`](http://en.wikipedia.org/wiki/libm)).
 It can be used standalone in applications and programming language
 implementations.
