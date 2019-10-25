@@ -27,7 +27,7 @@
 
 #ifdef __weak_reference
 #ifdef __NetBSD__
-#define __weak_reference_compat(sym,alias) __weak_reference(sym)
+#define __weak_reference_compat(sym,alias) __weak_alias(alias,sym)
 #else
 #define  __weak_reference_compat(sym,alias) __weak_reference(sym,alias)
 #endif
