@@ -43,5 +43,5 @@ cproj(double complex z)
 }
 
 #if LDBL_MANT_DIG == 53
-__weak_reference(cproj, cprojl);
+__weak_reference_compat(cproj, cprojl);
 #endif

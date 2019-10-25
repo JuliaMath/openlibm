@@ -280,5 +280,5 @@ fma(double x, double y, double z)
 }
 
 #if (LDBL_MANT_DIG == 53)
-__weak_reference(fma, fmal);
+__weak_reference_compat(fma, fmal);
 #endif

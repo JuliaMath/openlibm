@@ -14,7 +14,7 @@
 #ifdef __GNUC__
 #ifndef __strong_reference
 #ifdef __APPLE__
-#define __strong_reference(sym,aliassym) __weak_reference(sym,aliassym)
+#define __strong_reference(sym,aliassym) __weak_reference_compat(sym,aliassym)
 #else
 #define __strong_reference(sym,aliassym)	\
 	OLM_DLLEXPORT extern __typeof (sym) aliassym __attribute__ ((__alias__ (#sym)));
@@ -22,13 +22,19 @@
 #endif /* __strong_reference */
 
 #ifdef __wasm__
-#  define __weak_reference(sym,alias) __strong_reference(sym,alias)
+#  define __weak_reference_compat(sym,alias) __strong_reference(sym,alias)
 #endif
 
-#ifndef __weak_reference
+#ifdef __weak_reference
+#ifdef __NetBSD__
+#define __weak_reference_compat(sym,alias) __weak_reference(sym)
+#else
+#define  __weak_reference_compat(sym,alias) __weak_reference(sym,alias)
+#endif
+#else
 #ifdef __ELF__
 #ifdef __STDC__
-#define	__weak_reference(sym,alias)	\
+#define	__weak_reference_compat(sym,alias)	\
 	__asm__(".weak " #alias);	\
 	__asm__(".equ "  #alias ", " #sym)
 #ifndef __warn_references
@@ -38,7 +44,7 @@
 	__asm__(".previous")
 #endif /* __warn_references */
 #else
-#define	__weak_reference(sym,alias)	\
+#define	__weak_reference_compat(sym,alias)	\
 	__asm__(".weak alias");		\
 	__asm__(".equ alias, sym")
 #ifndef __warn_references
@@ -50,17 +56,17 @@
 #endif	/* __STDC__ */
 #elif defined(__clang__) /* CLANG */
 #ifdef __STDC__
-#define __weak_reference(sym,alias)     \
+#define __weak_reference_compat(sym,alias)     \
     __asm__(".weak_reference " #alias); \
     __asm__(".set " #alias ", " #sym)
 #else
-#define __weak_reference(sym,alias)     \
+#define __weak_referenc_compate(sym,alias)     \
     __asm__(".weak_reference alias");\
     __asm__(".set alias, sym")
 #endif
 #else	/* !__ELF__ */
 #ifdef __STDC__
-#define __weak_reference(sym,alias)	\
+#define __weak_reference_compat(sym,alias)	\
 	__asm__(".stabs \"_" #alias "\",11,0,0,0");	\
 	__asm__(".stabs \"_" #sym "\",1,0,0,0")
 #ifndef __warn_references
@@ -69,7 +75,7 @@
 	__asm__(".stabs \"_" #sym "\",1,0,0,0")
 #endif /* __warn_references */
 #else
-#define __weak_reference(sym,alias)	\
+#define __weak_reference_compat(sym,alias)	\
 	__asm__(".stabs \"_/**/alias\",11,0,0,0");	\
 	__asm__(".stabs \"_/**/sym\",1,0,0,0")
 #ifndef __warn_references

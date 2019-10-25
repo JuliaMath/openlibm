@@ -113,5 +113,5 @@ __ieee754_asin(double x)
 }
 
 #if LDBL_MANT_DIG == 53
-__weak_reference(asin, asinl);
+__weak_reference_compat(asin, asinl);
 #endif

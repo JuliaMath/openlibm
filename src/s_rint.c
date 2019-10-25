@@ -88,5 +88,5 @@ rint(double x)
 }
 
 #if (LDBL_MANT_DIG == 53)
-__weak_reference(rint, rintl);
+__weak_reference_compat(rint, rintl);
 #endif

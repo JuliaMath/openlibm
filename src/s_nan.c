@@ -120,5 +120,5 @@ nanf(const char *s)
 }
 
 #if (LDBL_MANT_DIG == 53)
-__weak_reference(nan, nanl);
+__weak_reference_compat(nan, nanl);
 #endif
