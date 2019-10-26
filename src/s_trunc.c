@@ -63,5 +63,5 @@ trunc(double x)
 }
 
 #if LDBL_MANT_DIG == 53
-__weak_reference(trunc, truncl);
+openlibm_weak_reference(trunc, truncl);
 #endif

@@ -392,5 +392,5 @@ exp2(double x)
 }
 
 #if (LDBL_MANT_DIG == 53)
-__weak_reference(exp2, exp2l);
+openlibm_weak_reference(exp2, exp2l);
 #endif

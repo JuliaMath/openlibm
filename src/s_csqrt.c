@@ -110,5 +110,5 @@ csqrt(double complex z)
 }
 
 #if LDBL_MANT_DIG == 53
-__weak_reference(csqrt, csqrtl);
+openlibm_weak_reference(csqrt, csqrtl);
 #endif

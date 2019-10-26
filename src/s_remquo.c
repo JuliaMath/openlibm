@@ -154,5 +154,5 @@ fixup:
 }
 
 #if LDBL_MANT_DIG == 53
-__weak_reference(remquo, remquol);
+openlibm_weak_reference(remquo, remquol);
 #endif

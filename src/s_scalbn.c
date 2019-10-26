@@ -59,8 +59,8 @@ scalbn (double x, int n)
 }
 
 #if (LDBL_MANT_DIG == 53)
-__weak_reference(scalbn, ldexpl);
-__weak_reference(scalbn, scalbnl);
+openlibm_weak_reference(scalbn, ldexpl);
+openlibm_weak_reference(scalbn, scalbnl);
 #endif
 
-__strong_reference(scalbn, ldexp);
+openlibm_strong_reference(scalbn, ldexp);

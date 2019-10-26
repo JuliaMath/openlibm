@@ -146,5 +146,5 @@ sincos(double x, double * s, double * c)
 }
 
 #if (LDBL_MANT_DIG == 53)
-__weak_reference(sincos, sincosl);
+openlibm_weak_reference(sincos, sincosl);
 #endif

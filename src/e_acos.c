@@ -107,5 +107,5 @@ __ieee754_acos(double x)
 }
 
 #if LDBL_MANT_DIG == 53
-__weak_reference(acos, acosl);
+openlibm_weak_reference(acos, acosl);
 #endif

@@ -114,5 +114,5 @@ cbrt(double x)
 }
 
 #if (LDBL_MANT_DIG == 53)
-__weak_reference(cbrt, cbrtl);
+openlibm_weak_reference(cbrt, cbrtl);
 #endif

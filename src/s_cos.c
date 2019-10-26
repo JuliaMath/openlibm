@@ -85,5 +85,5 @@ cos(double x)
 }
 
 #if (LDBL_MANT_DIG == 53)
-__weak_reference(cos, cosl);
+openlibm_weak_reference(cos, cosl);
 #endif

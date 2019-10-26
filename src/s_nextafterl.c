@@ -77,4 +77,4 @@ nextafterl(long double x, long double y)
 	return ux.e;
 }
 
-__strong_reference(nextafterl, nexttowardl);
+openlibm_strong_reference(nextafterl, nexttowardl);

@@ -85,5 +85,5 @@ sin(double x)
 }
 
 #if (LDBL_MANT_DIG == 53)
-__weak_reference(sin, sinl);
+openlibm_weak_reference(sin, sinl);
 #endif

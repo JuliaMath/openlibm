@@ -63,4 +63,4 @@ __isinfl(long double e)
 }
 #endif
 
-__weak_reference(__isinff, isinff);
+openlibm_weak_reference(__isinff, isinff);

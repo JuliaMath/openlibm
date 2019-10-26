@@ -12,37 +12,49 @@
 #endif /* !defined(__BEGIN_DECLS) */
 
 #ifdef __GNUC__
-#ifndef __strong_reference
-#ifdef __APPLE__
-#define __strong_reference(sym,aliassym) __weak_reference(sym,aliassym)
+#if defined(__strong_alias) && defined(__NetBSD__)
+#define openlibm_strong_reference(sym,alias) __strong_alias(alias,sym)
+#elif defined(__strong_reference)
+#define openlibm_strong_reference(sym,alias) __strong_reference(sym,alias)
 #else
-#define __strong_reference(sym,aliassym)	\
+#ifdef __APPLE__
+#define openlibm_strong_reference(sym,aliassym) openlibm_weak_reference(sym,aliassym)
+#else
+#define openlibm_strong_reference(sym,aliassym)	\
 	OLM_DLLEXPORT extern __typeof (sym) aliassym __attribute__ ((__alias__ (#sym)));
 #endif /* __APPLE__ */
 #endif /* __strong_reference */
 
 #ifdef __wasm__
-#  define __weak_reference(sym,alias) __strong_reference(sym,alias)
+#  define openlibm_weak_reference(sym,alias) openlibm_strong_reference(sym,alias)
 #endif
 
-#ifndef __weak_reference
+#if defined(__weak_alias) && defined(__NetBSD__)
+#define openlibm_weak_reference(sym,alias) __weak_alias(alias,sym)
+#elif defined(__weak_reference)
+#define openlibm_weak_reference(sym,alias) __weak_reference(sym,alias)
+#else
 #ifdef __ELF__
 #ifdef __STDC__
-#define	__weak_reference(sym,alias)	\
+#define openlibm_weak_reference(sym,alias)	\
 	__asm__(".weak " #alias);	\
 	__asm__(".equ "  #alias ", " #sym)
-#ifndef __warn_references
-#define	__warn_references(sym,msg)	\
+#ifdef __warn_references
+#define openlibm_warn_references(sym,msg) __warn_references(sym,msg)
+#else
+#define openlibm_warn_references(sym,msg)	\
 	__asm__(".section .gnu.warning." #sym);	\
 	__asm__(".asciz \"" msg "\"");	\
 	__asm__(".previous")
 #endif /* __warn_references */
 #else
-#define	__weak_reference(sym,alias)	\
+#define openlibm_weak_reference(sym,alias)	\
 	__asm__(".weak alias");		\
 	__asm__(".equ alias, sym")
-#ifndef __warn_references
-#define	__warn_references(sym,msg)	\
+#ifdef __warn_references
+#define openlibm_warn_references(sym,msg) __warn_references(sym,msg)
+#else
+#define openlibm_warn_references(sym,msg)	\
 	__asm__(".section .gnu.warning.sym"); \
 	__asm__(".asciz \"msg\"");	\
 	__asm__(".previous")
@@ -50,30 +62,34 @@
 #endif	/* __STDC__ */
 #elif defined(__clang__) /* CLANG */
 #ifdef __STDC__
-#define __weak_reference(sym,alias)     \
+#define openlibm_weak_reference(sym,alias)     \
     __asm__(".weak_reference " #alias); \
     __asm__(".set " #alias ", " #sym)
 #else
-#define __weak_reference(sym,alias)     \
+#define openlibm_weak_reference(sym,alias)     \
     __asm__(".weak_reference alias");\
     __asm__(".set alias, sym")
 #endif
 #else	/* !__ELF__ */
 #ifdef __STDC__
-#define __weak_reference(sym,alias)	\
+#define openlibm_weak_reference(sym,alias)	\
 	__asm__(".stabs \"_" #alias "\",11,0,0,0");	\
 	__asm__(".stabs \"_" #sym "\",1,0,0,0")
-#ifndef __warn_references
-#define __warn_references(sym,msg)	\
+#ifdef __warn_references
+#define openlibm_warn_references(sym,msg) __warn_references(sym,msg)
+#else
+#define openlibm_warn_references(sym,msg)	\
 	__asm__(".stabs \"" msg "\",30,0,0,0");		\
 	__asm__(".stabs \"_" #sym "\",1,0,0,0")
 #endif /* __warn_references */
 #else
-#define __weak_reference(sym,alias)	\
+#define openlibm_weak_reference(sym,alias)	\
 	__asm__(".stabs \"_/**/alias\",11,0,0,0");	\
 	__asm__(".stabs \"_/**/sym\",1,0,0,0")
-#ifndef __warn_references
-#define __warn_references(sym,msg)	\
+#ifdef __warn_references
+#define openlibm_warn_references(sym,msg) __warn_references(sym,msg)
+#else
+#define openlibm_warn_references(sym,msg)	\
 	__asm__(".stabs msg,30,0,0,0");			\
 	__asm__(".stabs \"_/**/sym\",1,0,0,0")
 #endif	/* __warn_references */

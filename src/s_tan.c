@@ -79,5 +79,5 @@ tan(double x)
 }
 
 #if (LDBL_MANT_DIG == 53)
-__weak_reference(tan, tanl);
+openlibm_weak_reference(tan, tanl);
 #endif

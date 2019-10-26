@@ -21,5 +21,5 @@ cabs(double complex z)
 }
 
 #if LDBL_MANT_DIG == 53
-__weak_reference(cabs, cabsl);
+openlibm_weak_reference(cabs, cabsl);
 #endif

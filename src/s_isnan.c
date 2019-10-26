@@ -64,4 +64,4 @@ __isnanl(long double e)
 }
 #endif
 
-__weak_reference(__isnanf, isnanf);
+openlibm_weak_reference(__isnanf, isnanf);

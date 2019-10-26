@@ -88,5 +88,5 @@ rint(double x)
 }
 
 #if (LDBL_MANT_DIG == 53)
-__weak_reference(rint, rintl);
+openlibm_weak_reference(rint, rintl);
 #endif
