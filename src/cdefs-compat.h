@@ -26,10 +26,8 @@
 #endif /* __strong_reference */
 
 #ifdef __wasm__
-#  define openlibm_weak_reference(sym,alias) openlibm_strong_reference(sym,alias)
-#endif
-
-#if defined(__weak_alias) && defined(__NetBSD__)
+#define openlibm_weak_reference(sym,alias) openlibm_strong_reference(sym,alias)
+#elif defined(__weak_alias) && defined(__NetBSD__)
 #define openlibm_weak_reference(sym,alias) __weak_alias(alias,sym)
 #elif defined(__weak_reference)
 #define openlibm_weak_reference(sym,alias) __weak_reference(sym,alias)
