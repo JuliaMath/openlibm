@@ -15,10 +15,10 @@ consistently across compilers and operating systems, and in 32-bit and
 
 ## Platform support
 
-OpenLibm builds on Linux, Mac OS X, Windows, FreeBSD, OpenBSD, and
+OpenLibm builds on Linux, macOS, Windows, FreeBSD, OpenBSD, NetBSD, and
 DragonFly BSD.  It builds with both GCC and clang. Although largely
 tested and widely used on the x86 and x86-64 architectures, OpenLibm
-also supports arm, aarch64, ppc64le, and mips.
+also supports arm, aarch64, ppc64le, mips, wasm32, and s390(x).
 
 ## Build instructions
 
