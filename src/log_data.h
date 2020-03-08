@@ -5,10 +5,6 @@
 #ifndef _LOG_DATA_H
 #define _LOG_DATA_H
 
-//#include <features.h>
-#include <machine/endian.h>
-
-
 #define LOG_TABLE_BITS 7
 #define LOG_POLY_ORDER 6
 #define LOG_POLY1_ORDER 12

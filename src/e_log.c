@@ -8,6 +8,7 @@
 #include <math.h>
 #include <stdint.h>
 #include "math_private.h"
+#include "fpmath.h"
 
 #define WANT_ROUNDING 1
 #define __FP_FAST_FMA 0
