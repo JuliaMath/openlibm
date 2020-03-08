@@ -10,6 +10,7 @@
 #include "math_private.h"
 
 #define WANT_ROUNDING 1
+#define __FP_FAST_FMA 0
 
 /* Helps static branch prediction so hot path can be better optimized.  */
 #ifdef __GNUC__
