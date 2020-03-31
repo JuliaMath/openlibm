@@ -9,7 +9,7 @@ It can be used standalone in applications and programming language
 implementations.
 
 The project was born out of a need to have a good `libm` for the
-[Julia programming langage](http://www.julialang.org) that worked
+[Julia programming language](http://www.julialang.org) that worked
 consistently across compilers and operating systems, and in 32-bit and
 64-bit environments.
 
