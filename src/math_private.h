@@ -18,7 +18,7 @@
 #define	_MATH_PRIVATE_H_
 
 #include <openlibm_complex.h>
-
+#include <openlibm_defs.h>
 #include "cdefs-compat.h"
 #include "types-compat.h"
 #include "fpmath.h"
@@ -354,17 +354,5 @@ float complex __ldexp_cexpf(float complex,int);
 long double __kernel_sinl(long double, long double, int);
 long double __kernel_cosl(long double, long double);
 long double __kernel_tanl(long double, long double, int);
-
-#undef OLM_DLLEXPORT
-#ifdef _WIN32
-# ifdef IMPORT_EXPORTS
-#  define OLM_DLLEXPORT __declspec(dllimport)
-# else
-#  define OLM_DLLEXPORT __declspec(dllexport)
-# endif
-#else
-#define OLM_DLLEXPORT __attribute__ ((visibility("default")))
-#endif
-
 
 #endif /* !_MATH_PRIVATE_H_ */
