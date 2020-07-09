@@ -74,5 +74,5 @@ cpow(double complex a, double complex z)
 }
 
 #if	LDBL_MANT_DIG == DBL_MANT_DIG
-__strong_alias(cpowl, cpow);
+openlibm_strong_reference(cpow, cpowl);
 #endif	/* LDBL_MANT_DIG == DBL_MANT_DIG */

@@ -38,7 +38,7 @@
  * If z = x + iy, r = sqrt( x**2 + y**2 ),
  * then
  *       w = log(r) + i arctan(y/x).
- * 
+ *
  * The arctangent ranges from -PI to +PI.
  *
  *
@@ -58,6 +58,8 @@
 #include <openlibm_complex.h>
 #include <openlibm_math.h>
 
+#include "math_private.h"
+
 double complex
 clog(double complex z)
 {
@@ -73,5 +75,5 @@ clog(double complex z)
 }
 
 #if	LDBL_MANT_DIG == DBL_MANT_DIG
-__strong_alias(clogl, clog);
+openlibm_strong_reference(clog, clogl);
 #endif	/* LDBL_MANT_DIG == DBL_MANT_DIG */
