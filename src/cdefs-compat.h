@@ -21,7 +21,7 @@
 #define openlibm_strong_reference(sym,aliassym) openlibm_weak_reference(sym,aliassym)
 #else
 #define openlibm_strong_reference(sym,aliassym)	\
-	OLM_DLLEXPORT extern __typeof (sym) aliassym __attribute__ ((__alias__ (#sym)));
+	OLM_DLLEXPORT extern __typeof (aliassym) aliassym __attribute__ ((__alias__ (#sym)));
 #endif /* __APPLE__ */
 #endif /* __strong_reference */
 

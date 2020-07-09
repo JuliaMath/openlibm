@@ -46,6 +46,8 @@
 #include <openlibm_complex.h>
 #include <openlibm_math.h>
 
+#include "math_private.h"
+
 double complex
 casinh(double complex z)
 {
@@ -56,5 +58,5 @@ casinh(double complex z)
 }
 
 #if	LDBL_MANT_DIG == DBL_MANT_DIG
-__strong_alias(casinhl, casinh);
+openlibm_strong_reference(casinh, casinhl);
 #endif	/* LDBL_MANT_DIG == DBL_MANT_DIG */
