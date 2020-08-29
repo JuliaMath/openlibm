@@ -29,10 +29,9 @@
 #ifndef	_FENV_H_
 #define	_FENV_H_
 
+#include <openlibm_defs.h>
 #include "cdefs-compat.h"
 #include "types-compat.h"
-
-#include "math_private.h"
 
 #ifndef	__fenv_static
 #define	__fenv_static	static
