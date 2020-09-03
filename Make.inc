@@ -148,6 +148,9 @@ endif
 endif
 
 ifneq ($(filter $(ARCH),i387 amd64),)
+# Determines whether `long double` is the same as `double` on this arch.
+# linux x86_64, for instance, `long double` is 80 bits wide, whereas on macOS aarch64,
+# `long double` is the same as `double`. 
 LONG_DOUBLE_NOT_DOUBLE := 1
 else ifeq ($(ARCH), aarch64)
 ifneq ($(OS),Darwin)
