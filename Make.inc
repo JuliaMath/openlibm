@@ -55,6 +55,9 @@ $(error "the mingw32 compiler you are using fails the openblas testsuite. please
 endif
 
 # OS-specific stuff
+ifeq ($(ARCH),arm64)
+override ARCH := aarch64
+endif
 ifeq ($(findstring arm,$(ARCH)),arm)
 override ARCH := arm
 MARCH ?= armv7-a
@@ -144,6 +147,13 @@ CFLAGS_add += -I$(OPENLIBM_HOME)/ld128
 endif
 endif
 
+ifneq ($(filter $(ARCH),i387 amd64),)
+LONG_DOUBLE_NOT_DOUBLE := 1
+else ifeq ($(ARCH), aarch64)
+ifneq ($(OS),Darwin)
+LONG_DOUBLE_NOT_DOUBLE := 1
+endif
+endif
 
 %.c.o: %.c
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(CFLAGS_add) -c $< -o $@

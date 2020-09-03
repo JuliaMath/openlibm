@@ -2,6 +2,7 @@ OPENLIBM_HOME=$(abspath .)
 include ./Make.inc
 
 SUBDIRS = src $(ARCH) bsdsrc
+ifeq ($(LONG_DOUBLE_NOT_DOUBLE),1)
 # Add ld80 directory on x86 and x64
 ifneq ($(filter $(ARCH),i387 amd64),)
 SUBDIRS += ld80
@@ -9,6 +10,7 @@ else
 ifneq ($(filter $(ARCH),aarch64),)
 SUBDIRS += ld128
 else
+endif
 endif
 endif
 

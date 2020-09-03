@@ -44,7 +44,7 @@ endif
 endif
 
 # Add in long double functions for x86, x64 and aarch64
-ifneq ($(filter $(ARCH),i387 amd64 aarch64),)
+ifeq ($(LONG_DOUBLE_NOT_DOUBLE),1)
 # C99 long double functions
 $(CUR_SRCS) +=	s_copysignl.c s_fabsl.c s_llrintl.c s_lrintl.c s_modfl.c
 
