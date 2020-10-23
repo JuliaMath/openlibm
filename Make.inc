@@ -10,41 +10,41 @@ VERSION = 0.7.0
 SOMAJOR = 3
 SOMINOR = 0
 DESTDIR =
-prefix = /usr/local
-bindir = $(prefix)/bin
-libdir = $(prefix)/lib
-includedir = $(prefix)/include
+prefix ?= /usr/local
+bindir ?= $(prefix)/bin
+libdir ?= $(prefix)/lib
+includedir ?= $(prefix)/include
 
 ifeq ($(OS), FreeBSD)
-pkgconfigdir = $(prefix)/libdata/pkgconfig
+pkgconfigdir ?= $(prefix)/libdata/pkgconfig
 else
-pkgconfigdir = $(libdir)/pkgconfig
+pkgconfigdir ?= $(libdir)/pkgconfig
 endif
 
-USEGCC = 1
-USECLANG = 0
+USEGCC ?= 1
+USECLANG ?= 0
 
 ifneq (,$(findstring $(OS),Darwin FreeBSD OpenBSD))
-USEGCC = 0
-USECLANG = 1
+USEGCC ?= 0
+USECLANG ?= 1
 endif
 
-AR = $(TOOLPREFIX)ar
+AR ?= $(TOOLPREFIX)ar
 
 ifeq ($(ARCH),wasm32)
-CC = clang-8
-USEGCC = 0
+CC ?= clang-8
+USEGCC ?= 0
 CFLAGS_add += -fno-builtin -fno-strict-aliasing
 endif
 
 ifeq ($(USECLANG),1)
-USEGCC = 0
-CC = clang
+USEGCC ?= 0
+CC ?= clang
 CFLAGS_add += -fno-builtin -fno-strict-aliasing
 endif
 
 ifeq ($(USEGCC),1)
-CC = $(TOOLPREFIX)gcc
+CC ?= $(TOOLPREFIX)gcc
 CFLAGS_add += -fno-gnu89-inline -fno-builtin
 endif
 
