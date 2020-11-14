@@ -304,6 +304,7 @@ OLM_DLLEXPORT double	trunc(double);
  * BSD math library entry points
  */
 #if __BSD_VISIBLE
+OLM_DLLEXPORT int	isinff(float) __pure2;
 OLM_DLLEXPORT int	isnanf(float) __pure2;
 
 /*
