@@ -29,7 +29,7 @@
 #include "bsd_fpu.h"
 #include "math_private.h"
 
-#ifndef OPENLIBM_USE_HOST_FENV_H
+#ifdef _WIN32
 #define __fenv_static OLM_DLLEXPORT
 #endif
 #include <openlibm_fenv.h>
