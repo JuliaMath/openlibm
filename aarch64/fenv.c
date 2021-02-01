@@ -26,7 +26,6 @@
  * $FreeBSD: src/lib/msun/arm/fenv.c,v 1.3 2011/10/16 05:37:56 das Exp $
  */
 
-#define	__fenv_static
 #include <openlibm_fenv.h>
 
 #ifdef __GNUC_GNU_INLINE__
