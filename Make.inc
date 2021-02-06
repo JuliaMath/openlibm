@@ -29,17 +29,16 @@ USEGCC ?= 0
 USECLANG ?= 1
 endif
 
-AR ?= $(TOOLPREFIX)ar
-
 ifeq ($(ARCH),wasm32)
-CC ?= clang-8
-USEGCC ?= 0
-CFLAGS_add += -fno-builtin -fno-strict-aliasing
+USECLANG = 1
+TOOLPREFIX = llvm-
 endif
+
+AR ?= $(TOOLPREFIX)ar
 
 ifeq ($(USECLANG),1)
 USEGCC ?= 0
-CC ?= clang
+CC = clang
 CFLAGS_add += -fno-builtin -fno-strict-aliasing
 endif
 
