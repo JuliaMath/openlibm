@@ -25,6 +25,9 @@ bp[] = {1.0, 1.5,},
 dp_h[] = { 0.0, 5.84960938e-01,}, /* 0x3f15c000 */
 dp_l[] = { 0.0, 1.56322085e-06,}, /* 0x35d1cfdc */
 zero    =  0.0,
+half    =  0.5,
+qrtr    =  0.25,
+thrd    =  3.33333343e-01, /* 0x3eaaaaab */
 one	=  1.0,
 two	=  2.0,
 two24	=  16777216.0,	/* 0x4b800000 */
@@ -74,7 +77,7 @@ __ieee754_powf(float x, float y)
     /* y!=zero: result is NaN if either arg is NaN */
 	if(ix > 0x7f800000 ||
 	   iy > 0x7f800000)
-		return (x+0.0F)+(y+0.0F);
+	    return nan_mix(x, y);
 
     /* determine if y is an odd int when x < 0
      * yisint = 0	... y is not an integer
@@ -103,15 +106,10 @@ __ieee754_powf(float x, float y)
 	if(iy==0x3f800000) {	/* y is  +-1 */
 	    if(hy<0) return one/x; else return x;
 	}
-        if(hy==0x40000000) return x*x;   /* y is  2 */
-        if(hy==0x40400000) return x*x*x; /* y is  3 */
-        if(hy==0x40800000) {             /* y is  4 */
-            u = x*x;
-            return u*u;
-        }
-        if(hy==0x3f000000) {             /* y is  0.5 */
+	if(hy==0x40000000) return x*x; /* y is  2 */
+	if(hy==0x3f000000) {	/* y is  0.5 */
 	    if(hx>=0)	/* x >= +0 */
-                return __ieee754_sqrtf(x);
+	    return __ieee754_sqrtf(x);
 	}
 
 	ax   = fabsf(x);
@@ -144,7 +142,7 @@ __ieee754_powf(float x, float y)
 	/* now |1-x| is tiny <= 2**-20, suffice to compute
 	   log(x) by x-x^2/2+x^3/3-x^4/4 */
 	    t = ax-1;		/* t has 20 trailing zeros */
-	    w = (t*t)*((float)0.5-t*((float)0.333333333333-t*(float)0.25));
+	    w = (t*t)*(half-t*(thrd-t*qrtr));
 	    u = ivln2_h*t;	/* ivln2_h has 16 sig. bits */
 	    v = t*ivln2_l-w*ivln2;
 	    t1 = u+v;
@@ -183,10 +181,10 @@ __ieee754_powf(float x, float y)
 	    r = s2*s2*(L1+s2*(L2+s2*(L3+s2*(L4+s2*(L5+s2*L6)))));
 	    r += s_l*(s_h+s);
 	    s2  = s_h*s_h;
-	    t_h = (float)3.0+s2+r;
+	    t_h = 3+s2+r;
 	    GET_FLOAT_WORD(is,t_h);
 	    SET_FLOAT_WORD(t_h,is&0xfffff000);
-	    t_l = r-((t_h-(float)3.0)-s2);
+	    t_l = r-((t_h-3)-s2);
 	/* u+v = s*(1+...) */
 	    u = s_h*t_h;
 	    v = s_l*t_h+t_l*s;
@@ -198,7 +196,7 @@ __ieee754_powf(float x, float y)
 	    z_h = cp_h*p_h;		/* cp_h+cp_l = 2/(3*log2) */
 	    z_l = cp_l*p_h+p_l*cp+dp_l[k];
 	/* log2(ax) = (s+..)*2/(3*log2) = n + dp_h + z_h + z_l */
-	    t = (float)n;
+	    t = n;
 	    t1 = (((z_h+z_l)+dp_h[k])+t);
 	    GET_FLOAT_WORD(is,t1);
 	    SET_FLOAT_WORD(t1,is&0xfffff000);
