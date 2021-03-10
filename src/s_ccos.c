@@ -53,6 +53,8 @@
 #include <openlibm_complex.h>
 #include <openlibm_math.h>
 
+#include "math_private.h"
+
 /* calculate cosh and sinh */
 
 static void
@@ -85,5 +87,5 @@ ccos(double complex z)
 }
 
 #if	LDBL_MANT_DIG == DBL_MANT_DIG
-__strong_alias(ccosl, ccos);
+openlibm_strong_reference(ccos, ccosl);
 #endif	/* LDBL_MANT_DIG == DBL_MANT_DIG */

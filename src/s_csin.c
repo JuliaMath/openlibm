@@ -55,6 +55,8 @@
 #include <openlibm_complex.h>
 #include <openlibm_math.h>
 
+#include "math_private.h"
+
 /* calculate cosh and sinh */
 
 static void
@@ -87,5 +89,5 @@ csin(double complex z)
 }
 
 #if	LDBL_MANT_DIG == DBL_MANT_DIG
-__strong_alias(csinl, csin);
+openlibm_strong_reference(csin, csinl);
 #endif	/* LDBL_MANT_DIG == DBL_MANT_DIG */

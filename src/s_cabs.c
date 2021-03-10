@@ -19,6 +19,8 @@
 #include <openlibm_complex.h>
 #include <openlibm_math.h>
 
+#include "math_private.h"
+
 double
 cabs(double complex z)
 {
@@ -26,5 +28,5 @@ cabs(double complex z)
 }
 
 #if	LDBL_MANT_DIG == DBL_MANT_DIG
-__strong_alias(cabsl, cabs);
+openlibm_strong_reference(cabs, cabsl);
 #endif	/* LDBL_MANT_DIG == DBL_MANT_DIG */
