@@ -165,3 +165,7 @@ __ieee754_exp(double x)	/* default IEEE double exp */
 	    return y*twopk*twom1000;
 	}
 }
+
+#if (LDBL_MANT_DIG == 53)
+openlibm_weak_reference(exp, expl);
+#endif

@@ -24,6 +24,7 @@
  * in not-quite-routine extra precision.
  */
 
+#include <float.h>
 #include <openlibm_math.h>
 
 #include "math_private.h"
@@ -109,3 +110,7 @@ __ieee754_log2(double x)
 
 	return val_lo + val_hi;
 }
+
+#if (LDBL_MANT_DIG == 53)
+openlibm_weak_reference(log2, log2l);
+#endif

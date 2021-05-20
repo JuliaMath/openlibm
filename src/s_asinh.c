@@ -24,6 +24,7 @@
  *		 := sign(x)*log1p(|x| + x^2/(1 + sqrt(1+x^2)))
  */
 
+#include <float.h>
 #include <openlibm_math.h>
 
 #include "math_private.h"
@@ -55,3 +56,7 @@ asinh(double x)
 	}
 	if(hx>0) return w; else return -w;
 }
+
+#if (LDBL_MANT_DIG == 53)
+openlibm_weak_reference(asinh, asinhl);
+#endif
