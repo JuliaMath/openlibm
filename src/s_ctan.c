@@ -60,6 +60,8 @@
 #include <openlibm_complex.h>
 #include <openlibm_math.h>
 
+#include "math_private.h"
+
 #define MACHEP 1.1e-16
 #define MAXNUM 1.0e308
 
@@ -153,5 +155,5 @@ ctan(double complex z)
 }
 
 #if	LDBL_MANT_DIG == DBL_MANT_DIG
-__strong_alias(ctanl, ctan);
+openlibm_strong_reference(ctan, ctanl);
 #endif	/* LDBL_MANT_DIG == DBL_MANT_DIG */
