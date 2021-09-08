@@ -34,6 +34,6 @@ jobs:
     - uses: msys2/setup-msys2@v2
       with: 
         msystem: MINGW64
-        install: make
-    - run: make CC=gcc
+        install: make mingw-w64-x86_64-toolchain
+    - run: make
     - run: make test
