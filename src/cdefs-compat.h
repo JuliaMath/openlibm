@@ -73,7 +73,7 @@
     __asm__(".weak_reference openlibm_symbol_prefix/**/alias");\
     __asm__(".set openlibm_symbol_prefix/**/alias, openlibm_symbol_prefix/**/sym")
 #endif
-#undef oepnlibm_symbol_prefix
+#undef openlibm_symbol_prefix
 #else	/* !__ELF__ */
 #ifdef __STDC__
 #define openlibm_weak_reference(sym,alias)	\
