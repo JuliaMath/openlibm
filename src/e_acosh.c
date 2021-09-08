@@ -29,6 +29,7 @@
  *	acosh(NaN) is NaN without signal.
  */
 
+#include <float.h>
 #include <openlibm_math.h>
 
 #include "math_private.h"
@@ -61,3 +62,7 @@ __ieee754_acosh(double x)
 	    return log1p(t+sqrt(2.0*t+t*t));
 	}
 }
+
+#if (LDBL_MANT_DIG == 53)
+openlibm_weak_reference(acosh, acoshl);
+#endif

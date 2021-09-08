@@ -37,6 +37,7 @@
  *	only tanh(0)=0 is exact for finite argument.
  */
 
+#include <float.h>
 #include <openlibm_math.h>
 
 #include "math_private.h"
@@ -76,3 +77,7 @@ tanh(double x)
 	}
 	return (jx>=0)? z: -z;
 }
+
+#if (LDBL_MANT_DIG == 53)
+openlibm_weak_reference(tanh, tanhl);
+#endif

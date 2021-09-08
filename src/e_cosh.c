@@ -35,6 +35,7 @@
  *	only cosh(0)=1 is exact for finite x.
  */
 
+#include <float.h>
 #include <openlibm_math.h>
 
 #include "math_private.h"
@@ -78,3 +79,7 @@ __ieee754_cosh(double x)
     /* |x| > overflowthresold, cosh(x) overflow */
 	return huge*huge;
 }
+
+#if (LDBL_MANT_DIG == 53)
+openlibm_weak_reference(cosh, coshl);
+#endif

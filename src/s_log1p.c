@@ -173,3 +173,7 @@ log1p(double x)
 	if(k==0) return f-(hfsq-s*(hfsq+R)); else
 		 return k*ln2_hi-((hfsq-(s*(hfsq+R)+(k*ln2_lo+c)))-f);
 }
+
+#if (LDBL_MANT_DIG == 53)
+openlibm_weak_reference(log1p, log1pl);
+#endif
