@@ -35,5 +35,5 @@ jobs:
       with: 
         msystem: MINGW64
         install: make
-    - run: make
+    - run: make CC=gcc
     - run: make test
