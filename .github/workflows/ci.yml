@@ -21,10 +21,8 @@ jobs:
           - aarch64          
     steps:
     - uses: actions/checkout@v2
-    - name: make
-      run: make
-    - name: make test
-      run: make test
+    - run: make
+    - run: make test
   
   buildwindows:
     runs-on: windows-latest
@@ -34,8 +32,5 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: msys2/setup-msys2@v2
-      with:
-        install: make mingw-w64-x86_64-clang
-    - run: clang --version
-    - run: make USECLANG=1
+    - run: make
     - run: make test
