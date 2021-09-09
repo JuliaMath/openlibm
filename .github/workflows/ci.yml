@@ -46,7 +46,7 @@ jobs:
       - uses: msys2/setup-msys2@v2
         with:
           msystem: ${{matrix.sys}}
-          install: mingw-w64-${{matrix.env}}-toolchain
+          install: base-devel mingw-w64-${{matrix.env}}-toolchain
       - name: Build and run tests
         shell: msys2 {0}
         run: make && make test
