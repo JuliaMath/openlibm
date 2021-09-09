@@ -29,6 +29,7 @@
 #ifndef	_FENV_H_
 #define	_FENV_H_
 
+#include "openlibm_defs.h"
 #include "cdefs-compat.h"
 #include "types-compat.h"
 
@@ -88,8 +89,8 @@ __BEGIN_DECLS
 
 /* After testing for SSE support once, we cache the result in __has_sse. */
 enum __sse_support { __SSE_YES, __SSE_NO, __SSE_UNK };
-extern enum __sse_support __has_sse;
-int __test_sse(void);
+OLM_DLLEXPORT extern enum __sse_support __has_sse;
+OLM_DLLEXPORT int __test_sse(void);
 #ifdef __SSE__
 #define	__HAS_SSE()	1
 #else
@@ -98,7 +99,7 @@ int __test_sse(void);
 #endif
 
 /* Default floating-point environment */
-extern const fenv_t	__fe_dfl_env;
+OLM_DLLEXPORT extern const fenv_t	__fe_dfl_env;
 #define	FE_DFL_ENV	(&__fe_dfl_env)
 
 #define	__fldcw(__cw)		__asm __volatile("fldcw %0" : : "m" (__cw))
@@ -150,8 +151,8 @@ fegetexceptflag(fexcept_t *__flagp, int __excepts)
 	return (0);
 }
 
-int fesetexceptflag(const fexcept_t *__flagp, int __excepts);
-int feraiseexcept(int __excepts);
+OLM_DLLEXPORT int fesetexceptflag(const fexcept_t *__flagp, int __excepts);
+OLM_DLLEXPORT int feraiseexcept(int __excepts);
 
 __fenv_static inline int
 fetestexcept(int __excepts)
@@ -206,8 +207,8 @@ fesetround(int __round)
 	return (0);
 }
 
-int fegetenv(fenv_t *__envp);
-int feholdexcept(fenv_t *__envp);
+OLM_DLLEXPORT int fegetenv(fenv_t *__envp);
+OLM_DLLEXPORT int feholdexcept(fenv_t *__envp);
 
 __fenv_static inline int
 fesetenv(const fenv_t *__envp)
@@ -231,12 +232,12 @@ fesetenv(const fenv_t *__envp)
 	return (0);
 }
 
-int feupdateenv(const fenv_t *__envp);
+OLM_DLLEXPORT int feupdateenv(const fenv_t *__envp);
 
 #if __BSD_VISIBLE
 
-int feenableexcept(int __mask);
-int fedisableexcept(int __mask);
+OLM_DLLEXPORT int feenableexcept(int __mask);
+OLM_DLLEXPORT int fedisableexcept(int __mask);
 
 /* We currently provide no external definition of fegetexcept(). */
 static inline int

@@ -94,8 +94,7 @@ endif
 #keep these if statements separate
 ifeq ($(OS), WINNT)
 SHLIB_EXT = dll
-SONAME_FLAG = -soname
-CFLAGS_add += -nodefaultlibs
+SONAME_FLAG =
 shlibdir = $(bindir)
 else
 ifeq ($(OS), Darwin)

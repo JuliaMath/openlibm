@@ -2,12 +2,11 @@ name: OpenLibm CI
 
 on:
   push:
-    branches: [ master ]
   pull_request:
     branches: [ master ]
 
 jobs:
-  build:
+  build-nix:
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -15,19 +14,12 @@ jobs:
         os:
           - ubuntu-latest
           - macos-latest
-          - windows-latest
         arch:
           - x64
           - x86
           - armv7
           - aarch64
         exclude:
-          - os: windows-latest
-            arch: aarch64
-          - os: windows-latest
-            arch: armv7
-          - os: windows-latest
-            arch: x86
           - os: macos-latest
             arch: armv7
           - os: macos-latest
@@ -35,17 +27,26 @@ jobs:
             
     steps:
       - uses: actions/checkout@v2
-      - name: Install i686-w64-mingw32-gcc
-        if: ${{ matrix.os == 'windows-latest' && matrix.arch == 'x86' }}
-        shell: bash
-        run: |
-          choco install mingw -y --x86 --force --params "/exception:sjlj"
-          choco install make -y
-          echo "CC=i686-w64-mingw32-gcc" >> "${GITHUB_ENV}"
-      - name: Set compiler for 64-bit Windows
-        if: ${{ matrix.os == 'windows-latest' && matrix.arch == 'x64' }}
-        shell: bash
-        run: |
-          echo "CC=x86_64-w64-mingw32-gcc" >> "${GITHUB_ENV}"
       - name: Build and run tests
+        run: make && make test
+
+  build-msys2:
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { sys: mingw64, env: x86_64 }
+          - { sys: mingw32, env: i686 }
+          - { sys: ucrt64,  env: ucrt-x86_64 }  # Experimental!
+          - { sys: clang64, env: clang-x86_64 } # Experimental!
+            
+    steps:
+      - uses: actions/checkout@v2
+      - uses: msys2/setup-msys2@v2
+        with:
+          msystem: ${{matrix.sys}}
+          install: base-devel mingw-w64-${{matrix.env}}-toolchain
+      - name: Build and run tests
+        shell: msys2 {0}
         run: make && make test
