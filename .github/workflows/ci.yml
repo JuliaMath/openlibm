@@ -1,11 +1,12 @@
 name: OpenLibm CI
-
 on:
   push:
     branches: [ master ]
   pull_request:
     branches: [ master ]
-
+defaults:
+  run:
+    shell: bash
 jobs:
   build:
     runs-on: ${{ matrix.os }}
@@ -30,20 +31,25 @@ jobs:
             arch: armv7
           - os: macos-latest
             arch: x86
-            
     steps:
       - uses: actions/checkout@v2
-      - name: Install i686-w64-mingw32-gcc
+      - name: Set compiler for 32-bit Windows
         if: ${{ matrix.os == 'windows-latest' && matrix.arch == 'x86' }}
-        shell: bash
         run: |
-          choco install mingw -y --x86 --force --params "/exception:sjlj"
-          choco install make -y
-          echo "CC=i686-w64-mingw32-gcc" >> "${GITHUB_ENV}"
+          echo "C:\msys64\mingw32\bin" >> $GITHUB_PATH
+          echo "CC=i686-w64-mingw32-gcc" >> "$GITHUB_ENV"
+        shell: bash
       - name: Set compiler for 64-bit Windows
         if: ${{ matrix.os == 'windows-latest' && matrix.arch == 'x64' }}
-        shell: bash
         run: |
-          echo "CC=x86_64-w64-mingw32-gcc" >> "${GITHUB_ENV}"
+          echo "CC=x86_64-w64-mingw32-gcc" >> "$GITHUB_ENV"
+        shell: bash
+      - name: Debugging - DELETEME
+        if: ${{ matrix.os == 'windows-latest' && matrix.arch == 'x86' }}
+        run: i686-w64-mingw32-gcc --version
+      - name: Debugging - DELETEME
+        if: ${{ matrix.os == 'windows-latest' && matrix.arch == 'x86' }}
+        run: |
+          $CC --version
       - name: Build and run tests
         run: make && make test
