@@ -174,7 +174,7 @@ extern const union __nan_un {
 #define	MAXFLOAT	((float)3.40282346638528860e+38)
 
 #ifndef OPENLIBM_ONLY_THREAD_SAFE
-extern int signgam;
+OLM_DLLEXPORT extern int signgam;
 #endif
 #endif /* __BSD_VISIBLE || __XSI_VISIBLE */
 
