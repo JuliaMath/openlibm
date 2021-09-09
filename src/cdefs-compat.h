@@ -59,14 +59,19 @@
 #endif	/* __warn_references */
 #endif	/* __STDC__ */
 #elif defined(__clang__) /* CLANG */
+#if defined(_WIN32) && defined(_X86_)
+#define openlibm_asm_symbol_prefix "_"
+#else
+#define openlibm_asm_symbol_prefix ""
+#endif
 #ifdef __STDC__
 #define openlibm_weak_reference(sym,alias)     \
-    __asm__(".weak_reference " #alias); \
-    __asm__(".set " #alias ", " #sym)
+    __asm__(".weak_reference " openlibm_asm_symbol_prefix #alias); \
+    __asm__(".set " openlibm_asm_symbol_prefix #alias ", " openlibm_asm_symbol_prefix #sym)
 #else
 #define openlibm_weak_reference(sym,alias)     \
-    __asm__(".weak_reference alias");\
-    __asm__(".set alias, sym")
+    __asm__(".weak_reference openlibm_asm_symbol_prefix/**/alias");\
+    __asm__(".set openlibm_asm_symbol_prefix/**/alias, openlibm_asm_symbol_prefix/**/sym")
 #endif
 #else	/* !__ELF__ */
 #ifdef __STDC__
