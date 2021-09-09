@@ -1,12 +1,14 @@
-name: OpenLibm CI
-
+name: CI
 on:
-  push:
   pull_request:
-    branches: [ master ]
-
+    branches:
+      - master
+  push:
+    branches:
+      - master
+    tags: '*'
 jobs:
-  build-nix:
+  test-unix:
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -23,14 +25,12 @@ jobs:
           - os: macos-latest
             arch: armv7
           - os: macos-latest
-            arch: x86
-            
+            arch: x86        
     steps:
       - uses: actions/checkout@v2
-      - name: Build and run tests
-        run: make && make test
-
-  build-msys2:
+      - run: make
+      - run: make test
+  windows:
     runs-on: windows-latest
     strategy:
       fail-fast: false
@@ -40,13 +40,14 @@ jobs:
           - { sys: mingw32, env: i686 }
           - { sys: ucrt64,  env: ucrt-x86_64 }  # Experimental!
           - { sys: clang64, env: clang-x86_64 } # Experimental!
-            
     steps:
       - uses: actions/checkout@v2
-      - uses: msys2/setup-msys2@v2
+      - name: Set up the desired MSYS2 environment
+        uses: msys2/setup-msys2@v2
         with:
           msystem: ${{matrix.sys}}
           install: base-devel mingw-w64-${{matrix.env}}-toolchain
-      - name: Build and run tests
+      - run: make
         shell: msys2 {0}
-        run: make && make test
+      - run: make test
+        shell: msys2 {0}
