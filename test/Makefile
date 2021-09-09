@@ -7,6 +7,8 @@ ifneq ($(OS),WINNT)
 ifneq ($(OS),Darwin)
 OPENLIBM_LIB += -Wl,-rpath=$(OPENLIBM_HOME)
 endif
+else # WINNT
+CFLAGS_add += -DIMPORT_EXPORTS
 endif
 
 all: test-double test-float # test-double-system test-float-system
