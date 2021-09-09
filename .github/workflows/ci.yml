@@ -10,41 +10,28 @@ jobs:
   build:
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         os:
           - ubuntu-latest
           - macos-latest
+          - windows-latest
         arch:
           - x64
-          - x32
+          - x86
           - armv7
           - aarch64          
     steps:
-    - uses: actions/checkout@v2
-    - name: Build and run tests
-      run: make && make test
-  
-  buildwindows:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os:
-          - windows-latest
-        julia-arch:
-          - x64
-          - x86
-    steps:
       - uses: actions/checkout@v2
       - name: Install i686-w64-mingw32-gcc
-        if: ${{ matrix.os == 'windows-latest' && matrix.julia-arch == 'x86' }}
+        if: ${{ matrix.os == 'windows-latest' && matrix.arch == 'x86' }}
         shell: bash
         run: |
           choco install mingw -y --x86 --force --params "/exception:sjlj"
           choco install make -y
           echo "CC=i686-w64-mingw32-gcc" >> "${GITHUB_ENV}"
       - name: Set compiler for 64-bit Windows
-        if: ${{ matrix.os == 'windows-latest' && matrix.julia-arch == 'x64' }}
+        if: ${{ matrix.os == 'windows-latest' && matrix.arch == 'x64' }}
         shell: bash
         run: |
           echo "CC=x86_64-w64-mingw32-gcc" >> "${GITHUB_ENV}"
