@@ -96,7 +96,13 @@ install-static: libopenlibm.a
 
 install-shared: libopenlibm.$(OLM_MAJOR_MINOR_SHLIB_EXT)
 	mkdir -p $(DESTDIR)$(shlibdir)
+ifeq ($(OS), WINNT)
+	mkdir -p $(DESTDIR)$(libdir)
+	cp -RpP -f libopenlibm.*$(SHLIB_EXT) $(DESTDIR)$(shlibdir)/
+	cp -RpP -f libopenlibm.*$(SHLIB_EXT).a $(DESTDIR)$(libdir)/
+else
 	cp -RpP -f libopenlibm.*$(SHLIB_EXT)* $(DESTDIR)$(shlibdir)/
+endif
 
 install-pkgconfig: openlibm.pc
 	mkdir -p $(DESTDIR)$(pkgconfigdir)
