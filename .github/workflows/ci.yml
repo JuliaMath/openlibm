@@ -30,6 +30,9 @@ jobs:
           - { sys: mingw32, env: i686 }
           - { sys: ucrt64,  env: ucrt-x86_64 }  # Experimental!
           - { sys: clang64, env: clang-x86_64 } # Experimental!
+    defaults:
+      run:
+        shell: msys2 {0}
     steps:
       - uses: actions/checkout@v2
       - name: Set up the desired MSYS2 environment
@@ -38,6 +41,4 @@ jobs:
           msystem: ${{matrix.sys}}
           install: base-devel mingw-w64-${{matrix.env}}-toolchain
       - run: make
-        shell: msys2 {0}
       - run: make test
-        shell: msys2 {0}
