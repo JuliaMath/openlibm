@@ -26,8 +26,6 @@ jobs:
             arch: aarch64
           - os: windows-latest
             arch: armv7
-          - os: windows-latest
-            arch: x86
           - os: macos-latest
             arch: armv7
           - os: macos-latest
