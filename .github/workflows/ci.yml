@@ -30,6 +30,8 @@ jobs:
             arch: x86
           - os: macos-latest
             arch: armv7
+          - os: macos-latest
+            arch: x86
             
     steps:
       - uses: actions/checkout@v2
