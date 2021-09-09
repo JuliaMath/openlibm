@@ -21,8 +21,8 @@ jobs:
           - aarch64          
     steps:
     - uses: actions/checkout@v2
-    - run: make
-    - run: make test
+    - name: Build and run tests
+      run: make && make test
   
   buildwindows:
     runs-on: ${{ matrix.os }}
@@ -49,4 +49,4 @@ jobs:
         run: |
           echo "CC=x86_64-w64-mingw32-gcc" >> "${GITHUB_ENV}"
       - name: Build and run tests
-        run: make && make teset
+        run: make && make test
