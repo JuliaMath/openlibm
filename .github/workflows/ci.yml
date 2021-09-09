@@ -16,16 +16,6 @@ jobs:
         os:
           - ubuntu-latest
           - macos-latest
-        arch:
-          - x64
-          - x86
-          - armv7
-          - aarch64
-        exclude:
-          - os: macos-latest
-            arch: armv7
-          - os: macos-latest
-            arch: x86        
     steps:
       - uses: actions/checkout@v2
       - run: make
