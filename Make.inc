@@ -151,7 +151,7 @@ ifneq ($(filter $(ARCH),i387 amd64),)
 # `long double` is the same as `double`. 
 LONG_DOUBLE_NOT_DOUBLE := 1
 else ifeq ($(ARCH), aarch64)
-ifneq ($(OS),Darwin)
+ifeq ($(filter $(OS),Darwin WINNT),)
 LONG_DOUBLE_NOT_DOUBLE := 1
 endif
 endif
