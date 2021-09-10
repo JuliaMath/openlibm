@@ -30,15 +30,15 @@
 union IEEEl2bits {
 	long double	e;
 	struct {
-		unsigned long	manl	:64;
-		unsigned long	manh	:48;
+		uint64_t	manl	:64;
+		uint64_t	manh	:48;
 		unsigned int	exp	:15;
 		unsigned int	sign	:1;
 	} bits;
 	/* TODO andrew: Check the packing here */
 	struct {
-		unsigned long	manl	:64;
-		unsigned long	manh	:48;
+		uint64_t	manl	:64;
+		uint64_t	manh	:48;
 		unsigned int	expsign	:16;
 	} xbits;
 };
