@@ -6,8 +6,8 @@ default: all
 OS := $(shell uname)
 # Do not forget to bump SOMINOR when changing VERSION,
 # and SOMAJOR when breaking ABI in a backward-incompatible way
-VERSION = 0.7.0
-SOMAJOR = 3
+VERSION = 0.8.0
+SOMAJOR = 4
 SOMINOR = 0
 DESTDIR =
 prefix ?= /usr/local
