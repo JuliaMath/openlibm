@@ -14,6 +14,8 @@
 #include <openlibm_fenv_mips.h>
 #elif defined(__s390__)
 #include <openlibm_fenv_s390.h>
+#elif defined(__riscv)
+#include <openlibm_fenv_riscv.h>
 #else
 #error "Unsupported platform"
 #endif

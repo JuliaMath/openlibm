@@ -81,6 +81,9 @@ endif
 ifeq ($(findstring mips,$(ARCH)),mips)
 override ARCH := mips
 endif
+ifeq ($(findstring riscv64,$(ARCH)),riscv64)
+override ARCH := riscv64
+endif
 
 # If CFLAGS does not contain a -O optimization flag, default to -O3
 ifeq ($(findstring -O,$(CFLAGS)),)
