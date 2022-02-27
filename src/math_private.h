@@ -226,6 +226,110 @@ do {								\
 #endif
 
 /*
+ * 2sum gives the same result as 2sumF without requiring |a| >= |b| or
+ * a == 0, but is slower.
+ */
+#define	_2sum(a, b) do {	\
+	__typeof(a) __s, __w;	\
+				\
+	__w = (a) + (b);	\
+	__s = __w - (a);	\
+	(b) = ((a) - (__w - __s)) + ((b) - __s); \
+	(a) = __w;		\
+} while (0)
+
+/*
+ * 2sumF algorithm.
+ *
+ * "Normalize" the terms in the infinite-precision expression a + b for
+ * the sum of 2 floating point values so that b is as small as possible
+ * relative to 'a'.  (The resulting 'a' is the value of the expression in
+ * the same precision as 'a' and the resulting b is the rounding error.)
+ * |a| must be >= |b| or 0, b's type must be no larger than 'a's type, and
+ * exponent overflow or underflow must not occur.  This uses a Theorem of
+ * Dekker (1971).  See Knuth (1981) 4.2.2 Theorem C.  The name "TwoSum"
+ * is apparently due to Skewchuk (1997).
+ *
+ * For this to always work, assignment of a + b to 'a' must not retain any
+ * extra precision in a + b.  This is required by C standards but broken
+ * in many compilers.  The brokenness cannot be worked around using
+ * STRICT_ASSIGN() like we do elsewhere, since the efficiency of this
+ * algorithm would be destroyed by non-null strict assignments.  (The
+ * compilers are correct to be broken -- the efficiency of all floating
+ * point code calculations would be destroyed similarly if they forced the
+ * conversions.)
+ *
+ * Fortunately, a case that works well can usually be arranged by building
+ * any extra precision into the type of 'a' -- 'a' should have type float_t,
+ * double_t or long double.  b's type should be no larger than 'a's type.
+ * Callers should use these types with scopes as large as possible, to
+ * reduce their own extra-precision and efficiciency problems.  In
+ * particular, they shouldn't convert back and forth just to call here.
+ */
+#ifdef DEBUG
+#define	_2sumF(a, b) do {				\
+	__typeof(a) __w;				\
+	volatile __typeof(a) __ia, __ib, __r, __vw;	\
+							\
+	__ia = (a);					\
+	__ib = (b);					\
+	assert(__ia == 0 || fabsl(__ia) >= fabsl(__ib));	\
+							\
+	__w = (a) + (b);				\
+	(b) = ((a) - __w) + (b);			\
+	(a) = __w;					\
+							\
+	/* The next 2 assertions are weak if (a) is already long double. */ \
+	assert((long double)__ia + __ib == (long double)(a) + (b));	\
+	__vw = __ia + __ib;				\
+	__r = __ia - __vw;				\
+	__r += __ib;					\
+	assert(__vw == (a) && __r == (b));		\
+} while (0)
+#else /* !DEBUG */
+#define	_2sumF(a, b) do {	\
+	__typeof(a) __w;	\
+				\
+	__w = (a) + (b);	\
+	(b) = ((a) - __w) + (b); \
+	(a) = __w;		\
+} while (0)
+#endif /* DEBUG */
+
+/*
+ * Set x += c, where x is represented in extra precision as a + b.
+ * x must be sufficiently normalized and sufficiently larger than c,
+ * and the result is then sufficiently normalized.
+ *
+ * The details of ordering are that |a| must be >= |c| (so that (a, c)
+ * can be normalized without extra work to swap 'a' with c).  The details of
+ * the normalization are that b must be small relative to the normalized 'a'.
+ * Normalization of (a, c) makes the normalized c tiny relative to the
+ * normalized a, so b remains small relative to 'a' in the result.  However,
+ * b need not ever be tiny relative to 'a'.  For example, b might be about
+ * 2**20 times smaller than 'a' to give about 20 extra bits of precision.
+ * That is usually enough, and adding c (which by normalization is about
+ * 2**53 times smaller than a) cannot change b significantly.  However,
+ * cancellation of 'a' with c in normalization of (a, c) may reduce 'a'
+ * significantly relative to b.  The caller must ensure that significant
+ * cancellation doesn't occur, either by having c of the same sign as 'a',
+ * or by having |c| a few percent smaller than |a|.  Pre-normalization of
+ * (a, b) may help.
+ *
+ * This is is a variant of an algorithm of Kahan (see Knuth (1981) 4.2.2
+ * exercise 19).  We gain considerable efficiency by requiring the terms to
+ * be sufficiently normalized and sufficiently increasing.
+ */
+#define	_3sumF(a, b, c) do {	\
+	__typeof(a) __tmp;	\
+				\
+	__tmp = (c);		\
+	_2sumF(__tmp, (a));	\
+	(b) += (a);		\
+	(a) = __tmp;		\
+} while (0)
+
+/*
  * Common routine to process the arguments to nan(), nanf(), and nanl().
  */
 void __scan_nan(u_int32_t *__words, int __num_words, const char *__s);
@@ -348,24 +452,22 @@ double	__ldexp_exp(double,int);
 double complex __ldexp_cexp(double complex,int);
 
 /* float precision kernel functions */
-#ifdef INLINE_REM_PIO2F
-__inline
+#ifndef INLINE_REM_PIO2F
+int     __ieee754_rem_pio2f(float,double*);
 #endif
-int	__ieee754_rem_pio2f(float,double*);
-#ifdef INLINE_KERNEL_SINDF
-__inline
+#ifndef INLINE_KERNEL_SINDF
+float   __kernel_sindf(double);
 #endif
-float	__kernel_sindf(double);
-#ifdef INLINE_KERNEL_COSDF
-__inline
+#ifndef INLINE_KERNEL_COSDF
+float   __kernel_cosdf(double);
 #endif
-float	__kernel_cosdf(double);
-#ifdef INLINE_KERNEL_TANDF
-__inline
+#ifndef INLINE_KERNEL_TANDF
+float   __kernel_tandf(double,int);
 #endif
-float	__kernel_tandf(double,int);
-float	__ldexp_expf(float,int);
+float   __ldexp_expf(float,int);
+#ifdef _COMPLEX_H
 float complex __ldexp_cexpf(float complex,int);
+#endif
 
 /* long double precision kernel functions */
 long double __kernel_sinl(long double, long double, int);

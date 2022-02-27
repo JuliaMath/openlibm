@@ -31,6 +31,11 @@ $(CUR_SRCS) = common.c \
 	s_trunc.c s_truncf.c s_cpow.c  s_cpowf.c \
 	w_cabs.c w_cabsf.c
 
+# IEEE-754 2008 and ISO/IEC TS 18661-4 half-cycle trignometric functions
+$(CUR_SRCS) += s_cospi.c s_cospif.c \
+        s_sinpi.c s_sinpif.c \
+        s_tanpi.c s_tanpif.c
+
 ifneq ($(ARCH), wasm32)
 
 $(CUR_SRCS) += \
