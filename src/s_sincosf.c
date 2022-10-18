@@ -1,5 +1,14 @@
 /* s_sincosf.c -- float version of s_sincos.c
  *
+ * ====================================================
+ * This file is derived from fdlibm:
+ * Copyright (C) 1993 by Sun Microsystems, Inc. All rights reserved.
+ * Developed at SunPro, a Sun Microsystems, Inc. business.
+ * Permission to use, copy, modify, and distribute this
+ * software is freely granted, provided that this notice
+ * is preserved.
+ *
+ * ====================================================
  * Copyright (C) 2013 Elliot Saba
  * Developed at the University of Washington
  *
@@ -115,14 +124,14 @@ sincosf(float x, float * s, float * c) {
 	/* |x| ~<= 9*pi/4 */
 	if(ix<=0x40e231d5) {
 		/* |x|  ~> 7*pi/4 */
-	    if(ix<=0x40afeddf) {	
+	    if(ix<=0x40afeddf) {
 			if(hx>0) {
 				__kernel_sincosdf( x - sc3pio2, c, &k_s );
 				*s = -k_s;
 			} else {
 				__kernel_sincosdf( x + sc3pio2, &k_c, s );
 				*c = -k_c;
-		    } 
+		    }
 		}
 		else {
 	    	if( hx > 0 ) {
@@ -148,7 +157,7 @@ sincosf(float x, float * s, float * c) {
 			case 1:
 				__kernel_sincosdf( -y, c, s );
 				break;
-			case 2: 
+			case 2:
 				__kernel_sincosdf( -y, s, &k_c);
 				*c = -k_c;
 				break;

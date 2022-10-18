@@ -1,5 +1,14 @@
 /* @(#)s_sincos.c 5.1 13/07/15 */
-/*
+/* See openlibm LICENSE.md for full license details.
+ *
+ * ====================================================
+ * This file is derived from fdlibm:
+ * Copyright (C) 1993 by Sun Microsystems, Inc. All rights reserved.
+ * Developed at SunPro, a Sun Microsystems, Inc. business.
+ * Permission to use, copy, modify, and distribute this
+ * software is freely granted, provided that this notice
+ * is preserved.
+ *
  * ====================================================
  * Copyright (C) 2013 Elliot Saba. All rights reserved.
  *
@@ -25,7 +34,7 @@
  *      Borrow liberally from s_sin.c and s_cos.c, merging
  *  efforts where applicable and returning their values in
  * appropriate variables, thereby slightly reducing the
- * amount of work relative to just calling sin/cos(x) 
+ * amount of work relative to just calling sin/cos(x)
  * separately
  *
  * Special cases:
