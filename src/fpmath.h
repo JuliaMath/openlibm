@@ -37,7 +37,7 @@
 #else 
 #include "i386_fpmath.h"
 #endif
-#elif defined(__powerpc__)
+#elif defined(__powerpc__) || defined(__ppc__)
 #include "powerpc_fpmath.h"
 #elif defined(__mips__)
 #include "mips_fpmath.h"
