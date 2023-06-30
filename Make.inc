@@ -84,6 +84,9 @@ endif
 ifeq ($(findstring riscv64,$(ARCH)),riscv64)
 override ARCH := riscv64
 endif
+ifeq ($(findstring loongarch64,$(ARCH)),loongarch64)
+override ARCH := loongarch64
+endif
 
 # If CFLAGS does not contain a -O optimization flag, default to -O3
 ifeq ($(findstring -O,$(CFLAGS)),)
