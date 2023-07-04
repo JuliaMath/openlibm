@@ -34,8 +34,8 @@
 #define	__fenv_static	static
 #endif
 
-typedef	__uint32_t	fenv_t;
-typedef	__uint32_t	fexcept_t;
+typedef	uint32_t	fenv_t;
+typedef	uint32_t	fexcept_t;
 
 /* Exception flags */
 #define	FE_INVALID	0x100000
@@ -77,7 +77,7 @@ feclearexcept(int __excepts)
 {
 	fexcept_t __fpsr;
 
-	__rfs(&__fpsr);
+	__rfs(__fpsr);
 	__fpsr &= ~__excepts;
 	__wfs(__fpsr);
 	return (0);
@@ -88,7 +88,7 @@ fegetexceptflag(fexcept_t *__flagp, int __excepts)
 {
 	fexcept_t __fpsr;
 
-	__rfs(&__fpsr);
+	__rfs(__fpsr);
 	*__flagp = __fpsr & __excepts;
 	return (0);
 }
@@ -98,7 +98,7 @@ fesetexceptflag(const fexcept_t *__flagp, int __excepts)
 {
 	fexcept_t __fpsr;
 
-	__rfs(&__fpsr);
+	__rfs(__fpsr);
 	__fpsr &= ~__excepts;
 	__fpsr |= *__flagp & __excepts;
 	__wfs(__fpsr);
@@ -119,7 +119,7 @@ fetestexcept(int __excepts)
 {
 	fexcept_t __fpsr;
 
-	__rfs(&__fpsr);
+	__rfs(__fpsr);
 	return (__fpsr & __excepts);
 }
 
@@ -128,7 +128,7 @@ fegetround(void)
 {
 	fexcept_t __fpsr;
 
-	__rfs(&__fpsr);
+	__rfs(__fpsr);
 	return __fpsr & _ROUND_MASK;
 }
 
@@ -139,7 +139,7 @@ fesetround(int __round)
 	if ((__round & ~_ROUND_MASK) != 0)
 		return 1;
 
-	__rfs(&__fpsr);
+	__rfs(__fpsr);
 	__fpsr &= ~_ROUND_MASK;
 	__fpsr |= __round;
 	__wfs(__fpsr);
@@ -150,7 +150,7 @@ fesetround(int __round)
 __fenv_static inline int
 fegetenv(fenv_t *__envp)
 {
-	__rfs(__envp);
+	__rfs(*__envp);
 	return (0);
 }
 
@@ -159,7 +159,7 @@ feholdexcept(fenv_t *__envp)
 {
 	fenv_t __env;
 
-	__rfs(&__env);
+	__rfs(__env);
 	*__envp = __env;
 	__env &= ~(FE_ALL_EXCEPT | _FPU_MASK_V | _FPU_MASK_Z | _FPU_MASK_O | _FPU_MASK_U | _FPU_MASK_I);
 	__wfs(__env);
@@ -178,7 +178,7 @@ feupdateenv(const fenv_t *__envp)
 {
 	fexcept_t __fpsr;
 
-	__rfs(&__fpsr);
+	__rfs(__fpsr);
 	__wfs(*__envp);
 	feraiseexcept(__fpsr & FE_ALL_EXCEPT);
 	return (0);
@@ -191,7 +191,7 @@ feenableexcept(int __mask)
 {
 	fenv_t __old_fpsr, __new_fpsr;
 
-	__rfs(&__new_fpsr);
+	__rfs(__new_fpsr);
 	__old_fpsr = (__new_fpsr & _ENABLE_MASK) << _FPUSW_SHIFT;
 	__new_fpsr |= (__mask & FE_ALL_EXCEPT) >> _FPUSW_SHIFT;
 	__wfs(__new_fpsr);
@@ -203,7 +203,7 @@ fedisableexcept(int __mask)
 {
 	fenv_t __old_fpsr, __new_fpsr;
 
-	__rfs(&__new_fpsr);
+	__rfs(__new_fpsr);
 	__old_fpsr = (__new_fpsr & _ENABLE_MASK) << _FPUSW_SHIFT;
 	__new_fpsr &= ~((__mask & FE_ALL_EXCEPT) >> _FPUSW_SHIFT);
 	__wfs(__new_fpsr);
@@ -215,7 +215,7 @@ fegetexcept(void)
 {
 	fenv_t __fpsr;
 
-	__rfs(&__fpsr);
+	__rfs(__fpsr);
 	return ((__fpsr & _ENABLE_MASK) << _FPUSW_SHIFT);
 }
 

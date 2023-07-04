@@ -24,6 +24,8 @@
  * SUCH DAMAGE.
  */
 
+#include <stdint.h>
+
 union IEEEl2bits {
 	long double	e;
 	struct {
