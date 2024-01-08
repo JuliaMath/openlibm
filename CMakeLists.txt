@@ -31,7 +31,7 @@ list(APPEND C_ASM_COMPILE_FLAGS "-Wall" "-Wno-implicit-function-declaration")
 list(APPEND C_ASM_COMPILE_FLAGS "-DASSEMBLER" "-D__BSD_VISIBLE" "-O3")
 
 # Compiler-specific compile flags
-if("${CMAKE_C_COMPILER_ID}" STREQUAL "Clang")
+if("${CMAKE_C_COMPILER_ID}" MATCHES "Clang")
     list(APPEND C_ASM_COMPILE_FLAGS "-fno-strict-aliasing" "-ffp-exception-behavior=strict")
 elseif("${CMAKE_C_COMPILER_ID}" STREQUAL "GNU")
     list(APPEND C_ASM_COMPILE_FLAGS "-fno-gnu89-inline")
