@@ -18,9 +18,11 @@ consistently across compilers and operating systems, and in 32-bit and
 OpenLibm builds on Linux, macOS, Windows, FreeBSD, OpenBSD, NetBSD, and
 DragonFly BSD.  It builds with both GCC and clang. Although largely
 tested and widely used on the x86 and x86-64 architectures, OpenLibm
-also supports arm, aarch64, ppc64le, mips, wasm32, riscv, and s390(x).
+also supports arm, aarch64, ppc64le, mips, wasm32, riscv, s390(x) and loongarch64.
 
 ## Build instructions
+
+### GNU Make
 
 1. Use GNU Make to build OpenLibm. This is `make` on most systems, but `gmake` on BSDs.
 2. Use `make USEGCC=1` to build with GCC. This is the default on
@@ -32,6 +34,17 @@ also supports arm, aarch64, ppc64le, mips, wasm32, riscv, and s390(x).
    build for i386. Other supported architectures are i486, i586, and
    i686. GCC 4.8 is the minimum requirement for correct codegen on
    older 32-bit architectures.
+
+### CMake
+
+1. Create build directory with `mkdir build` and navigate into it with `cd build`.
+2. Run CMake to configure project and generate native build system with `cmake /path/to/openlibm/`
+or generate project with build system of choice e.g. `cmake /path/to/openlib/ -G "MinGW Makefiles"`.
+3. Build with the build system with `cmake --build .`.
+
+Default CMake configuration builds a `STATIC` library. To build a `SHARED` library,
+replace the keyword the `add_library()`in the `CMakeLists.txt`.
+
 
 ## Acknowledgements
 
