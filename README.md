@@ -22,6 +22,7 @@ also supports arm, aarch64, ppc64le, mips, wasm32, riscv, and s390(x).
 
 ## Build instructions
 
+### make
 1. Use GNU Make to build OpenLibm. This is `make` on most systems, but `gmake` on BSDs.
 2. Use `make USEGCC=1` to build with GCC. This is the default on
    Linux and Windows.
@@ -32,6 +33,12 @@ also supports arm, aarch64, ppc64le, mips, wasm32, riscv, and s390(x).
    build for i386. Other supported architectures are i486, i586, and
    i686. GCC 4.8 is the minimum requirement for correct codegen on
    older 32-bit architectures.
+
+### CMake
+> NOTE: CMake currently only supports building as a static library.
+
+1. Configure: `cmake -S . -B build/`
+2. Build `cmake --build build -j`
 
 ## Acknowledgements
 
