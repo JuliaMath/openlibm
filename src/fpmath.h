@@ -45,6 +45,8 @@
 #include "s390_fpmath.h"
 #elif defined(__riscv)
 #include "riscv_fpmath.h"
+#elif defined(__loongarch64)
+#include "loongarch64_fpmath.h"
 #endif
 
 /* Definitions provided directly by GCC and Clang. */

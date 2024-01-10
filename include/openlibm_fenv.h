@@ -16,6 +16,8 @@
 #include <openlibm_fenv_s390.h>
 #elif defined(__riscv)
 #include <openlibm_fenv_riscv.h>
+#elif defined(__loongarch64)
+#include <openlibm_fenv_loongarch64.h>
 #else
 #error "Unsupported platform"
 #endif
