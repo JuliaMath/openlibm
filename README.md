@@ -18,7 +18,8 @@ consistently across compilers and operating systems, and in 32-bit and
 OpenLibm builds on Linux, macOS, Windows, FreeBSD, OpenBSD, NetBSD, and
 DragonFly BSD.  It builds with both GCC and clang. Although largely
 tested and widely used on the x86 and x86-64 architectures, OpenLibm
-also supports arm, aarch64, ppc64le, mips, wasm32, riscv, and s390(x).
+also supports arm, aarch64, ppc64le, mips, wasm32, riscv, s390(x), and
+loongarch64.
 
 ## Build instructions
 
