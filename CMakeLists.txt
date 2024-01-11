@@ -503,6 +503,32 @@ else()
 	message(FATAL_ERROR "${PROJECT_NAME} CMake build is not set up for ${OPENLIBM_ARCH_FOLDER}")
 endif()
 
+
+# Filter out C implementation from compilation list if a native implementation exists
+# when generating a shared library to avoid multiple definitions
+get_target_property(TARGET_TYPE "${PROJECT_NAME}" TYPE)
+if (TARGET_TYPE STREQUAL SHARED_LIBRARY)
+    foreach(FILE_TO_REMOVE ${OPENLIBM_ASM_SOURCE})
+        # Get filename and strip out extension
+        cmake_path(GET FILE_TO_REMOVE FILENAME FILENAME_TO_REMOVE)
+        cmake_path(REMOVE_EXTENSION FILENAME_TO_REMOVE OUTPUT_VARIABLE FILENAME_TO_REMOVE)
+        message(DEBUG "Filename to remove: ${FILENAME_TO_REMOVE}")
+
+        # Go through files and remove one with the same name
+        foreach(CUR_FILE ${OPENLIBM_C_SOURCE})
+            cmake_path(GET CUR_FILE FILENAME CUR_FILENAME)
+            cmake_path(REMOVE_EXTENSION CUR_FILENAME OUTPUT_VARIABLE CUR_FILENAME)
+
+            if(${CUR_FILENAME} STREQUAL ${FILENAME_TO_REMOVE})
+                list(REMOVE_ITEM OPENLIBM_C_SOURCE ${CUR_FILE})
+                message(DEBUG "Removed source file from compilation list: ${CUR_FILE}")
+                break()
+            endif()
+        endforeach()
+    endforeach()
+endif()
+
+
 # Add sources
 target_sources("${PROJECT_NAME}" PRIVATE ${OPENLIBM_C_SOURCE}
                                          ${OPENLIBM_ASM_SOURCE}
