@@ -4,7 +4,7 @@ project(openlibm
         VERSION 0.8.0
         LANGUAGES C ASM)
 
-add_library("${PROJECT_NAME}" STATIC)
+add_library("${PROJECT_NAME}" SHARED)
 
 
 # Find the relevant folder depending on the architecture
@@ -361,39 +361,38 @@ if (LONG_DOUBLE_NOT_DOUBLE)
                 "${PROJECT_SRC}/ld80/s_nanl.c"
             )
         endif()
-    endif()
-
-else()
-    if(${OPENLIBM_ARCH_FOLDER} STREQUAL "aarch64")
-        list(APPEND OPENLIBM_C_SOURCE
-            # ld128
-            "${PROJECT_SRC}/ld128/invtrig.c"
-            "${PROJECT_SRC}/ld128/e_acoshl.c"
-            "${PROJECT_SRC}/ld128/e_powl.c"
-            "${PROJECT_SRC}/ld128/k_tanl.c"
-            "${PROJECT_SRC}/ld128/s_exp2l.c"
-            "${PROJECT_SRC}/ld128/e_atanhl.c"
-            "${PROJECT_SRC}/ld128/e_lgammal_r.c"
-            "${PROJECT_SRC}/ld128/e_sinhl.c"
-            "${PROJECT_SRC}/ld128/s_asinhl.c"
-            "${PROJECT_SRC}/ld128/s_expm1l.c"
-            "${PROJECT_SRC}/ld128/e_coshl.c"
-            "${PROJECT_SRC}/ld128/e_log10l.c"
-            "${PROJECT_SRC}/ld128/e_tgammal.c"
-            "${PROJECT_SRC}/ld128/e_expl.c"
-            "${PROJECT_SRC}/ld128/e_log2l.c"
-            "${PROJECT_SRC}/ld128/k_cosl.c"
-            "${PROJECT_SRC}/ld128/s_log1pl.c"
-            "${PROJECT_SRC}/ld128/s_tanhl.c"
-            "${PROJECT_SRC}/ld128/e_logl.c"
-            "${PROJECT_SRC}/ld128/k_sinl.c"
-            "${PROJECT_SRC}/ld128/s_erfl.c"
-        )
-
-        if(NOT ${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
+    else()
+        if(${OPENLIBM_ARCH_FOLDER} STREQUAL "aarch64")
             list(APPEND OPENLIBM_C_SOURCE
-                "${PROJECT_SRC}/ld128/s_nanl.c"
+                # ld128
+                "${PROJECT_SRC}/ld128/invtrig.c"
+                "${PROJECT_SRC}/ld128/e_acoshl.c"
+                "${PROJECT_SRC}/ld128/e_powl.c"
+                "${PROJECT_SRC}/ld128/k_tanl.c"
+                "${PROJECT_SRC}/ld128/s_exp2l.c"
+                "${PROJECT_SRC}/ld128/e_atanhl.c"
+                "${PROJECT_SRC}/ld128/e_lgammal_r.c"
+                "${PROJECT_SRC}/ld128/e_sinhl.c"
+                "${PROJECT_SRC}/ld128/s_asinhl.c"
+                "${PROJECT_SRC}/ld128/s_expm1l.c"
+                "${PROJECT_SRC}/ld128/e_coshl.c"
+                "${PROJECT_SRC}/ld128/e_log10l.c"
+                "${PROJECT_SRC}/ld128/e_tgammal.c"
+                "${PROJECT_SRC}/ld128/e_expl.c"
+                "${PROJECT_SRC}/ld128/e_log2l.c"
+                "${PROJECT_SRC}/ld128/k_cosl.c"
+                "${PROJECT_SRC}/ld128/s_log1pl.c"
+                "${PROJECT_SRC}/ld128/s_tanhl.c"
+                "${PROJECT_SRC}/ld128/e_logl.c"
+                "${PROJECT_SRC}/ld128/k_sinl.c"
+                "${PROJECT_SRC}/ld128/s_erfl.c"
             )
+
+            if(NOT ${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
+                list(APPEND OPENLIBM_C_SOURCE
+                    "${PROJECT_SRC}/ld128/s_nanl.c"
+                )
+            endif()
         endif()
     endif()
 endif()
@@ -505,28 +504,24 @@ endif()
 
 
 # Filter out C implementation from compilation list if a native implementation exists
-# when generating a shared library to avoid multiple definitions
-get_target_property(TARGET_TYPE "${PROJECT_NAME}" TYPE)
-if (TARGET_TYPE STREQUAL SHARED_LIBRARY)
-    foreach(FILE_TO_REMOVE ${OPENLIBM_ASM_SOURCE})
-        # Get filename and strip out extension
-        cmake_path(GET FILE_TO_REMOVE FILENAME FILENAME_TO_REMOVE)
-        cmake_path(REMOVE_EXTENSION FILENAME_TO_REMOVE OUTPUT_VARIABLE FILENAME_TO_REMOVE)
-        message(DEBUG "Filename to remove: ${FILENAME_TO_REMOVE}")
+foreach(FILE_TO_REMOVE ${OPENLIBM_ASM_SOURCE})
+    # Get filename and strip out extension
+    cmake_path(GET FILE_TO_REMOVE FILENAME FILENAME_TO_REMOVE)
+    cmake_path(REMOVE_EXTENSION FILENAME_TO_REMOVE OUTPUT_VARIABLE FILENAME_TO_REMOVE)
+    message(DEBUG "Filename to remove: ${FILENAME_TO_REMOVE}")
 
-        # Go through files and remove one with the same name
-        foreach(CUR_FILE ${OPENLIBM_C_SOURCE})
-            cmake_path(GET CUR_FILE FILENAME CUR_FILENAME)
-            cmake_path(REMOVE_EXTENSION CUR_FILENAME OUTPUT_VARIABLE CUR_FILENAME)
+    # Go through files and remove one with the same name
+    foreach(CUR_FILE ${OPENLIBM_C_SOURCE})
+        cmake_path(GET CUR_FILE FILENAME CUR_FILENAME)
+        cmake_path(REMOVE_EXTENSION CUR_FILENAME OUTPUT_VARIABLE CUR_FILENAME)
 
-            if(${CUR_FILENAME} STREQUAL ${FILENAME_TO_REMOVE})
-                list(REMOVE_ITEM OPENLIBM_C_SOURCE ${CUR_FILE})
-                message(DEBUG "Removed source file from compilation list: ${CUR_FILE}")
-                break()
-            endif()
-        endforeach()
+        if(${CUR_FILENAME} STREQUAL ${FILENAME_TO_REMOVE})
+            list(REMOVE_ITEM OPENLIBM_C_SOURCE ${CUR_FILE})
+            message(DEBUG "Removed source file from compilation list: ${CUR_FILE}")
+            break()
+        endif()
     endforeach()
-endif()
+endforeach()
 
 
 # Add sources
