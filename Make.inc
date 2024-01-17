@@ -23,6 +23,7 @@ endif
 
 USEGCC ?= 1
 USECLANG ?= 0
+TOOLPREFIX ?=
 
 ifneq (,$(findstring $(OS),Darwin FreeBSD OpenBSD))
 USEGCC ?= 0
@@ -34,7 +35,7 @@ USECLANG = 1
 TOOLPREFIX = llvm-
 endif
 
-AR ?= $(TOOLPREFIX)ar
+AR := $(TOOLPREFIX)ar
 
 ifeq ($(USECLANG),1)
 USEGCC ?= 0
@@ -43,7 +44,7 @@ CFLAGS_add += -fno-builtin -fno-strict-aliasing
 endif
 
 ifeq ($(USEGCC),1)
-CC ?= $(TOOLPREFIX)gcc
+CC := $(TOOLPREFIX)gcc
 CFLAGS_add += -fno-gnu89-inline -fno-builtin
 endif
 
