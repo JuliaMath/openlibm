@@ -33,6 +33,25 @@ loongarch64.
    i686. GCC 4.8 is the minimum requirement for correct codegen on
    older 32-bit architectures.
 
+
+**Cross Build**
+Take `riscv64` as example:
+1. install `qemu-riscv64-static`, `gcc-riscv64-linux-gnu`
+2. Cross build:
+```sh
+ARCH=riscv64
+TRIPLE=$ARCH-linux-gnu
+make ARCH=$ARCH TOOLPREFIX=$TRIPLE-  -j
+make -C test ARCH=$ARCH TOOLPREFIX=$TRIPLE-  -j
+```
+
+3. Run test with qemu:
+```sh
+qemu-$ARCH-static -L . -L /usr/$TRIPLE/  test/test-float
+qemu-$ARCH-static -L . -L /usr/$TRIPLE/  test/test-double
+```
+
+
 ### CMake
 
 1. Create build directory with `mkdir build` and navigate into it with `cd build`.
