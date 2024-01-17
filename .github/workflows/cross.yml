@@ -22,6 +22,9 @@ jobs:
           - { arch: aarch64,  triple: aarch64-linux-gnu }
           - { arch: ppc64le,  triple: powerpc64le-linux-gnu }
           - { arch: mips,     triple: mips-linux-gnu }
+          - { arch: mips64,   triple: mips64-linux-gnuabi64 }
+          - { arch: mipsel,   triple: mipsel-linux-gnu }
+          - { arch: mips64el, triple: mips64el-linux-gnuabi64 }
           - { arch: riscv64,  triple: riscv64-linux-gnu }
           - { arch: s390x,    triple: s390x-linux-gnu }
     env:
