@@ -17,7 +17,12 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - { arch: aarch64, triple: aarch64-linux-gnu }
+          - { arch: arm,      triple: arm-linux-gnueabi }
+          - { arch: aarch64,  triple: aarch64-linux-gnu }
+          - { arch: ppc64le,  triple: ppc64le-linux-gnu }
+          - { arch: mips,     triple: mips-linux-gnu }
+          - { arch: riscv64,  triple: riscv64-linux-gnu }
+          - { arch: s390x,    triple: s390x-linux-gnu }
     env:
       ARCH: ${{ matrix.config.arch }}
       TRIPLE: ${{ matrix.config.triple }}
