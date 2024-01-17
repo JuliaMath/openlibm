@@ -22,6 +22,10 @@ pkgconfigdir ?= $(libdir)/pkgconfig
 endif
 
 # Build with Code Coverage
+# Only test with Ubuntu + gcc + lcov, may not work for other platform.
+# deps:  https://github.com/linux-test-project/lcov
+# You don't need to set this flag manually, `make coverage` will do it for you.
+# Just Run:  make clean && make coverage -j
 CODE_COVERAGE ?= 0
 
 USEGCC ?= 1
