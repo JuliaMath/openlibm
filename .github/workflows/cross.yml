@@ -37,10 +37,10 @@ jobs:
           sudo apt update
           sudo apt install gcc-$TRIPLE -y
       - name: Build with ${{ matrix.config.triple }}-gcc
-        run: |
-          make ARCH=$ARCH TOOLPREFIX=$TRIPLE-
-          make -C test ARCH=$ARCH TOOLPREFIX=$TRIPLE-
-      - name: Test
+        run: make ARCH=$ARCH TOOLPREFIX=$TRIPLE-
+      - name: Build tests
+        run: make -C test ARCH=$ARCH TOOLPREFIX=$TRIPLE-
+      - name: Run Tests
         env:
           QEMU_EXEC: qemu-${{ matrix.config.arch }}-static
           CROSS_LIB: /usr/${{ matrix.config.triple }}
