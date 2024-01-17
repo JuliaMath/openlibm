@@ -21,6 +21,9 @@ else
 pkgconfigdir ?= $(libdir)/pkgconfig
 endif
 
+# Build with Code Coverage
+CODE_COVERAGE ?= 0
+
 USEGCC ?= 1
 USECLANG ?= 0
 
@@ -161,6 +164,12 @@ ifeq ($(filter $(OS),Darwin WINNT),)
 LONG_DOUBLE_NOT_DOUBLE := 1
 endif
 endif
+
+ifeq ($(CODE_COVERAGE),1)
+CFLAGS_add  += -g -O0 --coverage
+LDFLAGS_add += --coverage
+endif # CODE_COVERAGE==1
+
 
 %.c.o: %.c
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(CFLAGS_add) -c $< -o $@
