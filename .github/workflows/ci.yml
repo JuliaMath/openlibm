@@ -42,3 +42,15 @@ jobs:
           install: base-devel mingw-w64-${{matrix.env}}-toolchain
       - run: make
       - run: make test
+  code-coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup LCOV
+        uses: hrishikesh-kadam/setup-lcov@v1
+      - name: Build and Run tests
+        run: make coverage -j
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          files: ./cov-html/libopenlibm.info
