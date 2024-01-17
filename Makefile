@@ -86,8 +86,12 @@ COVERAGE_FILE:=$(COVERAGE_DIR)/libopenlibm.info
 coverage: clean-coverage
 	mkdir $(COVERAGE_DIR)
 	$(MAKE) test  CODE_COVERAGE=1
-	lcov -d amd64 -d bsdsrc -d ld80 -d src --capture --output-file $(COVERAGE_FILE)
-	genhtml --output-directory $(COVERAGE_DIR)/ $(COVERAGE_FILE)
+	lcov -d amd64 -d bsdsrc -d ld80 -d src \
+		--rc lcov_branch_coverage=1 --capture --output-file $(COVERAGE_FILE)
+	genhtml --legend --branch-coverage \
+		--title "Openlibm commit `git rev-parse HEAD`" \
+		--output-directory $(COVERAGE_DIR)/ \
+		$(COVERAGE_FILE)
 
 # Zero coverage statistics and Delete report
 clean-coverage:
