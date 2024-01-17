@@ -1,0 +1,49 @@
+name: Cross
+
+on:
+  pull_request:
+    branches:
+      - master
+  push:
+    branches:
+      - master
+    tags: '*'
+
+jobs:
+  build-cross-qemu:
+    runs-on: ubuntu-latest
+    name: build-cross-qemu-$ARCH
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - { arch: aarch64, triple: aarch64-linux-gnu }
+    env:
+      ARCH: ${{ matrix.config.arch }}
+      TRIPLE: ${{ matrix.config.triple }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install QEMU
+        # this ensure install latest qemu on ubuntu, apt get version is old
+        env:
+          QEMU_SRC: "http://archive.ubuntu.com/ubuntu/pool/universe/q/qemu"
+          QEMU_VER: "qemu-user-static_7\\.2+dfsg-.*_amd64.deb$"
+        run: |
+          DEB=`curl -s $QEMU_SRC/ | grep -o -E 'href="([^"#]+)"' | cut -d'"' -f2 | grep $QEMU_VER | tail -1`
+          wget $QEMU_SRC/$DEB
+          sudo dpkg -i $DEB
+      - name: Install toolchain gcc-$TRIPLE
+        run: |
+          sudo apt update
+          sudo apt install gcc-$TRIPLE -y
+      - name: Build with $TRIPLE-gcc
+        run: |
+          make ARCH=$ARCH TOOLPREFIX=$TRIPLE-
+          make -C test ARCH=$ARCH TOOLPREFIX=$TRIPLE-
+      - name: Test
+        env:
+          QEMU_EXEC: qemu-$ARCH-static
+          CROSS_LIB: /usr/$TRIPLE
+        run: |
+          $QEMU_EXEC -L . -L $CROSS_LIB/  test/test-float
+          $QEMU_EXEC -L . -L $CROSS_LIB/  test/test-double
