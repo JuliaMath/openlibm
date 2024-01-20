@@ -80,9 +80,29 @@ test/test-double: libopenlibm.$(OLM_MAJOR_MINOR_SHLIB_EXT)
 test/test-float: libopenlibm.$(OLM_MAJOR_MINOR_SHLIB_EXT)
 	$(MAKE) -C test test-float
 
-clean:
+COVERAGE_DIR:=cov-html
+COVERAGE_FILE:=$(COVERAGE_DIR)/libopenlibm.info
+# Gen cov report with:  make clean && make coverage -j
+coverage: clean-coverage
+	mkdir $(COVERAGE_DIR)
+	$(MAKE) test  CODE_COVERAGE=1
+	lcov -d amd64 -d bsdsrc -d ld80 -d src \
+		--rc lcov_branch_coverage=1 --capture --output-file $(COVERAGE_FILE)
+	genhtml --legend --branch-coverage \
+		--title "Openlibm commit `git rev-parse HEAD`" \
+		--output-directory $(COVERAGE_DIR)/ \
+		$(COVERAGE_FILE)
+
+# Zero coverage statistics and Delete report
+clean-coverage:
+	-lcov -d amd64 -d bsdsrc -d ld80 -d src --zerocounters
+	rm -f ./*/*.gcda
+	rm -rf $(COVERAGE_DIR)/
+
+clean: clean-coverage
 	rm -f aarch64/*.o amd64/*.o arm/*.o bsdsrc/*.o i387/*.o loongarch64/*.o ld80/*.o ld128/*.o src/*.o powerpc/*.o mips/*.o s390/*.o riscv64/*.o
 	rm -f libopenlibm.a libopenlibm.*$(SHLIB_EXT)*
+	rm -f ./*/*.gcno
 	$(MAKE) -C test clean
 
 openlibm.pc: openlibm.pc.in Make.inc Makefile

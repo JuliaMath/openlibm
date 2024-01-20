@@ -1,5 +1,7 @@
 # OpenLibm
 
+[![codecov](https://codecov.io/gh/JuliaMath/openlibm/graph/badge.svg?token=eTAdN7d9cg)](https://codecov.io/gh/JuliaMath/openlibm)
+
 [OpenLibm](https://openlibm.org/) is an effort to have a high quality, portable, standalone
 C mathematical library ([`libm`](http://en.wikipedia.org/wiki/libm)).
 It can be used standalone in applications and programming language
