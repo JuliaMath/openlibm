@@ -17,8 +17,7 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          # TODO: fix arm cross build
-          # - { arch: arm,      triple: arm-linux-gnueabi }
+          - { arch: arm,      triple: arm-linux-gnueabihf }
           - { arch: aarch64,  triple: aarch64-linux-gnu }
           - { arch: ppc,      triple: powerpc-linux-gnu }
           - { arch: ppc64,    triple: powerpc64-linux-gnu }
