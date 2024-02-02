@@ -3,9 +3,28 @@ CFLAGS += -Wno-unknown-pragmas -fno-builtin -frounding-math
 CFLAGS += -Werror=implicit-function-declaration -Werror=implicit-int -Werror=pointer-sign -Werror=pointer-arith
 CFLAGS += -g
 LDFLAGS += -g
-LDLIBS += -lpthread -lm -lrt
+# XXX: link libm later
+LDLIBS += -lpthread -lrt
 
 # glibc specific settings
-CFLAGS += -D_FILE_OFFSET_BITS=64
-LDLIBS += -lcrypt -ldl -lresolv -lutil -lpthread
+# XXX: Not using the Glibc settings
+# CFLAGS += -D_FILE_OFFSET_BITS=64
+# LDLIBS += -lcrypt -ldl -lresolv -lutil -lpthread
 
+# XXX: ---- OpenlibM settings
+OPENLIBM_HOME=$(abspath ../..)
+include $(OPENLIBM_HOME)/Make.inc
+
+# Set rpath of tests to builddir for loading shared library
+OPENLIBM_LIB = -L$(OPENLIBM_HOME) -lopenlibm
+ifneq ($(OS),WINNT)
+ifneq ($(OS),Darwin)
+OPENLIBM_LIB += -Wl,-rpath=$(OPENLIBM_HOME)
+endif
+else # WINNT
+CFLAGS_add += -DIMPORT_EXPORTS
+endif
+
+CFLAGS += $(CFLAGS_add)
+LDFLAGS += $(LDFLAGS_add)
+LDLIBS += $(OPENLIBM_LIB)
