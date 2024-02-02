@@ -1,4 +1,7 @@
-#include <fenv.h>
+// XXX: Use openlibm
+// #include <fenv.h>
+#include <openlibm_fenv.h>
+
 #define T(t) (t*)0;
 #define F(t,n) {t *y = &x.n;}
 #define C(n) switch(n){case n:;}

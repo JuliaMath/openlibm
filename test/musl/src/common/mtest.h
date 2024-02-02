@@ -1,6 +1,9 @@
-#include <fenv.h>
 #include <float.h>
-#include <math.h>
+// XXX: Use openlibm
+// #include <fenv.h>
+// #include <math.h>
+#include <openlibm_fenv.h>
+#include <openlibm_math.h>
 
 #undef RN
 #undef RZ
@@ -132,4 +135,3 @@ static int checkcr(long double y, long double ywant, int r)
 		return isnan(y);
 	return y == ywant && signbit(y) == signbit(ywant);
 }
-

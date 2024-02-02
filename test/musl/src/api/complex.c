@@ -1,4 +1,7 @@
-#include <complex.h>
+// XXX: Use openlibm
+// #include <complex.h>
+#include <openlibm_complex.h>
+
 #define T(t) (t*)0;
 static void f()
 {

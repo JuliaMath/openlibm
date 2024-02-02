@@ -1,4 +1,7 @@
-#include <math.h>
+// XXX: Use openlibm
+// #include <math.h>
+#include <openlibm_math.h>
+
 #define T(t) (t*)0;
 #define C(n) switch(n){case n:;}
 #define I(t,e) {t x[sizeof(t)==sizeof(e)] = {e};}

@@ -1,4 +1,6 @@
-#include <math.h>
+// XXX: Use openlibm
+// #include <math.h>
+#include <openlibm_math.h>
 #include "mtest.h"
 #include "test.h"
 
