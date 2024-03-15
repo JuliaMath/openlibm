@@ -4,7 +4,7 @@ project(openlibm
         VERSION 0.8.0
         LANGUAGES C ASM)
 
-add_library("${PROJECT_NAME}" SHARED)
+add_library("${PROJECT_NAME}")
 
 
 # Find the relevant folder depending on the architecture
@@ -72,7 +72,7 @@ elseif(${OPENLIBM_ARCH_FOLDER} STREQUAL "aarch64")
 endif()
 
 # Project Source
-set(PROJECT_SRC "${PROJECT_SOURCE_DIR}")
+set(PROJECT_SRC "${CMAKE_CURRENT_SOURCE_DIR}")
 
 # Common
 list(APPEND OPENLIBM_C_SOURCE
