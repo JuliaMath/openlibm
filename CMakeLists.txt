@@ -500,6 +500,9 @@ elseif(${OPENLIBM_ARCH_FOLDER} STREQUAL "powerpc")
         list(APPEND OPENLIBM_C_SOURCE
                 "${PROJECT_SRC}/powerpc/fenv.c"
         )
+elseif(${OPENLIBM_ARCH_FOLDER} STREQUAL "riscv64")
+        list(APPEND OPENLIBM_C_SOURCE
+                "${PROJECT_SRC}/riscv64/fenv.c")
 else()
 	message(FATAL_ERROR "${PROJECT_NAME} CMake build is not set up for ${OPENLIBM_ARCH_FOLDER}")
 endif()
