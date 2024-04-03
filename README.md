@@ -29,7 +29,7 @@ loongarch64.
    Linux and Windows.
 3. Use `make USECLANG=1` to build with clang. This is the default on OS X, FreeBSD,
    and OpenBSD.
-4. Use `make ARCH=wasm32` to build the wasm32 library with clang. Requires clang-8.
+4. Use `make ARCH=wasm32` to build the wasm32 library with clang.
 5. Architectures are auto-detected. Use `make ARCH=i386` to force a
    build for i386. Other supported architectures are i486, i586, and
    i686. GCC 4.8 is the minimum requirement for correct codegen on

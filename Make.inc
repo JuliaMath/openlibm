@@ -39,6 +39,7 @@ endif
 
 ifeq ($(ARCH),wasm32)
 USECLANG = 1
+USEGCC = 0
 TOOLPREFIX = llvm-
 endif
 
