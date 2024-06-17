@@ -548,3 +548,7 @@ else()
 endif()
 
 target_include_directories("${PROJECT_NAME}" PUBLIC ${OPENLIBM_INCLUDE_DIRS})
+
+file(GLOB PUBLIC_HEADERS "include/*.h")
+set_target_properties("${PROJECT_NAME}" PROPERTIES PUBLIC_HEADER "${PUBLIC_HEADERS}")
+install (TARGETS "${PROJECT_NAME}")
