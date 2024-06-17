@@ -52,13 +52,6 @@ if(OPENLIBM_SUPPRESS_WARNINGS)
     list(APPEND C_ASM_COMPILE_FLAGS "-w")
 endif()
 
-list(APPEND C_ASM_COMPILE_FLAGS
-        "-I${PROJECT_SRC}"
-        "-I${PROJECT_SRC}/include"
-        "-I${PROJECT_SRC}/${OPENLIBM_ARCH_FOLDER}"
-        "-I${PROJECT_SRC}/src"
-)
-
 # Add compile flags
 target_compile_options("${PROJECT_NAME}" PUBLIC ${C_ASM_COMPILE_FLAGS})
 
