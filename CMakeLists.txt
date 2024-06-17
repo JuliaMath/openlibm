@@ -4,8 +4,9 @@ project(openlibm
         VERSION 0.8.0
         LANGUAGES C ASM)
 
-add_library("${PROJECT_NAME}" SHARED)
+option(BUILD_SHARED_LIBS "Build using shared libraries" ON)
 
+add_library("${PROJECT_NAME}")
 
 # Find the relevant folder depending on the architecture
 set(OPENLIBM_ARCH_FOLDER ${CMAKE_SYSTEM_PROCESSOR})
