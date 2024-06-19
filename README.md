@@ -29,7 +29,7 @@ loongarch64.
    Linux and Windows.
 3. Use `make USECLANG=1` to build with clang. This is the default on OS X, FreeBSD,
    and OpenBSD.
-4. Use `make ARCH=wasm32` to build the wasm32 library with clang. Requires clang-8.
+4. Use `make ARCH=wasm32` to build the wasm32 library with clang.
 5. Architectures are auto-detected. Use `make ARCH=i386` to force a
    build for i386. Other supported architectures are i486, i586, and
    i686. GCC 4.8 is the minimum requirement for correct codegen on
@@ -61,8 +61,9 @@ qemu-$ARCH-static -L . -L /usr/$TRIPLE/  test/test-double
 or generate project with build system of choice e.g. `cmake /path/to/openlib/ -G "MinGW Makefiles"`.
 3. Build with the build system with `cmake --build .`.
 
-Default CMake configuration builds a shared library, this can easily be changed by replacing
-the keyword in the `add_library()` command in the `CMakeLists.txt`.
+Default CMake configuration builds a shared library, this can easily be configured using
+[BUILD_SHARED_LIBS](https://cmake.org/cmake/help/latest/variable/BUILD_SHARED_LIBS.html)
+configuration option.
 
 
 ## Acknowledgements
