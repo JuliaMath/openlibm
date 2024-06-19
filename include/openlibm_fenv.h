@@ -8,7 +8,7 @@
 #include <openlibm_fenv_amd64.h>
 #elif defined(__i386__)
 #include <openlibm_fenv_i387.h>
-#elif defined(__powerpc__) || defined(__ppc__)
+#elif defined(__powerpc__) || defined(__POWERPC__)
 #include <openlibm_fenv_powerpc.h>
 #elif defined(__mips__)
 #include <openlibm_fenv_mips.h>
