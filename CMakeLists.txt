@@ -1,11 +1,12 @@
 cmake_minimum_required(VERSION 3.25)
 
 project(openlibm
-        VERSION 0.8.0
+        VERSION 0.8.2
         LANGUAGES C ASM)
 
-add_library("${PROJECT_NAME}" SHARED)
+option(BUILD_SHARED_LIBS "Build using shared libraries" ON)
 
+add_library("${PROJECT_NAME}")
 
 # Find the relevant folder depending on the architecture
 set(OPENLIBM_ARCH_FOLDER ${CMAKE_SYSTEM_PROCESSOR})
@@ -13,7 +14,7 @@ string(TOLOWER "${OPENLIBM_ARCH_FOLDER}" OPENLIBM_ARCH_FOLDER)
 
 if(${OPENLIBM_ARCH_FOLDER} STREQUAL "amd64" OR ${OPENLIBM_ARCH_FOLDER} STREQUAL "x86_64")
     set(OPENLIBM_ARCH_FOLDER "amd64")
-elseif(${OPENLIBM_ARCH_FOLDER} MATCHES "arm64")
+elseif(${OPENLIBM_ARCH_FOLDER} STREQUAL "arm64" OR ${OPENLIBM_ARCH_FOLDER} STREQUAL "aarch64")
     set(OPENLIBM_ARCH_FOLDER "aarch64")
 elseif(${OPENLIBM_ARCH_FOLDER} STREQUAL "x86")
     set(OPENLIBM_ARCH_FOLDER "i387")
@@ -50,13 +51,6 @@ endif()
 if(OPENLIBM_SUPPRESS_WARNINGS)
     list(APPEND C_ASM_COMPILE_FLAGS "-w")
 endif()
-
-list(APPEND C_ASM_COMPILE_FLAGS
-        "-I${PROJECT_SRC}"
-        "-I${PROJECT_SRC}/include"
-        "-I${PROJECT_SRC}/${OPENLIBM_ARCH_FOLDER}"
-        "-I${PROJECT_SRC}/src"
-)
 
 # Add compile flags
 target_compile_options("${PROJECT_NAME}" PUBLIC ${C_ASM_COMPILE_FLAGS})
@@ -547,3 +541,7 @@ else()
 endif()
 
 target_include_directories("${PROJECT_NAME}" PUBLIC ${OPENLIBM_INCLUDE_DIRS})
+
+file(GLOB PUBLIC_HEADERS "*.h" "include/*.h" "${OPENLIBM_ARCH_FOLDER}/*.h" "src/*.h")
+set_target_properties("${PROJECT_NAME}" PROPERTIES PUBLIC_HEADER "${PUBLIC_HEADERS}")
+install (TARGETS "${PROJECT_NAME}")
