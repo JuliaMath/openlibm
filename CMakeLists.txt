@@ -57,16 +57,6 @@ endif()
 # Add compile flags
 target_compile_options("${PROJECT_NAME}" PUBLIC ${C_ASM_COMPILE_FLAGS})
 
-
-# Determine if long double and double is the same on current platform
-if(${OPENLIBM_ARCH_FOLDER} STREQUAL "i387" OR ${OPENLIBM_ARCH_FOLDER} STREQUAL "amd64")
-    set(LONG_DOUBLE_NOT_DOUBLE 1)
-elseif(${OPENLIBM_ARCH_FOLDER} STREQUAL "aarch64")
-    if(NOT (${CMAKE_SYSTEM_NAME} STREQUAL "Darwin" OR ${CMAKE_SYSTEM_NAME} STREQUAL "Windows"))
-        set(LONG_DOUBLE_NOT_DOUBLE 1)
-    endif()
-endif()
-
 # Project Source
 set(PROJECT_SRC "${PROJECT_SOURCE_DIR}")
 
@@ -258,6 +248,16 @@ if(NOT ${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
             "${PROJECT_SRC}/src/s_nan.c"
     )
 endif()
+
+# Determine if long double and double are the same size
+include(CheckCSourceCompiles)
+check_c_source_compiles("
+#include <float.h>
+#if (LDBL_MANT_DIG == DBL_MANT_DIG)
+#error \"long double and double are the same size\"
+#endif
+int main(void ) { return 0; }
+" LONG_DOUBLE_NOT_DOUBLE)
 
 # Add in long double functions for x86, x64 and aarch64
 if(LONG_DOUBLE_NOT_DOUBLE)
