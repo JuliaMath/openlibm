@@ -552,3 +552,16 @@ target_include_directories("${PROJECT_NAME}" PUBLIC ${OPENLIBM_INCLUDE_DIRS})
 file(GLOB PUBLIC_HEADERS "*.h" "include/*.h" "${OPENLIBM_ARCH_FOLDER}/*.h" "src/*.h")
 set_target_properties("${PROJECT_NAME}" PROPERTIES PUBLIC_HEADER "${PUBLIC_HEADERS}")
 install (TARGETS "${PROJECT_NAME}")
+
+# Can't use configure_file because openlibm.pc.in uses $var instead of CMake configure @var's
+# Would rather string replace variables here instead of editing .pc.in, because editing .pc.in
+# might build break autotools build.
+file(READ "${PROJECT_SRC}/openlibm.pc.in" PC_FILE)
+string(REPLACE "\${version}" ${CMAKE_PROJECT_VERSION} PC_FILE ${PC_FILE})
+string(PREPEND PC_FILE "prefix=${CMAKE_INSTALL_PREFIX}
+includedir=\${prefix}/${CMAKE_INSTALL_INCLUDEDIR}
+libdir=\${prefix}/${CMAKE_INSTALL_LIBDIR}\n
+")
+file(WRITE "${CMAKE_BINARY_DIR}/${PROJECT_NAME}.pc" ${PC_FILE})
+install(FILES "${CMAKE_BINARY_DIR}/${PROJECT_NAME}.pc"
+        DESTINATION "${CMAKE_INSTALL_LIBDIR}/pkgconfig")
