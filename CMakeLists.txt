@@ -26,6 +26,8 @@ elseif(${OPENLIBM_ARCH_FOLDER} STREQUAL "x86" OR ${OPENLIBM_ARCH_FOLDER} STREQUA
     set(OPENLIBM_ARCH_FOLDER "i387")
 elseif(${OPENLIBM_ARCH_FOLDER} STREQUAL "powerpc")
     set(OPENLIBM_ARCH_FOLDER "powerpc")
+elseif(${OPENLIBM_ARCH_FOLDER} STREQUAL "riscv64")
+    set(OPENLIBM_ARCH_FOLDER "riscv64")
 else()
     message(FATAL_ERROR "${PROJECT_NAME} not set up for detected architecture: ${OPENLIBM_ARCH_FOLDER}")
 endif()
@@ -62,7 +64,7 @@ endif()
 target_compile_options("${PROJECT_NAME}" PUBLIC ${C_ASM_COMPILE_FLAGS})
 
 # Project Source
-set(PROJECT_SRC "${PROJECT_SOURCE_DIR}")
+set(PROJECT_SRC "${CMAKE_CURRENT_SOURCE_DIR}")
 
 # Common
 list(APPEND OPENLIBM_C_SOURCE
@@ -503,6 +505,9 @@ elseif(${OPENLIBM_ARCH_FOLDER} STREQUAL "powerpc")
         list(APPEND OPENLIBM_C_SOURCE
                 "${PROJECT_SRC}/powerpc/fenv.c"
         )
+elseif(${OPENLIBM_ARCH_FOLDER} STREQUAL "riscv64")
+        list(APPEND OPENLIBM_C_SOURCE
+                "${PROJECT_SRC}/riscv64/fenv.c")
 else()
 	message(FATAL_ERROR "${PROJECT_NAME} CMake build is not set up for ${OPENLIBM_ARCH_FOLDER}")
 endif()
