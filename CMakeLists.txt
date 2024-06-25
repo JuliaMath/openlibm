@@ -1,7 +1,11 @@
 cmake_minimum_required(VERSION 3.25)
 
+# Get version string from Make.inc
+file(READ "${CMAKE_CURRENT_LIST_DIR}/Make.inc" MAKE_FILE)
+string(REGEX MATCH "VERSION = ([0-9\.]+)" _ ${MAKE_FILE})
+
 project(openlibm
-        VERSION 0.8.2
+        VERSION ${CMAKE_MATCH_1}
         LANGUAGES C ASM)
 
 option(BUILD_SHARED_LIBS "Build using shared libraries" ON)
@@ -16,7 +20,9 @@ if(${OPENLIBM_ARCH_FOLDER} STREQUAL "amd64" OR ${OPENLIBM_ARCH_FOLDER} STREQUAL 
     set(OPENLIBM_ARCH_FOLDER "amd64")
 elseif(${OPENLIBM_ARCH_FOLDER} STREQUAL "arm64" OR ${OPENLIBM_ARCH_FOLDER} STREQUAL "aarch64")
     set(OPENLIBM_ARCH_FOLDER "aarch64")
-elseif(${OPENLIBM_ARCH_FOLDER} STREQUAL "x86")
+elseif(${OPENLIBM_ARCH_FOLDER} STREQUAL "armv7-a")
+    set(OPENLIBM_ARCH_FOLDER "arm")
+elseif(${OPENLIBM_ARCH_FOLDER} STREQUAL "x86" OR ${OPENLIBM_ARCH_FOLDER} STREQUAL "i686")
     set(OPENLIBM_ARCH_FOLDER "i387")
 elseif(${OPENLIBM_ARCH_FOLDER} STREQUAL "powerpc")
     set(OPENLIBM_ARCH_FOLDER "powerpc")
@@ -54,16 +60,6 @@ endif()
 
 # Add compile flags
 target_compile_options("${PROJECT_NAME}" PUBLIC ${C_ASM_COMPILE_FLAGS})
-
-
-# Determine if long double and double is the same on current platform
-if(${OPENLIBM_ARCH_FOLDER} STREQUAL "i387" OR ${OPENLIBM_ARCH_FOLDER} STREQUAL "amd64")
-    set(LONG_DOUBLE_NOT_DOUBLE 1)
-elseif(${OPENLIBM_ARCH_FOLDER} STREQUAL "aarch64")
-    if(NOT (${CMAKE_SYSTEM_NAME} STREQUAL "Darwin" OR ${CMAKE_SYSTEM_NAME} STREQUAL "Windows"))
-        set(LONG_DOUBLE_NOT_DOUBLE 1)
-    endif()
-endif()
 
 # Project Source
 set(PROJECT_SRC "${PROJECT_SOURCE_DIR}")
@@ -257,6 +253,16 @@ if(NOT ${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
     )
 endif()
 
+# Determine if long double and double are the same size
+include(CheckCSourceCompiles)
+check_c_source_compiles("
+#include <float.h>
+#if (LDBL_MANT_DIG == DBL_MANT_DIG)
+#error \"long double and double are the same size\"
+#endif
+int main(void ) { return 0; }
+" LONG_DOUBLE_NOT_DOUBLE)
+
 # Add in long double functions for x86, x64 and aarch64
 if(LONG_DOUBLE_NOT_DOUBLE)
     list(APPEND OPENLIBM_C_SOURCE
@@ -428,6 +434,11 @@ elseif(${OPENLIBM_ARCH_FOLDER} STREQUAL "aarch64")
             "${PROJECT_SRC}/aarch64/fenv.c"
     )
 
+elseif(${OPENLIBM_ARCH_FOLDER} STREQUAL "arm")
+    list(APPEND OPENLIBM_C_SOURCE
+            "${PROJECT_SRC}/${OPENLIBM_ARCH_FOLDER}/fenv.c"
+    )
+
 elseif(${OPENLIBM_ARCH_FOLDER} STREQUAL "i387")
     list(APPEND OPENLIBM_C_SOURCE
             "${PROJECT_SRC}/i387/fenv.c"
@@ -545,3 +556,16 @@ target_include_directories("${PROJECT_NAME}" PUBLIC ${OPENLIBM_INCLUDE_DIRS})
 file(GLOB PUBLIC_HEADERS "*.h" "include/*.h" "${OPENLIBM_ARCH_FOLDER}/*.h" "src/*.h")
 set_target_properties("${PROJECT_NAME}" PROPERTIES PUBLIC_HEADER "${PUBLIC_HEADERS}")
 install (TARGETS "${PROJECT_NAME}")
+
+# Can't use configure_file because openlibm.pc.in uses $var instead of CMake configure @var's
+# Would rather string replace variables here instead of editing .pc.in, because editing .pc.in
+# might build break autotools build.
+file(READ "${PROJECT_SRC}/openlibm.pc.in" PC_FILE)
+string(REPLACE "\${version}" ${CMAKE_PROJECT_VERSION} PC_FILE ${PC_FILE})
+string(PREPEND PC_FILE "prefix=${CMAKE_INSTALL_PREFIX}
+includedir=\${prefix}/${CMAKE_INSTALL_INCLUDEDIR}
+libdir=\${prefix}/${CMAKE_INSTALL_LIBDIR}\n
+")
+file(WRITE "${CMAKE_BINARY_DIR}/${PROJECT_NAME}.pc" ${PC_FILE})
+install(FILES "${CMAKE_BINARY_DIR}/${PROJECT_NAME}.pc"
+        DESTINATION "${CMAKE_INSTALL_LIBDIR}/pkgconfig")
