@@ -19,3 +19,8 @@ ENTRY(fmodf)
 	fstp	%st
 	ret
 END(fmodf)
+
+/* Enable stack protection */
+#if defined(__ELF__)
+.section .note.GNU-stack,"",%progbits
+#endif
