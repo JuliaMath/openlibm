@@ -155,7 +155,7 @@ CFLAGS_add += -std=c99 -Wall -I$(OPENLIBM_HOME) -I$(OPENLIBM_HOME)/include -I$(O
 ifneq ($(filter $(ARCH),i387 amd64 powerpc),)
 CFLAGS_add += -I$(OPENLIBM_HOME)/ld80
 else
-ifneq ($(filter $(ARCH),aarch64),)
+ifneq ($(filter $(ARCH),aarch64 riscv64),)
 CFLAGS_add += -I$(OPENLIBM_HOME)/ld128
 endif
 endif
@@ -165,7 +165,7 @@ ifneq ($(filter $(ARCH),i387 amd64),)
 # linux x86_64, for instance, `long double` is 80 bits wide, whereas on macOS aarch64,
 # `long double` is the same as `double`. 
 LONG_DOUBLE_NOT_DOUBLE := 1
-else ifeq ($(ARCH), aarch64)
+else ifeq ($(ARCH), aarch64 riscv64)
 ifeq ($(filter $(OS),Darwin WINNT),)
 LONG_DOUBLE_NOT_DOUBLE := 1
 endif

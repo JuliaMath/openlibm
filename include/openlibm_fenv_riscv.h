@@ -45,8 +45,8 @@
 #define	__fenv_static	static
 #endif
 
-typedef	__uint64_t	fenv_t;
-typedef	__uint64_t	fexcept_t;
+typedef	uint64_t	fenv_t;
+typedef	uint64_t	fexcept_t;
 
 /* Exception flags */
 #define	FE_INVALID	0x0010
