@@ -11,7 +11,9 @@ on:
 
 jobs:
   build-cross-qemu:
-    runs-on: ubuntu-latest
+    # TODO: We need Ubuntu 24.04 to use newer version of qemu,
+    #   switch to ubuntu-latest when `ubuntu-latest >= 24.04`
+    runs-on: ubuntu-24.04
     name: build-cross-qemu-${{ matrix.config.arch }}
     strategy:
       fail-fast: false
@@ -34,19 +36,10 @@ jobs:
       TRIPLE: ${{ matrix.config.triple }}
     steps:
       - uses: actions/checkout@v4
-      - name: Install QEMU
-        # this ensure install latest qemu on ubuntu, apt get version is old
-        env:
-          QEMU_SRC: "http://archive.ubuntu.com/ubuntu/pool/universe/q/qemu"
-          QEMU_VER: "qemu-user-static_9.*_amd64.deb$"
-        run: |
-          DEB=`curl -s $QEMU_SRC/ | grep -o -E 'href="([^"#]+)"' | cut -d'"' -f2 | grep $QEMU_VER | tail -1`
-          wget $QEMU_SRC/$DEB
-          sudo dpkg -i $DEB
-      - name: Install toolchain gcc-${{ matrix.config.triple }}
+      - name: Install qemu and toolchain gcc-${{ matrix.config.triple }}
         run: |
           sudo apt update
-          sudo apt install gcc-$TRIPLE -y
+          sudo apt install qemu-user qemu-user-binfmt gcc-$TRIPLE -y
       - name: Build with ${{ matrix.config.triple }}-gcc
         run: make ARCH=$ARCH TOOLPREFIX=$TRIPLE-
       - name: Build tests
