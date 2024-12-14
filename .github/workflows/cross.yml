@@ -46,7 +46,7 @@ jobs:
         run: make -C test ARCH=$ARCH TOOLPREFIX=$TRIPLE-
       - name: Run Tests
         env:
-          QEMU_EXEC: qemu-${{ matrix.config.arch }}-static
+          QEMU_EXEC: qemu-${{ matrix.config.arch }}
           CROSS_LIB: /usr/${{ matrix.config.triple }}
         run: |
           $QEMU_EXEC -L . -L $CROSS_LIB/  test/test-float
