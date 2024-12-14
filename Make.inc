@@ -37,6 +37,12 @@ USEGCC ?= 0
 USECLANG ?= 1
 endif
 
+ifneq (,$(findstring CLANG,$(MSYSTEM)))
+# In MSYS2
+USEGCC = 0
+USECLANG = 1
+endif
+
 ifeq ($(ARCH),wasm32)
 USECLANG = 1
 USEGCC = 0
