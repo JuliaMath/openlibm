@@ -1,4 +1,5 @@
 # -*- mode: makefile-gmake -*-
+# vi:ft=make
 
 # Default build rule for any Makefile in this project: all
 default: all
