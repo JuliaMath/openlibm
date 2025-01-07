@@ -28,10 +28,6 @@ endif
 # Just Run:  make clean && make coverage -j
 CODE_COVERAGE ?= 0
 
-USEGCC ?= 1
-USECLANG ?= 0
-TOOLPREFIX ?=
-
 ifneq (,$(findstring $(OS),Darwin FreeBSD OpenBSD))
 USEGCC ?= 0
 USECLANG ?= 1
@@ -49,10 +45,14 @@ USEGCC = 0
 TOOLPREFIX = llvm-
 endif
 
+USEGCC ?= 1
+USECLANG ?= 0
+TOOLPREFIX ?=
+
 AR := $(TOOLPREFIX)ar
 
 ifeq ($(USECLANG),1)
-USEGCC ?= 0
+USEGCC = 0
 CC = clang
 CFLAGS_add += -fno-builtin -fno-strict-aliasing
 endif
