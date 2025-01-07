@@ -171,7 +171,7 @@ ifneq ($(filter $(ARCH),i387 amd64),)
 # linux x86_64, for instance, `long double` is 80 bits wide, whereas on macOS aarch64,
 # `long double` is the same as `double`. 
 LONG_DOUBLE_NOT_DOUBLE := 1
-else ifeq ($(ARCH), aarch64 riscv64)
+else ifeq ($(ARCH), aarch64)
 ifeq ($(filter $(OS),Darwin WINNT),)
 LONG_DOUBLE_NOT_DOUBLE := 1
 endif
