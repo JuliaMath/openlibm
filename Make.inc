@@ -1,4 +1,5 @@
 # -*- mode: makefile-gmake -*-
+# vi:ft=make
 
 # Default build rule for any Makefile in this project: all
 default: all
@@ -28,10 +29,6 @@ endif
 # Just Run:  make clean && make coverage -j
 CODE_COVERAGE ?= 0
 
-USEGCC ?= 1
-USECLANG ?= 0
-TOOLPREFIX ?=
-
 ifneq (,$(findstring $(OS),Darwin FreeBSD OpenBSD))
 USEGCC ?= 0
 USECLANG ?= 1
@@ -49,10 +46,14 @@ USEGCC = 0
 TOOLPREFIX = llvm-
 endif
 
+USEGCC ?= 1
+USECLANG ?= 0
+TOOLPREFIX ?=
+
 AR := $(TOOLPREFIX)ar
 
 ifeq ($(USECLANG),1)
-USEGCC ?= 0
+USEGCC = 0
 CC = clang
 CFLAGS_add += -fno-builtin -fno-strict-aliasing
 endif
@@ -171,7 +172,7 @@ ifneq ($(filter $(ARCH),i387 amd64),)
 # linux x86_64, for instance, `long double` is 80 bits wide, whereas on macOS aarch64,
 # `long double` is the same as `double`. 
 LONG_DOUBLE_NOT_DOUBLE := 1
-else ifeq ($(ARCH), aarch64 riscv64)
+else ifeq ($(ARCH), aarch64)
 ifeq ($(filter $(OS),Darwin WINNT),)
 LONG_DOUBLE_NOT_DOUBLE := 1
 endif
