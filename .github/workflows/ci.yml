@@ -54,6 +54,7 @@ jobs:
         uses: codecov/codecov-action@v5
         with:
           files: ./cov-html/libopenlibm.info
+          token: ${{ secrets.CODECOV_TOKEN }}
       - uses: actions/upload-artifact@v4
         with:
           name: code-coverage-report
