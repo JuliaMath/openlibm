@@ -49,7 +49,7 @@
 OLM_DLLEXPORT dtype
 fn(type x)
 {
-	fenv_t env;
+	fenv_t env = __fe_dfl_env;
 	dtype d;
 
 	feholdexcept(&env);

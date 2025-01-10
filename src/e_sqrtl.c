@@ -81,7 +81,7 @@ sqrtl(long double x)
 	union IEEEl2bits u;
 	int k, r;
 	long double lo, xn;
-	fenv_t env;
+	fenv_t env = __fe_dfl_env;
 
 	u.e = x;
 
