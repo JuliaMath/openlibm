@@ -44,7 +44,7 @@ OLM_DLLEXPORT type				\
 fn(type x)			\
 {				\
 	type ret;		\
-	fenv_t env;		\
+	fenv_t env = __fe_dfl_env;	\
 				\
 	fegetenv(&env);		\
 	ret = rint(x);		\
