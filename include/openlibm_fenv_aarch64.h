@@ -24,14 +24,12 @@
  * SUCH DAMAGE.
  */
 
-#ifdef __arm__
-#include <arm/fenv.h>
-#else /* __arm__ */
-
 #ifndef	_FENV_H_
 #define	_FENV_H_
 
-#include <sys/_types.h>
+#include <stdint.h>
+
+#include "cdefs-compat.h"
 
 #ifndef	__fenv_static
 #define	__fenv_static	static
@@ -80,7 +78,8 @@ extern const fenv_t	__fe_dfl_env;
 #define	__mrs_fpsr(__r)	__asm __volatile("mrs %0, fpsr" : "=r" (__r))
 #define	__msr_fpsr(__r)	__asm __volatile("msr fpsr, %0" : : "r" (__r))
 
-__fenv_static __inline int
+
+__fenv_static inline int
 feclearexcept(int __excepts)
 {
 	fexcept_t __r;
@@ -246,5 +245,3 @@ fegetexcept(void)
 __END_DECLS
 
 #endif	/* !_FENV_H_ */
-
-#endif /* __arm__ */
