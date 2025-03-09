@@ -1,0 +1,8 @@
+*.err
+*.o
+*.so
+*.a
+*.exe
+config.mak
+REPORT
+options.h

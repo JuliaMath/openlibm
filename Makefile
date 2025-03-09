@@ -86,6 +86,7 @@ COVERAGE_FILE:=$(COVERAGE_DIR)/libopenlibm.info
 coverage: clean-coverage
 	mkdir $(COVERAGE_DIR)
 	$(MAKE) test  CODE_COVERAGE=1
+	$(MAKE) -C test/musl  CODE_COVERAGE=1
 	lcov -d amd64 -d bsdsrc -d ld80 -d src \
 		--rc lcov_branch_coverage=1 --capture --output-file $(COVERAGE_FILE)
 	genhtml --legend --branch-coverage \
@@ -104,6 +105,7 @@ clean: clean-coverage
 	rm -f libopenlibm.a libopenlibm.*$(SHLIB_EXT)*
 	rm -f ./*/*.gcno
 	$(MAKE) -C test clean
+	$(MAKE) -C test/musl clean
 
 openlibm.pc: openlibm.pc.in Make.inc Makefile
 	echo "version=${VERSION}" > openlibm.pc
