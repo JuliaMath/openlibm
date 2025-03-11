@@ -30,6 +30,7 @@ jobs:
           - { sys: mingw32, env: i686 }
           - { sys: ucrt64,  env: ucrt-x86_64 }  # Experimental!
           - { sys: clang64, env: clang-x86_64 } # Experimental!
+          - { sys: clangarm64, env: clang-aarch64 } # Experimental!
     defaults:
       run:
         shell: msys2 {0}
