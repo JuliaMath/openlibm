@@ -7,6 +7,7 @@
 *.pc
 
 # code coverage
+openlibm-test
 cov-html/
 *.gcda
 *.gcno

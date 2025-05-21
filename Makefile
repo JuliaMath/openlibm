@@ -84,8 +84,11 @@ COVERAGE_DIR:=cov-html
 COVERAGE_FILE:=$(COVERAGE_DIR)/libopenlibm.info
 # Gen cov report with:  make clean && make coverage -j
 coverage: clean-coverage
-	mkdir $(COVERAGE_DIR)
 	$(MAKE) test  CODE_COVERAGE=1
+	$(MAKE) gen-cov-report
+
+gen-cov-report:
+	-mkdir $(COVERAGE_DIR)
 	lcov -d amd64 -d bsdsrc -d ld80 -d src \
 		--rc lcov_branch_coverage=1 --capture --output-file $(COVERAGE_FILE)
 	genhtml --legend --branch-coverage \
