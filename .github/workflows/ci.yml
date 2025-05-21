@@ -74,7 +74,10 @@ jobs:
       - name: Build Openlibm
         run: make -j`nproc` CODE_COVERAGE=1
       - name: Run Test
-        run: make -j`nproc` -C openlibm-test USE_OPENLIBM=1 SKIP_FP_EXCEPT_TEST=1
+        run: |
+          make -j`nproc` -C openlibm-test \
+            USE_OPENLIBM=1 OPENLIBM_HOME="$(pwd)" \
+            SKIP_FP_EXCEPT_TEST=1 \
       - name: Show Test Result
         run: cat openlibm-test/src/REPORT
       - name: Gen Coverage Report
