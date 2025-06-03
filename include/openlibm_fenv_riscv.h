@@ -190,9 +190,11 @@ __fenv_static inline int
 feholdexcept(fenv_t *__envp)
 {
 
+	__rfs(*__envp);
+
 	/* No exception traps. */
 
-	return (-1);
+	return (0);
 }
 
 __fenv_static inline int
