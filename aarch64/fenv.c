@@ -36,7 +36,7 @@
  * Hopefully the system ID byte is immutable, so it's valid to use
  * this as a default environment.
  */
-const fenv_t __fe_dfl_env = 0;
+const fenv_t __fe_dfl_env = {0};
 
 extern inline int feclearexcept(int __excepts);
 extern inline int fegetexceptflag(fexcept_t *__flagp, int __excepts);
