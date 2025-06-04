@@ -37,7 +37,7 @@
  * Hopefully the system ID byte is immutable, so it's valid to use
  * this as a default environment.
  */
-const fenv_t __fe_dfl_env = 0;
+const fenv_t __fe_dfl_env = {0};
 
 #ifdef __riscv_float_abi_soft
 #define __set_env(env, flags, mask, rnd) env = ((flags) | (rnd) << 5)
