@@ -29,14 +29,15 @@
 #ifndef	_FENV_H_
 #define	_FENV_H_
 
+#include <stdint.h>
 #include <sys/types.h>
 
 #ifndef	__fenv_static
 #define	__fenv_static	static
 #endif
 
-typedef	__uint32_t	fenv_t;
-typedef	__uint32_t	fexcept_t;
+typedef	uint32_t	fenv_t;
+typedef	uint32_t	fexcept_t;
 
 /* Exception flags */
 #define	FE_INEXACT	0x02000000
@@ -99,9 +100,9 @@ union __fpscr {
 	struct {
 #if defined(__BYTE_ORDER__) && (__BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__)
 		fenv_t __reg;
-		__uint32_t __junk;
+		uint32_t __junk;
 #else
-		__uint32_t __junk;
+		uint32_t __junk;
 		fenv_t __reg;
 #endif
 	} __bits;
