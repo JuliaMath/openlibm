@@ -29,14 +29,16 @@
 #ifndef	_FENV_H_
 #define	_FENV_H_
 
+#include <stdint.h>
 #include <sys/types.h>
+#include "cdefs-compat.h"
 
 #ifndef	__fenv_static
 #define	__fenv_static	static
 #endif
 
-typedef	__uint32_t	fenv_t;
-typedef	__uint32_t	fexcept_t;
+typedef	uint32_t	fenv_t;
+typedef	uint32_t	fexcept_t;
 
 /* Exception flags */
 #define	FE_INEXACT	0x080000
