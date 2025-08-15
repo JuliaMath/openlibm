@@ -566,7 +566,7 @@ install (TARGETS "${PROJECT_NAME}")
 # Would rather string replace variables here instead of editing .pc.in, because editing .pc.in
 # might build break autotools build.
 file(READ "${PROJECT_SRC}/openlibm.pc.in" PC_FILE)
-string(REPLACE "\${version}" ${CMAKE_PROJECT_VERSION} PC_FILE ${PC_FILE})
+string(REPLACE "\${version}" "${CMAKE_PROJECT_VERSION}" PC_FILE ${PC_FILE})
 string(PREPEND PC_FILE "prefix=${CMAKE_INSTALL_PREFIX}
 includedir=\${prefix}/${CMAKE_INSTALL_INCLUDEDIR}
 libdir=\${prefix}/${CMAKE_INSTALL_LIBDIR}\n
