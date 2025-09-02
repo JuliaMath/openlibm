@@ -26,7 +26,7 @@ jobs:
       ARCH: ${{ matrix.config.arch }}
       TRIPLE: ${{ matrix.config.triple }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Install qemu
         run: |
           sudo apt update
