@@ -35,7 +35,7 @@ jobs:
       ARCH: ${{ matrix.config.arch }}
       TRIPLE: ${{ matrix.config.triple }}
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Install qemu and toolchain gcc-${{ matrix.config.triple }}
         run: |
           sudo apt update
