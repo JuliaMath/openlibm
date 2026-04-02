@@ -51,7 +51,7 @@ jobs:
       - name: Build and Run tests
         run: make coverage -j
       # - name: Upload coverage to Codecov
-      #   uses: codecov/codecov-action@v5
+      #   uses: codecov/codecov-action@v6
       #   with:
       #     files: ./cov-html/libopenlibm.info
       #     token: ${{ secrets.CODECOV_TOKEN }}
@@ -83,7 +83,7 @@ jobs:
       - name: Gen Coverage Report
         run: make gen-cov-report
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@v6
         with:
           files: ./cov-html/libopenlibm.info
           token: ${{ secrets.CODECOV_TOKEN }}
