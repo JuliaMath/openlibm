@@ -256,8 +256,8 @@ if(NOT ${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
 endif()
 
 # Determine if long double and double are the same size
-include(CheckCSourceCompiles)
-check_c_source_compiles("
+include(CheckSourceCompiles)
+check_source_compiles(C "
 #include <float.h>
 #if (LDBL_MANT_DIG == DBL_MANT_DIG)
 #error \"long double and double are the same size\"
@@ -514,14 +514,14 @@ endif()
 
 
 # Filter out C implementation from compilation list if a native implementation exists
-foreach(FILE_TO_REMOVE ${OPENLIBM_ASM_SOURCE})
+foreach(FILE_TO_REMOVE IN LISTS OPENLIBM_ASM_SOURCE)
     # Get filename and strip out extension
     cmake_path(GET FILE_TO_REMOVE FILENAME FILENAME_TO_REMOVE)
     cmake_path(REMOVE_EXTENSION FILENAME_TO_REMOVE OUTPUT_VARIABLE FILENAME_TO_REMOVE)
     message(DEBUG "Filename to remove: ${FILENAME_TO_REMOVE}")
 
     # Go through files and remove one with the same name
-    foreach(CUR_FILE ${OPENLIBM_C_SOURCE})
+    foreach(CUR_FILE IN LISTS OPENLIBM_C_SOURCE)
         cmake_path(GET CUR_FILE FILENAME CUR_FILENAME)
         cmake_path(REMOVE_EXTENSION CUR_FILENAME OUTPUT_VARIABLE CUR_FILENAME)
 
