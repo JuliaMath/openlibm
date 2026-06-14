@@ -9,6 +9,7 @@ project(openlibm
         LANGUAGES C ASM)
 
 option(BUILD_SHARED_LIBS "Build using shared libraries" ON)
+option(openlibm_PIC "Build openlibm with position independent code" ON)
 
 add_library("${PROJECT_NAME}")
 
@@ -35,7 +36,7 @@ endif()
 
 # Compile flags
 list(APPEND C_ASM_COMPILE_FLAGS "-ffp-contract=off" "-fno-fast-math" "-fno-rounding-math" "-fno-math-errno")
-list(APPEND C_ASM_COMPILE_FLAGS "-fPIC" "-fno-builtin")
+list(APPEND C_ASM_COMPILE_FLAGS "-fno-builtin")
 list(APPEND C_ASM_COMPILE_FLAGS "-Wall" "-Wno-implicit-function-declaration")
 list(APPEND C_ASM_COMPILE_FLAGS "-DASSEMBLER" "-D__BSD_VISIBLE" "-O3")
 
@@ -539,10 +540,16 @@ target_sources("${PROJECT_NAME}" PRIVATE ${OPENLIBM_C_SOURCE}
                                          ${OPENLIBM_ASM_SOURCE}
 )
 
+if(openlibm_PIC)
+  include(CheckPIESupported)
+  check_pie_supported()
+endif()
+
 set_target_properties("${PROJECT_NAME}" PROPERTIES
     C_STANDARD 99
     C_STANDARD_REQUIRED ON
     C_EXTENSIONS OFF
+    POSITION_INDEPENDENT_CODE ${openlibm_PIC}
 )
 
 
