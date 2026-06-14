@@ -517,13 +517,13 @@ endif()
 foreach(FILE_TO_REMOVE IN LISTS OPENLIBM_ASM_SOURCE)
     # Get filename and strip out extension
     cmake_path(GET FILE_TO_REMOVE FILENAME FILENAME_TO_REMOVE)
-    cmake_path(REMOVE_EXTENSION FILENAME_TO_REMOVE OUTPUT_VARIABLE FILENAME_TO_REMOVE)
+    cmake_path(REMOVE_EXTENSION FILENAME_TO_REMOVE)
     message(DEBUG "Filename to remove: ${FILENAME_TO_REMOVE}")
 
     # Go through files and remove one with the same name
     foreach(CUR_FILE IN LISTS OPENLIBM_C_SOURCE)
         cmake_path(GET CUR_FILE FILENAME CUR_FILENAME)
-        cmake_path(REMOVE_EXTENSION CUR_FILENAME OUTPUT_VARIABLE CUR_FILENAME)
+        cmake_path(REMOVE_EXTENSION CUR_FILENAME)
 
         if(${CUR_FILENAME} STREQUAL ${FILENAME_TO_REMOVE})
             list(REMOVE_ITEM OPENLIBM_C_SOURCE ${CUR_FILE})
