@@ -35,7 +35,7 @@ endif()
 
 # Compile flags
 list(APPEND C_ASM_COMPILE_FLAGS "-ffp-contract=off" "-fno-fast-math" "-fno-rounding-math" "-fno-math-errno")
-list(APPEND C_ASM_COMPILE_FLAGS "-fPIC" "-std=c99" "-fno-builtin")
+list(APPEND C_ASM_COMPILE_FLAGS "-fPIC" "-fno-builtin")
 list(APPEND C_ASM_COMPILE_FLAGS "-Wall" "-Wno-implicit-function-declaration")
 list(APPEND C_ASM_COMPILE_FLAGS "-DASSEMBLER" "-D__BSD_VISIBLE" "-O3")
 
@@ -537,6 +537,12 @@ endforeach()
 # Add sources
 target_sources("${PROJECT_NAME}" PRIVATE ${OPENLIBM_C_SOURCE}
                                          ${OPENLIBM_ASM_SOURCE}
+)
+
+set_target_properties("${PROJECT_NAME}" PROPERTIES
+    C_STANDARD 99
+    C_STANDARD_REQUIRED ON
+    C_EXTENSIONS OFF
 )
 
 
