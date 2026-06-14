@@ -25,12 +25,29 @@ jobs:
           - macos-latest
           - macos-15-intel
     steps:
-      - uses: actions/checkout@v7
-      - run: make -j$(getconf _NPROCESSORS_ONLN)
-      - run: make test
+      - &git-checkout
+        name: Checkout Openlibm
+        uses: actions/checkout@v7
+      - &count-cpu
+        name: Count CPU cores
+        uses: ./.github/workflows/composite-nproc
+      - &make-build
+        name: Build with GNU Make
+        run: make -j${CMAKE_BUILD_PARALLEL_LEVEL}
+      - &make-test
+        name: Test with GNU Make
+        run: make test -j${CTEST_PARALLEL_LEVEL}
+      - &cmake-build
+        name: Build with CMake
+        run: cmake -Bbuild && cmake --build build
+      - &ctest
+        name: Test with CTest
+        run: ctest --test-dir build --output-on-failure
   windows:
     runs-on: ${{ matrix.os }}
     timeout-minutes: 10
+    env:
+      CMAKE_GENERATOR: "MinGW Makefiles"
     strategy:
       fail-fast: false
       matrix:
@@ -44,20 +61,22 @@ jobs:
       run:
         shell: msys2 {0}
     steps:
-      - uses: actions/checkout@v7
+      - *git-checkout
+      - *count-cpu
       - name: Set up the desired MSYS2 environment
         uses: msys2/setup-msys2@v2
         with:
           msystem: ${{matrix.sys}}
-          install: base-devel mingw-w64-${{matrix.env}}-toolchain
-      - run: make -j$(nproc)
-      - run: make test
+          install: base-devel mingw-w64-${{ matrix.env }}-cmake mingw-w64-${{ matrix.env }}-make mingw-w64-${{matrix.env}}-toolchain
+      - *make-build
+      - *make-test
+      - *cmake-build
+      - *ctest
   code-coverage:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: Checkout Openlibm
-        uses: actions/checkout@v7
+      - *git-checkout
       - name: Checkout Openlibm-test
         uses: actions/checkout@v7
         with:
@@ -65,11 +84,12 @@ jobs:
           path: 'openlibm-test'
       - name: Setup LCOV
         uses: hrishikesh-kadam/setup-lcov@v1
+      - *count-cpu
       - name: Build Openlibm
-        run: make -j$(nproc) CODE_COVERAGE=1
+        run: make -j${CMAKE_BUILD_PARALLEL_LEVEL} CODE_COVERAGE=1
       - name: Run Test
         run: |
-          make -j$(nproc) -C openlibm-test \
+          make -j${CTEST_PARALLEL_LEVEL} -C openlibm-test \
             USE_OPENLIBM=1 OPENLIBM_HOME="$(pwd)" \
             SKIP_FP_EXCEPT_TEST=1
       - name: Show Test Result
