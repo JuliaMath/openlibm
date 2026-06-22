@@ -57,6 +57,8 @@
  *
  */
 
+#include <float.h>
+
 #include <openlibm_math.h>
 
 static const long double MAXLOGL = 1.1356523406294143949492E4L;
@@ -131,8 +133,17 @@ qx = x + (0.5 * xx + xx * px / qx);
 
 /* exp(x) = exp(k ln 2) exp(remainder ln 2) = 2^k exp(remainder ln 2).
    We have qx = exp(remainder ln 2) - 1, so
-   exp(x) - 1  =  2^k (qx + 1) - 1  =  2^k qx + 2^k - 1.  */
-px = ldexpl(1.0L, k);
-x = px * qx + (px - 1.0);
+   exp(x) - 1  =  2^k (qx + 1) - 1  =  2^k qx + 2^k - 1.
+
+   For large k, 2^k overflows even though the final result is finite
+   (the argument is just below the overflow threshold).  In that regime
+   form exp(remainder ln 2) = qx + 1 first (which lies near 1) and scale
+   the exponent directly, so no intermediate value overflows.  */
+if (k >= LDBL_MAX_EXP) {
+  x = scalbnl(qx + 1.0L, k) - 1.0L;
+} else {
+  px = ldexpl(1.0L, k);
+  x = px * qx + (px - 1.0);
+}
 return x;
 }
