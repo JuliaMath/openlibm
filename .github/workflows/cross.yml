@@ -15,7 +15,7 @@ concurrency:
 
 jobs:
   build-cross-qemu:
-    runs-on: ${{ matrix.config.runner || 'ubuntu-24.04' }}
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     name: build-cross-qemu-${{ matrix.config.arch }}
     strategy:
@@ -29,11 +29,12 @@ jobs:
           - { arch: ppc64le,     triple: powerpc64le-linux-gnu }
           - { arch: mips,        triple: mips-linux-gnu }
           - { arch: mipsel,      triple: mipsel-linux-gnu }
-          # mips64 needs qemu >= 10.x for correct FPU exception flag handling
-          # under the n64 ABI; Ubuntu 24.04 ships qemu 8.2, 26.04 ships 10.2.
+          # mips64 / mips64el disabled. Tests fail under Ubuntu 24.04's
+          # qemu 8.2 (spurious FPU exception flags); Ubuntu 26.04 has
+          # newer qemu but dropped the mips64 cross-toolchain entirely.
           # See #347.
-          - { arch: mips64,      triple: mips64-linux-gnuabi64,   runner: ubuntu-26.04 }
-          - { arch: mips64el,    triple: mips64el-linux-gnuabi64, runner: ubuntu-26.04 }
+          # - { arch: mips64,    triple: mips64-linux-gnuabi64 }
+          # - { arch: mips64el,  triple: mips64el-linux-gnuabi64 }
           - { arch: riscv64,     triple: riscv64-linux-gnu }
           - { arch: s390x,       triple: s390x-linux-gnu }
           # loongarch64 has no unversioned apt package; pin to gcc-14.
