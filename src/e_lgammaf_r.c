@@ -141,6 +141,7 @@ __ieee754_lgammaf_r(float x, int *signgamp)
 	float t,y,z,nadj,p,p1,p2,p3,q,r,w;
 	int32_t hx;
 	int i,ix;
+	nadj = 0;	/* only set & used when hx<0; init silences -Wmaybe-uninitialized */
 
 	GET_FLOAT_WORD(hx,x);
 

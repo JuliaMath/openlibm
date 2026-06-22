@@ -7,3 +7,8 @@
 /bench-openlibm
 /bench-syslibm
 /*.exe
+# Built regression programs (keep the .c sources and the shared header).
+/regression/test-*
+!/regression/test-*.c
+/regression/*.exe
+/regression/*.dSYM

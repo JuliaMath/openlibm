@@ -52,6 +52,25 @@ jobs:
           install: base-devel mingw-w64-${{matrix.env}}-toolchain
       - run: make -j$(nproc)
       - run: make test
+  strict-warnings:
+    # Dedicated -Werror lane. Pinned to a fixed image (not ubuntu-latest) so a
+    # compiler upgrade surfaces here as an explicit, isolated failure instead of
+    # breaking the whole matrix. See WERROR in Make.inc.
+    name: strict-werror (${{ matrix.cc }})
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { cc: gcc,   flags: "" }
+          - { cc: clang, flags: "USECLANG=1 USEGCC=0" }
+    steps:
+      - uses: actions/checkout@v7
+      - name: Build with -Werror
+        run: make -j$(nproc) WERROR=1 ${{ matrix.flags }}
+      - name: Test
+        run: make test ${{ matrix.flags }}
   code-coverage:
     runs-on: ubuntu-latest
     timeout-minutes: 10

@@ -57,9 +57,12 @@ jobs:
       - name: Build with ${{ matrix.config.triple }}-gcc
         run: make -j$(nproc) ARCH=$ARCH TOOLPREFIX=$TRIPLE- ${CC:+CC=$CC} ${AR:+AR=$AR}
       - name: Build tests
-        run: make -j$(nproc) -C test ARCH=$ARCH TOOLPREFIX=$TRIPLE- ${CC:+CC=$CC} ${AR:+AR=$AR}
+        # Build the regression programs with the cross toolchain too, so the
+        # run step below only executes them (under qemu) rather than trying to
+        # rebuild them with the host compiler.
+        run: make -j$(nproc) -C test all regression-build ARCH=$ARCH TOOLPREFIX=$TRIPLE- ${CC:+CC=$CC} ${AR:+AR=$AR}
       - name: Run tests under qemu
         env:
           QEMU_LD_PREFIX: /usr/${{ matrix.config.triple }}
           LD_LIBRARY_PATH: .
-        run: make test
+        run: make test ARCH=$ARCH TOOLPREFIX=$TRIPLE- ${CC:+CC=$CC} ${AR:+AR=$AR}

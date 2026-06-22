@@ -208,6 +208,7 @@ __ieee754_lgamma_r(double x, int *signgamp)
 	double t,y,z,nadj,p,p1,p2,p3,q,r,w;
 	int32_t hx;
 	int i,lx,ix;
+	nadj = 0;	/* only set & used when hx<0; init silences -Wmaybe-uninitialized */
 
 	EXTRACT_WORDS(hx,lx,x);
 
