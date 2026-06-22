@@ -23,15 +23,16 @@ jobs:
       - run: make
       - run: make test
   windows:
-    runs-on: windows-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
         include:
-          - { sys: mingw64, env: x86_64 }
-          - { sys: mingw32, env: i686 }
-          - { sys: ucrt64,  env: ucrt-x86_64 }  # Experimental!
-          - { sys: clang64, env: clang-x86_64 } # Experimental!
+          - { os: windows-latest,  sys: mingw64,     env: x86_64 }
+          - { os: windows-latest,  sys: mingw32,     env: i686 }
+          - { os: windows-latest,  sys: ucrt64,      env: ucrt-x86_64 }  # Experimental!
+          - { os: windows-latest,  sys: clang64,     env: clang-x86_64 } # Experimental!
+          - { os: windows-11-arm,  sys: clangarm64,  env: clang-aarch64 } # Experimental!
     defaults:
       run:
         shell: msys2 {0}
