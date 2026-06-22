@@ -66,3 +66,35 @@ jobs:
           QEMU_LD_PREFIX: /usr/${{ matrix.config.triple }}
           LD_LIBRARY_PATH: .
         run: make test ARCH=$ARCH TOOLPREFIX=$TRIPLE- ${CC:+CC=$CC} ${AR:+AR=$AR}
+
+  # Regression test for #262 / #349: the RISC-V single-float ABI (lp64f /
+  # ilp32f) used to be rejected by include/openlibm_fenv_riscv.h with an
+  # `#error`. This job rebuilds the whole library with `-mabi=lp64f` to make
+  # sure the header (and the rest of openlibm) accepts that ABI.
+  #
+  # This is a COMPILE-ONLY check (build the static libopenlibm.a, no qemu run).
+  # Ubuntu's gcc-riscv64-linux-gnu ships only the default lp64d sysroot, so a
+  # full shared-library link or a qemu execution under lp64f is impossible
+  # without a custom single-float sysroot the distro does not provide. Building
+  # the static archive needs no libc/CRT link, so it compiles every source file
+  # (including riscv64/fenv.c, which pulls in the fixed header) under the
+  # single-float ABI and directly regresses the removed `#error`. Adding a
+  # bespoke lp64f sysroot would be exactly the kind of fragile, unmaintainable
+  # toolchain dependency that got mips64 disabled in #347, so we deliberately
+  # avoid it.
+  build-cross-riscv64-lp64f:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    name: build-cross-riscv64-lp64f
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install RISC-V toolchain
+        run: |
+          sudo apt update
+          sudo apt install -y gcc-riscv64-linux-gnu
+      - name: Build libopenlibm.a for the single-float ABI (lp64f)
+        run: |
+          make -j$(nproc) ARCH=riscv64 TOOLPREFIX=riscv64-linux-gnu- \
+            CFLAGS_arch='-march=rv64imafc -mabi=lp64f' \
+            SFLAGS_arch='-march=rv64imafc -mabi=lp64f' \
+            libopenlibm.a
