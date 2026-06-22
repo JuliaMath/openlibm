@@ -165,14 +165,21 @@ CFLAGS_add += -std=c99 -Wall -I$(OPENLIBM_HOME) -I$(OPENLIBM_HOME)/include -I$(O
 WERROR ?= 0
 ifeq ($(WERROR),1)
 CFLAGS_add += -Werror
-# Two clang-only diagnostics are silenced for the strict lane (gcc ignores
+# A few clang-only diagnostics are silenced for the strict lane (gcc ignores
 # unknown -Wno-* options, so this is safe for both compilers):
-#  * -Wimplicit-int-float-conversion: s_lround/s_llround deliberately round
-#    DTYPE_MAX through (dtype)x; the boundary arithmetic is correct by design.
+#  * -Wimplicit-int-float-conversion / -Wimplicit-const-int-float-conversion:
+#    s_lround/s_llround deliberately round DTYPE_MAX through (dtype)x; the
+#    boundary arithmetic is correct by design. (clang renamed the const form
+#    around clang 18, so both spellings are listed.)
 #  * -Wignored-attributes: the extern-inline fenv re-declarations in
-#    openlibm_fenv_*.h trip a harmless attribute-placement diagnostic; tracked
-#    separately rather than reworked under the warnings sweep.
-CFLAGS_add += -Wno-implicit-int-float-conversion -Wno-ignored-attributes
+#    openlibm_fenv_*.h trip a harmless attribute-placement diagnostic.
+#  * -Wdeprecated-non-prototype: a handful of old K&R-style definitions
+#    (w_cabs*.c, bsdsrc/b_*.c) that C23 deprecates; converting them to ANSI
+#    prototypes is left to a focused follow-up rather than this CI change.
+CFLAGS_add += -Wno-implicit-int-float-conversion \
+              -Wno-implicit-const-int-float-conversion \
+              -Wno-ignored-attributes \
+              -Wno-deprecated-non-prototype
 endif
 ifneq ($(filter $(ARCH),i387 amd64 powerpc),)
 CFLAGS_add += -I$(OPENLIBM_HOME)/ld80
