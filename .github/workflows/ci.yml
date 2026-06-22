@@ -37,17 +37,18 @@ jobs:
         # Install only what the build needs instead of `base-devel` plus the
         # full `*-toolchain` meta-package. The msys2 package cache is already on
         # by default and hits, but pacman still *extracts* every package on each
-        # run, and base-devel + the toolchain meta dominate setup time (it was
+        # run, and base-devel + the toolchain meta dominated setup time (it was
         # ~3.5 min of pacman install on the arm runner). openlibm only needs make
-        # and a C compiler: the -gcc package pulls in binutils/runtime, while the
-        # clang environments have no standalone binutils package so they keep the
-        # toolchain meta (for ar/lld).
+        # and a C compiler. The -gcc package pulls in binutils and the runtime;
+        # the -clang package requires lld and llvm-tools (which provides ar), so
+        # it is a complete toolchain on its own without the meta-package's unused
+        # extras (lldb, openmp, flang, ...).
         include:
           - { os: windows-latest,  sys: mingw64,     install: "make mingw-w64-x86_64-gcc" }
           - { os: windows-latest,  sys: mingw32,     install: "make mingw-w64-i686-gcc" }
-          - { os: windows-latest,  sys: ucrt64,      install: "make mingw-w64-ucrt-x86_64-gcc" }        # Experimental!
-          - { os: windows-latest,  sys: clang64,     install: "make mingw-w64-clang-x86_64-toolchain" }  # Experimental!
-          - { os: windows-11-arm,  sys: clangarm64,  install: "make mingw-w64-clang-aarch64-toolchain" } # Experimental!
+          - { os: windows-latest,  sys: ucrt64,      install: "make mingw-w64-ucrt-x86_64-gcc" }    # Experimental!
+          - { os: windows-latest,  sys: clang64,     install: "make mingw-w64-clang-x86_64-clang" }  # Experimental!
+          - { os: windows-11-arm,  sys: clangarm64,  install: "make mingw-w64-clang-aarch64-clang" } # Experimental!
     defaults:
       run:
         shell: msys2 {0}
