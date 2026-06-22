@@ -21,8 +21,10 @@ REGRESSION_BINS := $(REGRESSION_SRCS:.c=)
 
 regression-build: $(REGRESSION_BINS)
 
+# -pthread lets thread-safety regressions (e.g. test-222) spawn threads.  It is
+# harmless for the single-threaded tests and is a no-op stub on glibc >= 2.34.
 regression/%: regression/%.c regression/regress-util.h
-	$(CC) $(CPPFLAGS) $(CFLAGS) $(CFLAGS_add) $(LDFLAGS) $(LDFLAGS_arch) $< -D__BSD_VISIBLE -I ../include -I../src $(OPENLIBM_LIB) -o $@
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(CFLAGS_add) $(LDFLAGS) $(LDFLAGS_arch) $< -D__BSD_VISIBLE -I ../include -I../src $(OPENLIBM_LIB) -pthread -o $@
 
 bench: bench-syslibm bench-openlibm
 
