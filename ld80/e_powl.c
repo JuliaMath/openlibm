@@ -404,6 +404,27 @@ Fa = reducl(F);
 Fb = F - Fa;
 
 G = Fa + w * ya;
+
+/*
+ * Guard against intermediate overflow in reducl(G).  When |y*log2(x)|
+ * is enormous, reducl(G) computes ldexpl(G, LNXT) which overflows to
+ * +-Inf; the subsequent Inf-Inf / Inf+(-Inf) arithmetic then yields
+ * NaN, which defeats the w > MEXP / w < MNEXP tests below and makes
+ * powl() return NaN instead of Inf (overflow) or +0 (underflow).
+ * G holds y*log2(x) in 1/NXT units, so the final exponent is
+ * ldexpl(G, LNXT) to within O(1).  Genuine over/underflow occurs at
+ * |G| ~ MEXP/NXT ~ 16448, vastly below the |G| ~ LDBL_MAX/NXT at
+ * which reducl(G) overflows.  A generous margin (2*MEXP/NXT) keeps
+ * this guard well clear of the real boundary, so borderline cases
+ * still fall through to the precise test on w = ldexpl(Ga+Ha, LNXT)
+ * below, while the pathological huge-|G| case is caught here before
+ * reducl(G) can overflow.
+ */
+if( G > (2.0L * MEXP / NXT) )
+	return (huge * huge);		/* overflow */
+if( G < (2.0L * MNEXP / NXT) )
+	return (twom10000 * twom10000);	/* underflow */
+
 Ga = reducl(G);
 Gb = G - Ga;
 
