@@ -34,12 +34,20 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
+        # Install only what the build needs instead of `base-devel` plus the
+        # full `*-toolchain` meta-package. The msys2 package cache is already on
+        # by default and hits, but pacman still *extracts* every package on each
+        # run, and base-devel + the toolchain meta dominate setup time (it was
+        # ~3.5 min of pacman install on the arm runner). openlibm only needs make
+        # and a C compiler: the -gcc package pulls in binutils/runtime, while the
+        # clang environments have no standalone binutils package so they keep the
+        # toolchain meta (for ar/lld).
         include:
-          - { os: windows-latest,  sys: mingw64,     env: x86_64 }
-          - { os: windows-latest,  sys: mingw32,     env: i686 }
-          - { os: windows-latest,  sys: ucrt64,      env: ucrt-x86_64 }  # Experimental!
-          - { os: windows-latest,  sys: clang64,     env: clang-x86_64 } # Experimental!
-          - { os: windows-11-arm,  sys: clangarm64,  env: clang-aarch64 } # Experimental!
+          - { os: windows-latest,  sys: mingw64,     install: "make mingw-w64-x86_64-gcc" }
+          - { os: windows-latest,  sys: mingw32,     install: "make mingw-w64-i686-gcc" }
+          - { os: windows-latest,  sys: ucrt64,      install: "make mingw-w64-ucrt-x86_64-gcc" }        # Experimental!
+          - { os: windows-latest,  sys: clang64,     install: "make mingw-w64-clang-x86_64-toolchain" }  # Experimental!
+          - { os: windows-11-arm,  sys: clangarm64,  install: "make mingw-w64-clang-aarch64-toolchain" } # Experimental!
     defaults:
       run:
         shell: msys2 {0}
@@ -49,7 +57,7 @@ jobs:
         uses: msys2/setup-msys2@v2
         with:
           msystem: ${{matrix.sys}}
-          install: base-devel mingw-w64-${{matrix.env}}-toolchain
+          install: ${{matrix.install}}
       - run: make -j$(nproc)
       - run: make test
   strict-warnings:
