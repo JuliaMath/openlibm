@@ -29,8 +29,10 @@ jobs:
           - { arch: ppc64le,     triple: powerpc64le-linux-gnu }
           - { arch: mips,        triple: mips-linux-gnu }
           - { arch: mipsel,      triple: mipsel-linux-gnu }
-          - { arch: mips64,      triple: mips64-linux-gnuabi64 }
-          - { arch: mips64el,    triple: mips64el-linux-gnuabi64 }
+          # mips64 / mips64el disabled: spurious FPU exception flags under
+          # qemu-user on Ubuntu 24.04. See #347.
+          # - { arch: mips64,    triple: mips64-linux-gnuabi64 }
+          # - { arch: mips64el,  triple: mips64el-linux-gnuabi64 }
           - { arch: riscv64,     triple: riscv64-linux-gnu }
           - { arch: s390x,       triple: s390x-linux-gnu }
           # loongarch64 has no unversioned apt package; pin to gcc-14.
