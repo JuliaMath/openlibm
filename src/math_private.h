@@ -253,7 +253,7 @@ void __scan_nan(u_int32_t *__words, int __num_words, const char *__s);
 /* Asm versions of some functions. */
 
 #ifdef __amd64__
-static __inline int
+static __inline int __attribute__((__unused__))
 irint(double x)
 {
 	int n;
@@ -265,7 +265,7 @@ irint(double x)
 #endif
 
 #ifdef __i386__
-static __inline int
+static __inline int __attribute__((__unused__))
 irint(double x)
 {
 	int n;

@@ -49,8 +49,14 @@ endif
 LDFLAGS_add += -Wl,$(SONAME_FLAG),libopenlibm.$(OLM_MAJOR_SHLIB_EXT)
 endif
 
-.PHONY: all check test clean distclean \
+.PHONY: all check test test-regression clean distclean \
 	install install-static install-shared install-pkgconfig install-headers
+
+# Per-issue regression programs live in test/regression/*.c. They are run from
+# the repo root (like test-double/test-float) so the freshly built shared
+# library is found the same way on every platform.
+REGRESSION_SRCS := $(sort $(wildcard test/regression/*.c))
+REGRESSION_BINS := $(REGRESSION_SRCS:.c=)
 
 
 OLM_LIBS := libopenlibm.a
@@ -63,6 +69,21 @@ all : $(OLM_LIBS)
 check test: test/test-double test/test-float
 	test/test-double
 	test/test-float
+	$(MAKE) test-regression
+
+# Build (in test/) then run each regression program from the repo root.
+# Exit status 0 = pass, 77 = skipped (not applicable here), anything else = fail.
+test-regression: libopenlibm.$(OLM_MAJOR_MINOR_SHLIB_EXT)
+	$(MAKE) -C test regression-build
+	@pass=0; skip=0; fail=0; \
+	for t in $(REGRESSION_BINS); do \
+		./$$t; rc=$$?; \
+		if [ "$$rc" = "0" ]; then echo "  PASS $$t"; pass=`expr $$pass + 1`; \
+		elif [ "$$rc" = "77" ]; then echo "  SKIP $$t"; skip=`expr $$skip + 1`; \
+		else echo "  FAIL $$t (exit $$rc)"; fail=`expr $$fail + 1`; fi; \
+	done; \
+	echo "regression: $$pass passed, $$skip skipped, $$fail failed"; \
+	[ "$$fail" = "0" ]
 
 libopenlibm.a: $(OBJS)
 	$(AR) -rcs libopenlibm.a $(OBJS)
