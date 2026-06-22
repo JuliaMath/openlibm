@@ -75,8 +75,8 @@ coshl(long double x)
     {
       t = expm1l (u.value);
       w = one + t;
-      if (ex < 0x3fb80000) /* |x| < 2^-116 */
-	return w;		/* cosh(tiny) = 1 */
+      if (ex < 0x3fb80000) /* |x| < 2^-71 */
+	return one;		/* cosh(tiny) = 1 */
 
       return one + (t * t) / (w + w);
     }
