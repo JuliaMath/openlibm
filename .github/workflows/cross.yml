@@ -49,15 +49,17 @@ jobs:
       AR: ${{ matrix.config.ar }}
     steps:
       - uses: actions/checkout@v7
+      - name: Count CPU cores
+        uses: ./.github/workflows/composite-nproc
       - name: Install qemu and toolchain
         run: |
           sudo apt update
           sudo apt install -y qemu-user qemu-user-binfmt \
             ${{ matrix.config.gcc_pkg || format('gcc-{0}', matrix.config.triple) }}
       - name: Build with ${{ matrix.config.triple }}-gcc
-        run: make -j$(nproc) ARCH=$ARCH TOOLPREFIX=$TRIPLE- ${CC:+CC=$CC} ${AR:+AR=$AR}
+        run: make -j${CMAKE_BUILD_PARALLEL_LEVEL} ARCH=$ARCH TOOLPREFIX=$TRIPLE- ${CC:+CC=$CC} ${AR:+AR=$AR}
       - name: Build tests
-        run: make -j$(nproc) -C test ARCH=$ARCH TOOLPREFIX=$TRIPLE- ${CC:+CC=$CC} ${AR:+AR=$AR}
+        run: make -j${CTEST_PARALLEL_LEVEL} -C test ARCH=$ARCH TOOLPREFIX=$TRIPLE- ${CC:+CC=$CC} ${AR:+AR=$AR}
       - name: Run tests under qemu
         env:
           QEMU_LD_PREFIX: /usr/${{ matrix.config.triple }}

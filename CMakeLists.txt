@@ -9,6 +9,7 @@ project(openlibm
         LANGUAGES C ASM)
 
 option(BUILD_SHARED_LIBS "Build using shared libraries" ON)
+option(openlibm_PIC "Build openlibm with position independent code" ON)
 
 add_library("${PROJECT_NAME}")
 
@@ -16,17 +17,24 @@ add_library("${PROJECT_NAME}")
 set(OPENLIBM_ARCH_FOLDER ${CMAKE_SYSTEM_PROCESSOR})
 string(TOLOWER "${OPENLIBM_ARCH_FOLDER}" OPENLIBM_ARCH_FOLDER)
 
-if(${OPENLIBM_ARCH_FOLDER} STREQUAL "amd64" OR ${OPENLIBM_ARCH_FOLDER} STREQUAL "x86_64")
-    set(OPENLIBM_ARCH_FOLDER "amd64")
-elseif(${OPENLIBM_ARCH_FOLDER} STREQUAL "arm64" OR ${OPENLIBM_ARCH_FOLDER} STREQUAL "aarch64")
+# CMAKE_SYSTEM_PROCESSOR reflects the host instead of the selected MinGW target.
+# Use pointer size to disambiguate x86/x64.
+if(OPENLIBM_ARCH_FOLDER STREQUAL "x86_64" OR OPENLIBM_ARCH_FOLDER STREQUAL "amd64" OR
+   OPENLIBM_ARCH_FOLDER STREQUAL "x86" OR OPENLIBM_ARCH_FOLDER STREQUAL "i686")
+    if(CMAKE_SIZEOF_VOID_P EQUAL 8)
+        set(OPENLIBM_ARCH_FOLDER "amd64")
+    elseif(CMAKE_SIZEOF_VOID_P EQUAL 4)
+        set(OPENLIBM_ARCH_FOLDER "i387")
+    else()
+        message(FATAL_ERROR "Unsupported pointer size: ${CMAKE_SIZEOF_VOID_P}")
+    endif()
+elseif(OPENLIBM_ARCH_FOLDER STREQUAL "arm64" OR OPENLIBM_ARCH_FOLDER STREQUAL "aarch64")
     set(OPENLIBM_ARCH_FOLDER "aarch64")
-elseif(${OPENLIBM_ARCH_FOLDER} STREQUAL "armv7-a")
+elseif(OPENLIBM_ARCH_FOLDER STREQUAL "armv7-a")
     set(OPENLIBM_ARCH_FOLDER "arm")
-elseif(${OPENLIBM_ARCH_FOLDER} STREQUAL "x86" OR ${OPENLIBM_ARCH_FOLDER} STREQUAL "i686")
-    set(OPENLIBM_ARCH_FOLDER "i387")
-elseif(${OPENLIBM_ARCH_FOLDER} STREQUAL "powerpc")
+elseif(OPENLIBM_ARCH_FOLDER STREQUAL "powerpc")
     set(OPENLIBM_ARCH_FOLDER "powerpc")
-elseif(${OPENLIBM_ARCH_FOLDER} STREQUAL "riscv64")
+elseif(OPENLIBM_ARCH_FOLDER STREQUAL "riscv64")
     set(OPENLIBM_ARCH_FOLDER "riscv64")
 else()
     message(FATAL_ERROR "${PROJECT_NAME} not set up for detected architecture: ${OPENLIBM_ARCH_FOLDER}")
@@ -35,23 +43,23 @@ endif()
 
 # Compile flags
 list(APPEND C_ASM_COMPILE_FLAGS "-ffp-contract=off" "-fno-fast-math" "-fno-rounding-math" "-fno-math-errno")
-list(APPEND C_ASM_COMPILE_FLAGS "-fPIC" "-std=c99" "-fno-builtin")
+list(APPEND C_ASM_COMPILE_FLAGS "-fno-builtin")
 list(APPEND C_ASM_COMPILE_FLAGS "-Wall" "-Wno-implicit-function-declaration")
 list(APPEND C_ASM_COMPILE_FLAGS "-DASSEMBLER" "-D__BSD_VISIBLE" "-O3")
 
 # Compiler-specific compile flags
-if("${CMAKE_C_COMPILER_ID}" MATCHES "Clang")
+if(CMAKE_C_COMPILER_ID MATCHES "Clang")
     list(APPEND C_ASM_COMPILE_FLAGS "-fno-strict-aliasing" "-ffp-exception-behavior=strict")
-elseif("${CMAKE_C_COMPILER_ID}" STREQUAL "GNU")
+elseif(CMAKE_C_COMPILER_ID STREQUAL "GNU")
     list(APPEND C_ASM_COMPILE_FLAGS "-fno-gnu89-inline")
 else()
     message(FATAL_ERROR "${PROJECT_NAME} not set up to be compiled with ${CMAKE_C_COMPILER_ID}")
 endif()
 
 # Architecture-specific compile flags - take advantage of sse on x86
-if(${OPENLIBM_ARCH_FOLDER} STREQUAL "i387")
+if(OPENLIBM_ARCH_FOLDER STREQUAL "i387")
     list(APPEND C_ASM_COMPILE_FLAGS "-march=i686" "-m32" "-msse2" "-mfpmath=sse")
-elseif(${OPENLIBM_ARCH_FOLDER} STREQUAL "amd64")
+elseif(OPENLIBM_ARCH_FOLDER STREQUAL "amd64")
     list(APPEND C_ASM_COMPILE_FLAGS "-m64" "-msse2" "-mfpmath=sse")
 endif()
 
@@ -249,15 +257,15 @@ list(APPEND OPENLIBM_C_SOURCE
 		"${PROJECT_SRC}/bsdsrc/b_tgamma.c"
 )
 
-if(NOT ${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
+if(NOT CMAKE_SYSTEM_NAME STREQUAL "Windows")
     list(APPEND OPENLIBM_C_SOURCE
             "${PROJECT_SRC}/src/s_nan.c"
     )
 endif()
 
 # Determine if long double and double are the same size
-include(CheckCSourceCompiles)
-check_c_source_compiles("
+include(CheckSourceCompiles)
+check_source_compiles(C "
 #include <float.h>
 #if (LDBL_MANT_DIG == DBL_MANT_DIG)
 #error \"long double and double are the same size\"
@@ -332,7 +340,7 @@ if(LONG_DOUBLE_NOT_DOUBLE)
 endif()
 
 if (LONG_DOUBLE_NOT_DOUBLE)
-    if (${OPENLIBM_ARCH_FOLDER} STREQUAL "i387" OR ${OPENLIBM_ARCH_FOLDER} STREQUAL "amd64")
+    if (OPENLIBM_ARCH_FOLDER STREQUAL "i387" OR OPENLIBM_ARCH_FOLDER STREQUAL "amd64")
         list(APPEND OPENLIBM_C_SOURCE
             # ld80
             "${PROJECT_SRC}/ld80/invtrig.c"
@@ -358,13 +366,13 @@ if (LONG_DOUBLE_NOT_DOUBLE)
             "${PROJECT_SRC}/ld80/s_erfl.c"
         )
 
-        if(NOT ${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
+        if(NOT CMAKE_SYSTEM_NAME STREQUAL "Windows")
             list(APPEND OPENLIBM_C_SOURCE
                 "${PROJECT_SRC}/ld80/s_nanl.c"
             )
         endif()
     else()
-        if(${OPENLIBM_ARCH_FOLDER} STREQUAL "aarch64")
+        if(OPENLIBM_ARCH_FOLDER STREQUAL "aarch64")
             list(APPEND OPENLIBM_C_SOURCE
                 # ld128
                 "${PROJECT_SRC}/ld128/invtrig.c"
@@ -390,7 +398,7 @@ if (LONG_DOUBLE_NOT_DOUBLE)
                 "${PROJECT_SRC}/ld128/s_erfl.c"
             )
 
-            if(NOT ${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
+            if(NOT CMAKE_SYSTEM_NAME STREQUAL "Windows")
                 list(APPEND OPENLIBM_C_SOURCE
                     "${PROJECT_SRC}/ld128/s_nanl.c"
                 )
@@ -400,7 +408,7 @@ if (LONG_DOUBLE_NOT_DOUBLE)
 endif()
 
 # Architecture-specific sources
-if (${OPENLIBM_ARCH_FOLDER} STREQUAL "amd64")
+if (OPENLIBM_ARCH_FOLDER STREQUAL "amd64")
     list(APPEND OPENLIBM_C_SOURCE
         "${PROJECT_SRC}/amd64/fenv.c"
     )
@@ -431,17 +439,17 @@ if (${OPENLIBM_ARCH_FOLDER} STREQUAL "amd64")
         "${PROJECT_SRC}/amd64/e_fmodl.S"
     )
 
-elseif(${OPENLIBM_ARCH_FOLDER} STREQUAL "aarch64")
+elseif(OPENLIBM_ARCH_FOLDER STREQUAL "aarch64")
     list(APPEND OPENLIBM_C_SOURCE
             "${PROJECT_SRC}/aarch64/fenv.c"
     )
 
-elseif(${OPENLIBM_ARCH_FOLDER} STREQUAL "arm")
+elseif(OPENLIBM_ARCH_FOLDER STREQUAL "arm")
     list(APPEND OPENLIBM_C_SOURCE
             "${PROJECT_SRC}/${OPENLIBM_ARCH_FOLDER}/fenv.c"
     )
 
-elseif(${OPENLIBM_ARCH_FOLDER} STREQUAL "i387")
+elseif(OPENLIBM_ARCH_FOLDER STREQUAL "i387")
     list(APPEND OPENLIBM_C_SOURCE
             "${PROJECT_SRC}/i387/fenv.c"
     )
@@ -493,7 +501,7 @@ elseif(${OPENLIBM_ARCH_FOLDER} STREQUAL "i387")
             "${PROJECT_SRC}/i387/s_truncl.S"
     )
 
-    if(NOT ${CMAKE_SYSTEM_NAME} STREQUAL "Windows")
+    if(NOT CMAKE_SYSTEM_NAME STREQUAL "Windows")
         list(APPEND OPENLIBM_ASM_SOURCE
                 "${PROJECT_SRC}/i387/s_scalbn.S"
                 "${PROJECT_SRC}/i387/s_scalbnf.S"
@@ -501,11 +509,11 @@ elseif(${OPENLIBM_ARCH_FOLDER} STREQUAL "i387")
         )
     endif()
 
-elseif(${OPENLIBM_ARCH_FOLDER} STREQUAL "powerpc")
+elseif(OPENLIBM_ARCH_FOLDER STREQUAL "powerpc")
         list(APPEND OPENLIBM_C_SOURCE
                 "${PROJECT_SRC}/powerpc/fenv.c"
         )
-elseif(${OPENLIBM_ARCH_FOLDER} STREQUAL "riscv64")
+elseif(OPENLIBM_ARCH_FOLDER STREQUAL "riscv64")
         list(APPEND OPENLIBM_C_SOURCE
                 "${PROJECT_SRC}/riscv64/fenv.c")
 else()
@@ -514,18 +522,18 @@ endif()
 
 
 # Filter out C implementation from compilation list if a native implementation exists
-foreach(FILE_TO_REMOVE ${OPENLIBM_ASM_SOURCE})
+foreach(FILE_TO_REMOVE IN LISTS OPENLIBM_ASM_SOURCE)
     # Get filename and strip out extension
     cmake_path(GET FILE_TO_REMOVE FILENAME FILENAME_TO_REMOVE)
-    cmake_path(REMOVE_EXTENSION FILENAME_TO_REMOVE OUTPUT_VARIABLE FILENAME_TO_REMOVE)
+    cmake_path(REMOVE_EXTENSION FILENAME_TO_REMOVE)
     message(DEBUG "Filename to remove: ${FILENAME_TO_REMOVE}")
 
     # Go through files and remove one with the same name
-    foreach(CUR_FILE ${OPENLIBM_C_SOURCE})
+    foreach(CUR_FILE IN LISTS OPENLIBM_C_SOURCE)
         cmake_path(GET CUR_FILE FILENAME CUR_FILENAME)
-        cmake_path(REMOVE_EXTENSION CUR_FILENAME OUTPUT_VARIABLE CUR_FILENAME)
+        cmake_path(REMOVE_EXTENSION CUR_FILENAME)
 
-        if(${CUR_FILENAME} STREQUAL ${FILENAME_TO_REMOVE})
+        if(CUR_FILENAME STREQUAL ${FILENAME_TO_REMOVE})
             list(REMOVE_ITEM OPENLIBM_C_SOURCE ${CUR_FILE})
             message(DEBUG "Removed source file from compilation list: ${CUR_FILE}")
             break()
@@ -539,6 +547,18 @@ target_sources("${PROJECT_NAME}" PRIVATE ${OPENLIBM_C_SOURCE}
                                          ${OPENLIBM_ASM_SOURCE}
 )
 
+if(openlibm_PIC)
+  include(CheckPIESupported)
+  check_pie_supported()
+endif()
+
+set_target_properties("${PROJECT_NAME}" PROPERTIES
+    C_STANDARD 99
+    C_STANDARD_REQUIRED ON
+    C_EXTENSIONS OFF
+    POSITION_INDEPENDENT_CODE ${openlibm_PIC}
+)
+
 
 # Include directories
 list(APPEND OPENLIBM_INCLUDE_DIRS
@@ -548,10 +568,10 @@ list(APPEND OPENLIBM_INCLUDE_DIRS
         "${PROJECT_SRC}/src"
 )
 
-if(${OPENLIBM_ARCH_FOLDER} STREQUAL "i387" OR ${OPENLIBM_ARCH_FOLDER} STREQUAL "amd64" OR ${OPENLIBM_ARCH_FOLDER} STREQUAL "powerpc")
+if(OPENLIBM_ARCH_FOLDER STREQUAL "i387" OR OPENLIBM_ARCH_FOLDER STREQUAL "amd64" OR OPENLIBM_ARCH_FOLDER STREQUAL "powerpc")
     list(APPEND OPENLIBM_INCLUDE_DIRS "${PROJECT_SRC}/ld80")
 else()
-    if(${OPENLIBM_ARCH_FOLDER} STREQUAL "aarch64" OR ${OPENLIBM_ARCH_FOLDER} STREQUAL "riscv64")
+    if(OPENLIBM_ARCH_FOLDER STREQUAL "aarch64" OR OPENLIBM_ARCH_FOLDER STREQUAL "riscv64")
         list(APPEND OPENLIBM_INCLUDE_DIRS "${PROJECT_SRC}/ld128")
     endif()
 endif()

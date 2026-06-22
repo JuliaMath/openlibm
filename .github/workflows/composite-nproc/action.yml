@@ -1,0 +1,24 @@
+name: Detect CPU core count
+description: Set CPU core count as environment variables for parallel builds and tests
+
+runs:
+
+  using: composite
+
+  steps:
+  - name: Detect CPU cores
+    shell: bash
+    id: cores
+    run: |
+        if [[ "$RUNNER_OS" == "Linux" ]]; then
+        CORES=$(nproc)
+        elif [[ "$RUNNER_OS" == "macOS" ]]; then
+        CORES=$(sysctl -n hw.ncpu)
+        elif [[ "$RUNNER_OS" == "Windows" ]]; then
+        CORES=$NUMBER_OF_PROCESSORS
+        else
+        CORES=2
+        fi
+        echo "CMAKE_BUILD_PARALLEL_LEVEL=$CORES" >> $GITHUB_ENV
+        echo "CTEST_PARALLEL_LEVEL=$CORES" >> $GITHUB_ENV
+        echo "Detected $CORES cores"
