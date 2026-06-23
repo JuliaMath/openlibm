@@ -1,0 +1,14 @@
+# Coverage is advisory for openlibm, not a merge gate.
+#
+# The library has many defensive branches (overflow/underflow guards, NaN and
+# special-value paths) that the test suites do not always exercise, so a small
+# patch can legitimately add lines that no test hits.  Report coverage so it is
+# visible in review, but never fail the check on it.
+coverage:
+  status:
+    project:
+      default:
+        informational: true
+    patch:
+      default:
+        informational: true
