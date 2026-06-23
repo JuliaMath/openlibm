@@ -189,8 +189,6 @@ static long double R[] = {
 static const long double MAXLOGL = 1.1356523406294143949492E4L;
 static const long double MINLOGL = -1.13994985314888605586758E4L;
 static const long double LOGE2L = 6.9314718055994530941723E-1L;
-static volatile long double z;
-static long double w, W, Wa, Wb, ya, yb, u;
 static const long double huge = 0x1p10000L;
 #if 0 /* XXX Prevent gcc from erroneously constant folding this. */
 static const long double twom10000 = 0x1p-10000L;
@@ -207,6 +205,13 @@ powl(long double x, long double y)
 /* double F, Fa, Fb, G, Ga, Gb, H, Ha, Hb */
 int i, nflg, iyflg, yoddint;
 long e;
+
+/* Local scratch (formerly file-scope statics, which made powl()
+ * non-reentrant and unsafe to call from multiple threads).  The
+ * volatile on z is load-bearing: it forces the rounding/underflow
+ * behaviour of the final products, just as twom10000 does below. */
+volatile long double z;
+long double w, W, Wa, Wb, ya, yb, u;
 
 if( y == 0.0L )
 	return( 1.0L );
