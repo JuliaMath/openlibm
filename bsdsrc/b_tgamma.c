@@ -131,7 +131,14 @@ tgamma(x)
 
 	if (isgreaterequal(x, 6)) {
 		if(x > 171.63)
-			return (x / zero);
+			/*
+			 * Overflow: the true value exceeds DBL_MAX.  Return +Inf
+			 * and raise FE_OVERFLOW (per math_errhandling ==
+			 * MATH_ERREXCEPT and the function comment above).  The
+			 * old `x / zero` returned +Inf but wrongly raised
+			 * FE_DIVBYZERO, which is reserved for the pole at x == 0.
+			 */
+			return (x * 0x1p1023);
 		u = large_gam(x);
 		return(__exp__D(u.a, u.b));
 	} else if (isgreaterequal(x, 1.0 + LEFT + x0))
