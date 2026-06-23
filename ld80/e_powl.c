@@ -189,8 +189,6 @@ static long double R[] = {
 static const long double MAXLOGL = 1.1356523406294143949492E4L;
 static const long double MINLOGL = -1.13994985314888605586758E4L;
 static const long double LOGE2L = 6.9314718055994530941723E-1L;
-static volatile long double z;
-static long double w, W, Wa, Wb, ya, yb, u;
 static const long double huge = 0x1p10000L;
 #if 0 /* XXX Prevent gcc from erroneously constant folding this. */
 static const long double twom10000 = 0x1p-10000L;
@@ -207,6 +205,13 @@ powl(long double x, long double y)
 /* double F, Fa, Fb, G, Ga, Gb, H, Ha, Hb */
 int i, nflg, iyflg, yoddint;
 long e;
+
+/* Local scratch (formerly file-scope statics, which made powl()
+ * non-reentrant and unsafe to call from multiple threads).  The
+ * volatile on z is load-bearing: it forces the rounding/underflow
+ * behaviour of the final products, just as twom10000 does below. */
+volatile long double z;
+long double w, W, Wa, Wb, ya, yb, u;
 
 if( y == 0.0L )
 	return( 1.0L );
@@ -404,6 +409,27 @@ Fa = reducl(F);
 Fb = F - Fa;
 
 G = Fa + w * ya;
+
+/*
+ * Guard against intermediate overflow in reducl(G).  When |y*log2(x)|
+ * is enormous, reducl(G) computes ldexpl(G, LNXT) which overflows to
+ * +-Inf; the subsequent Inf-Inf / Inf+(-Inf) arithmetic then yields
+ * NaN, which defeats the w > MEXP / w < MNEXP tests below and makes
+ * powl() return NaN instead of Inf (overflow) or +0 (underflow).
+ * G holds y*log2(x) in 1/NXT units, so the final exponent is
+ * ldexpl(G, LNXT) to within O(1).  Genuine over/underflow occurs at
+ * |G| ~ MEXP/NXT ~ 16448, vastly below the |G| ~ LDBL_MAX/NXT at
+ * which reducl(G) overflows.  A generous margin (2*MEXP/NXT) keeps
+ * this guard well clear of the real boundary, so borderline cases
+ * still fall through to the precise test on w = ldexpl(Ga+Ha, LNXT)
+ * below, while the pathological huge-|G| case is caught here before
+ * reducl(G) can overflow.
+ */
+if( G > (2.0L * MEXP / NXT) )
+	return (huge * huge);		/* overflow */
+if( G < (2.0L * MNEXP / NXT) )
+	return (twom10000 * twom10000);	/* underflow */
+
 Ga = reducl(G);
 Gb = G - Ga;
 
