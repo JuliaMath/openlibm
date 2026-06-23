@@ -48,10 +48,31 @@ fmaf(float x, float y, float z)
 	xy = (double)x * y;
 	result = xy + z;
 	EXTRACT_WORDS(hr, lr, result);
+
+	/*
+	 * Compute the exact rounding error of the sum xy + z using Knuth's
+	 * 2Sum.  result is the exact value of xy + z if and only if err == 0.
+	 *
+	 * The naive shortcut "result - xy == z" is *not* a valid exactness
+	 * test: when |z| > |xy| the subtraction result - xy is itself rounded
+	 * and can return z even though result lost low-order bits of the true
+	 * sum (e.g. fmaf(0.9474001f, 4.639901e-7f, -0.24325085f)).  Trusting
+	 * it skips the correction below and lets the inexact double result be
+	 * rounded a second time to float, producing a 1-ulp double-rounding
+	 * error.  2Sum is order-independent, so it avoids that trap.
+	 *
+	 * The volatile barriers force each step to round in double precision
+	 * so the decomposition stays exact even under FP contraction.
+	 */
+	volatile double zz = result - xy;
+	volatile double rz = result - zz;
+	volatile double tz = z - zz;
+	double err = (xy - rz) + tz;
+
 	/* Common case: The double precision result is fine. */
 	if ((lr & 0x1fffffff) != 0x10000000 ||	/* not a halfway case */
 	    (hr & 0x7ff00000) == 0x7ff00000 ||	/* NaN */
-	    result - xy == z ||			/* exact */
+	    err == 0 ||				/* exact */
 	    fegetround() != FE_TONEAREST)	/* not round-to-nearest */
 		return (result);
 
