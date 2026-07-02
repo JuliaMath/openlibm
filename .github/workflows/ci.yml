@@ -107,7 +107,7 @@ jobs:
       - name: Upload coverage to Codecov
         # Codecov token isn't exposed to forked-PR runs; skip the upload there.
         if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
-        uses: codecov/codecov-action@v6
+        uses: codecov/codecov-action@v7
         with:
           files: ./cov-html/libopenlibm.info
           token: ${{ secrets.CODECOV_TOKEN }}
