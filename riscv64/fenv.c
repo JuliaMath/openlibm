@@ -26,7 +26,15 @@
  * $FreeBSD: head/lib/msun/riscv/fenv.c 332792 2018-04-19 20:36:15Z brooks $
  */
 
+/*
+ * Keep the hard-float functions private.  The FreeBSD-derived FE_* values are
+ * shifted into fcsr.frm, unlike the raw encodings used on Linux, so exporting
+ * these functions would interpose an incompatible fenv implementation.
+ * Soft-float keeps external definitions because the header only declares them.
+ */
+#ifdef __riscv_float_abi_soft
 #define	__fenv_static
+#endif
 #include <openlibm_fenv.h>
 
 #ifdef __GNUC_GNU_INLINE__
@@ -45,7 +53,6 @@ const fenv_t __fe_dfl_env = {0};
 #define __env_mask(env)                 (0) /* No exception traps. */
 #define __env_round(env)                (((env) >> 5) & _ROUND_MASK)
 #include "fenv-softfloat.h"
-#endif
 
 extern inline int feclearexcept(int __excepts);
 extern inline int fegetexceptflag(fexcept_t *__flagp, int __excepts);
@@ -61,3 +68,4 @@ extern inline int feupdateenv(const fenv_t *__envp);
 extern inline int feenableexcept(int __mask);
 extern inline int fedisableexcept(int __mask);
 extern inline int fegetexcept(void);
+#endif /* __riscv_float_abi_soft */
