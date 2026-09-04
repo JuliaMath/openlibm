@@ -233,8 +233,6 @@ q = fabsl(x);
 if( q > 13.0L )
 	{
 	int sign = 1;
-	if( q > MAXGAML )
-		goto goverf;
 	if( x < 0.0L )
 		{
 		p = floorl(q);
@@ -250,16 +248,22 @@ if( q > 13.0L )
 			z = q - p;
 			}
 		z = q * sinl( PIL * z );
-		z = fabsl(z) * stirf(q);
-		if( z <= PIL/LDBL_MAX )
-			{
-goverf:
-			return( sign * INFINITY);
-			}
-		z = PIL/z;
+		z = fabsl(z);
+		/*
+		 * Reflection formula: |tgamma(x)| = pi / (z * tgamma(q)).
+		 * For large negative x, tgamma(q) is enormous, so |tgamma(x)|
+		 * is tiny.  Divide pi by tgamma(q) *before* dividing by z to
+		 * avoid an intermediate overflow of z * tgamma(q) that would
+		 * spuriously yield Inf (issue #223).  When tgamma(q) is so
+		 * large that stirf(q) overflows to Inf, the quotient correctly
+		 * underflows toward zero.
+		 */
+		z = (PIL / stirf(q)) / z;
 		}
 	else
 		{
+		if( q > MAXGAML )
+			return( INFINITY );
 		z = stirf(x);
 		}
 	return( sign * z );
