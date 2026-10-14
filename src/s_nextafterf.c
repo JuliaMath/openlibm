@@ -54,7 +54,7 @@ nextafterf(float x, float y)
 	    }
 	}
 	hy = hx&0x7f800000;
-	if(hy>=0x7f800000) return x+x;	/* overflow  */
+	if(hy>=0x7f800000) t = x+x;	/* raise overflow flag */
 	if(hy<0x00800000) {		/* underflow */
 	    t = x*x;
 	    if(t!=x) {		/* raise underflow flag */
