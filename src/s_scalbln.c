@@ -68,13 +68,8 @@ scalblnl (long double x, long n)
 {
 	int in;
 
-	in = (int)n;
-	if (in != n) {
-		if (n > 0)
-			in = INT_MAX;
-		else
-			in = INT_MIN;
-	}
-	return (scalbnl(x, (int)n));
+	/* Bound n before conversion and leave room for exponent arithmetic. */
+	in = (n > 65536) ? 65536 : (n < -65536) ? -65536 : (int)n;
+	return (scalbnl(x, in));
 }
 #endif
