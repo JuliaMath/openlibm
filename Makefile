@@ -131,8 +131,8 @@ clean: clean-coverage
 
 openlibm.pc: openlibm.pc.in Make.inc Makefile
 	echo "version=${VERSION}" > openlibm.pc
-	echo "libdir=$(DESTDIR)$(libdir)" >> openlibm.pc
-	echo "includedir=$(DESTDIR)$(includedir)/openlibm" >> openlibm.pc
+	echo "libdir=$(libdir)" >> openlibm.pc
+	echo "includedir=$(includedir)/openlibm" >> openlibm.pc
 	cat openlibm.pc.in >> openlibm.pc
 
 install-static: libopenlibm.a
